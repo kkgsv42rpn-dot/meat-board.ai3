@@ -1,1352 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Baruch Boards | Premium Kosher Meat Boards</title>
 
 <style>
-:root{
-  --bg:#070707;
-  --card:#11100f;
-  --gold:#c7a66a;
-  --cream:#f4eee4;
-  --muted:#aaa29a;
-  --line:rgba(255,255,255,.12)
+* {
+  box-sizing: border-box;
 }
 
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--cream);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  overflow-x:hidden
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #070605;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas{
-  position:absolute!important;
-  top:0;
-  left:0;
-  width:100%!important;
-  height:100vh!important;
-  z-index:0
+canvas {
+  display: block;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.hero{
-  height:100vh;
-  min-height:680px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden
+.overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 35%,
+      rgba(0,0,0,.18) 65%,
+      rgba(0,0,0,.75) 100%
+    );
 }
 
-.hero:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    rgba(0,0,0,.2),
-    rgba(0,0,0,.15) 55%,
-    #070707 100%
-  );
-  pointer-events:none
+.brand {
+  position: fixed;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  color: white;
+  pointer-events: none;
+  width: 90%;
 }
 
-.vignette{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:radial-gradient(
-    125% 95% at 50% 42%,
-    transparent 32%,
-    rgba(0,0,0,.7) 100%
-  )
+.brand-name {
+  font-size: clamp(30px, 5vw, 58px);
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-shadow: 0 4px 30px rgba(0,0,0,.8);
 }
 
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:20;
-  height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 5vw;
-  background:linear-gradient(180deg,rgba(5,5,5,.88),transparent);
-  backdrop-filter:blur(8px)
+.tagline {
+  margin-top: 12px;
+  font-size: clamp(10px, 1.4vw, 15px);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: #d8c5aa;
 }
 
-.logo{
-  font-weight:900;
-  letter-spacing:.18em;
-  font-size:18px
+.bottom {
+  position: fixed;
+  left: 50%;
+  bottom: 42px;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  width: 90%;
+  pointer-events: none;
 }
 
-.logo span{color:var(--gold)}
-
-nav .links{
-  display:flex;
-  gap:28px
+.bottom-title {
+  color: white;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-shadow: 0 3px 20px black;
 }
 
-nav a{
-  color:#eee;
-  text-decoration:none;
-  font-size:12px;
-  letter-spacing:.13em;
-  text-transform:uppercase
+.bottom-subtitle {
+  margin-top: 9px;
+  color: #c4b49f;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
 }
 
-nav a:hover{color:var(--gold)}
-
-.heroCopy{
-  position:relative;
-  z-index:3;
-  text-align:center;
-  max-width:850px;
-  padding:40px 24px
+.loading {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #070605;
+  color: #d8c5aa;
+  font-size: 12px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  transition: opacity .8s ease;
 }
 
-.eyebrow{
-  font-size:11px;
-  letter-spacing:.38em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:18px
-}
-
-.hero h1{
-  font-size:clamp(42px,8vw,92px);
-  line-height:.94;
-  letter-spacing:-.045em;
-  margin:0 0 22px;
-  font-weight:900
-}
-
-.hero h1 span{
-  display:block;
-  color:var(--gold)
-}
-
-.hero p{
-  font-size:clamp(16px,2vw,21px);
-  color:#ddd4c8;
-  max-width:650px;
-  margin:0 auto 32px;
-  line-height:1.6
-}
-
-.buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:15px 24px;
-  border-radius:999px;
-  text-decoration:none;
-  text-transform:uppercase;
-  letter-spacing:.15em;
-  font-size:11px;
-  font-weight:800;
-  border:1px solid var(--gold);
-  transition:.25s
-}
-
-.btn.primary{
-  background:var(--gold);
-  color:#111
-}
-
-.btn.secondary{
-  color:#fff;
-  background:rgba(0,0,0,.3);
-  border-color:rgba(255,255,255,.3)
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-  filter:brightness(1.08)
-}
-
-.scrollHint{
-  position:absolute;
-  z-index:4;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:10px;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  color:#aaa;
-  opacity:.7
-}
-
-.section{
-  position:relative;
-  z-index:5;
-  padding:110px 6vw;
-  background:var(--bg)
-}
-
-.section.alt{background:#0b0a09}
-
-.container{
-  max-width:1180px;
-  margin:auto
-}
-
-.sectionHead{
-  max-width:720px;
-  margin-bottom:55px
-}
-
-.kicker{
-  color:var(--gold);
-  font-size:11px;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  font-weight:800
-}
-
-.section h2{
-  font-size:clamp(34px,5vw,60px);
-  line-height:1;
-  margin:14px 0 18px;
-  letter-spacing:-.035em
-}
-
-.sectionHead p{
-  color:var(--muted);
-  line-height:1.75;
-  font-size:17px
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px
-}
-
-.card{
-  background:linear-gradient(145deg,#151310,#0d0c0b);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:30px;
-  min-height:210px;
-  transition:.35s
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(199,166,106,.55)
-}
-
-.card .num{
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:.2em
-}
-
-.card h3{
-  font-size:24px;
-  margin:30px 0 10px
-}
-
-.card p{
-  color:#a9a39b;
-  line-height:1.7
-}
-
-.builder{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px
-}
-
-.panel{
-  background:#11100f;
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:28px
-}
-
-.panel h3{
-  margin-top:0;
-  font-size:24px
-}
-
-.field{margin:18px 0}
-
-.field label{
-  display:block;
-  font-size:11px;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:#aaa;
-  margin-bottom:8px
-}
-
-.field select,
-.field textarea,
-.field input{
-  width:100%;
-  padding:14px;
-  border:1px solid #302d29;
-  border-radius:12px;
-  background:#080807;
-  color:#fff;
-  font:inherit
-}
-
-.field textarea{
-  min-height:110px;
-  resize:vertical
-}
-
-.checks{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.checks label{
-  padding:11px;
-  border:1px solid #2b2824;
-  border-radius:10px;
-  color:#ccc;
-  cursor:pointer
-}
-
-.checks input{
-  width:auto;
-  margin-right:7px
-}
-
-.featureGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px
-}
-
-.feature{
-  padding:24px;
-  border-top:1px solid var(--gold)
-}
-
-.feature h3{margin:10px 0}
-
-.feature p{
-  color:#999;
-  line-height:1.6;
-  font-size:14px
-}
-
-.gallery{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:14px
-}
-
-.gallery div{
-  min-height:220px;
-  border-radius:20px;
-  border:1px solid var(--line);
-  background:radial-gradient(
-    circle at 50% 30%,
-    #5a3421,
-    #17120e 48%,
-    #0b0a09
-  );
-  display:flex;
-  align-items:flex-end;
-  padding:22px;
-  font-size:18px;
-  font-weight:800
-}
-
-.gallery div:first-child{
-  grid-row:span 2;
-  min-height:454px
-}
-
-.testimonials{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px
-}
-
-.quote{
-  padding:30px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:#10100e
-}
-
-.quote p{
-  font-size:18px;
-  line-height:1.7
-}
-
-.quote small{color:var(--gold)}
-
-.contact{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px
-}
-
-.contactInfo{padding:25px 0}
-
-.contactInfo div{margin:22px 0}
-
-.contactInfo strong{
-  display:block;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  color:var(--gold);
-  margin-bottom:7px
-}
-
-.contactInfo a{
-  color:#fff;
-  text-decoration:none
-}
-
-.form button{
-  width:100%;
-  cursor:pointer
-}
-
-.footer{
-  position:relative;
-  z-index:5;
-  padding:50px 6vw;
-  border-top:1px solid var(--line);
-  background:#050505
-}
-
-.footerInner{
-  max-width:1180px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  gap:30px;
-  flex-wrap:wrap
-}
-
-.footer p,
-.footer a{
-  color:#888;
-  font-size:13px;
-  text-decoration:none
-}
-
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:opacity .8s ease,transform .8s ease
-}
-
-.reveal.show{
-  opacity:1;
-  transform:none
-}
-
-@media(max-width:850px){
-  nav .links{display:none}
-
-  .grid,
-  .builder,
-  .contact,
-  .testimonials{
-    grid-template-columns:1fr
-  }
-
-  .featureGrid{
-    grid-template-columns:1fr 1fr
-  }
-
-  .gallery{
-    grid-template-columns:1fr 1fr
-  }
-
-  .gallery div:first-child{
-    grid-row:auto;
-    min-height:300px
-  }
-
-  .hero{min-height:620px}
-
-  .heroCopy{padding-top:80px}
-}
-
-@media(max-width:520px){
-  .section{padding:80px 5vw}
-
-  .featureGrid,
-  .gallery{
-    grid-template-columns:1fr
-  }
-
-  .checks{
-    grid-template-columns:1fr
-  }
-
-  .hero h1{font-size:48px}
+.loading.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a class="logo" href="#home">
-    BARUCH <span>BOARDS</span>
-  </a>
+<div class="loading" id="loading">
+  BARUCH BOARDS
+</div>
 
-  <div class="links">
-    <a href="#boards">Boards</a>
-    <a href="#builder">Build</a>
-    <a href="#catering">Catering</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
+<div class="overlay"></div>
+
+<div class="brand">
+  <div class="brand-name">BARUCH BOARDS</div>
+  <div class="tagline">
+    Exceptional Kosher. Unforgettable Boards.
   </div>
+</div>
 
-  <a class="btn primary" href="#builder">Build Your Board</a>
-</nav>
-
-<div id="vignette" class="vignette"></div>
-
-<section id="home" class="hero">
-
-  <div class="heroCopy">
-
-    <div class="eyebrow">
-      Premium Kosher Meat Boards • NY & NJ
-    </div>
-
-    <h1>
-      BARUCH
-      <span>BOARDS</span>
-    </h1>
-
-    <p>
-      Exceptional Kosher. Unforgettable Boards.
-    </p>
-
-    <div class="buttons">
-      <a class="btn primary" href="#builder">
-        Build Your Board
-      </a>
-
-      <a class="btn secondary" href="#contact">
-        Contact Us
-      </a>
-    </div>
-
+<div class="bottom">
+  <div class="bottom-title">
+    Premium Kosher Meat, Crafted Your Way
   </div>
-
-  <div class="scrollHint">
-    Scroll to explore
+  <div class="bottom-subtitle">
+    Watch your board come together
   </div>
-
-</section>
-
-
-<section id="boards" class="section">
-
-  <div class="container">
-
-    <div class="sectionHead reveal">
-      <div class="kicker">Our Boards</div>
-
-      <h2>
-        Your Board. Your Cuts. Your Way.
-      </h2>
-
-      <p>
-        Premium kosher meat, crafted your way for homes,
-        celebrations, gifts, Shabbat, weddings, corporate
-        events and large gatherings.
-      </p>
-    </div>
-
-    <div class="grid">
-
-      <div class="card reveal">
-        <div class="num">01</div>
-        <h3>Meat Boards</h3>
-        <p>
-          NY strip, oyster steak, rib eye, pastrami,
-          salami, roast beef, steak and chicken.
-        </p>
-      </div>
-
-      <div class="card reveal">
-        <div class="num">02</div>
-        <h3>Individual Trays</h3>
-        <p>
-          Beautifully arranged meat trays made for
-          sharing, hosting and gifting.
-        </p>
-      </div>
-
-      <div class="card reveal">
-        <div class="num">03</div>
-        <h3>Gift Boxes</h3>
-        <p>
-          A premium kosher gift experience built around
-          the cuts and flavors you want.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="builder" class="section alt">
-
-  <div class="container">
-
-    <div class="sectionHead reveal">
-
-      <div class="kicker">Custom Builder</div>
-
-      <h2>Build Your Board</h2>
-
-      <p>
-        Choose your size, cuts, seasonings, sauces,
-        pickles and olives. Want something different?
-        Tell us what you have in mind.
-      </p>
-
-    </div>
-
-
-    <div class="builder">
-
-      <div class="panel reveal">
-
-        <h3>Make it yours</h3>
-
-        <div class="field">
-
-          <label>Board Size</label>
-
-          <select id="size">
-
-            <option>
-              Small — 5–8 people
-            </option>
-
-            <option>
-              Medium — 9–15 people
-            </option>
-
-            <option>
-              Large — 16–25 people
-            </option>
-
-            <option>
-              XL — 26+ people
-            </option>
-
-            <option>
-              Custom / Large Event
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Meat Cuts</label>
-
-          <div class="checks">
-
-            <label>
-              <input type="checkbox">
-              NY Strip
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Oyster Steak
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Rib Eye
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Pastrami
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Salami
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Roast Beef
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Steak
-            </label>
-
-            <label>
-              <input type="checkbox">
-              Chicken
-            </label>
-
-          </div>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Seasoning / Flavor</label>
-
-          <input
-            id="seasoning"
-            placeholder="Pepper crust, BBQ, garlic, spicy, custom..."
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="panel reveal">
-
-        <h3>Finishing touches</h3>
-
-        <div class="field">
-
-          <label>Sauces & Dips</label>
-
-          <input
-            id="sauce"
-            placeholder="Request any sauce or dip"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Pickles & Olives</label>
-
-          <input
-            id="garnish"
-            placeholder="Pickles, green olives, black olives, custom..."
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Anything Else?</label>
-
-          <textarea
-            id="notes"
-            placeholder="Tell us exactly how you want your board...
-
-Orders: 24 hours for Small / Medium / Large.
-48 hours for XL or custom orders."
-          ></textarea>
-
-        </div>
-
-
-        <a
-          class="btn primary"
-          href="#contact"
-          onclick="prepareRequest()"
-        >
-          Request My Board
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="catering" class="section">
-
-  <div class="container">
-
-    <div class="sectionHead reveal">
-
-      <div class="kicker">Catering</div>
-
-      <h2>Made for the moment.</h2>
-
-      <p>
-        From intimate celebrations to weddings,
-        corporate events and large gatherings,
-        we create premium kosher platters designed
-        to make an impression.
-      </p>
-
-    </div>
-
-
-    <div class="featureGrid">
-
-      <div class="feature reveal">
-        <h3>Events</h3>
-        <p>
-          Birthdays, weddings, engagements and celebrations.
-        </p>
-      </div>
-
-      <div class="feature reveal">
-        <h3>Shabbat & Yom Tov</h3>
-        <p>
-          Beautiful boards for hosting and sharing.
-        </p>
-      </div>
-
-      <div class="feature reveal">
-        <h3>Corporate</h3>
-        <p>
-          Premium food for meetings, clients and teams.
-        </p>
-      </div>
-
-      <div class="feature reveal">
-        <h3>Large Events</h3>
-        <p>
-          Custom catering and larger-format orders.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="gallery" class="section alt">
-
-  <div class="container">
-
-    <div class="sectionHead reveal">
-
-      <div class="kicker">Gallery</div>
-
-      <h2>Built to be seen.</h2>
-
-      <p>
-        Every board is arranged to feel abundant,
-        polished and unforgettable.
-      </p>
-
-    </div>
-
-
-    <div class="gallery">
-
-      <div class="reveal">
-        Premium Meat Boards
-      </div>
-
-      <div class="reveal">
-        Rib Eye
-      </div>
-
-      <div class="reveal">
-        Pastrami
-      </div>
-
-      <div class="reveal">
-        Event Platters
-      </div>
-
-      <div class="reveal">
-        Gift Boxes
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="section">
-
-  <div class="container">
-
-    <div class="sectionHead reveal">
-
-      <div class="kicker">
-        Why Baruch Boards
-      </div>
-
-      <h2>
-        Premium from first cut to final detail.
-      </h2>
-
-    </div>
-
-
-    <div class="testimonials">
-
-      <div class="quote reveal">
-
-        <p>
-          “Beautiful presentation, incredible meat
-          and exactly what we wanted.”
-        </p>
-
-        <small>
-          Baruch Boards Customer
-        </small>
-
-      </div>
-
-
-      <div class="quote reveal">
-
-        <p>
-          “The board was the centerpiece of the event.”
-        </p>
-
-        <small>
-          Private Event Customer
-        </small>
-
-      </div>
-
-
-      <div class="quote reveal">
-
-        <p>
-          “Everything felt premium, from the cuts
-          to the presentation.”
-        </p>
-
-        <small>
-          Baruch Boards Customer
-        </small>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section id="contact" class="section alt">
-
-  <div class="container">
-
-    <div class="sectionHead reveal">
-
-      <div class="kicker">Contact</div>
-
-      <h2>Let's build your board.</h2>
-
-      <p>
-        Serving NY & NJ. Delivery and pickup available.
-      </p>
-
-    </div>
-
-
-    <div class="contact">
-
-      <div class="contactInfo reveal">
-
-        <div>
-          <strong>Phone</strong>
-
-          <a href="tel:3478208835">
-            347-820-8835
-          </a>
-        </div>
-
-
-        <div>
-          <strong>Email</strong>
-
-          <a href="mailto:baruch.aminov@icloud.com">
-            baruch.aminov@icloud.com
-          </a>
-        </div>
-
-
-        <div>
-          <strong>Service Area</strong>
-
-          <span>
-            New York & New Jersey
-          </span>
-        </div>
-
-
-        <div>
-          <strong>Kosher</strong>
-
-          <span>
-            VHQ Kosher Certified
-          </span>
-        </div>
-
-
-        <div>
-          <strong>Ordering Notice</strong>
-
-          <span>
-            24 hours for Small, Medium & Large.
-            48 hours for XL or custom.
-          </span>
-        </div>
-
-      </div>
-
-
-      <form
-        class="panel form reveal"
-        action="mailto:baruch.aminov@icloud.com"
-        method="post"
-        enctype="text/plain"
-      >
-
-        <div class="field">
-
-          <label>Name</label>
-
-          <input
-            name="Name"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Phone</label>
-
-          <input
-            name="Phone"
-            type="tel"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Email</label>
-
-          <input
-            name="Email"
-            type="email"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Event Date</label>
-
-          <input
-            name="Event Date"
-            type="date"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Tell Us What You Need</label>
-
-          <textarea
-            name="Message"
-            required
-          ></textarea>
-
-        </div>
-
-
-        <button
-          class="btn primary"
-          type="submit"
-        >
-          Contact Us
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<footer class="footer">
-
-  <div class="footerInner">
-
-    <div>
-
-      <strong>
-        BARUCH BOARDS
-      </strong>
-
-      <p>
-        Exceptional Kosher. Unforgettable Boards.
-      </p>
-
-    </div>
-
-
-    <div>
-
-      <p>
-        NY & NJ • Delivery & Pickup • VHQ Kosher Certified
-      </p>
-
-      <p>
-
-        <a href="tel:3478208835">
-          347-820-8835
-        </a>
-
-        •
-
-        <a href="mailto:baruch.aminov@icloud.com">
-          baruch.aminov@icloud.com
-        </a>
-
-      </p>
-
-    </div>
-
-  </div>
-
-</footer>
-
-
-<script>
-
-function prepareRequest(){
-
-  const size =
-    document.getElementById('size').value;
-
-  const seasoning =
-    document.getElementById('seasoning').value;
-
-  const sauce =
-    document.getElementById('sauce').value;
-
-  const garnish =
-    document.getElementById('garnish').value;
-
-  const notes =
-    document.getElementById('notes').value;
-
-  document
-    .getElementById('contact')
-    .scrollIntoView({
-      behavior:'smooth'
-    });
-
-  setTimeout(()=>{
-
-    document.querySelector(
-      'textarea[name="Message"]'
-    ).value =
-`Board request:
-
-Size: ${size}
-
-Seasoning: ${seasoning}
-
-Sauce/Dip: ${sauce}
-
-Pickles/Olives: ${garnish}
-
-Notes: ${notes}`;
-
-  },500);
-}
-
-
-const observer =
-new IntersectionObserver(
-  entries =>
-    entries.forEach(e=>{
-      if(e.isIntersecting)
-        e.target.classList.add('show');
-    }),
-  {
-    threshold:.12
-  }
-);
-
-
-document
-  .querySelectorAll('.reveal')
-  .forEach(el =>
-    observer.observe(el)
-  );
-
-</script>
-
-
-<script type="importmap">
-{
-  "imports":{
-    "three":
-      "https://unpkg.com/three@0.166.1/build/three.module.js",
-    "three/addons/":
-      "https://unpkg.com/three@0.166.1/examples/jsm/"
-  }
-}
-</script>
-
+</div>
 
 <script type="module">
 
-import * as THREE from 'three';
+import * as THREE from
+"https://unpkg.com/three@0.166.1/build/three.module.js";
 
-import {
-  RoomEnvironment
-} from
-  'three/addons/environments/RoomEnvironment.js';
+/* =========================================================
+   SCENE
+========================================================= */
 
-import {
-  EffectComposer
-} from
-  'three/addons/postprocessing/EffectComposer.js';
+const scene = new THREE.Scene();
 
-import {
-  RenderPass
-} from
-  'three/addons/postprocessing/RenderPass.js';
+scene.background = new THREE.Color(0x070605);
 
-import {
-  BokehPass
-} from
-  'three/addons/postprocessing/BokehPass.js';
+scene.fog = new THREE.FogExp2(
+  0x070605,
+  0.055
+);
 
-import {
-  OutputPass
-} from
-  'three/addons/postprocessing/OutputPass.js';
+/* =========================================================
+   CAMERA
+========================================================= */
 
+const camera = new THREE.PerspectiveCamera(
+  38,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  100
+);
 
-/* --------------------------------------------------------------
-   DETERMINISTIC RANDOM
--------------------------------------------------------------- */
+camera.position.set(
+  0,
+  4.8,
+  7.4
+);
 
-let _seed = 0x9e3779b9;
+camera.lookAt(
+  0,
+  0,
+  0
+);
 
-function rand(){
+/* =========================================================
+   RENDERER
+========================================================= */
 
-  _seed |= 0;
-
-  _seed =
-    (_seed + 0x6d2b79f5) | 0;
-
-  let t =
-    Math.imul(
-      _seed ^ (_seed >>> 15),
-      1 | _seed
-    );
-
-  t =
-    (t +
-      Math.imul(
-        t ^ (t >>> 7),
-        61 | t
-      )
-    ) ^ t;
-
-  return (
-    (t ^ (t >>> 14)) >>> 0
-  ) / 4294967296;
-}
-
-const rnd =
-  (a,b) =>
-    a + (b-a)*rand();
-
-const lerp =
-  THREE.MathUtils.lerp;
-
-const easeInOutCubic =
-  p =>
-    p < .5
-      ? 4*p*p*p
-      : 1-Math.pow(-2*p+2,3)/2;
-
-const easeInOutSine =
-  p =>
-    .5-.5*Math.cos(Math.PI*p);
-
-
-/* --------------------------------------------------------------
-   RENDERER / SCENE / CAMERA
--------------------------------------------------------------- */
-
-const renderer =
-  new THREE.WebGLRenderer({
-    antialias:true,
-    powerPreference:'high-performance'
-  });
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  alpha: false
+});
 
 renderer.setPixelRatio(
-  Math.min(
-    window.devicePixelRatio || 1,
-    2
-  )
+  Math.min(window.devicePixelRatio || 1, 2)
 );
 
 renderer.setSize(
@@ -1362,7 +210,7 @@ renderer.shadowMap.type =
 renderer.toneMapping =
   THREE.ACESFilmicToneMapping;
 
-renderer.toneMappingExposure = 1.0;
+renderer.toneMappingExposure = 1.15;
 
 renderer.outputColorSpace =
   THREE.SRGBColorSpace;
@@ -1371,2119 +219,960 @@ document.body.appendChild(
   renderer.domElement
 );
 
+/* =========================================================
+   LIGHTING
+========================================================= */
 
-const scene =
-  new THREE.Scene();
-
-scene.background =
-  new THREE.Color(0x05060a);
-
-scene.fog =
-  new THREE.FogExp2(
-    0x070810,
-    0.032
-  );
-
-
-const camera =
-  new THREE.PerspectiveCamera(
-    35,
-    window.innerWidth /
-      window.innerHeight,
-    .1,
-    90
-  );
-
-const camTarget =
-  new THREE.Vector3(
-    0,
-    .10,
-    .02
-  );
-
-camera.position.set(
-  -3.2,
-  2.4,
-  4.1
+const ambient = new THREE.HemisphereLight(
+  0xffe8d0,
+  0x080604,
+  2.0
 );
 
-camera.lookAt(camTarget);
+scene.add(ambient);
 
 
-/* --------------------------------------------------------------
-   ENVIRONMENT
--------------------------------------------------------------- */
-
-const pmrem =
-  new THREE.PMREMGenerator(
-    renderer
+const keyLight =
+  new THREE.DirectionalLight(
+    0xffd6a8,
+    5
   );
 
-const envRT =
-  pmrem.fromScene(
-    new RoomEnvironment(),
-    .04
+keyLight.position.set(
+  4,
+  8,
+  5
+);
+
+keyLight.castShadow = true;
+
+keyLight.shadow.mapSize.width = 2048;
+keyLight.shadow.mapSize.height = 2048;
+
+scene.add(keyLight);
+
+
+const warmLight =
+  new THREE.PointLight(
+    0xff8c42,
+    18,
+    15
   );
 
-scene.environment =
-  envRT.texture;
+warmLight.position.set(
+  -4,
+  3,
+  -3
+);
 
-scene.environmentIntensity =
-  .30;
-
-pmrem.dispose();
+scene.add(warmLight);
 
 
-/* --------------------------------------------------------------
-   BACKDROP
--------------------------------------------------------------- */
-
-const backdrop =
-  new THREE.Mesh(
-    new THREE.SphereGeometry(
-      38,
-      32,
-      24
-    ),
-
-    new THREE.ShaderMaterial({
-
-      side:
-        THREE.BackSide,
-
-      depthWrite:false,
-
-      fog:false,
-
-      uniforms:{
-
-        uTop:{
-          value:
-            new THREE.Color(
-              0x1b1f27
-            )
-        },
-
-        uBottom:{
-          value:
-            new THREE.Color(
-              0x030407
-            )
-        },
-
-        uGlow:{
-          value:
-            new THREE.Color(
-              0x402a15
-            )
-        }
-
-      },
-
-      vertexShader:`
-
-        varying vec3 vPos;
-
-        void main(){
-
-          vPos = position;
-
-          gl_Position =
-            projectionMatrix *
-            modelViewMatrix *
-            vec4(
-              position,
-              1.0
-            );
-
-        }
-
-      `,
-
-      fragmentShader:`
-
-        varying vec3 vPos;
-
-        uniform vec3 uTop;
-        uniform vec3 uBottom;
-        uniform vec3 uGlow;
-
-        void main(){
-
-          vec3 d =
-            normalize(vPos);
-
-          float h =
-            smoothstep(
-              -.65,
-              .95,
-              d.y
-            );
-
-          vec3 col =
-            mix(
-              uBottom,
-              uTop,
-              h
-            );
-
-          float pool =
-            pow(
-              max(
-                0.0,
-                dot(
-                  d,
-                  normalize(
-                    vec3(
-                      -.25,
-                      .18,
-                      -1.0
-                    )
-                  )
-                )
-              ),
-              5.0
-            );
-
-          col +=
-            uGlow *
-            pool *
-            .75;
-
-          gl_FragColor =
-            vec4(
-              col,
-              1.0
-            );
-
-        }
-
-      `
-
-    })
+const coolLight =
+  new THREE.PointLight(
+    0x8ba8ff,
+    10,
+    15
   );
 
-scene.add(backdrop);
+coolLight.position.set(
+  4,
+  4,
+  -4
+);
 
+scene.add(coolLight);
+
+/* =========================================================
+   FLOOR
+========================================================= */
+
+const floorGeometry =
+  new THREE.PlaneGeometry(
+    40,
+    40
+  );
+
+const floorMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x100c08,
+    roughness: 0.9,
+    metalness: 0
+  });
 
 const floor =
   new THREE.Mesh(
-
-    new THREE.PlaneGeometry(
-      60,
-      60
-    ),
-
-    new THREE.MeshStandardMaterial({
-      color:0x090a0d,
-      roughness:.92,
-      metalness:0
-    })
-
+    floorGeometry,
+    floorMaterial
   );
 
 floor.rotation.x =
   -Math.PI / 2;
 
 floor.position.y =
-  -.306;
+  -0.35;
 
 floor.receiveShadow = true;
 
 scene.add(floor);
 
+/* =========================================================
+   BOARD
+========================================================= */
 
-/* --------------------------------------------------------------
-   LIGHTING
--------------------------------------------------------------- */
+const boardGroup =
+  new THREE.Group();
 
-const key =
-  new THREE.SpotLight(
-    0xffe8cd,
-    52,
-    18,
-    .60,
-    1.0,
-    2.0
-  );
+scene.add(boardGroup);
 
-key.position.set(
-  2.6,
-  5.2,
-  3.6
+
+const boardShape =
+  new THREE.Shape();
+
+const w = 4.5;
+const h = 2.9;
+const r = 0.35;
+
+boardShape.moveTo(
+  -w / 2 + r,
+  -h / 2
 );
 
-key.target.position.set(
-  -.05,
-  0,
-  -.05
+boardShape.lineTo(
+  w / 2 - r,
+  -h / 2
 );
 
-key.castShadow = true;
-
-key.shadow.mapSize.set(
-  2048,
-  2048
+boardShape.quadraticCurveTo(
+  w / 2,
+  -h / 2,
+  w / 2,
+  -h / 2 + r
 );
 
-key.shadow.bias =
-  -.0008;
-
-key.shadow.normalBias =
-  .022;
-
-key.shadow.radius = 3;
-
-key.shadow.camera.near =
-  1.5;
-
-key.shadow.camera.far =
-  18;
-
-scene.add(
-  key,
-  key.target
+boardShape.lineTo(
+  w / 2,
+  h / 2 - r
 );
 
-
-const rimWarm =
-  new THREE.SpotLight(
-    0xffb066,
-    80,
-    16,
-    .85,
-    1.0,
-    2.0
-  );
-
-rimWarm.position.set(
-  -4.3,
-  2.1,
-  -3.4
+boardShape.quadraticCurveTo(
+  w / 2,
+  h / 2,
+  w / 2 - r,
+  h / 2
 );
 
-rimWarm.target.position.set(
-  0,
-  .05,
-  0
+boardShape.lineTo(
+  -w / 2 + r,
+  h / 2
 );
 
-scene.add(
-  rimWarm,
-  rimWarm.target
+boardShape.quadraticCurveTo(
+  -w / 2,
+  h / 2,
+  -w / 2,
+  h / 2 - r
+);
+
+boardShape.lineTo(
+  -w / 2,
+  -h / 2 + r
+);
+
+boardShape.quadraticCurveTo(
+  -w / 2,
+  -h / 2,
+  -w / 2 + r,
+  -h / 2
 );
 
 
-const rimCool =
-  new THREE.SpotLight(
-    0x9dc4ff,
-    62,
-    16,
-    .85,
-    1.0,
-    2.0
-  );
-
-rimCool.position.set(
-  4.4,
-  2.8,
-  -3.8
-);
-
-rimCool.target.position.set(
-  0,
-  .05,
-  0
-);
-
-scene.add(
-  rimCool,
-  rimCool.target
-);
-
-
-scene.add(
-  new THREE.HemisphereLight(
-    0x2b3345,
-    0x07070a,
-    .45
-  )
-);
-
-
-const bounce =
-  new THREE.DirectionalLight(
-    0x5c4a34,
-    .22
-  );
-
-bounce.position.set(
-  -1.2,
-  -1.0,
-  2.0
-);
-
-scene.add(bounce);
-
-
-/* --------------------------------------------------------------
-   CANVAS TEXTURE HELPERS
--------------------------------------------------------------- */
-
-function mk(w,h){
-
-  const c =
-    document.createElement(
-      'canvas'
-    );
-
-  c.width = w;
-  c.height = h;
-
-  return {
-    c,
-    x:c.getContext('2d')
-  };
-
-}
-
-
-const MAX_ANISO =
-  renderer.capabilities
-    .getMaxAnisotropy();
-
-
-function tex(
-  canvas,
-  {
-    srgb=true,
-    repeat=null
-  }={}
-){
-
-  const t =
-    new THREE.CanvasTexture(
-      canvas
-    );
-
-  t.colorSpace =
-    srgb
-      ? THREE.SRGBColorSpace
-      : THREE.NoColorSpace;
-
-  t.wrapS =
-    t.wrapT =
-      THREE.RepeatWrapping;
-
-  if(repeat)
-    t.repeat.set(
-      repeat[0],
-      repeat[1]
-    );
-
-  t.anisotropy =
-    Math.min(
-      8,
-      MAX_ANISO
-    );
-
-  t.needsUpdate = true;
-
-  return t;
-
-}
-
-
-/* --------------------------------------------------------------
-   HARDWOOD
--------------------------------------------------------------- */
-
-function woodCanvas(){
-
-  const {
-    c,
-    x
-  } = mk(1024,1024);
-
-  x.fillStyle =
-    '#17110b';
-
-  x.fillRect(
-    0,
-    0,
-    c.width,
-    c.height
-  );
-
-  for(
-    let i=0;
-    i<1500;
-    i++
-  ){
-
-    const y =
-      Math.random() *
-      c.height;
-
-    x.strokeStyle =
-      `rgba(105,67,34,${.05+Math.random()*.12})`;
-
-    x.lineWidth =
-      .5 + Math.random()*2;
-
-    x.beginPath();
-
-    x.moveTo(
-      0,
-      y
-    );
-
-    x.bezierCurveTo(
-      c.width*.25,
-      y+Math.random()*18-9,
-      c.width*.75,
-      y+Math.random()*18-9,
-      c.width,
-      y+Math.random()*18-9
-    );
-
-    x.stroke();
-
-  }
-
-  return c;
-
-}
-
-
-const woodTexture =
-  tex(
-    woodCanvas(),
+const boardGeometry =
+  new THREE.ExtrudeGeometry(
+    boardShape,
     {
-      repeat:[2.5,2.5]
+      depth: 0.28,
+      bevelEnabled: true,
+      bevelThickness: 0.08,
+      bevelSize: 0.08,
+      bevelSegments: 5
     }
   );
 
-
-/* --------------------------------------------------------------
-   MATERIALS
--------------------------------------------------------------- */
-
-const M = {
-
-  wood:
-    new THREE.MeshStandardMaterial({
-      map:woodTexture,
-      roughness:.62,
-      metalness:.02
-    }),
-
-  meat:
-    new THREE.MeshStandardMaterial({
-      color:0x642b20,
-      roughness:.72
-    }),
-
-  meatDark:
-    new THREE.MeshStandardMaterial({
-      color:0x351713,
-      roughness:.78
-    }),
-
-  fat:
-    new THREE.MeshStandardMaterial({
-      color:0xe5c79c,
-      roughness:.65
-    }),
-
-  salami:
-    new THREE.MeshStandardMaterial({
-      color:0x8e2d25,
-      roughness:.58
-    }),
-
-  salamiFat:
-    new THREE.MeshStandardMaterial({
-      color:0xf0c8a0,
-      roughness:.65
-    }),
-
-  pickle:
-    new THREE.MeshStandardMaterial({
-      color:0x4d7d2d,
-      roughness:.6
-    }),
-
-  oliveGreen:
-    new THREE.MeshStandardMaterial({
-      color:0x687d34,
-      roughness:.5
-    }),
-
-  oliveBlack:
-    new THREE.MeshStandardMaterial({
-      color:0x171512,
-      roughness:.48
-    }),
-
-  ceramic:
-    new THREE.MeshStandardMaterial({
-      color:0xded5c4,
-      roughness:.3
-    }),
-
-  mustard:
-    new THREE.MeshStandardMaterial({
-      color:0xd29b21,
-      roughness:.42
-    })
-
-};
+boardGeometry.rotateX(
+  -Math.PI / 2
+);
 
 
-/* --------------------------------------------------------------
-   SHADOW HELPER
--------------------------------------------------------------- */
-
-function shadowed(obj){
-
-  obj.traverse(o=>{
-
-    if(o.isMesh){
-
-      o.castShadow = true;
-      o.receiveShadow = true;
-
-    }
-
+const boardMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x633c20,
+    roughness: 0.65,
+    metalness: 0
   });
 
-  return obj;
 
-}
+const board =
+  new THREE.Mesh(
+    boardGeometry,
+    boardMaterial
+  );
+
+board.castShadow = true;
+board.receiveShadow = true;
+
+board.position.y = 0;
+
+boardGroup.add(board);
 
 
-/* --------------------------------------------------------------
-   BOARD
--------------------------------------------------------------- */
+/* Board rim */
 
-function buildBoard(){
+const rimGeometry =
+  new THREE.BoxGeometry(
+    4.15,
+    0.08,
+    2.55
+  );
+
+const rimMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x8a5a32,
+    roughness: 0.5
+  });
+
+const rim =
+  new THREE.Mesh(
+    rimGeometry,
+    rimMaterial
+  );
+
+rim.position.y = 0.18;
+
+rim.castShadow = true;
+
+boardGroup.add(rim);
+
+/* =========================================================
+   MATERIALS
+========================================================= */
+
+const steakMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x9f2727,
+    roughness: 0.42
+  });
+
+const steakFat =
+  new THREE.MeshStandardMaterial({
+    color: 0xffd7bd,
+    roughness: 0.5
+  });
+
+const darkMeatMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x4b2015,
+    roughness: 0.8
+  });
+
+const pastramiMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x87352b,
+    roughness: 0.55
+  });
+
+const salamiMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x762323,
+    roughness: 0.5
+  });
+
+const pickleMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x718d2d,
+    roughness: 0.4
+  });
+
+const oliveMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0x1c2411,
+    roughness: 0.3
+  });
+
+const mustardMaterial =
+  new THREE.MeshStandardMaterial({
+    color: 0xe3aa16,
+    roughness: 0.35
+  });
+
+/* =========================================================
+   ANIMATION OBJECTS
+========================================================= */
+
+const animatedPieces = [];
+
+
+/* =========================================================
+   CREATE STEAK
+========================================================= */
+
+function createSteak(
+  x,
+  z,
+  scale = 1
+) {
 
   const group =
     new THREE.Group();
 
-  const board =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        4.9,
-        .28,
-        3.25,
-        4,
-        2,
-        4
-      ),
-      M.wood
+  const geometry =
+    new THREE.CylinderGeometry(
+      0.43,
+      0.43,
+      0.13,
+      48
     );
 
-  board.position.y =
-    -.17;
-
-  board.castShadow = true;
-  board.receiveShadow = true;
-
-  group.add(board);
-
-
-  const handle =
-    new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .38,
-        .38,
-        .28,
-        48
-      ),
-      M.wood
-    );
-
-  handle.rotation.z =
-    Math.PI/2;
-
-  handle.position.set(
-    2.65,
-    -.17,
-    0
-  );
-
-  group.add(handle);
-
-
-  const hole =
-    new THREE.Mesh(
-      new THREE.TorusGeometry(
-        .16,
-        .055,
-        12,
-        32
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x050505,
-        roughness:.9
-      })
-    );
-
-  hole.rotation.y =
-    Math.PI/2;
-
-  hole.position.set(
-    2.65,
-    -.02,
-    0
-  );
-
-  group.add(hole);
-
-  return shadowed(group);
-
-}
-
-scene.add(buildBoard());
-
-
-/* --------------------------------------------------------------
-   MEAT HELPERS
--------------------------------------------------------------- */
-
-function buildRibEye(){
-
-  const group =
-    new THREE.Group();
-
-  const main =
-    new THREE.Mesh(
-      new THREE.CapsuleGeometry(
-        .40,
-        .70,
-        8,
-        24
-      ),
-      M.meat
-    );
-
-  main.scale.set(
+  geometry.scale(
     1.25,
-    .38,
-    .85
+    1,
+    0.82
   );
 
-  main.rotation.z =
-    rnd(-.15,.15);
+  const steak =
+    new THREE.Mesh(
+      geometry,
+      steakMaterial
+    );
 
-  group.add(main);
+  steak.castShadow = true;
 
+  group.add(steak);
+
+
+  const fatGeometry =
+    new THREE.TorusGeometry(
+      0.13,
+      0.035,
+      10,
+      30
+    );
 
   const fat =
     new THREE.Mesh(
-      new THREE.TorusGeometry(
-        .23,
-        .045,
-        8,
-        20,
-        Math.PI*1.5
-      ),
-      M.fat
+      fatGeometry,
+      steakFat
     );
 
   fat.rotation.x =
-    Math.PI/2;
-
-  fat.position.set(
-    .10,
-    .16,
-    .05
-  );
-
-  group.add(fat);
-
-  return shadowed(group);
-
-}
-
-
-function buildBrisket(){
-
-  const group =
-    new THREE.Group();
-
-  const g =
-    new THREE.BoxGeometry(
-      .82,
-      .18,
-      .48,
-      6,
-      3,
-      6
-    );
-
-  const mesh =
-    new THREE.Mesh(
-      g,
-      M.meatDark
-    );
-
-  mesh.scale.y =
-    1.2;
-
-  group.add(mesh);
-
-
-  const fat =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        .70,
-        .025,
-        .43
-      ),
-      M.fat
-    );
+    Math.PI / 2;
 
   fat.position.y =
-    .11;
+    0.075;
+
+  fat.position.x =
+    0.05;
 
   group.add(fat);
 
-  return shadowed(group);
 
+  group.scale.setScalar(
+    scale
+  );
+
+  addAnimatedPiece(
+    group,
+    x,
+    z
+  );
 }
 
 
-function buildPastrami(){
+/* =========================================================
+   CREATE PASTRAMI
+========================================================= */
+
+function createPastrami(
+  x,
+  z,
+  rotation = 0
+) {
 
   const group =
     new THREE.Group();
 
-  const roll =
-    new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .22,
-        .22,
-        .72,
-        24
-      ),
-      M.meat
+  const geometry =
+    new THREE.CylinderGeometry(
+      0.3,
+      0.3,
+      0.20,
+      40
     );
 
-  roll.rotation.z =
-    Math.PI/2;
-
-  group.add(roll);
-
-
-  const end =
+  const meat =
     new THREE.Mesh(
-      new THREE.CircleGeometry(
-        .19,
-        32
-      ),
-      M.meatDark
+      geometry,
+      pastramiMaterial
     );
 
-  end.rotation.y =
-    Math.PI/2;
+  meat.rotation.z =
+    Math.PI / 2;
 
-  end.position.x =
-    .365;
+  meat.castShadow = true;
 
-  group.add(end);
+  group.add(meat);
 
-  return shadowed(group);
+  group.rotation.y =
+    rotation;
 
+  addAnimatedPiece(
+    group,
+    x,
+    z
+  );
 }
 
 
-function buildSalami(){
+/* =========================================================
+   CREATE SALAMI
+========================================================= */
 
-  const group =
-    new THREE.Group();
+function createSalami(
+  x,
+  z
+) {
 
-  const slice =
+  const geometry =
+    new THREE.CylinderGeometry(
+      0.20,
+      0.20,
+      0.075,
+      40
+    );
+
+  const meat =
     new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .26,
-        .26,
-        .065,
-        48
-      ),
-      M.salami
+      geometry,
+      salamiMaterial
     );
 
-  slice.rotation.x =
-    Math.PI/2;
+  meat.position.set(
+    x,
+    0.38,
+    z
+  );
 
-  group.add(slice);
+  meat.castShadow = true;
 
+  scene.add(meat);
 
-  for(let i=0;i<9;i++){
+  animatedPieces.push({
+    object: meat,
+    target: new THREE.Vector3(
+      x,
+      0.38,
+      z
+    ),
+    start: new THREE.Vector3(
+      x * 1.8,
+      2.2,
+      z * 1.8
+    ),
+    delay: animatedPieces.length * 0.08
+  });
 
-    const dot =
-      new THREE.Mesh(
-        new THREE.SphereGeometry(
-          .018,
-          8,
-          8
-        ),
-        M.salamiFat
-      );
-
-    const a =
-      rand()*Math.PI*2;
-
-    const r =
-      .07+rand()*.15;
-
-    dot.position.set(
-      Math.cos(a)*r,
-      .04,
-      Math.sin(a)*r
-    );
-
-    group.add(dot);
-
-  }
-
-  return shadowed(group);
-
+  meat.position.copy(
+    animatedPieces[
+      animatedPieces.length - 1
+    ].start
+  );
 }
 
 
-function buildKielbasa(){
+/* =========================================================
+   CREATE PICKLE
+========================================================= */
 
-  const group =
-    new THREE.Group();
+function createPickle(
+  x,
+  z,
+  rotation
+) {
 
-  const coin =
-    new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        .19,
-        .19,
-        .12,
-        32
-      ),
-      M.meatDark
+  const geometry =
+    new THREE.CapsuleGeometry(
+      0.10,
+      0.65,
+      8,
+      16
     );
-
-  coin.rotation.x =
-    Math.PI/2;
-
-  group.add(coin);
-
-  return shadowed(group);
-
-}
-
-
-function buildJerky(){
-
-  const group =
-    new THREE.Group();
-
-  const shape =
-    new THREE.Shape();
-
-  shape.moveTo(-.20,-.08);
-  shape.lineTo(.22,-.06);
-  shape.lineTo(.17,.09);
-  shape.lineTo(-.18,.07);
-  shape.closePath();
-
-  const geom =
-    new THREE.ExtrudeGeometry(
-      shape,
-      {
-        depth:.045,
-        bevelEnabled:true,
-        bevelSegments:2,
-        bevelSize:.018,
-        bevelThickness:.018
-      }
-    );
-
-  const mesh =
-    new THREE.Mesh(
-      geom,
-      M.meatDark
-    );
-
-  mesh.rotation.x =
-    Math.PI/2;
-
-  group.add(mesh);
-
-  return shadowed(group);
-
-}
-
-
-function buildPickle(){
-
-  const group =
-    new THREE.Group();
 
   const pickle =
     new THREE.Mesh(
-      new THREE.CapsuleGeometry(
-        .105,
-        .50,
-        8,
-        16
-      ),
-      M.pickle
+      geometry,
+      pickleMaterial
     );
 
   pickle.rotation.z =
-    Math.PI/2;
+    Math.PI / 2;
 
-  group.add(pickle);
+  pickle.rotation.y =
+    rotation;
 
-  return shadowed(group);
+  pickle.castShadow = true;
 
+  addAnimatedPiece(
+    pickle,
+    x,
+    z
+  );
 }
 
 
-function buildOlive(green){
+/* =========================================================
+   CREATE OLIVE
+========================================================= */
 
-  const g =
-    new THREE.Mesh(
-      new THREE.SphereGeometry(
-        .105,
-        20,
-        14
-      ),
-      green
-        ? M.oliveGreen
-        : M.oliveBlack
+function createOlive(
+  x,
+  z
+) {
+
+  const geometry =
+    new THREE.SphereGeometry(
+      0.10,
+      24,
+      18
     );
 
-  g.scale.y =
-    .85;
+  const olive =
+    new THREE.Mesh(
+      geometry,
+      oliveMaterial
+    );
 
-  return shadowed(g);
+  olive.castShadow = true;
 
+  addAnimatedPiece(
+    olive,
+    x,
+    z
+  );
 }
 
 
-/* --------------------------------------------------------------
-   MUSTARD BOWL
--------------------------------------------------------------- */
+/* =========================================================
+   CREATE MUSTARD BOWL
+========================================================= */
 
-function buildMustardBowl(){
+function createMustard(
+  x,
+  z
+) {
 
-  const grp =
+  const group =
     new THREE.Group();
-
-  const profile = [
-
-    [.000,.006],
-    [.130,.006],
-    [.206,.022],
-    [.262,.074],
-    [.288,.144],
-    [.292,.165],
-    [.272,.168],
-    [.266,.146],
-    [.242,.086],
-    [.185,.048],
-    [.090,.038],
-    [.000,.036]
-
-  ].map(
-    p =>
-      new THREE.Vector2(
-        p[0],
-        p[1]
-      )
-  );
 
 
   const bowl =
     new THREE.Mesh(
-      new THREE.LatheGeometry(
-        profile,
-        64
+      new THREE.CylinderGeometry(
+        0.30,
+        0.23,
+        0.20,
+        32
       ),
-      M.ceramic
+      new THREE.MeshStandardMaterial({
+        color: 0xe8e0d0,
+        roughness: 0.35
+      })
     );
 
-  grp.add(bowl);
+  bowl.castShadow = true;
+
+  group.add(bowl);
 
 
-  const dollopProfile = [
-
-    [.000,.070],
-    [.090,.072],
-    [.150,.082],
-    [.176,.100],
-    [.170,.124],
-    [.135,.142],
-    [.070,.152],
-    [.030,.159],
-    [.000,.163]
-
-  ].map(
-    p =>
-      new THREE.Vector2(
-        p[0],
-        p[1]
-      )
-  );
-
-
-  const dollop =
+  const mustard =
     new THREE.Mesh(
-      new THREE.LatheGeometry(
-        dollopProfile,
-        52
+      new THREE.SphereGeometry(
+        0.22,
+        32,
+        16
       ),
-      M.mustard
+      mustardMaterial
     );
 
-  dollop.rotation.y =
-    .7;
+  mustard.scale.y =
+    0.35;
 
-  grp.add(dollop);
+  mustard.position.y =
+    0.12;
 
-  return shadowed(grp);
+  group.add(mustard);
 
+
+  addAnimatedPiece(
+    group,
+    x,
+    z
+  );
 }
 
 
-/* --------------------------------------------------------------
-   PIECE ANIMATION REGISTRY
--------------------------------------------------------------- */
+/* =========================================================
+   ANIMATION SYSTEM
+========================================================= */
 
-const items = [];
+function addAnimatedPiece(
+  object,
+  x,
+  z
+) {
 
-let orderSeq = 0;
+  const target =
+    new THREE.Vector3(
+      x,
+      0.38,
+      z
+    );
 
+  const start =
+    new THREE.Vector3(
+      x * 1.9,
+      2.8 + Math.random() * 1.5,
+      z * 1.9
+    );
 
-function addPiece(
-  obj,
-  opts={}
-){
-
-  const {
-
-    x=0,
-    z=0,
-    y=0,
-
-    yaw=0,
-    tiltX=0,
-    tiltZ=0,
-
-    gap=.33,
-    lift=null,
-    arc=null,
-    dur=null
-
-  } = opts;
-
-
-  const idx =
-    orderSeq++;
-
-
-  const t0 =
-    .75 +
-    idx*gap;
-
-
-  const ang =
-    idx*2.39996 +
-    .35;
-
-
-  const rad =
-    1.75 +
-    (idx%6)*.17 +
-    rand()*.32;
-
-
-  const hgt =
-    lift !== null
-      ? lift
-      : .95 +
-        rand()*1.05;
-
-
-  const item = {
-
-    obj,
-
-    basePos:
-      new THREE.Vector3(
-        Math.sin(ang)*rad,
-        hgt,
-        Math.cos(ang)*rad
-      ),
-
-    startRotY:
-      rnd(-.25,.25),
-
-    spin:
-      rnd(-.7,.7),
-
-    phase:
-      rand()*Math.PI*2,
-
-    t0,
-
-    dur:
-      dur !== null
-        ? dur
-        : 1.95 +
-          rand()*.55,
-
-    arc:
-      arc !== null
-        ? arc
-        : .16 +
-          rand()*.16,
-
-    restPos:
-      new THREE.Vector3(
-        x,
-        y,
-        z
-      ),
-
-    restRot:
-      new THREE.Euler(
-        tiltX,
-        yaw,
-        tiltZ
-      )
-
-  };
-
-
-  obj.position.copy(
-    item.basePos
+  object.position.copy(
+    start
   );
 
-  obj.rotation.set(
-    0,
-    yaw,
-    0
-  );
+  scene.add(object);
 
-  scene.add(obj);
-
-  items.push(item);
-
-  return item;
-
+  animatedPieces.push({
+    object,
+    target,
+    start,
+    delay:
+      animatedPieces.length * 0.16,
+    duration:
+      1.5 + Math.random() * 0.5,
+    rotation:
+      (Math.random() - 0.5) * 5,
+    finished: false
+  });
 }
 
 
-/* --------------------------------------------------------------
-   LANDING SEQUENCE
--------------------------------------------------------------- */
+/* =========================================================
+   BUILD THE BOARD
+========================================================= */
 
-addPiece(
-  buildMustardBowl(),
-  {
-    x:-1.16,
-    z:.70,
-    yaw:.42,
-    arc:.10
-  }
+/* Main steaks */
+
+createSteak(
+  -0.65,
+  0.05,
+  1.0
+);
+
+createSteak(
+  0.05,
+  0.02,
+  1.0
+);
+
+createSteak(
+  0.72,
+  0.05,
+  0.95
 );
 
 
-addPiece(
-  buildSalami(),
-  {
-    x:-1.32,
-    z:-.38,
-    yaw:.55
-  }
+/* Pastrami */
+
+createPastrami(
+  1.20,
+  0.72,
+  0.4
 );
 
-addPiece(
-  buildSalami(),
-  {
-    x:-1.05,
-    z:-.55,
-    yaw:-.32
-  }
-);
-
-addPiece(
-  buildSalami(),
-  {
-    x:-1.22,
-    z:-.62,
-    y:.040,
-    yaw:1.10,
-    arc:.08
-  }
+createPastrami(
+  0.95,
+  0.88,
+  -0.3
 );
 
 
-addPiece(
-  buildKielbasa(),
-  {
-    x:-.58,
-    z:-.34,
-    yaw:.22
-  }
+/* Salami */
+
+createSalami(
+  -1.45,
+  -0.65
 );
 
-addPiece(
-  buildKielbasa(),
-  {
-    x:-.33,
-    z:-.24,
-    yaw:1.42
-  }
+createSalami(
+  -1.10,
+  -0.75
 );
 
-addPiece(
-  buildKielbasa(),
-  {
-    x:-.62,
-    z:-.60,
-    yaw:-.62
-  }
+createSalami(
+  -0.78,
+  -0.78
 );
 
-addPiece(
-  buildKielbasa(),
-  {
-    x:-.36,
-    z:-.72,
-    y:.056,
-    yaw:2.20
-  }
+createSalami(
+  -0.45,
+  -0.78
 );
 
 
-addPiece(
-  buildJerky(),
-  {
-    x:.28,
-    z:-.87,
-    yaw:.34
-  }
+/* Pickles */
+
+createPickle(
+  0.75,
+  -0.75,
+  -0.2
 );
 
-addPiece(
-  buildJerky(),
-  {
-    x:.62,
-    z:-.97,
-    yaw:-.36
-  }
-);
-
-addPiece(
-  buildJerky(),
-  {
-    x:.06,
-    z:-.62,
-    y:.030,
-    yaw:.92
-  }
+createPickle(
+  1.05,
+  -0.55,
+  0.3
 );
 
 
-addPiece(
-  buildPastrami(),
-  {
-    x:1.02,
-    z:.36,
-    yaw:-.95,
-    tiltZ:0
-  }
+/* Olives */
+
+createOlive(
+  -1.25,
+  0.55
+);
+
+createOlive(
+  -1.00,
+  0.72
+);
+
+createOlive(
+  -0.72,
+  0.62
+);
+
+createOlive(
+  -0.45,
+  0.72
 );
 
 
-addPiece(
-  buildBrisket(),
-  {
-    x:.80,
-    z:-.10,
-    yaw:.26,
-    tiltX:.03
-  }
-);
+/* Mustard */
 
-addPiece(
-  buildBrisket(),
-  {
-    x:1.02,
-    z:-.72,
-    yaw:-.75,
-    tiltX:-.03
-  }
+createMustard(
+  1.45,
+  -0.65
 );
 
 
-addPiece(
-  buildPickle(),
-  {
-    x:.60,
-    z:.66,
-    yaw:.22
-  }
-);
+/* =========================================================
+   INTRO ANIMATION
+========================================================= */
 
-addPiece(
-  buildPickle(),
-  {
-    x:.98,
-    z:.95,
-    yaw:-.16
-  }
-);
+const startTime =
+  performance.now();
 
+let boardRotation = 0;
 
-addPiece(
-  buildOlive(true),
-  {
-    x:-.62,
-    z:.90,
-    yaw:.3,
-    gap:.22,
-    arc:.10
-  }
-);
-
-addPiece(
-  buildOlive(true),
-  {
-    x:-.48,
-    z:.99,
-    yaw:1.1,
-    gap:.22,
-    arc:.10
-  }
-);
-
-addPiece(
-  buildOlive(true),
-  {
-    x:-.76,
-    z:.76,
-    yaw:2.0,
-    gap:.22,
-    arc:.10
-  }
-);
-
-
-addPiece(
-  buildOlive(false),
-  {
-    x:-.12,
-    z:.86,
-    yaw:.8,
-    gap:.22,
-    arc:.10
-  }
-);
-
-addPiece(
-  buildOlive(false),
-  {
-    x:.02,
-    z:.97,
-    yaw:1.7,
-    gap:.22,
-    arc:.10
-  }
-);
-
-addPiece(
-  buildOlive(false),
-  {
-    x:-.22,
-    z:.72,
-    yaw:2.6,
-    gap:.22,
-    arc:.10
-  }
-);
-
-
-/* HERO RIB EYE */
-
-addPiece(
-  buildRibEye(),
-  {
-    x:-.30,
-    z:.16,
-    yaw:.16,
-    gap:.46,
-    dur:2.5,
-    arc:.22
-  }
-);
-
-addPiece(
-  buildRibEye(),
-  {
-    x:.16,
-    z:.02,
-    yaw:-.38,
-    gap:.46,
-    dur:2.5,
-    arc:.22
-  }
-);
-
-
-const introEnd =
-  items.reduce(
-    (m,it)=>
-      Math.max(
-        m,
-        it.t0 +
-        it.dur
-      ),
-    0
-  );
-
-const introDur =
-  introEnd + .35;
-
-
-/* --------------------------------------------------------------
-   DEPTH OF FIELD
--------------------------------------------------------------- */
-
-let composer = null;
-let bokehPass = null;
-
-try{
-
-  composer =
-    new EffectComposer(
-      renderer
-    );
-
-  composer.setPixelRatio(
-    Math.min(
-      window.devicePixelRatio || 1,
-      2
-    )
-  );
-
-  composer.setSize(
-    window.innerWidth,
-    window.innerHeight
-  );
-
-
-  composer.addPass(
-    new RenderPass(
-      scene,
-      camera
-    )
-  );
-
-
-  bokehPass =
-    new BokehPass(
-      scene,
-      camera,
-      {
-        focus:
-          camera.position
-            .distanceTo(
-              camTarget
-            ),
-
-        aperture:.0034,
-
-        maxblur:.0036
-      }
-    );
-
-
-  if(
-    bokehPass.uniforms &&
-    bokehPass.uniforms.aspect
-  ){
-
-    bokehPass
-      .uniforms
-      .aspect
-      .value =
-        camera.aspect;
-
-  }
-
-
-  composer.addPass(
-    bokehPass
-  );
-
-  composer.addPass(
-    new OutputPass()
-  );
-
-}
-catch(err){
-
-  console.warn(
-    'Post-processing unavailable, falling back to direct render.',
-    err
-  );
-
-  composer = null;
-
-}
-
-
-/* --------------------------------------------------------------
-   CAMERA
--------------------------------------------------------------- */
-
-const CAM = {
-
-  az0:-.95,
-  az1:-.16,
-
-  pol0:1.245,
-  pol1:1.135,
-
-  r0:6.05,
-  r1:5.28
-
-};
-
-
-const _camPos =
-  new THREE.Vector3();
-
-
-function orbitPos(
-  az,
-  pol,
-  r,
-  out
-){
-
-  const sp =
-    Math.sin(pol);
-
-  out.set(
-    Math.sin(az)*sp*r,
-    Math.cos(pol)*r,
-    Math.cos(az)*sp*r
-  );
-
-  out.add(
-    camTarget
-  );
-
-  return out;
-
-}
-
-
-const pointer = {
-
-  x:0,
-  y:0,
-
-  tx:0,
-  ty:0
-
-};
-
-
-window.addEventListener(
-  'pointermove',
-  e=>{
-
-    pointer.tx =
-      (e.clientX /
-       window.innerWidth)*2-1;
-
-    pointer.ty =
-      (e.clientY /
-       window.innerHeight)*2-1;
-
-  },
-  {
-    passive:true
-  }
-);
-
-
-function updateCamera(
-  t,
-  dt
-){
-
-  const p =
-    Math.max(
-      0,
-      Math.min(
-        1,
-        t/introDur
-      )
-    );
-
-
-  const e =
-    easeInOutSine(p);
-
-
-  let az =
-    lerp(
-      CAM.az0,
-      CAM.az1,
-      e
-    );
-
-
-  let pol =
-    lerp(
-      CAM.pol0,
-      CAM.pol1,
-      e
-    );
-
-
-  let r =
-    lerp(
-      CAM.r0,
-      CAM.r1,
-      e
-    );
-
-
-  const k =
-    Math.min(
-      1,
-      Math.max(
-        0,
-        (t-introDur+2.0)/2.5
-      )
-    );
-
-
-  az +=
-    Math.sin(t*.23)*
-    .016*k +
-    pointer.x*.085;
-
-
-  pol +=
-    Math.sin(t*.17)*
-    .010*k +
-    pointer.y*.055;
-
-
-  r +=
-    Math.sin(t*.13)*
-    .05*k;
-
-
-  camera.position.copy(
-    orbitPos(
-      az,
-      pol,
-      r,
-      _camPos
-    )
-  );
-
-  camera.lookAt(
-    camTarget
-  );
-
-}
-
-
-/* --------------------------------------------------------------
-   PIECE ANIMATION
--------------------------------------------------------------- */
-
-const _float = {
-
-  pos:
-    new THREE.Vector3(),
-
-  rotX:0,
-  rotY:0,
-  rotZ:0
-
-};
-
-
-function floatPose(
-  it,
-  t,
-  out
-){
-
-  out.pos.set(
-
-    it.basePos.x +
-      Math.sin(
-        t*.72 +
-        it.phase
-      )*.085,
-
-    it.basePos.y +
-      Math.sin(
-        t*.98 +
-        it.phase*1.7
-      )*.135,
-
-    it.basePos.z +
-      Math.cos(
-        t*.58 +
-        it.phase*.8
-      )*.085
-
-  );
-
-
-  out.rotX =
-    Math.sin(
-      t*.80 +
-      it.phase
-    )*.18;
-
-
-  out.rotY =
-    it.startRotY +
-    t*it.spin;
-
-
-  out.rotZ =
-    Math.cos(
-      t*.66 +
-      it.phase
-    )*.16;
-
-
-  return out;
-
-}
-
-
-function updatePieces(t){
-
-  for(
-    let i=0;
-    i<items.length;
-    i++
-  ){
-
-    const it =
-      items[i];
-
-    const o =
-      it.obj;
-
-
-    if(
-      t < it.t0
-    ){
-
-      floatPose(
-        it,
-        t,
-        _float
-      );
-
-      o.position.copy(
-        _float.pos
-      );
-
-      o.rotation.set(
-        _float.rotX,
-        _float.rotY,
-        _float.rotZ
-      );
-
-      continue;
-
-    }
-
-
-    const p =
-      Math.min(
-        1,
-        (t-it.t0)/
-        it.dur
-      );
-
-
-    const e =
-      easeInOutCubic(p);
-
-
-    floatPose(
-      it,
-      it.t0,
-      _float
-    );
-
-
-    o.position.lerpVectors(
-      _float.pos,
-      it.restPos,
-      e
-    );
-
-
-    o.position.y +=
-      Math.sin(
-        Math.PI*e
-      )*it.arc;
-
-
-    const wob =
-      .10*(1-e);
-
-
-    o.rotation.set(
-
-      lerp(
-        _float.rotX,
-        it.restRot.x,
-        e
-      ) +
-      Math.sin(
-        t*2.2 +
-        it.phase
-      )*wob,
-
-
-      lerp(
-        _float.rotY,
-        it.restRot.y,
-        e
-      ),
-
-
-      lerp(
-        _float.rotZ,
-        it.restRot.z,
-        e
-      ) +
-      Math.cos(
-        t*1.9 +
-        it.phase
-      )*wob*.9
-
-    );
-
-
-    if(
-      p>=1
-    ){
-
-      const s =
-        t -
-        it.t0 -
-        it.dur;
-
-
-      const damp =
-        Math.exp(
-          -s*7.0
-        );
-
-
-      o.position.y =
-        it.restPos.y +
-        Math.sin(
-          s*18.0
-        )*.011*damp;
-
-
-      o.rotation.x =
-        it.restRot.x +
-        Math.sin(
-          s*11.0
-        )*.035*damp;
-
-
-      o.rotation.z =
-        it.restRot.z +
-        Math.sin(
-          s*13.0
-        )*.045*damp;
-
-    }
-
-  }
-
-}
-
-
-/* --------------------------------------------------------------
-   RESIZE
--------------------------------------------------------------- */
-
-function onResize(){
-
-  const w =
-    window.innerWidth;
-
-  const h =
-    window.innerHeight;
-
-  const dpr =
-    Math.min(
-      window.devicePixelRatio || 1,
-      2
-    );
-
-
-  camera.aspect =
-    w/h;
-
-  camera.updateProjectionMatrix();
-
-
-  renderer.setPixelRatio(
-    dpr
-  );
-
-  renderer.setSize(
-    w,
-    h
-  );
-
-
-  if(composer){
-
-    composer.setPixelRatio(
-      dpr
-    );
-
-    composer.setSize(
-      w,
-      h
-    );
-
-
-    if(
-      bokehPass &&
-      bokehPass.uniforms &&
-      bokehPass.uniforms.aspect
-    ){
-
-      bokehPass
-        .uniforms
-        .aspect
-        .value =
-          camera.aspect;
-
-    }
-
-  }
-
-}
-
-
-window.addEventListener(
-  'resize',
-  onResize
-);
-
-window.addEventListener(
-  'orientationchange',
-  () =>
-    setTimeout(
-      onResize,
-      120
-    )
-);
-
-
-/* --------------------------------------------------------------
-   ANIMATION LOOP
--------------------------------------------------------------- */
-
-const clock =
-  new THREE.Clock();
-
-let elapsed = 0;
-
-
-updateCamera(
-  0,
-  0
-);
-
-
-function animate(){
+function animate() {
 
   requestAnimationFrame(
     animate
   );
 
+  const now =
+    performance.now();
 
-  const dt =
-    Math.min(
-      clock.getDelta(),
-      .05
+  const elapsed =
+    (now - startTime) / 1000;
+
+
+  /* Pieces flying onto board */
+
+  for (
+    let i = 0;
+    i < animatedPieces.length;
+    i++
+  ) {
+
+    const piece =
+      animatedPieces[i];
+
+    const localTime =
+      elapsed -
+      piece.delay;
+
+    if (
+      localTime <= 0
+    ) {
+      continue;
+    }
+
+    const progress =
+      Math.min(
+        localTime /
+        piece.duration,
+        1
+      );
+
+    /* Smooth easing */
+
+    const eased =
+      1 -
+      Math.pow(
+        1 - progress,
+        4
+      );
+
+    piece.object.position.lerpVectors(
+      piece.start,
+      piece.target,
+      eased
     );
 
+    /* Bounce */
 
-  elapsed += dt;
+    if (
+      progress < 1
+    ) {
 
+      piece.object.position.y =
+        piece.start.y +
+        (
+          piece.target.y -
+          piece.start.y
+        ) * eased +
+        Math.sin(
+          progress * Math.PI
+        ) * 0.45;
 
-  updatePieces(
-    elapsed
-  );
+      piece.object.rotation.y =
+        piece.rotation *
+        (1 - eased);
+    }
 
-  updateCamera(
-    elapsed,
-    dt
-  );
+    else {
 
+      piece.object.position.copy(
+        piece.target
+      );
 
-  if(
-    bokehPass &&
-    bokehPass.uniforms &&
-    bokehPass.uniforms.focus
-  ){
+      piece.object.rotation.y =
+        0;
 
-    bokehPass
-      .uniforms
-      .focus
-      .value =
-        camera.position
-          .distanceTo(
-            camTarget
-          );
-
+      piece.finished = true;
+    }
   }
 
 
-  if(composer)
-    composer.render();
-  else
-    renderer.render(
-      scene,
-      camera
-    );
+  /* Slow camera movement */
 
+  const cameraTime =
+    elapsed * 0.22;
+
+  camera.position.x =
+    Math.sin(cameraTime) *
+    0.55;
+
+  camera.position.z =
+    7.2 +
+    Math.cos(cameraTime) *
+    0.35;
+
+  camera.position.y =
+    4.6 +
+    Math.sin(
+      cameraTime * 0.7
+    ) * 0.15;
+
+  camera.lookAt(
+    0,
+    0.25,
+    0
+  );
+
+
+  /* Board slowly rotates */
+
+  boardRotation +=
+    0.0007;
+
+  boardGroup.rotation.y =
+    Math.sin(
+      boardRotation
+    ) * 0.035;
+
+
+  /* Lights move slightly */
+
+  warmLight.position.x =
+    Math.sin(elapsed * 0.4) * 4;
+
+  coolLight.position.x =
+    Math.cos(elapsed * 0.35) * 4;
+
+
+  renderer.render(
+    scene,
+    camera
+  );
 }
 
 
-onResize();
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    camera.aspect =
+      window.innerWidth /
+      window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
+
+    renderer.setPixelRatio(
+      Math.min(
+        window.devicePixelRatio || 1,
+        2
+      )
+    );
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+setTimeout(() => {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  loading.classList.add(
+    "hidden"
+  );
+
+}, 700);
 
 animate();
 
