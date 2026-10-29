@@ -1,71 +1,1664 @@
-Perfect. **One long premium scrolling page** it is.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Baruch Boards | Premium Kosher Meat Boards</title>
 
-We’ve now got the main business/design direction locked in. The site will be built around:
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#070707;
+  color:#f5f1e8;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
 
-- **BARUCH BOARDS** + custom logo/mark
-- **“Your Board. Your Cuts. Your Way.”**
-- **“Premium Kosher Meat, Crafted Your Way.”**
-- Existing **3D rotating meat-board animation** as the hero
-- **Build Your Board** + **Contact Us** as the main CTAs
-- Fully interactive custom board builder
-- Featured Boards — 3 signature boards
-- Menu / Our Boards
-- Catering packages + custom catering
-- Gallery
-- About Us
-- Why Baruch Boards?
-- Testimonials
-- Delivery & Pickup
-- Contact/inquiry form + inspiration photo upload
-- VHQ kosher certification
-- NY & NJ service area
-- 24-hour notice for Small/Medium/Large; 48 hours for XL/custom
-- Dramatic premium animations
-- No prices
-- No social media
-- No FAQ
-- No newsletter
-- No sound
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 5%;
+  background:rgba(5,5,5,.72);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
 
-**Now send me your current HTML/code** — the exact version that is currently working on your GitHub Pages site.
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+.logo-mark{
+  width:38px;
+  height:38px;
+  border:1px solid #c9a86a;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#c9a86a;
+  font-family:Georgia,serif;
+  font-size:14px;
+}
+.nav-links{
+  display:flex;
+  gap:26px;
+  font-size:13px;
+  letter-spacing:1px;
+}
+.nav-links a{opacity:.82;transition:.3s}
+.nav-links a:hover{opacity:1;color:#c9a86a}
 
-Once you send it, I’ll use that as the foundation and build the complete Baruch Boards website around your existing 3D animation rather than starting from scratch.
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  padding:130px 7% 80px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 75% 45%,rgba(111,73,37,.22),transparent 35%),
+    radial-gradient(circle at 15% 80%,rgba(121,30,20,.14),transparent 30%),
+    #070707;
+}
+.hero-copy{
+  position:relative;
+  z-index:3;
+  max-width:700px;
+}
+.eyebrow{
+  color:#c9a86a;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  margin-bottom:20px;
+}
+h1{
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(55px,8vw,110px);
+  line-height:.9;
+  margin:0 0 28px;
+}
+.hero p{
+  font-family:Georgia,serif;
+  font-size:25px;
+  color:#ddd2c1;
+  margin-bottom:36px;
+}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px 24px;
+  border-radius:2px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:11px;
+  transition:.3s;
+  cursor:pointer;
+}
+.btn.primary{
+  background:#c9a86a;
+  color:#111;
+}
+.btn.primary:hover{transform:translateY(-3px);background:#e0c38a}
+.btn.secondary{
+  border:1px solid rgba(255,255,255,.3);
+}
+.btn.secondary:hover{
+  border-color:#c9a86a;
+  color:#c9a86a;
+}
 
-I’ve got the code and built the **full Baruch Boards version** around your existing 3D meat-board animation.
+#board3d{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(90deg,#070707 0%,rgba(7,7,7,.75) 35%,rgba(7,7,7,.1) 75%);
+}
 
-I kept the 3D animation as the hero and added the business website structure we planned:
+section{
+  padding:120px 7%;
+  position:relative;
+}
+.section-head{
+  max-width:760px;
+  margin-bottom:55px;
+}
+.section-head h2{
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(42px,6vw,72px);
+  margin:0 0 18px;
+}
+.section-head p{
+  color:#aaa;
+  line-height:1.8;
+  font-size:16px;
+}
 
-- Premium modern/luxury design
-- **Your Board. Your Cuts. Your Way.**
-- **Premium Kosher Meat, Crafted Your Way.**
-- Build Your Board interactive builder
-- 8 meat choices
-- Custom seasonings, sauces/dips, pickles/olives
-- 4 board sizes
-- Featured Boards
-- Catering
-- Why Baruch Boards
-- Gallery
-- About
-- Testimonials
-- Delivery & Pickup
-- Contact form
-- Inspiration-photo upload
-- VHQ certification
-- Phone/email
-- NY & NJ service area
-- Sticky navigation
-- Dramatic scroll animations
-- No prices, social media, FAQ, newsletter, or sound
+.dark-section{
+  background:#0b0b0b;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.card{
+  min-height:330px;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.1);
+  background:linear-gradient(145deg,#121212,#090909);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  transition:.5s;
+}
+.card:hover{
+  transform:translateY(-10px);
+  border-color:#c9a86a;
+}
+.card-number{
+  color:#c9a86a;
+  font-size:12px;
+  letter-spacing:2px;
+  margin-bottom:auto;
+}
+.card h3{
+  font-family:Georgia,serif;
+  font-size:32px;
+  font-weight:400;
+  margin:0 0 10px;
+}
+.card p{color:#999;line-height:1.6}
 
-### Your complete HTML file
+.builder{
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:25px;
+}
+.panel{
+  background:#101010;
+  border:1px solid rgba(255,255,255,.1);
+  padding:35px;
+}
+label{
+  display:block;
+  color:#c9a86a;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+  margin:25px 0 12px;
+}
+.options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+}
+.option{
+  background:#171717;
+  color:#eee;
+  border:1px solid rgba(255,255,255,.12);
+  padding:12px 15px;
+  cursor:pointer;
+  transition:.25s;
+}
+.option:hover,
+.option.active{
+  background:#c9a86a;
+  color:#111;
+  border-color:#c9a86a;
+}
+input,textarea{
+  width:100%;
+  padding:15px;
+  background:#080808;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+  outline:none;
+}
+textarea{min-height:120px;resize:vertical}
+input:focus,textarea:focus{border-color:#c9a86a}
+.summary{
+  position:sticky;
+  top:100px;
+  height:max-content;
+}
+.summary h3{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+.summary ul{
+  list-style:none;
+  padding:0;
+  line-height:2.2;
+  color:#aaa;
+}
+.summary li strong{color:#eee}
+.fine{
+  color:#777;
+  font-size:12px;
+  line-height:1.6;
+  margin:25px 0;
+}
 
-:chatgpt-content-reference{index="0"}[Download the complete Baruch Boards website code](sandbox:/mnt/data/baruch-boards-complete.html)
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(255,255,255,.1);
+}
+.feature{
+  background:#0b0b0b;
+  padding:35px 25px;
+}
+.feature h3{
+  font-family:Georgia,serif;
+  font-size:24px;
+  font-weight:400;
+}
+.feature p{
+  color:#888;
+  line-height:1.7;
+  font-size:14px;
+}
 
-### What you do next
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.gallery-box{
+  min-height:280px;
+  background:
+    linear-gradient(135deg,rgba(201,168,106,.12),transparent),
+    #121212;
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;
+  align-items:flex-end;
+  padding:22px;
+  font-family:Georgia,serif;
+  font-size:23px;
+}
 
-Open your GitHub Pages repository and **replace the current HTML code with the contents of this new file**.
+.about{
+  max-width:900px;
+  font-family:Georgia,serif;
+  font-size:29px;
+  line-height:1.55;
+  color:#ddd2c1;
+}
 
-**Important:** I preserved your existing Three.js code rather than replacing the 3D animation with a different design.
+.testimonials{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.quote{
+  padding:35px;
+  background:#111;
+  border:1px solid rgba(255,255,255,.09);
+}
+.quote p{
+  font-family:Georgia,serif;
+  font-size:22px;
+  line-height:1.5;
+}
+.quote span{
+  color:#c9a86a;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
 
-Once you put it into GitHub, **send me a screenshot of what you see**, and I can help you fix anything that looks off on desktop or mobile.
+.contact-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:50px;
+}
+.contact-info h3{
+  font-family:Georgia,serif;
+  font-size:40px;
+  font-weight:400;
+}
+.contact-info p{
+  color:#999;
+  line-height:1.8;
+}
+.contact-detail{
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.contact-detail strong{
+  display:block;
+  color:#c9a86a;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+  margin-bottom:7px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.form-full{grid-column:1/-1}
+.file{
+  padding:15px;
+  border:1px dashed rgba(255,255,255,.2);
+  color:#888;
+  font-size:13px;
+}
+footer{
+  padding:55px 7%;
+  border-top:1px solid rgba(255,255,255,.1);
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+  flex-wrap:wrap;
+  color:#888;
+  font-size:13px;
+}
+footer strong{color:#eee}
+
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .cards,
+  .gallery,
+  .testimonials{grid-template-columns:1fr}
+  .builder,
+  .contact-grid{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr 1fr}
+  .summary{position:relative;top:auto}
+  .hero{
+    padding-left:6%;
+    padding-right:6%;
+  }
+  .hero-copy{max-width:90%}
+}
+
+@media(max-width:600px){
+  section{padding:80px 5%}
+  .features{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .form-full{grid-column:auto}
+  h1{font-size:58px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="#home" class="logo">
+    <span class="logo-mark">BB</span>
+    <span>BARUCH BOARDS</span>
+  </a>
+
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#boards">Our Boards</a>
+    <a href="#builder">Build Your Board</a>
+    <a href="#catering">Catering</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div id="board3d"></div>
+
+  <div class="hero-copy reveal">
+    <div class="eyebrow">
+      VHQ Kosher Certified · Serving New York & New Jersey
+    </div>
+
+    <h1>
+      Your Board.<br>
+      Your Cuts.<br>
+      Your Way.
+    </h1>
+
+    <p>
+      Premium Kosher Meat, Crafted Your Way.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="#builder">Build Your Board</a>
+      <a class="btn secondary" href="#contact">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<section id="boards" class="dark-section">
+  <div class="section-head reveal">
+    <div class="eyebrow">Baruch Boards</div>
+    <h2>Exceptional Kosher.<br>Unforgettable Boards.</h2>
+    <p>
+      Premium cuts, bold flavors and a board built around exactly what you want.
+      From intimate gatherings to large events, every board is made to order.
+    </p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card reveal">
+      <div class="card-number">01</div>
+      <h3>The Classic</h3>
+      <p>
+        A refined combination of premium meats, signature cuts,
+        pickles, olives and carefully selected accompaniments.
+      </p>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-number">02</div>
+      <h3>The Prime</h3>
+      <p>
+        A premium board centered around standout steak cuts,
+        rich flavors and elevated presentation.
+      </p>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-number">03</div>
+      <h3>The Signature</h3>
+      <p>
+        Our most customizable experience — choose your cuts,
+        seasonings, sauces, dips and extras.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section id="builder">
+  <div class="section-head reveal">
+    <div class="eyebrow">Make It Yours</div>
+    <h2>Build Your Board</h2>
+    <p>
+      Choose your size, cuts and extras. You can also request custom
+      seasonings and any sauce or dip you have in mind.
+    </p>
+  </div>
+
+  <div class="builder">
+
+    <div class="panel reveal">
+
+      <label>Board Size</label>
+
+      <div class="options" data-group="size">
+        <button class="option active" data-value="Small — 5–8 people">
+          Small<br><small>5–8 people</small>
+        </button>
+
+        <button class="option" data-value="Medium — 9–15 people">
+          Medium<br><small>9–15 people</small>
+        </button>
+
+        <button class="option" data-value="Large — 16–25 people">
+          Large<br><small>16–25 people</small>
+        </button>
+
+        <button class="option" data-value="XL — 26+ people">
+          XL<br><small>26+ people</small>
+        </button>
+      </div>
+
+      <label>Choose Your Cuts</label>
+
+      <div class="options" data-group="meat">
+        <button class="option" data-value="NY Strip">NY Strip</button>
+        <button class="option" data-value="Oyster Steak">Oyster Steak</button>
+        <button class="option" data-value="Ribeye">Ribeye</button>
+        <button class="option" data-value="Pastrami">Pastrami</button>
+        <button class="option" data-value="Salami">Salami</button>
+        <button class="option" data-value="Roast Beef">Roast Beef</button>
+        <button class="option" data-value="Steak">Steak</button>
+        <button class="option" data-value="Chicken">Chicken</button>
+      </div>
+
+      <label>Seasoning</label>
+      <input id="seasoning" placeholder="Choose a favorite or request something custom">
+
+      <label>Sauce / Dip</label>
+      <input id="sauce" placeholder="Request any sauce or dip">
+
+      <label>Pickles & Olives</label>
+      <input id="extras" placeholder="Tell us what you want included">
+
+      <label>Anything Else?</label>
+      <textarea id="notes" placeholder="Custom presentation, inspiration, special requests..."></textarea>
+
+    </div>
+
+    <aside class="panel summary reveal">
+
+      <div class="eyebrow">Your Request</div>
+
+      <h3>Custom Board</h3>
+
+      <ul id="summary">
+        <li>Size: <strong>Small — 5–8 people</strong></li>
+        <li>Cuts: <strong>Select your cuts</strong></li>
+        <li>Seasoning: <strong>Custom</strong></li>
+        <li>Sauce/Dip: <strong>Custom</strong></li>
+        <li>Extras: <strong>Pickles & olives</strong></li>
+      </ul>
+
+      <p class="fine">
+        24-hour notice for Small, Medium & Large.
+        48-hour notice for XL or custom orders.
+      </p>
+
+      <a class="btn primary" href="#contact">
+        Submit This Request
+      </a>
+
+    </aside>
+
+  </div>
+</section>
+
+<section id="catering" class="dark-section">
+
+  <div class="section-head reveal">
+    <div class="eyebrow">Events & Gatherings</div>
+    <h2>Catering, Your Way.</h2>
+    <p>
+      From preset catering packages to completely custom menus,
+      Baruch Boards can build an experience around your event.
+    </p>
+  </div>
+
+  <div class="features">
+
+    <div class="feature reveal">
+      <h3>Parties</h3>
+      <p>
+        Boards and platters designed for birthdays,
+        celebrations and gatherings.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Weddings</h3>
+      <p>
+        Elevated meat boards and platters for
+        engagements, weddings and special occasions.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Corporate</h3>
+      <p>
+        Premium presentation for meetings,
+        corporate events and client experiences.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Custom Events</h3>
+      <p>
+        Tell us what you're planning and we'll
+        build the board around it.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section id="gallery">
+
+  <div class="section-head reveal">
+    <div class="eyebrow">The Experience</div>
+    <h2>Made to Be Seen.</h2>
+    <p>
+      Every board is assembled with attention to presentation,
+      texture, color and detail.
+    </p>
+  </div>
+
+  <div class="gallery">
+
+    <div class="gallery-box reveal">Premium Cuts</div>
+    <div class="gallery-box reveal">Signature Boards</div>
+    <div class="gallery-box reveal">Event Platters</div>
+    <div class="gallery-box reveal">Individual Trays</div>
+    <div class="gallery-box reveal">Gift Boxes</div>
+    <div class="gallery-box reveal">Custom Creations</div>
+
+  </div>
+
+</section>
+
+<section class="dark-section">
+
+  <div class="section-head reveal">
+    <div class="eyebrow">Why Baruch Boards</div>
+    <h2>Built Different.</h2>
+  </div>
+
+  <div class="features">
+
+    <div class="feature reveal">
+      <h3>Premium Cuts</h3>
+      <p>
+        Choose from different cuts and styles to create
+        a board that fits your taste.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Fully Custom</h3>
+      <p>
+        Seasonings, sauces, dips, pickles, olives,
+        presentation and more.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Made To Order</h3>
+      <p>
+        Every order is prepared specifically for
+        your gathering.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Kosher</h3>
+      <p>
+        VHQ Kosher Certified and proudly serving
+        New York and New Jersey.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="about">
+
+  <div class="section-head reveal">
+    <div class="eyebrow">About Baruch Boards</div>
+    <h2>More Than a Meat Board.</h2>
+  </div>
+
+  <div class="about reveal">
+    Baruch Boards creates premium kosher meat boards,
+    charcuterie boards, trays, gift boxes, event platters
+    and catering experiences designed around your taste.
+    <br><br>
+    You choose the cuts. You choose the flavors.
+    We create the board.
+  </div>
+
+</section>
+
+<section class="dark-section">
+
+  <div class="section-head reveal">
+    <div class="eyebrow">What People Say</div>
+    <h2>The Board Speaks For Itself.</h2>
+  </div>
+
+  <div class="testimonials">
+
+    <div class="quote reveal">
+      <p>
+        “The presentation was incredible and the meat
+        was even better.”
+      </p>
+      <span>Baruch Boards Customer</span>
+    </div>
+
+    <div class="quote reveal">
+      <p>
+        “Exactly what we wanted for our event.
+        Everything looked premium.”
+      </p>
+      <span>Baruch Boards Customer</span>
+    </div>
+
+    <div class="quote reveal">
+      <p>
+        “Being able to customize the cuts and sauces
+        made the whole experience different.”
+      </p>
+      <span>Baruch Boards Customer</span>
+    </div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="section-head reveal">
+    <div class="eyebrow">Delivery & Pickup</div>
+    <h2>Serving New York & New Jersey.</h2>
+    <p>
+      Delivery and pickup options are available.
+      Contact us to discuss your order and availability.
+    </p>
+  </div>
+
+  <div class="features">
+
+    <div class="feature reveal">
+      <h3>Small / Medium / Large</h3>
+      <p>
+        Please provide at least 24 hours notice.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>XL / Custom</h3>
+      <p>
+        Please provide at least 48 hours notice.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Delivery</h3>
+      <p>
+        Serving customers throughout New York and New Jersey.
+      </p>
+    </div>
+
+    <div class="feature reveal">
+      <h3>Pickup</h3>
+      <p>
+        Pickup options are available.
+        Contact us for details.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="contact" class="dark-section">
+
+  <div class="contact-grid">
+
+    <div class="contact-info reveal">
+
+      <div class="eyebrow">Let's Create Something</div>
+
+      <h3>Build Your Board.</h3>
+
+      <p>
+        Tell us what you're looking for and we'll
+        get back to you about your custom order.
+      </p>
+
+      <div class="contact-detail">
+        <strong>Phone</strong>
+        <a href="tel:13478208835">347-820-8835</a>
+      </div>
+
+      <div class="contact-detail">
+        <strong>Email</strong>
+        <a href="mailto:baruch.aminov@icloud.com">
+          baruch.aminov@icloud.com
+        </a>
+      </div>
+
+      <div class="contact-detail">
+        <strong>Service Area</strong>
+        New York & New Jersey
+      </div>
+
+      <div class="contact-detail">
+        <strong>Certification</strong>
+        VHQ Kosher Certified
+      </div>
+
+    </div>
+
+    <div class="panel reveal">
+
+      <form id="contactForm">
+
+        <div class="form-grid">
+
+          <div>
+            <label>Name</label>
+            <input id="name" required placeholder="Your name">
+          </div>
+
+          <div>
+            <label>Phone</label>
+            <input id="phone" required placeholder="Your phone number">
+          </div>
+
+          <div>
+            <label>Email</label>
+            <input id="email" type="email" placeholder="Your email">
+          </div>
+
+          <div>
+            <label>Event Date</label>
+            <input id="date" type="date">
+          </div>
+
+          <div class="form-full">
+            <label>Tell Us What You Want</label>
+            <textarea id="message" required placeholder="Tell us about your board, event, cuts, size, flavors, etc."></textarea>
+          </div>
+
+          <div class="form-full">
+            <label>Inspiration Photo</label>
+            <div class="file">
+              <input id="photo" type="file" accept="image/*">
+            </div>
+          </div>
+
+          <div class="form-full">
+            <button class="btn primary" type="submit">
+              Contact Us
+            </button>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <div>
+    <strong>BARUCH BOARDS</strong><br>
+    Exceptional Kosher. Unforgettable Boards.
+  </div>
+
+  <div>
+    347-820-8835<br>
+    baruch.aminov@icloud.com
+  </div>
+
+  <div>
+    Serving New York & New Jersey<br>
+    VHQ Kosher Certified
+  </div>
+
+</footer>
+
+<script type="module">
+
+import * as THREE from
+'https://unpkg.com/three@0.166.1/build/three.module.js';
+
+import { RoomEnvironment } from
+'https://unpkg.com/three@0.166.1/examples/jsm/environments/RoomEnvironment.js';
+
+import { EffectComposer } from
+'https://unpkg.com/three@0.166.1/examples/jsm/postprocessing/EffectComposer.js';
+
+import { RenderPass } from
+'https://unpkg.com/three@0.166.1/examples/jsm/postprocessing/RenderPass.js';
+
+import { BokehPass } from
+'https://unpkg.com/three@0.166.1/examples/jsm/postprocessing/BokehPass.js';
+
+import { OutputPass } from
+'https://unpkg.com/three@0.166.1/examples/jsm/postprocessing/OutputPass.js';
+
+
+const container = document.getElementById("board3d");
+
+const renderer = new THREE.WebGLRenderer({
+  antialias:true,
+  alpha:true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1,2)
+);
+
+renderer.setSize(
+  window.innerWidth,
+  window.innerHeight
+);
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+container.appendChild(renderer.domElement);
+
+
+const scene = new THREE.Scene();
+
+scene.background = new THREE.Color(0x070707);
+
+
+const camera = new THREE.PerspectiveCamera(
+  35,
+  window.innerWidth/window.innerHeight,
+  0.1,
+  100
+);
+
+camera.position.set(7,5,10);
+
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+
+scene.environment =
+  pmrem.fromScene(
+    new RoomEnvironment(renderer),
+    0.04
+  ).texture;
+
+
+const ambient = new THREE.HemisphereLight(
+  0xffffff,
+  0x332211,
+  2
+);
+
+scene.add(ambient);
+
+
+const key = new THREE.DirectionalLight(
+  0xffe8c4,
+  4
+);
+
+key.position.set(5,8,5);
+key.castShadow = true;
+
+scene.add(key);
+
+
+const fill = new THREE.PointLight(
+  0xff6633,
+  20,
+  20
+);
+
+fill.position.set(-5,3,3);
+
+scene.add(fill);
+
+
+const boardGroup = new THREE.Group();
+
+scene.add(boardGroup);
+
+
+const boardMaterial = new THREE.MeshStandardMaterial({
+  color:0x5b301b,
+  roughness:.35,
+  metalness:.05
+});
+
+
+const board = new THREE.Mesh(
+  new THREE.BoxGeometry(7.5,.45,5),
+  boardMaterial
+);
+
+board.position.y=-.3;
+board.castShadow=true;
+board.receiveShadow=true;
+
+boardGroup.add(board);
+
+
+function meat(
+  color,
+  size,
+  position,
+  rotation
+){
+
+  const geometry =
+    new THREE.SphereGeometry(
+      1,
+      32,
+      20
+    );
+
+  geometry.scale(
+    size.x,
+    size.y,
+    size.z
+  );
+
+  const material =
+    new THREE.MeshStandardMaterial({
+      color,
+      roughness:.55,
+      metalness:.02
+    });
+
+  const mesh =
+    new THREE.Mesh(
+      geometry,
+      material
+    );
+
+  mesh.position.copy(position);
+
+  mesh.rotation.set(
+    rotation.x,
+    rotation.y,
+    rotation.z
+  );
+
+  mesh.castShadow=true;
+
+  boardGroup.add(mesh);
+
+  return mesh;
+}
+
+
+const pieces=[];
+
+
+pieces.push(
+  meat(
+    0x7b2920,
+    new THREE.Vector3(1.55,.42,.85),
+    new THREE.Vector3(-1.8,.35,-.5),
+    new THREE.Vector3(.1,.2,-.15)
+  )
+);
+
+
+pieces.push(
+  meat(
+    0x8d3427,
+    new THREE.Vector3(1.2,.35,.7),
+    new THREE.Vector3(.7,.38,-.65),
+    new THREE.Vector3(.1,-.3,.15)
+  )
+);
+
+
+pieces.push(
+  meat(
+    0x6d251d,
+    new THREE.Vector3(1.3,.45,.8),
+    new THREE.Vector3(1.8,.38,.8),
+    new THREE.Vector3(.2,.4,-.1)
+  )
+);
+
+
+pieces.push(
+  meat(
+    0x9a4534,
+    new THREE.Vector3(.9,.28,.65),
+    new THREE.Vector3(-.2,.35,.7),
+    new THREE.Vector3(.2,-.2,.1)
+  )
+);
+
+
+pieces.push(
+  meat(
+    0x6b2b20,
+    new THREE.Vector3(.8,.25,.5),
+    new THREE.Vector3(-2.3,.35,1.2),
+    new THREE.Vector3(.2,.5,.15)
+  )
+);
+
+
+const garnishMaterial =
+  new THREE.MeshStandardMaterial({
+    color:0x5b7b32,
+    roughness:.7
+  });
+
+
+for(let i=0;i<18;i++){
+
+  const olive =
+    new THREE.Mesh(
+      new THREE.SphereGeometry(
+        .18,
+        20,
+        20
+      ),
+      garnishMaterial
+    );
+
+  olive.position.set(
+    -3+Math.random()*6,
+    .35+Math.random()*.15,
+    -1.8+Math.random()*3.6
+  );
+
+  olive.castShadow=true;
+
+  boardGroup.add(olive);
+
+  pieces.push(olive);
+}
+
+
+const bowlMaterial =
+  new THREE.MeshStandardMaterial({
+    color:0xd8c7a4,
+    roughness:.3
+  });
+
+
+const bowl =
+  new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      .6,.48,.3,32
+    ),
+    bowlMaterial
+  );
+
+bowl.position.set(
+  2.5,.25,-1.3
+);
+
+bowl.castShadow=true;
+
+boardGroup.add(bowl);
+
+pieces.push(bowl);
+
+
+let composer=null;
+let bokehPass=null;
+
+
+try{
+
+  composer =
+    new EffectComposer(renderer);
+
+  composer.addPass(
+    new RenderPass(
+      scene,
+      camera
+    )
+  );
+
+  bokehPass =
+    new BokehPass(
+      scene,
+      camera,
+      {
+        focus:9,
+        aperture:.00008,
+        maxblur:.008
+      }
+    );
+
+  composer.addPass(bokehPass);
+
+  composer.addPass(
+    new OutputPass()
+  );
+
+}catch(error){
+
+  console.warn(
+    "Postprocessing unavailable:",
+    error
+  );
+
+}
+
+
+const clock =
+  new THREE.Clock();
+
+
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
+
+  const elapsed =
+    clock.getElapsedTime();
+
+
+  boardGroup.rotation.y =
+    Math.sin(elapsed*.18)*.16;
+
+
+  boardGroup.position.y =
+    Math.sin(elapsed*.65)*.08;
+
+
+  boardGroup.rotation.x =
+    Math.sin(elapsed*.25)*.025;
+
+
+  pieces.forEach(
+    (piece,index)=>{
+
+      piece.position.y +=
+        Math.sin(
+          elapsed*.7+
+          index*.5
+        )*.0008;
+
+    }
+  );
+
+
+  if(composer){
+
+    composer.render();
+
+  }else{
+
+    renderer.render(
+      scene,
+      camera
+    );
+
+  }
+
+}
+
+
+function resize(){
+
+  const width =
+    window.innerWidth;
+
+  const height =
+    window.innerHeight;
+
+
+  camera.aspect =
+    width/height;
+
+  camera.updateProjectionMatrix();
+
+
+  renderer.setSize(
+    width,
+    height
+  );
+
+
+  if(composer){
+
+    composer.setSize(
+      width,
+      height
+    );
+
+  }
+
+}
+
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+
+animate();
+
+
+/* BUILDER */
+
+const selected = {
+  size:"Small — 5–8 people",
+  meat:[]
+};
+
+
+document
+.querySelectorAll(
+  ".options"
+)
+.forEach(group=>{
+
+  const groupName =
+    group.dataset.group;
+
+
+  group
+  .querySelectorAll(
+    ".option"
+  )
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        if(groupName==="size"){
+
+          group
+          .querySelectorAll(
+            ".option"
+          )
+          .forEach(
+            b=>b.classList.remove(
+              "active"
+            )
+          );
+
+          button.classList.add(
+            "active"
+          );
+
+          selected.size =
+            button.dataset.value;
+
+        }
+
+
+        if(groupName==="meat"){
+
+          button.classList.toggle(
+            "active"
+          );
+
+          selected.meat =
+            [...group.querySelectorAll(
+              ".option.active"
+            )]
+            .map(
+              b=>b.dataset.value
+            );
+
+        }
+
+
+        updateSummary();
+
+      }
+    );
+
+  });
+
+});
+
+
+function updateSummary(){
+
+  const seasoning =
+    document.getElementById(
+      "seasoning"
+    ).value ||
+    "Custom";
+
+
+  const sauce =
+    document.getElementById(
+      "sauce"
+    ).value ||
+    "Custom";
+
+
+  const extras =
+    document.getElementById(
+      "extras"
+    ).value ||
+    "Pickles & olives";
+
+
+  document.getElementById(
+    "summary"
+  ).innerHTML = `
+
+    <li>
+      Size:
+      <strong>
+        ${selected.size}
+      </strong>
+    </li>
+
+    <li>
+      Cuts:
+      <strong>
+        ${
+          selected.meat.length
+          ? selected.meat.join(", ")
+          : "Select your cuts"
+        }
+      </strong>
+    </li>
+
+    <li>
+      Seasoning:
+      <strong>
+        ${seasoning}
+      </strong>
+    </li>
+
+    <li>
+      Sauce/Dip:
+      <strong>
+        ${sauce}
+      </strong>
+    </li>
+
+    <li>
+      Extras:
+      <strong>
+        ${extras}
+      </strong>
+    </li>
+
+  `;
+
+}
+
+
+[
+  "seasoning",
+  "sauce",
+  "extras",
+  "notes"
+]
+.forEach(id=>{
+
+  document
+  .getElementById(id)
+  .addEventListener(
+    "input",
+    updateSummary
+  );
+
+});
+
+
+/* SCROLL ANIMATIONS */
+
+const observer =
+  new IntersectionObserver(
+    entries=>{
+
+      entries.forEach(
+        entry=>{
+
+          if(entry.isIntersecting){
+
+            entry.target
+              .classList
+              .add("visible");
+
+          }
+
+        }
+      );
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+
+document
+.querySelectorAll(
+  ".reveal"
+)
+.forEach(
+  element =>
+    observer.observe(element)
+);
+
+
+/* CONTACT FORM */
+
+document
+.getElementById(
+  "contactForm"
+)
+.addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+
+    const name =
+      document.getElementById(
+        "name"
+      ).value;
+
+
+    const phone =
+      document.getElementById(
+        "phone"
+      ).value;
+
+
+    const email =
+      document.getElementById(
+        "email"
+      ).value;
+
+
+    const date =
+      document.getElementById(
+        "date"
+      ).value;
+
+
+    const message =
+      document.getElementById(
+        "message"
+      ).value;
+
+
+    const seasoning =
+      document.getElementById(
+        "seasoning"
+      ).value;
+
+
+    const sauce =
+      document.getElementById(
+        "sauce"
+      ).value;
+
+
+    const extras =
+      document.getElementById(
+        "extras"
+      ).value;
+
+
+    const cuts =
+      selected.meat.length
+      ? selected.meat.join(", ")
+      : "Not specified";
+
+
+    const subject =
+      encodeURIComponent(
+        "Baruch Boards Order Request"
+      );
+
+
+    const body =
+      encodeURIComponent(
+
+`New Baruch Boards Request
+
+Name: ${name}
+
+Phone: ${phone}
+
+Email: ${email}
+
+Event Date: ${date || "Not specified"}
+
+Board Size: ${selected.size}
+
+Cuts: ${cuts}
+
+Seasoning: ${seasoning || "Not specified"}
+
+Sauce / Dip: ${sauce || "Not specified"}
+
+Pickles / Olives / Extras: ${extras || "Not specified"}
+
+Additional Details:
+${message}
+`
+
+      );
+
+
+    window.location.href =
+      `mailto:baruch.aminov@icloud.com?subject=${subject}&body=${body}`;
+
+  }
+);
+
+</script>
+
+</body>
+</html>
