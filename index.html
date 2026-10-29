@@ -3,1590 +3,3285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Baruchs Boards | Exceptional Kosher. Unforgettable Boards.</title>
+
+<title>Boards by Baruch | Exceptional Kosher. Unforgettable Boards.</title>
+
+<meta name="description" content="Boards by Baruch — premium kosher meat boards, custom boards, catering, gift boxes and event platters serving NY and NJ.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
-  --black:#070707;
-  --dark:#0d0c0b;
-  --brown:#3b2414;
-  --gold:#c8a56a;
-  --cream:#eee5d6;
-  --muted:#aaa092;
+    --black:#090806;
+    --deep:#0d0b09;
+    --brown:#20150e;
+    --gold:#c9a35b;
+    --gold2:#e0bd76;
+    --cream:#f3ead9;
+    --white:#f8f4ec;
+    --muted:#aaa297;
+    --line:rgba(201,163,91,.28);
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-  margin:0;
-  background:var(--black);
-  color:var(--cream);
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+    background:var(--black);
+    color:var(--white);
+    font-family:Inter,Arial,sans-serif;
+    overflow-x:hidden;
 }
 
-a{text-decoration:none;color:inherit}
-
-#three-container{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
+a{
+    color:inherit;
+    text-decoration:none;
 }
 
-canvas{display:block}
-
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 50% 35%,transparent 20%,rgba(0,0,0,.2) 60%,rgba(0,0,0,.75) 100%);
+button,
+input,
+textarea,
+select{
+    font:inherit;
 }
 
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:78px;
-  z-index:20;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 42px;
-  background:linear-gradient(to bottom,rgba(0,0,0,.8),transparent);
-  backdrop-filter:blur(5px);
+#loader{
+    position:fixed;
+    inset:0;
+    background:#080705;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 1s ease,visibility 1s ease;
 }
 
-.logo{
-  font-family:Georgia,serif;
-  font-size:24px;
-  letter-spacing:.18em;
-  font-weight:bold;
+#loader.hide{
+    opacity:0;
+    visibility:hidden;
 }
 
-.navlinks{
-  display:flex;
-  gap:28px;
-  align-items:center;
+.loader-inner{
+    text-align:center;
 }
 
-.navlinks a{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  color:#ddd;
-  transition:.3s;
+.loader-mark{
+    font-family:"Cormorant Garamond",serif;
+    color:var(--gold2);
+    font-size:52px;
+    letter-spacing:8px;
 }
 
-.navlinks a:hover{color:var(--gold)}
-
-.navcta{
-  border:1px solid rgba(200,165,106,.65);
-  padding:12px 18px;
-  color:var(--gold)!important;
+.loader-line{
+    width:130px;
+    height:1px;
+    background:var(--gold);
+    margin:18px auto;
+    transform-origin:left;
+    animation:loaderLine 1.5s ease infinite;
 }
 
-.sidebar{
-  position:fixed;
-  right:0;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:25;
-  writing-mode:vertical-rl;
-  background:#11100e;
-  border:1px solid rgba(200,165,106,.35);
-  border-right:0;
-  padding:20px 13px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  font-size:10px;
-  color:var(--gold);
-  cursor:pointer;
-  transition:.3s;
+.loader-text{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#aaa;
 }
 
-.sidebar:hover{
-  background:#1b1712;
-  padding-right:18px;
+@keyframes loaderLine{
+    0%,100%{transform:scaleX(.2)}
+    50%{transform:scaleX(1)}
 }
+
+/* LEFT NAV */
+
+.side-nav{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:198px;
+    background:rgba(8,7,5,.93);
+    border-right:1px solid rgba(201,163,91,.18);
+    z-index:500;
+    display:flex;
+    flex-direction:column;
+    padding:38px 26px;
+    backdrop-filter:blur(16px);
+}
+
+.brand{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.brand-mark{
+    color:var(--gold2);
+    font-family:"Cormorant Garamond",serif;
+    font-size:14px;
+    letter-spacing:5px;
+    margin-bottom:10px;
+}
+
+.brand-name{
+    font-family:"Cormorant Garamond",serif;
+    font-size:24px;
+    line-height:.82;
+    letter-spacing:3px;
+    color:var(--cream);
+}
+
+.brand-name span{
+    color:var(--gold2);
+}
+
+.brand-divider{
+    width:35px;
+    height:1px;
+    background:var(--gold);
+    margin:20px auto 0;
+}
+
+.nav-links{
+    display:flex;
+    flex-direction:column;
+    gap:27px;
+}
+
+.nav-links a{
+    color:#aaa49a;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    transition:.3s;
+    position:relative;
+}
+
+.nav-links a:before{
+    content:"";
+    position:absolute;
+    left:-26px;
+    top:50%;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--gold2);
+}
+
+.nav-links a:hover:before{
+    width:15px;
+}
+
+.nav-bottom{
+    margin-top:auto;
+}
+
+.vhq{
+    border-top:1px solid rgba(201,163,91,.18);
+    padding-top:25px;
+    text-align:center;
+}
+
+.vhq-circle{
+    width:50px;
+    height:50px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold2);
+    font-family:"Cormorant Garamond",serif;
+    font-weight:bold;
+    font-size:17px;
+}
+
+.vhq p{
+    margin-top:12px;
+    color:#858078;
+    font-size:8px;
+    letter-spacing:2px;
+    line-height:1.6;
+}
+
+/* CONTACT RAIL */
+
+.contact-rail{
+    position:fixed;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:600;
+    writing-mode:vertical-rl;
+    border:1px solid var(--gold);
+    background:rgba(10,8,6,.88);
+    color:var(--gold2);
+    padding:24px 12px;
+    letter-spacing:4px;
+    font-size:9px;
+    text-transform:uppercase;
+    transition:.3s;
+}
+
+.contact-rail:hover{
+    background:var(--gold);
+    color:#080705;
+}
+
+/* HERO */
 
 .hero{
-  min-height:100vh;
-  position:relative;
-  z-index:5;
-  display:flex;
-  align-items:flex-end;
-  padding:0 8vw 12vh;
-  pointer-events:none;
+    margin-left:198px;
+    height:100vh;
+    min-height:700px;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 70% 45%,rgba(98,57,29,.27),transparent 30%),
+        linear-gradient(90deg,#080705 0%,#0d0a08 48%,#1c1009 100%);
+}
+
+#heroCanvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+.hero-vignette{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    background:
+        linear-gradient(90deg,rgba(5,4,3,.82) 0%,rgba(5,4,3,.35) 40%,transparent 70%),
+        linear-gradient(0deg,rgba(5,4,3,.75) 0%,transparent 30%,rgba(5,4,3,.22) 100%);
 }
 
 .hero-content{
-  max-width:650px;
+    position:absolute;
+    z-index:10;
+    left:7%;
+    top:50%;
+    transform:translateY(-50%);
+    width:510px;
 }
 
 .eyebrow{
-  color:var(--gold);
-  font-size:11px;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  margin-bottom:18px;
+    color:var(--gold2);
+    font-size:11px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    margin-bottom:26px;
 }
 
-h1{
-  font-family:Georgia,serif;
-  font-weight:400;
-  font-size:clamp(50px,7vw,105px);
-  line-height:.92;
-  margin:0 0 25px;
+.hero-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(70px,7vw,116px);
+    line-height:.77;
+    font-weight:500;
+    letter-spacing:-3px;
+    color:#f5efe4;
 }
 
-.hero p{
-  max-width:560px;
-  font-size:16px;
-  line-height:1.8;
-  color:#c4b9a9;
+.hero-title span{
+    color:var(--gold2);
 }
 
-.buttons{
-  display:flex;
-  gap:14px;
-  margin-top:30px;
-  pointer-events:auto;
+.hero-rule{
+    width:310px;
+    height:1px;
+    background:linear-gradient(90deg,var(--gold),transparent);
+    margin:35px 0 28px;
+}
+
+.hero-subtitle{
+    font-family:"Cormorant Garamond",serif;
+    font-size:22px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:#e7dfd1;
+    line-height:1.5;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    margin-top:38px;
 }
 
 .btn{
-  display:inline-flex;
-  padding:16px 25px;
-  border:1px solid rgba(200,165,106,.6);
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:10px;
-  transition:.3s;
+    border:1px solid var(--gold);
+    padding:17px 28px;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:.35s;
 }
 
-.btn.primary{
-  background:var(--gold);
-  color:#090807;
+.btn-primary{
+    background:linear-gradient(135deg,#d9b66e,#b78c42);
+    color:#171008;
+    border-color:#d9b66e;
 }
 
-.btn:hover{
-  transform:translateY(-3px);
-  background:#e0c38a;
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 35px rgba(201,163,91,.22);
 }
 
-.scroll-note{
-  position:absolute;
-  bottom:28px;
-  right:9vw;
-  font-size:9px;
-  letter-spacing:.35em;
-  color:#aaa;
-  text-transform:uppercase;
+.btn-outline{
+    background:rgba(0,0,0,.2);
+    color:var(--cream);
 }
 
-section{
-  position:relative;
-  z-index:6;
-  min-height:100vh;
-  padding:120px 8vw;
-  background:linear-gradient(to bottom,rgba(5,5,5,.05),rgba(5,5,5,.96) 15%);
+.btn-outline:hover{
+    background:rgba(201,163,91,.12);
+    transform:translateY(-3px);
+}
+
+.scroll-indicator{
+    position:absolute;
+    z-index:10;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    color:#aaa;
+    font-size:8px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.scroll-arrow{
+    width:30px;
+    height:45px;
+    border:1px solid rgba(201,163,91,.6);
+    border-radius:20px;
+    margin:0 auto 8px;
+    position:relative;
+}
+
+.scroll-arrow:after{
+    content:"";
+    width:5px;
+    height:5px;
+    border-right:1px solid var(--gold);
+    border-bottom:1px solid var(--gold);
+    transform:rotate(45deg);
+    position:absolute;
+    left:11px;
+    top:12px;
+    animation:scrollDown 1.7s infinite;
+}
+
+@keyframes scrollDown{
+    0%{opacity:0;transform:translateY(-4px) rotate(45deg)}
+    40%{opacity:1}
+    100%{opacity:0;transform:translateY(13px) rotate(45deg)}
+}
+
+/* SECTIONS */
+
+.section{
+    margin-left:198px;
+    position:relative;
+}
+
+.dark-section{
+    background:#0b0907;
+}
+
+.light-section{
+    background:#eee5d5;
+    color:#20170f;
 }
 
 .section-inner{
-  max-width:1150px;
-  margin:auto;
+    width:min(1200px,88%);
+    margin:auto;
+    padding:130px 0;
 }
 
 .section-label{
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:.3em;
-  font-size:10px;
-  margin-bottom:18px;
+    font-size:9px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
 }
 
-h2{
-  font-family:Georgia,serif;
-  font-size:clamp(40px,5vw,72px);
-  font-weight:400;
-  margin:0 0 25px;
+.section-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:65px;
+    line-height:.95;
+    font-weight:500;
 }
 
-.lead{
-  max-width:750px;
-  color:#bbb0a1;
-  font-size:17px;
-  line-height:1.9;
+.section-title span{
+    color:var(--gold);
 }
 
 .about-grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:70px;
-  align-items:center;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:90px;
+    align-items:center;
 }
 
-.feature-box{
-  border-left:1px solid var(--gold);
-  padding-left:30px;
+.about-copy{
+    color:#a9a39a;
+    font-size:14px;
+    line-height:2;
+    margin-top:30px;
+    max-width:550px;
 }
 
-.feature-box strong{
-  display:block;
-  font-family:Georgia,serif;
-  font-size:26px;
-  font-weight:400;
-  margin-bottom:12px;
+.about-photo{
+    height:530px;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(90deg,transparent,rgba(0,0,0,.2)),
+        radial-gradient(circle at 65% 50%,#703d20,#25140b 40%,#080705 75%);
 }
 
-.feature-box p{
-  color:#9f968a;
-  line-height:1.8;
+.about-photo:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,transparent 40%,rgba(0,0,0,.7));
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  margin-top:60px;
+.about-steak{
+    position:absolute;
+    width:80%;
+    height:48%;
+    right:-7%;
+    top:27%;
+    border-radius:45% 50% 40% 45%;
+    transform:rotate(-9deg);
+    background:
+        radial-gradient(circle at 40% 45%,#d86b4e 0 5%,transparent 6%),
+        radial-gradient(circle at 63% 34%,#c95d42 0 5%,transparent 6%),
+        linear-gradient(135deg,#3d1710,#8d3626 40%,#c35b43 55%,#4b1c13);
+    box-shadow:
+        0 35px 50px rgba(0,0,0,.7),
+        inset 0 0 30px rgba(0,0,0,.45);
 }
 
-.card{
-  background:rgba(18,16,13,.85);
-  border:1px solid rgba(200,165,106,.15);
-  padding:34px 27px;
-  min-height:190px;
-  transition:.4s;
+.about-steak:after{
+    content:"";
+    position:absolute;
+    inset:10%;
+    border-radius:inherit;
+    border:3px solid rgba(255,215,175,.16);
 }
 
-.card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(200,165,106,.5);
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid rgba(201,163,91,.2);
+    border-bottom:1px solid rgba(201,163,91,.2);
 }
 
-.card-number{
-  color:var(--gold);
-  font-size:10px;
-  letter-spacing:.2em;
+.feature{
+    padding:30px 20px;
+    text-align:center;
+    border-right:1px solid rgba(201,163,91,.15);
 }
 
-.card h3{
-  font-family:Georgia,serif;
-  font-size:27px;
-  font-weight:400;
-  margin:30px 0 12px;
+.feature:last-child{
+    border-right:0;
 }
 
-.card p{
-  color:#999084;
-  line-height:1.7;
-  font-size:14px;
+.feature-number{
+    color:var(--gold);
+    font-family:"Cormorant Garamond",serif;
+    font-size:35px;
 }
+
+.feature-title{
+    margin-top:7px;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.feature-text{
+    color:#817b72;
+    font-size:10px;
+    margin-top:8px;
+}
+
+/* SERVICES */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(201,163,91,.18);
+    margin-top:65px;
+}
+
+.service{
+    background:#0b0907;
+    min-height:250px;
+    padding:40px;
+    transition:.4s;
+}
+
+.service:hover{
+    background:#15100c;
+    transform:translateY(-5px);
+}
+
+.service-icon{
+    font-size:25px;
+    color:var(--gold);
+    margin-bottom:28px;
+}
+
+.service h3{
+    font-family:"Cormorant Garamond",serif;
+    font-size:30px;
+    font-weight:500;
+}
+
+.service p{
+    color:#858078;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+/* INFO STRIP */
 
 .info-strip{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  margin-top:70px;
-  border-top:1px solid #29241e;
-  border-bottom:1px solid #29241e;
+    margin-left:198px;
+    background:#c4a05c;
+    color:#171009;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
 }
 
-.info{
-  padding:25px;
-  border-right:1px solid #29241e;
+.info-box{
+    padding:28px 20px;
+    text-align:center;
+    border-right:1px solid rgba(0,0,0,.15);
 }
 
-.info:last-child{border-right:0}
-
-.info span{
-  display:block;
-  color:var(--gold);
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  margin-bottom:9px;
+.info-box:last-child{
+    border:0;
 }
 
-.info strong{
-  font-family:Georgia,serif;
-  font-weight:400;
-  font-size:18px;
+.info-box strong{
+    display:block;
+    font-family:"Cormorant Garamond",serif;
+    font-size:22px;
 }
+
+.info-box span{
+    display:block;
+    font-size:8px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-top:5px;
+}
+
+/* BUILDER */
 
 .builder{
-  background:#0b0a09;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(112,70,31,.18),transparent 40%),
+        #0a0806;
 }
 
-.builder-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:55px;
-  margin-top:55px;
+.builder-header{
+    text-align:center;
 }
 
-.option-group{
-  margin-bottom:32px;
+.builder-header .section-title{
+    font-size:70px;
 }
 
-.option-group label{
-  display:block;
-  color:var(--gold);
-  text-transform:uppercase;
-  font-size:10px;
-  letter-spacing:.2em;
-  margin-bottom:14px;
+.builder-header p{
+    color:#8f8880;
+    font-size:12px;
+    letter-spacing:2px;
+    margin-top:20px;
+}
+
+.builder-layout{
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    gap:70px;
+    margin-top:75px;
+}
+
+.builder-preview{
+    position:sticky;
+    top:100px;
+    height:530px;
+    background:radial-gradient(circle,#25170d,#080705 65%);
+    overflow:hidden;
+}
+
+.preview-board{
+    position:absolute;
+    width:76%;
+    height:45%;
+    left:12%;
+    bottom:17%;
+    border-radius:28px;
+    transform:perspective(700px) rotateX(55deg) rotateZ(-3deg);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #4c2a17 0px,
+            #5e361e 3px,
+            #3b2112 7px,
+            #633b20 11px
+        );
+    box-shadow:0 35px 45px rgba(0,0,0,.8);
+}
+
+.preview-meat{
+    position:absolute;
+    width:150px;
+    height:70px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 35% 45%,#dc795e 0 4%,transparent 5%),
+        radial-gradient(circle at 65% 30%,#b84d38 0 5%,transparent 6%),
+        linear-gradient(135deg,#4c1810,#9e3827,#d76b4e);
+    box-shadow:0 15px 20px rgba(0,0,0,.5);
+    z-index:3;
+}
+
+.meat1{left:20%;bottom:43%;transform:rotate(-8deg)}
+.meat2{left:43%;bottom:46%;transform:rotate(9deg) scale(.8)}
+.meat3{left:56%;bottom:38%;transform:rotate(-17deg) scale(.72)}
+
+.preview-pickle{
+    position:absolute;
+    width:70px;
+    height:25px;
+    border-radius:50%;
+    background:linear-gradient(#526d20,#91a940,#394d18);
+    z-index:4;
+}
+
+.pickle1{left:65%;bottom:49%;transform:rotate(20deg)}
+.pickle2{left:31%;bottom:35%;transform:rotate(-25deg)}
+
+.builder-form{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+}
+
+.form-group{
+    border-top:1px solid rgba(201,163,91,.18);
+    padding-top:25px;
+}
+
+.form-group h3{
+    font-family:"Cormorant Garamond",serif;
+    font-size:28px;
+    font-weight:500;
+    margin-bottom:18px;
 }
 
 .options{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
 }
 
 .option{
-  padding:12px 15px;
-  border:1px solid #302b25;
-  color:#bdb3a7;
-  font-size:12px;
-  cursor:pointer;
-  transition:.25s;
+    border:1px solid rgba(201,163,91,.3);
+    background:transparent;
+    color:#aaa39a;
+    padding:13px 16px;
+    font-size:10px;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition:.25s;
 }
 
 .option:hover,
 .option.active{
-  background:var(--gold);
-  color:#111;
-  border-color:var(--gold);
+    border-color:var(--gold);
+    background:rgba(201,163,91,.12);
+    color:var(--gold2);
 }
 
 textarea,
-input{
-  width:100%;
-  background:#12100e;
-  color:#eee;
-  border:1px solid #302b25;
-  padding:15px;
-  outline:none;
-  font:inherit;
+input,
+select{
+    width:100%;
+    border:1px solid rgba(201,163,91,.25);
+    background:#100d0a;
+    color:#eee;
+    padding:16px;
+    outline:none;
 }
 
 textarea{
-  min-height:120px;
-  resize:vertical;
+    min-height:110px;
+    resize:vertical;
 }
 
-.builder-summary{
-  position:sticky;
-  top:120px;
-  height:max-content;
-  border:1px solid rgba(200,165,106,.28);
-  padding:35px;
-  background:linear-gradient(145deg,#17130f,#0c0b09);
+.file-input{
+    padding:12px;
 }
 
-.builder-summary h3{
-  font-family:Georgia,serif;
-  font-size:34px;
-  font-weight:400;
-  margin-top:0;
+.builder-submit{
+    margin-top:10px;
+    width:100%;
 }
 
-.summary-line{
-  display:flex;
-  justify-content:space-between;
-  padding:14px 0;
-  border-bottom:1px solid #29241f;
-  color:#aaa096;
-  font-size:13px;
+/* QUOTE */
+
+.quote{
+    text-align:center;
+    background:
+        linear-gradient(rgba(8,6,4,.7),rgba(8,6,4,.8)),
+        radial-gradient(circle at center,#4b2b16,#080705 70%);
 }
 
-.summary-line strong{
-  color:#eee;
-  font-weight:400;
+.quote-inner{
+    padding:150px 20px;
+    max-width:900px;
+    margin:auto;
 }
+
+.quote-text{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(40px,5vw,72px);
+    line-height:1;
+}
+
+.quote-author{
+    margin-top:25px;
+    color:var(--gold);
+    font-size:9px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+/* CONTACT */
 
 .contact{
-  background:
-    radial-gradient(circle at 80% 30%,rgba(116,70,27,.18),transparent 35%),
-    #080807;
+    background:#eee5d5;
+    color:#21170f;
 }
 
 .contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:70px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:90px;
+}
+
+.contact-info .section-title{
+    color:#25190f;
+}
+
+.contact-info p{
+    color:#6f655b;
+    line-height:1.9;
+    margin-top:25px;
+    max-width:500px;
 }
 
 .contact-details{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-  margin-top:40px;
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
 }
 
 .contact-detail{
-  border-bottom:1px solid #28231e;
-  padding-bottom:20px;
+    border-bottom:1px solid rgba(80,50,25,.16);
+    padding-bottom:18px;
 }
 
-.contact-detail span{
-  display:block;
-  color:var(--gold);
-  font-size:10px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  margin-bottom:8px;
+.contact-detail small{
+    display:block;
+    color:#8e7351;
+    font-size:8px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:6px;
 }
 
-.contact-detail a,
-.contact-detail strong{
-  font-family:Georgia,serif;
-  font-size:20px;
-  font-weight:400;
+.contact-detail a{
+    font-family:"Cormorant Garamond",serif;
+    font-size:24px;
 }
 
-form{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+.contact-form{
+    background:#e6dccb;
+    padding:42px;
 }
 
-form input,
-form textarea{
-  margin-bottom:4px;
+.contact-form h3{
+    font-family:"Cormorant Garamond",serif;
+    font-size:35px;
+    margin-bottom:28px;
 }
 
-form button{
-  cursor:pointer;
-  border:0;
-  padding:17px;
-  background:var(--gold);
-  color:#0a0908;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:10px;
-  margin-top:8px;
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
+
+.contact-form input,
+.contact-form textarea{
+    background:#f0e8da;
+    border-color:rgba(60,40,20,.2);
+    color:#21170f;
+    margin-bottom:12px;
+}
+
+.contact-form textarea{
+    min-height:130px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+    color:#887c6e;
+}
+
+/* FOOTER */
 
 footer{
-  position:relative;
-  z-index:7;
-  padding:55px 8vw;
-  border-top:1px solid #28231e;
-  background:#050505;
+    margin-left:198px;
+    background:#080705;
+    border-top:1px solid rgba(201,163,91,.18);
 }
 
-.footer-grid{
-  display:flex;
-  justify-content:space-between;
-  gap:30px;
+.footer-inner{
+    width:min(1200px,88%);
+    margin:auto;
+    padding:65px 0 30px;
+}
+
+.footer-top{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:50px;
 }
 
 .footer-brand{
-  font-family:Georgia,serif;
-  font-size:25px;
-  letter-spacing:.15em;
+    font-family:"Cormorant Garamond",serif;
+    font-size:34px;
+    color:var(--gold2);
 }
 
-footer p{
-  color:#777;
-  font-size:12px;
-  line-height:1.8;
+.footer-column h4{
+    color:#eee;
+    font-size:9px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:20px;
 }
 
-@media(max-width:850px){
-  nav{padding:0 20px}
-  .navlinks{display:none}
-  .hero{padding:0 25px 100px}
-  section{padding:90px 25px}
-  .about-grid,
-  .builder-grid,
-  .contact-grid{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  .info-strip{grid-template-columns:1fr 1fr}
-  .info:nth-child(2){border-right:0}
-  .builder-summary{position:relative;top:0}
-  .sidebar{display:none}
+.footer-column p,
+.footer-column a{
+    display:block;
+    color:#77716a;
+    font-size:11px;
+    line-height:2;
 }
 
-@media(max-width:500px){
-  .info-strip{grid-template-columns:1fr}
-  .info{border-right:0!important}
-  h1{font-size:50px}
+.footer-bottom{
+    border-top:1px solid rgba(201,163,91,.12);
+    margin-top:55px;
+    padding-top:20px;
+    display:flex;
+    justify-content:space-between;
+    color:#57524c;
+    font-size:9px;
+    letter-spacing:1px;
 }
+
+/* REVEAL */
+
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:opacity 1s ease,transform 1s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .side-nav{
+        width:100%;
+        height:70px;
+        bottom:auto;
+        padding:0 20px;
+        flex-direction:row;
+        align-items:center;
+        border-right:0;
+        border-bottom:1px solid rgba(201,163,91,.2);
+    }
+
+    .brand{
+        margin:0;
+        text-align:left;
+    }
+
+    .brand-mark,
+    .brand-divider,
+    .nav-bottom{
+        display:none;
+    }
+
+    .brand-name{
+        font-size:19px;
+    }
+
+    .nav-links{
+        margin-left:auto;
+        flex-direction:row;
+        gap:17px;
+        overflow:hidden;
+    }
+
+    .nav-links a{
+        font-size:7px;
+        letter-spacing:1.5px;
+        white-space:nowrap;
+    }
+
+    .nav-links a:before{
+        display:none;
+    }
+
+    .hero,
+    .section,
+    footer{
+        margin-left:0;
+    }
+
+    .hero{
+        padding-top:70px;
+    }
+
+    .contact-rail{
+        display:none;
+    }
+
+    .hero-content{
+        left:7%;
+        width:80%;
+    }
+
+    .hero-title{
+        font-size:65px;
+    }
+
+    .hero-subtitle{
+        font-size:16px;
+        letter-spacing:3px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        width:220px;
+    }
+
+    .section-inner{
+        padding:90px 0;
+    }
+
+    .about-grid,
+    .builder-layout,
+    .contact-grid{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .builder-preview{
+        position:relative;
+        top:auto;
+        height:400px;
+    }
+
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features,
+    .info-strip{
+        grid-template-columns:1fr 1fr;
+        margin-left:0;
+    }
+
+    .feature:nth-child(2){
+        border-right:0;
+    }
+
+    .feature{
+        border-bottom:1px solid rgba(201,163,91,.15);
+    }
+
+    .footer-top{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:10px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .nav-links a:nth-child(n+4){
+        display:none;
+    }
+
+    .hero{
+        min-height:720px;
+    }
+
+    .hero-title{
+        font-size:54px;
+    }
+
+    .hero-content{
+        top:47%;
+    }
+
+    .features,
+    .info-strip{
+        grid-template-columns:1fr;
+    }
+
+    .feature,
+    .info-box{
+        border-right:0;
+    }
+
+    .section-title,
+    .builder-header .section-title{
+        font-size:52px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .contact-form{
+        padding:25px;
+    }
+
+    .footer-top{
+        grid-template-columns:1fr;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="three-container"></div>
-<div class="overlay"></div>
+<!-- LOADER -->
 
-<nav>
-  <a href="#home" class="logo">BARUCHS BOARDS</a>
+<div id="loader">
+    <div class="loader-inner">
+        <div class="loader-mark">BB</div>
+        <div class="loader-line"></div>
+        <div class="loader-text">BOARDS BY BARUCH</div>
+    </div>
+</div>
 
-  <div class="navlinks">
-    <a href="#about">About</a>
-    <a href="#boards">Boards</a>
-    <a href="#builder">Create Yours</a>
-    <a href="#contact">Contact</a>
-    <a href="#contact" class="navcta">Contact Us Now</a>
-  </div>
+
+<!-- LEFT NAV -->
+
+<nav class="side-nav">
+
+    <a href="#home" class="brand">
+        <div class="brand-mark">✦</div>
+
+        <div class="brand-name">
+            BOARDS<br>
+            <span>BY BARUCH</span>
+        </div>
+
+        <div class="brand-divider"></div>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="#home">Home</a>
+
+        <a href="#about">About Us</a>
+
+        <a href="#boards">Our Boards</a>
+
+        <a href="#builder">Create Your Own</a>
+
+        <a href="#services">Catering</a>
+
+        <a href="#gifts">Gift Boxes</a>
+
+        <a href="#ordering">Ordering Info</a>
+
+        <a href="#contact">Contact Us</a>
+
+    </div>
+
+    <div class="nav-bottom">
+
+        <div class="vhq">
+
+            <div class="vhq-circle">VHQ</div>
+
+            <p>
+                KOSHER CERTIFIED<br>
+                UNDER VHQ SUPERVISION
+            </p>
+
+        </div>
+
+    </div>
+
 </nav>
 
-<a href="#contact" class="sidebar">Contact Us Now</a>
 
-<main>
+<!-- CONTACT RAIL -->
+
+<a href="#contact" class="contact-rail">
+    ☎ &nbsp; Contact Us Now
+</a>
+
+
+<!-- HERO -->
 
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="eyebrow">Premium Kosher Meat • NY & NJ</div>
 
-    <h1>Exceptional Kosher.<br>Unforgettable Boards.</h1>
+    <canvas id="heroCanvas"></canvas>
 
-    <p>
-      Premium kosher meat, crafted your way.
-      From intimate Shabbat tables to weddings, celebrations,
-      corporate events and unforgettable gatherings,
-      Baruchs Boards creates luxury meat experiences built around you.
-    </p>
+    <div class="hero-vignette"></div>
 
-    <div class="buttons">
-      <a href="#builder" class="btn primary">Create Your Own Board</a>
-      <a href="#contact" class="btn">Contact Us Now</a>
-    </div>
-  </div>
+    <div class="hero-content reveal">
 
-  <div class="scroll-note">Scroll to build the board ↓</div>
-</section>
-
-<section id="about">
-  <div class="section-inner">
-
-    <div class="about-grid">
-      <div>
-        <div class="section-label">The Baruchs Boards Experience</div>
-        <h2>Your Board.<br>Your Cuts.<br>Your Way.</h2>
-        <p class="lead">
-          Baruchs Boards brings premium kosher meats together with
-          thoughtful presentation, bold flavors and a luxury experience.
-          Every board is designed around your event, your guests and your taste.
-        </p>
-      </div>
-
-      <div class="feature-box">
-        <strong>Made for the moment.</strong>
-        <p>
-          Whether you're hosting at home, celebrating a birthday,
-          planning a wedding or engagement, preparing for Shabbat or Yom Tov,
-          entertaining corporate guests or planning a large event,
-          your board is built specifically for you.
-        </p>
-      </div>
-    </div>
-
-    <div class="info-strip">
-      <div class="info">
-        <span>Certification</span>
-        <strong>VHQ Kosher</strong>
-      </div>
-
-      <div class="info">
-        <span>Service Area</span>
-        <strong>NY & NJ</strong>
-      </div>
-
-      <div class="info">
-        <span>Delivery</span>
-        <strong>Delivery & Pickup</strong>
-      </div>
-
-      <div class="info">
-        <span>Ordering</span>
-        <strong>24–48 Hours</strong>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section id="boards">
-  <div class="section-inner">
-
-    <div class="section-label">What We Create</div>
-    <h2>Built for every table.</h2>
-
-    <p class="lead">
-      From individual meat trays to full-scale catering,
-      every Baruchs Board is designed to look incredible,
-      taste incredible and make the occasion feel special.
-    </p>
-
-    <div class="cards">
-
-      <div class="card">
-        <div class="card-number">01</div>
-        <h3>Meat Boards</h3>
-        <p>
-          Layered premium cuts, charcuterie, accompaniments
-          and sauces arranged into a dramatic centerpiece.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">02</div>
-        <h3>Events</h3>
-        <p>
-          Birthdays, weddings, engagements, Shabbat,
-          Yom Tov and celebrations of every size.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">03</div>
-        <h3>Catering</h3>
-        <p>
-          Large events and corporate gatherings with
-          custom quantities and custom arrangements.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">04</div>
-        <h3>Gift Boxes</h3>
-        <p>
-          Premium kosher meat experiences prepared as
-          memorable gifts for someone special.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">05</div>
-        <h3>Individual Trays</h3>
-        <p>
-          Smaller-format premium meat selections
-          designed for personal meals and gatherings.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">06</div>
-        <h3>Custom</h3>
-        <p>
-          Have something specific in mind?
-          Request exactly what you want and we'll build around it.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="builder" id="builder">
-  <div class="section-inner">
-
-    <div class="section-label">Interactive Builder</div>
-    <h2>Create Your Own Board.</h2>
-
-    <p class="lead">
-      Choose your size, cuts, flavors and extras.
-      Tell us exactly what you want and we'll turn your idea into a board.
-    </p>
-
-    <div class="builder-grid">
-
-      <div>
-
-        <div class="option-group">
-          <label>Board Size</label>
-          <div class="options" data-group="size">
-            <div class="option active">Small · 5–8</div>
-            <div class="option">Medium · 9–15</div>
-            <div class="option">Large · 16–25</div>
-            <div class="option">XL · 26+</div>
-            <div class="option">Custom</div>
-          </div>
+        <div class="eyebrow">
+            Premium Kosher Meat · NY & NJ
         </div>
 
-        <div class="option-group">
-          <label>Choose Your Cuts</label>
-          <div class="options" data-group="cuts">
-            <div class="option">NY Strip</div>
-            <div class="option">Oyster Steak</div>
-            <div class="option">Rib Eye</div>
-            <div class="option">Pastrami</div>
-            <div class="option">Salami</div>
-            <div class="option">Roast Beef</div>
-            <div class="option">Steak</div>
-            <div class="option">Chicken</div>
-          </div>
+        <h1 class="hero-title">
+            BOARDS<br>
+            <span>BY BARUCH</span>
+        </h1>
+
+        <div class="hero-rule"></div>
+
+        <div class="hero-subtitle">
+            Exceptional Kosher.<br>
+            Unforgettable Boards.
         </div>
 
-        <div class="option-group">
-          <label>Seasonings & Flavors</label>
-          <div class="options" data-group="seasonings">
-            <div class="option">Classic</div>
-            <div class="option">Pepper Crust</div>
-            <div class="option">Smoky</div>
-            <div class="option">Garlic</div>
-            <div class="option">Spicy</div>
-            <div class="option">Custom</div>
-          </div>
-        </div>
+        <div class="hero-buttons">
 
-        <div class="option-group">
-          <label>Sauces & Dips</label>
-          <div class="options" data-group="sauces">
-            <div class="option">Mustard</div>
-            <div class="option">BBQ</div>
-            <div class="option">Spicy Sauce</div>
-            <div class="option">Request Any</div>
-          </div>
-        </div>
-
-        <div class="option-group">
-          <label>Extras</label>
-          <div class="options" data-group="extras">
-            <div class="option">Pickles</div>
-            <div class="option">Green Olives</div>
-            <div class="option">Black Olives</div>
-            <div class="option">Request Any</div>
-          </div>
-        </div>
-
-        <div class="option-group">
-          <label>Custom Notes</label>
-          <textarea id="customNotes" placeholder="Tell us exactly how you want your board..."></textarea>
-        </div>
-
-      </div>
-
-      <div class="builder-summary">
-        <div class="section-label">Your Selection</div>
-        <h3>Build It Your Way.</h3>
-
-        <div class="summary-line">
-          <span>Size</span>
-          <strong id="summarySize">Small · 5–8</strong>
-        </div>
-
-        <div class="summary-line">
-          <span>Cuts</span>
-          <strong id="summaryCuts">Select cuts</strong>
-        </div>
-
-        <div class="summary-line">
-          <span>Seasoning</span>
-          <strong id="summarySeasoning">Select</strong>
-        </div>
-
-        <div class="summary-line">
-          <span>Sauce</span>
-          <strong id="summarySauce">Select</strong>
-        </div>
-
-        <div class="summary-line">
-          <span>Extras</span>
-          <strong id="summaryExtras">Select</strong>
-        </div>
-
-        <br>
-
-        <a href="#contact" class="btn primary" style="width:100%;justify-content:center;">
-          Request My Board
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="section-inner">
-
-    <div class="contact-grid">
-
-      <div>
-        <div class="section-label">Let's Create Something</div>
-        <h2>Contact Us Now.</h2>
-
-        <p class="lead">
-          Tell us about your event, what you're imagining,
-          and how many people you're serving. We'll take it from there.
-        </p>
-
-        <div class="contact-details">
-
-          <div class="contact-detail">
-            <span>Phone</span>
-            <a href="tel:3478208835">347-820-8835</a>
-          </div>
-
-          <div class="contact-detail">
-            <span>Email</span>
-            <a href="mailto:baruch.aminov@icloud.com">
-              baruch.aminov@icloud.com
+            <a href="#builder" class="btn btn-primary">
+                Create Your Own Board
             </a>
-          </div>
 
-          <div class="contact-detail">
-            <span>Service Area</span>
-            <strong>New York & New Jersey</strong>
-          </div>
-
-          <div class="contact-detail">
-            <span>Kosher Certification</span>
-            <strong>VHQ</strong>
-          </div>
-
-          <div class="contact-detail">
-            <span>Ordering Notice</span>
-            <strong>24 hours standard · 48 hours custom/large</strong>
-          </div>
+            <a href="#contact" class="btn btn-outline">
+                Contact Us Now
+            </a>
 
         </div>
-      </div>
-
-      <div>
-        <form id="contactForm">
-
-          <input type="text" name="name" placeholder="Your Name" required>
-
-          <input type="tel" name="phone" placeholder="Phone Number" required>
-
-          <input type="email" name="email" placeholder="Email Address" required>
-
-          <input type="text" name="date" placeholder="Event Date">
-
-          <textarea name="message" placeholder="Tell us about your board or event..." required></textarea>
-
-          <button type="submit">Send Request</button>
-
-        </form>
-      </div>
 
     </div>
-  </div>
+
+
+    <div class="scroll-indicator">
+
+        <div class="scroll-arrow"></div>
+
+        Scroll
+
+    </div>
+
 </section>
 
-</main>
+
+<!-- ABOUT -->
+
+<section class="section light-section" id="about">
+
+    <div class="section-inner">
+
+        <div class="about-grid reveal">
+
+            <div>
+
+                <div class="section-label">
+                    About Us
+                </div>
+
+                <h2 class="section-title">
+                    A Passion<br>
+                    <span>For Great Food.</span>
+                </h2>
+
+                <p class="about-copy">
+
+                    At Boards by Baruch, every board is created around
+                    premium kosher meats, beautiful presentation and
+                    the experience you want your guests to remember.
+
+                    <br><br>
+
+                    From intimate Shabbat gatherings to large events,
+                    weddings, celebrations, corporate events and gifts,
+                    every board can be crafted your way.
+
+                </p>
+
+                <div style="margin-top:30px">
+
+                    <a href="#builder" class="btn btn-outline" style="color:#25190f">
+                        Build Your Board
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-photo">
+
+                <div class="about-steak"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<div class="features">
+
+    <div class="feature">
+        <div class="feature-number">01</div>
+        <div class="feature-title">Premium Meats</div>
+        <div class="feature-text">Carefully selected kosher cuts</div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-number">02</div>
+        <div class="feature-title">Fully Custom</div>
+        <div class="feature-text">Your board, your cuts, your way</div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-number">03</div>
+        <div class="feature-title">Every Occasion</div>
+        <div class="feature-text">Events, gifts and celebrations</div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-number">04</div>
+        <div class="feature-title">NY & NJ</div>
+        <div class="feature-text">Delivery and pickup available</div>
+    </div>
+
+</div>
+
+
+<!-- SERVICES -->
+
+<section class="section dark-section" id="services">
+
+    <div class="section-inner">
+
+        <div class="section-label reveal">
+            What We Create
+        </div>
+
+        <h2 class="section-title reveal">
+            Made For<br>
+            <span>Your Occasion.</span>
+        </h2>
+
+
+        <div class="services-grid">
+
+            <div class="service reveal">
+
+                <div class="service-icon">◆</div>
+
+                <h3>Meat Boards</h3>
+
+                <p>
+                    Premium sliced meats, steaks and curated
+                    accompaniments presented beautifully for your table.
+                </p>
+
+            </div>
+
+
+            <div class="service reveal">
+
+                <div class="service-icon">◇</div>
+
+                <h3>Event Catering</h3>
+
+                <p>
+                    Large custom orders for weddings, celebrations,
+                    corporate events and unforgettable gatherings.
+                </p>
+
+            </div>
+
+
+            <div class="service reveal" id="gifts">
+
+                <div class="service-icon">✦</div>
+
+                <h3>Gift Boxes</h3>
+
+                <p>
+                    A premium kosher gift experience designed for
+                    birthdays, holidays, clients, families and friends.
+                </p>
+
+            </div>
+
+
+            <div class="service reveal">
+
+                <div class="service-icon">◆</div>
+
+                <h3>Individual Trays</h3>
+
+                <p>
+                    Beautiful individual meat trays perfect for
+                    entertaining, Shabbat and special occasions.
+                </p>
+
+            </div>
+
+
+            <div class="service reveal">
+
+                <div class="service-icon">◇</div>
+
+                <h3>Custom Platters</h3>
+
+                <p>
+                    Tell us what you want and we'll build a platter
+                    around your preferences.
+                </p>
+
+            </div>
+
+
+            <div class="service reveal">
+
+                <div class="service-icon">✦</div>
+
+                <h3>Shabbat & Yom Tov</h3>
+
+                <p>
+                    Elevated meat presentation for your family's
+                    most important meals.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INFO -->
+
+<div class="info-strip" id="ordering">
+
+    <div class="info-box">
+
+        <strong>Small · Medium · Large</strong>
+
+        <span>24 Hour Notice</span>
+
+    </div>
+
+    <div class="info-box">
+
+        <strong>XL & Custom</strong>
+
+        <span>48 Hour Notice</span>
+
+    </div>
+
+    <div class="info-box">
+
+        <strong>NY & NJ</strong>
+
+        <span>Delivery & Pickup</span>
+
+    </div>
+
+    <div class="info-box">
+
+        <strong>VHQ</strong>
+
+        <span>Kosher Certified</span>
+
+    </div>
+
+</div>
+
+
+<!-- BUILDER -->
+
+<section class="section builder" id="builder">
+
+    <div class="section-inner">
+
+        <div class="builder-header reveal">
+
+            <div class="section-label">
+                Your Board. Your Cuts. Your Way.
+            </div>
+
+            <h2 class="section-title">
+                Create Your <span>Own Board.</span>
+            </h2>
+
+            <p>
+                Customize every detail and tell us exactly what you're looking for.
+            </p>
+
+        </div>
+
+
+        <div class="builder-layout">
+
+
+            <!-- PREVIEW -->
+
+            <div class="builder-preview reveal">
+
+                <div class="preview-board"></div>
+
+                <div class="preview-meat meat1"></div>
+                <div class="preview-meat meat2"></div>
+                <div class="preview-meat meat3"></div>
+
+                <div class="preview-pickle pickle1"></div>
+                <div class="preview-pickle pickle2"></div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <div class="builder-form">
+
+
+                <div class="form-group reveal">
+
+                    <h3>01 · Choose Your Size</h3>
+
+                    <div class="options">
+
+                        <button class="option" data-group="size">
+                            Small · 5–8
+                        </button>
+
+                        <button class="option" data-group="size">
+                            Medium · 9–15
+                        </button>
+
+                        <button class="option" data-group="size">
+                            Large · 16–25
+                        </button>
+
+                        <button class="option" data-group="size">
+                            XL · 26+
+                        </button>
+
+                        <button class="option" data-group="size">
+                            Custom
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group reveal">
+
+                    <h3>02 · Choose Your Cuts</h3>
+
+                    <div class="options">
+
+                        <button class="option" data-group="cuts">NY Strip</button>
+                        <button class="option" data-group="cuts">Oyster Steak</button>
+                        <button class="option" data-group="cuts">Rib Eye</button>
+                        <button class="option" data-group="cuts">Pastrami</button>
+                        <button class="option" data-group="cuts">Salami</button>
+                        <button class="option" data-group="cuts">Roast Beef</button>
+                        <button class="option" data-group="cuts">Steak</button>
+                        <button class="option" data-group="cuts">Chicken</button>
+                        <button class="option" data-group="cuts">Request Any</button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group reveal">
+
+                    <h3>03 · Seasonings</h3>
+
+                    <div class="options">
+
+                        <button class="option" data-group="seasoning">
+                            Classic Salt & Pepper
+                        </button>
+
+                        <button class="option" data-group="seasoning">
+                            Garlic Herb
+                        </button>
+
+                        <button class="option" data-group="seasoning">
+                            Steakhouse
+                        </button>
+
+                        <button class="option" data-group="seasoning">
+                            Spicy
+                        </button>
+
+                        <button class="option" data-group="seasoning">
+                            Custom
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group reveal">
+
+                    <h3>04 · Sauces & Dips</h3>
+
+                    <div class="options">
+
+                        <button class="option" data-group="sauce">
+                            Request Any
+                        </button>
+
+                        <button class="option" data-group="sauce">
+                            Garlic
+                        </button>
+
+                        <button class="option" data-group="sauce">
+                            BBQ
+                        </button>
+
+                        <button class="option" data-group="sauce">
+                            Spicy
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group reveal">
+
+                    <h3>05 · Pickles & Olives</h3>
+
+                    <div class="options">
+
+                        <button class="option" data-group="garnish">
+                            Pickles
+                        </button>
+
+                        <button class="option" data-group="garnish">
+                            Green Olives
+                        </button>
+
+                        <button class="option" data-group="garnish">
+                            Black Olives
+                        </button>
+
+                        <button class="option" data-group="garnish">
+                            Mixed
+                        </button>
+
+                        <button class="option" data-group="garnish">
+                            None
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group reveal">
+
+                    <h3>06 · Custom Notes</h3>
+
+                    <textarea
+                        id="builderNotes"
+                        placeholder="Tell us exactly what you have in mind..."
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary builder-submit"
+                    onclick="sendBuilderRequest()"
+                >
+                    Request My Custom Board
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUOTE -->
+
+<section class="section quote">
+
+    <div class="quote-inner reveal">
+
+        <div class="quote-text">
+            “Premium Kosher Meat,
+            Crafted Your Way.”
+        </div>
+
+        <div class="quote-author">
+            Boards by Baruch
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="section contact" id="contact">
+
+    <div class="section-inner">
+
+        <div class="contact-grid">
+
+            <div class="contact-info reveal">
+
+                <div class="section-label">
+                    Let's Create Something
+                </div>
+
+                <h2 class="section-title">
+                    Let's Build<br>
+                    <span>Your Board.</span>
+                </h2>
+
+                <p>
+                    Whether you already know exactly what you want
+                    or want us to create something from scratch,
+                    reach out and we'll take care of the rest.
+                </p>
+
+
+                <div class="contact-details">
+
+                    <div class="contact-detail">
+
+                        <small>Phone</small>
+
+                        <a href="tel:3478208835">
+                            (347) 820-8835
+                        </a>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <small>Email</small>
+
+                        <a href="mailto:baruch.aminov@icloud.com">
+                            baruch.aminov@icloud.com
+                        </a>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <small>Service Area</small>
+
+                        <div style="font-family:'Cormorant Garamond';font-size:24px">
+                            New York & New Jersey
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-detail">
+
+                        <small>Ordering Notice</small>
+
+                        <div style="font-family:'Cormorant Garamond';font-size:24px">
+                            24 Hours · 48 Hours for Large/Custom
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-form reveal">
+
+                <h3>Start Your Order</h3>
+
+                <form
+                    action="mailto:baruch.aminov@icloud.com"
+                    method="post"
+                    enctype="text/plain"
+                    onsubmit="prepareContactEmail()"
+                >
+
+                    <div class="form-row">
+
+                        <input
+                            type="text"
+                            name="Name"
+                            placeholder="Your Name"
+                            required
+                        >
+
+                        <input
+                            type="tel"
+                            name="Phone"
+                            placeholder="Phone Number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <input
+                        type="email"
+                        name="Email"
+                        placeholder="Email Address"
+                        required
+                    >
+
+
+                    <input
+                        type="date"
+                        name="Event Date"
+                    >
+
+
+                    <textarea
+                        name="Message"
+                        placeholder="Tell us about your event, board, cuts, size, or anything else you have in mind..."
+                    ></textarea>
+
+
+                    <label style="
+                        display:block;
+                        font-size:9px;
+                        letter-spacing:2px;
+                        text-transform:uppercase;
+                        margin:4px 0 8px;
+                        color:#806b50;
+                    ">
+                        Inspiration Photo
+                    </label>
+
+
+                    <input
+                        class="file-input"
+                        type="file"
+                        accept="image/*"
+                        name="Inspiration Photo"
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="width:100%;margin-top:10px"
+                    >
+                        Contact Us Now
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
 
 <footer>
-  <div class="footer-grid">
 
-    <div>
-      <div class="footer-brand">BARUCHS BOARDS</div>
-      <p>Exceptional Kosher. Unforgettable Boards.</p>
+    <div class="footer-inner">
+
+        <div class="footer-top">
+
+            <div>
+
+                <div class="footer-brand">
+                    BOARDS BY BARUCH
+                </div>
+
+                <p style="
+                    color:#77716a;
+                    font-size:11px;
+                    line-height:1.8;
+                    margin-top:15px;
+                    max-width:280px;
+                ">
+                    Exceptional Kosher.
+                    Unforgettable Boards.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Explore</h4>
+
+                <a href="#about">About Us</a>
+                <a href="#boards">Our Boards</a>
+                <a href="#builder">Create Your Own</a>
+                <a href="#services">Catering</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Information</h4>
+
+                <a href="#ordering">Ordering Info</a>
+                <a href="#contact">Contact Us</a>
+                <p>NY & NJ</p>
+                <p>VHQ Certified</p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Contact</h4>
+
+                <a href="tel:3478208835">
+                    347-820-8835
+                </a>
+
+                <a href="mailto:baruch.aminov@icloud.com">
+                    baruch.aminov@icloud.com
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Boards by Baruch
+            </span>
+
+            <span>
+                PREMIUM KOSHER MEAT BOARDS
+            </span>
+
+        </div>
+
     </div>
 
-    <div>
-      <p>
-        Premium kosher meat<br>
-        Crafted your way.<br>
-        NY & NJ
-      </p>
-    </div>
-
-  </div>
 </footer>
+
+
+<!-- THREE.JS -->
 
 <script type="importmap">
 {
-  "imports":{
-    "three":"https://unpkg.com/three@0.166.1/build/three.module.js",
-    "three/addons/":"https://unpkg.com/three@0.166.1/examples/jsm/"
-  }
+    "imports":{
+        "three":"https://unpkg.com/three@0.166.1/build/three.module.js",
+        "three/addons/":"https://unpkg.com/three@0.166.1/examples/jsm/"
+    }
 }
 </script>
+
 
 <script type="module">
 
 import * as THREE from "three";
-import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 
-const container=document.getElementById("three-container");
+import {
+    RoomEnvironment
+} from "three/addons/environments/RoomEnvironment.js";
 
-const renderer=new THREE.WebGLRenderer({
-  antialias:true,
-  alpha:true,
-  powerPreference:"high-performance"
+import {
+    EffectComposer
+} from "three/addons/postprocessing/EffectComposer.js";
+
+import {
+    RenderPass
+} from "three/addons/postprocessing/RenderPass.js";
+
+import {
+    BokehPass
+} from "three/addons/postprocessing/BokehPass.js";
+
+import {
+    OutputPass
+} from "three/addons/postprocessing/OutputPass.js";
+
+
+/* ---------------------------------
+   SCENE
+--------------------------------- */
+
+const canvas = document.getElementById("heroCanvas");
+
+const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias:true,
+    alpha:true,
+    powerPreference:"high-performance"
 });
 
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setSize(innerWidth,innerHeight);
-renderer.shadowMap.enabled=true;
-renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.15;
-renderer.outputColorSpace=THREE.SRGBColorSpace;
-
-container.appendChild(renderer.domElement);
-
-const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x050505);
-scene.fog=new THREE.FogExp2(0x050505,.035);
-
-const camera=new THREE.PerspectiveCamera(
-  35,
-  innerWidth/innerHeight,
-  .1,
-  100
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio,2)
 );
 
-camera.position.set(0,3.2,7);
+renderer.setSize(
+    canvas.clientWidth,
+    canvas.clientHeight
+);
 
-const target=new THREE.Vector3(0,.15,0);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-const pmrem=new THREE.PMREMGenerator(renderer);
-const env=pmrem.fromScene(new RoomEnvironment(),.04);
-scene.environment=env.texture;
-scene.environmentIntensity=.45;
-pmrem.dispose();
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.25;
 
-const key=new THREE.SpotLight(0xffe5c4,70,18,.58,1,2);
-key.position.set(3.5,6,4);
-key.target.position.set(0,0,0);
-key.castShadow=true;
-key.shadow.mapSize.set(2048,2048);
-scene.add(key,key.target);
 
-const warm=new THREE.PointLight(0xff9d55,45,10);
-warm.position.set(-4,2,-3);
-scene.add(warm);
+const scene = new THREE.Scene();
 
-const cool=new THREE.PointLight(0x8dafff,35,12);
-cool.position.set(4,3,-4);
-scene.add(cool);
+scene.background = new THREE.Color("#0b0907");
 
-scene.add(new THREE.HemisphereLight(0x303747,0x080604,.55));
 
-function textureCanvas(type){
+const camera = new THREE.PerspectiveCamera(
+    38,
+    canvas.clientWidth / canvas.clientHeight,
+    .1,
+    100
+);
 
-  const c=document.createElement("canvas");
-  c.width=700;
-  c.height=700;
-
-  const x=c.getContext("2d");
-
-  if(type==="wood"){
-
-    x.fillStyle="#6b4525";
-    x.fillRect(0,0,700,700);
-
-    for(let i=0;i<120;i++){
-
-      x.strokeStyle=Math.random()>.5
-        ?"rgba(30,15,5,.16)"
-        :"rgba(210,150,90,.08)";
-
-      x.lineWidth=Math.random()*3+1;
-
-      x.beginPath();
-
-      let y=Math.random()*700;
-
-      x.moveTo(0,y);
-
-      for(let xx=0;xx<700;xx+=10){
-        y+=Math.sin(xx*.018+Math.random())*.8;
-        x.lineTo(xx,y);
-      }
-
-      x.stroke();
-    }
-
-  }else if(type==="steak"){
-
-    const g=x.createRadialGradient(330,300,20,350,350,430);
-    g.addColorStop(0,"#bd5551");
-    g.addColorStop(.45,"#963c3d");
-    g.addColorStop(1,"#4c171b");
-
-    x.fillStyle=g;
-    x.fillRect(0,0,700,700);
-
-    for(let i=0;i<130;i++){
-
-      x.strokeStyle="rgba(255,225,210,.3)";
-      x.lineWidth=2+Math.random()*5;
-
-      x.beginPath();
-
-      let px=Math.random()*700;
-      let py=Math.random()*700;
-
-      x.moveTo(px,py);
-
-      for(let j=0;j<5;j++){
-        px+=Math.random()*80-40;
-        py+=Math.random()*80-40;
-        x.lineTo(px,py);
-      }
-
-      x.stroke();
-    }
-
-  }else if(type==="dark"){
-
-    x.fillStyle="#25130b";
-    x.fillRect(0,0,700,700);
-
-    for(let i=0;i<5000;i++){
-      x.fillStyle=Math.random()>.5
-        ?"rgba(0,0,0,.45)"
-        :"rgba(170,100,55,.16)";
-      x.fillRect(Math.random()*700,Math.random()*700,2,2);
-    }
-
-  }else{
-
-    x.fillStyle="#8d3432";
-    x.fillRect(0,0,700,700);
-
-    for(let i=0;i<2000;i++){
-      x.fillStyle="rgba(245,225,205,.5)";
-      x.beginPath();
-      x.arc(Math.random()*700,Math.random()*700,Math.random()*3,0,Math.PI*2);
-      x.fill();
-    }
-  }
-
-  const t=new THREE.CanvasTexture(c);
-  t.colorSpace=THREE.SRGBColorSpace;
-  return t;
-}
-
-const woodTex=textureCanvas("wood");
-const steakTex=textureCanvas("steak");
-const darkTex=textureCanvas("dark");
-const salamiTex=textureCanvas("salami");
-
-const boardMat=new THREE.MeshPhysicalMaterial({
-  map:woodTex,
-  roughness:.72,
-  clearcoat:.35,
-  clearcoatRoughness:.4
-});
-
-const steakMat=new THREE.MeshPhysicalMaterial({
-  map:steakTex,
-  roughness:.42,
-  clearcoat:.65,
-  clearcoatRoughness:.22,
-  sheen:.5
-});
-
-const darkMat=new THREE.MeshStandardMaterial({
-  map:darkTex,
-  roughness:.9
-});
-
-const salamiMat=new THREE.MeshPhysicalMaterial({
-  map:salamiTex,
-  roughness:.45,
-  clearcoat:.5
-});
-
-const pickleMat=new THREE.MeshPhysicalMaterial({
-  color:0x718b2e,
-  roughness:.22,
-  clearcoat:1
-});
-
-const oliveMat=new THREE.MeshPhysicalMaterial({
-  color:0x202315,
-  roughness:.28,
-  clearcoat:.8
-});
-
-const mustardMat=new THREE.MeshPhysicalMaterial({
-  color:0xd7a817,
-  roughness:.3,
-  clearcoat:.65
-});
-
-const boardShape=new THREE.Shape();
-
-const w=3.8;
-const d=2.5;
-const r=.18;
-
-boardShape.moveTo(-w/2+r,-d/2);
-boardShape.lineTo(w/2-r,-d/2);
-boardShape.quadraticCurveTo(w/2,-d/2,w/2,-d/2+r);
-boardShape.lineTo(w/2,d/2-r);
-boardShape.quadraticCurveTo(w/2,d/2,w/2-r,d/2);
-boardShape.lineTo(-w/2+r,d/2);
-boardShape.quadraticCurveTo(-w/2,d/2,-w/2,d/2-r);
-boardShape.lineTo(-w/2,-d/2+r);
-boardShape.quadraticCurveTo(-w/2,-d/2,-w/2+r,-d/2);
-
-const boardGeo=new THREE.ExtrudeGeometry(boardShape,{
-  depth:.25,
-  bevelEnabled:true,
-  bevelThickness:.035,
-  bevelSize:.035,
-  bevelSegments:5,
-  curveSegments:24
-});
-
-boardGeo.rotateX(-Math.PI/2);
-
-const board=new THREE.Mesh(boardGeo,boardMat);
-board.castShadow=true;
-board.receiveShadow=true;
-scene.add(board);
-
-function meatSlice(scale=.55){
-
-  const geo=new THREE.CylinderGeometry(.48,.45,.075,64);
-
-  geo.scale(scale,1,scale*.76);
-
-  const p=geo.attributes.position;
-
-  for(let i=0;i<p.count;i++){
-
-    const x=p.getX(i);
-    const z=p.getZ(i);
-
-    const f=
-      1+
-      Math.sin(Math.atan2(z,x)*4)*.05+
-      Math.sin(Math.atan2(z,x)*8)*.025;
-
-    p.setX(i,x*f);
-    p.setZ(i,z*f);
-  }
-
-  geo.computeVertexNormals();
-
-  const m=new THREE.Mesh(geo,steakMat);
-  m.castShadow=true;
-  m.receiveShadow=true;
-
-  return m;
-}
-
-function brisket(){
-
-  const geo=new THREE.BoxGeometry(.95,.10,.48,30,5,20);
-
-  const p=geo.attributes.position;
-
-  for(let i=0;i<p.count;i++){
-
-    const x=p.getX(i);
-    const z=p.getZ(i);
-
-    p.setY(
-      i,
-      p.getY(i)+
-      Math.sin(x*7)*.035+
-      Math.sin(z*12)*.018
-    );
-  }
-
-  geo.computeVertexNormals();
-
-  const m=new THREE.Mesh(geo,darkMat);
-
-  m.castShadow=true;
-  m.receiveShadow=true;
-
-  return m;
-}
-
-function salami(){
-
-  const geo=new THREE.CylinderGeometry(.22,.22,.065,48);
-
-  geo.rotateX(Math.PI/2);
-
-  const m=new THREE.Mesh(geo,salamiMat);
-
-  m.castShadow=true;
-  m.receiveShadow=true;
-
-  return m;
-}
-
-function pickle(){
-
-  const geo=new THREE.CapsuleGeometry(.085,.48,10,24);
-  geo.rotateZ(Math.PI/2);
-
-  const m=new THREE.Mesh(geo,pickleMat);
-
-  m.castShadow=true;
-  m.receiveShadow=true;
-
-  return m;
-}
-
-function olive(){
-
-  const geo=new THREE.SphereGeometry(.085,24,18);
-
-  geo.scale(1,.8,1);
-
-  const m=new THREE.Mesh(geo,oliveMat);
-
-  m.castShadow=true;
-  m.receiveShadow=true;
-
-  return m;
-}
-
-function mustard(){
-
-  const group=new THREE.Group();
-
-  const bowl=new THREE.Mesh(
-    new THREE.CylinderGeometry(.28,.23,.12,48),
-    new THREE.MeshPhysicalMaterial({
-      color:0xe8e0d0,
-      roughness:.3
-    })
-  );
-
-  bowl.position.y=.06;
-
-  const sauce=new THREE.Mesh(
-    new THREE.SphereGeometry(.20,40,24),
-    mustardMat
-  );
-
-  sauce.scale.y=.28;
-  sauce.position.y=.13;
-
-  group.add(bowl,sauce);
-
-  group.traverse(o=>{
-    if(o.isMesh){
-      o.castShadow=true;
-      o.receiveShadow=true;
-    }
-  });
-
-  return group;
-}
-
-const pieces=[];
-
-function addPiece(obj,finalPos,rotation){
-
-  const start=new THREE.Vector3(
-    finalPos.x*2.4+Math.random()-.5,
-    2.2+Math.random()*2,
-    finalPos.z*2.4+Math.random()-.5
-  );
-
-  obj.position.copy(start);
-  obj.rotation.set(
-    Math.random()*2,
-    Math.random()*2,
-    Math.random()*2
-  );
-
-  scene.add(obj);
-
-  pieces.push({
-    obj,
-    start,
-    end:new THREE.Vector3(
-      finalPos.x,
-      finalPos.y+.15,
-      finalPos.z
-    ),
-    rotation,
-    delay:pieces.length*.045,
-    duration:.75+Math.random()*.4,
-    wobble:Math.random()*Math.PI*2
-  });
-}
-
-addPiece(mustard(),new THREE.Vector3(-1.25,.27,.72),.35);
-
-addPiece(salami(),new THREE.Vector3(-1.3,.29,-.55),.4);
-addPiece(salami(),new THREE.Vector3(-1.02,.31,-.68),-.3);
-addPiece(salami(),new THREE.Vector3(-.78,.33,-.57),.9);
-addPiece(salami(),new THREE.Vector3(-1.18,.35,-.82),-.8);
-
-addPiece(brisket(),new THREE.Vector3(.82,.29,-.72),-.4);
-addPiece(brisket(),new THREE.Vector3(.95,.38,-.35),.35);
-addPiece(brisket(),new THREE.Vector3(.65,.47,-.02),-.15);
-
-addPiece(meatSlice(.65),new THREE.Vector3(-.32,.34,.05),.15);
-addPiece(meatSlice(.58),new THREE.Vector3(.15,.38,.12),-.4);
-addPiece(meatSlice(.52),new THREE.Vector3(-.02,.44,.42),.75);
-addPiece(meatSlice(.48),new THREE.Vector3(.42,.42,.48),-.2);
-
-addPiece(pickle(),new THREE.Vector3(.65,.31,.86),.2);
-addPiece(pickle(),new THREE.Vector3(1.02,.34,.72),-.3);
-
-addPiece(olive(),new THREE.Vector3(-.55,.34,.92),.2);
-addPiece(olive(),new THREE.Vector3(-.36,.35,.99),.8);
-addPiece(olive(),new THREE.Vector3(-.72,.35,.78),1.3);
-
-addPiece(olive(),new THREE.Vector3(-.15,.35,.92),2);
-addPiece(olive(),new THREE.Vector3(.02,.35,.98),.4);
-addPiece(olive(),new THREE.Vector3(.18,.35,.82),1.2);
-
-addPiece(meatSlice(.45),new THREE.Vector3(.72,.52,.05),-.55);
-addPiece(meatSlice(.40),new THREE.Vector3(.92,.57,.16),.2);
-
-let scrollTarget=0;
-let smoothScroll=0;
-
-window.addEventListener("scroll",()=>{
-
-  const max=document.documentElement.scrollHeight-innerHeight;
-
-  scrollTarget=Math.max(
+camera.position.set(
     0,
-    Math.min(1,window.scrollY/max)
-  );
+    3.3,
+    13
+);
 
-},{passive:true});
 
-function ease(t){
-  return t<.5
-    ?4*t*t*t
-    :1-Math.pow(-2*t+2,3)/2;
+/* ENVIRONMENT */
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+
+scene.environment =
+    pmrem.fromScene(
+        new RoomEnvironment(renderer),
+        .04
+    ).texture;
+
+
+/* LIGHTING */
+
+const keyLight = new THREE.SpotLight(
+    0xffd8a0,
+    900
+);
+
+keyLight.position.set(
+    3,
+    9,
+    7
+);
+
+keyLight.angle=.42;
+keyLight.penumbra=.8;
+keyLight.castShadow=true;
+
+scene.add(keyLight);
+
+
+const warmLight = new THREE.PointLight(
+    0xd8793f,
+    250,
+    18
+);
+
+warmLight.position.set(
+    -5,
+    4,
+    4
+);
+
+scene.add(warmLight);
+
+
+const rimLight = new THREE.PointLight(
+    0xffe1a9,
+    350,
+    20
+);
+
+rimLight.position.set(
+    5,
+    3,
+    -5
+);
+
+scene.add(rimLight);
+
+
+const frontLight = new THREE.PointLight(
+    0xffffff,
+    110,
+    15
+);
+
+frontLight.position.set(
+    0,
+    3,
+    8
+);
+
+scene.add(frontLight);
+
+
+/* POST PROCESSING */
+
+const composer = new EffectComposer(renderer);
+
+composer.addPass(
+    new RenderPass(scene,camera)
+);
+
+const bokeh = new BokehPass(
+    scene,
+    camera,
+    {
+        focus:9,
+        aperture:.000035,
+        maxblur:.012
+    }
+);
+
+composer.addPass(bokeh);
+
+composer.addPass(
+    new OutputPass()
+);
+
+
+/* ---------------------------------
+   TEXTURE HELPERS
+--------------------------------- */
+
+function textureCanvas(width,height,draw){
+
+    const c=document.createElement("canvas");
+
+    c.width=width;
+    c.height=height;
+
+    const ctx=c.getContext("2d");
+
+    draw(ctx,width,height);
+
+    const texture=
+        new THREE.CanvasTexture(c);
+
+    texture.colorSpace=
+        THREE.SRGBColorSpace;
+
+    texture.wrapS=
+        THREE.RepeatWrapping;
+
+    texture.wrapT=
+        THREE.RepeatWrapping;
+
+    return texture;
 }
 
-const mouse={
-  x:0,
-  y:0
-};
 
-window.addEventListener("pointermove",e=>{
+/* WOOD */
 
-  mouse.x=(e.clientX/innerWidth-.5);
-  mouse.y=(e.clientY/innerHeight-.5);
+const woodTexture =
+textureCanvas(1000,500,(ctx,w,h)=>{
 
-},{passive:true});
+    ctx.fillStyle="#4b2b17";
 
-const clock=new THREE.Clock();
+    ctx.fillRect(0,0,w,h);
 
-function animate(){
+    for(let i=0;i<180;i++){
 
-  requestAnimationFrame(animate);
+        const y=Math.random()*h;
 
-  const time=clock.getElapsedTime();
+        ctx.beginPath();
 
-  smoothScroll+=(
-    scrollTarget-smoothScroll
-  )*.055;
+        ctx.moveTo(0,y);
 
-  const scroll=smoothScroll;
+        ctx.bezierCurveTo(
+            w*.25,
+            y+Math.random()*25-12,
+            w*.65,
+            y+Math.random()*25-12,
+            w,
+            y+Math.random()*15-7
+        );
 
-  pieces.forEach((piece,index)=>{
+        ctx.strokeStyle=
+            `rgba(${70+Math.random()*45},${35+Math.random()*25},${15+Math.random()*15},${.12+Math.random()*.2})`;
 
-    let p=
-      (scroll-piece.delay*.018)/
-      (.52);
+        ctx.lineWidth=
+            .4+Math.random()*2;
 
-    p=Math.max(0,Math.min(1,p));
+        ctx.stroke();
+    }
 
-    const e=ease(p);
+});
 
-    const start=piece.start;
-    const end=piece.end;
 
-    piece.obj.position.lerpVectors(
-      start,
-      end,
-      e
+/* STEAK */
+
+const steakTexture =
+textureCanvas(900,650,(ctx,w,h)=>{
+
+    ctx.fillStyle="#a94531";
+
+    ctx.fillRect(0,0,w,h);
+
+
+    for(let i=0;i<220;i++){
+
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+        const r=2+Math.random()*12;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,y,r,0,Math.PI*2
+        );
+
+        ctx.fillStyle =
+            Math.random()>.62
+            ? "rgba(245,150,112,.42)"
+            : "rgba(70,18,10,.28)";
+
+        ctx.fill();
+    }
+
+
+    for(let i=0;i<40;i++){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            Math.random()*w,
+            Math.random()*h
+        );
+
+        ctx.lineTo(
+            Math.random()*w,
+            Math.random()*h
+        );
+
+        ctx.strokeStyle=
+            "rgba(255,205,175,.17)";
+
+        ctx.lineWidth=
+            3+Math.random()*7;
+
+        ctx.stroke();
+    }
+
+});
+
+
+/* CHARCUTERIE */
+
+const salamiTexture =
+textureCanvas(700,700,(ctx,w,h)=>{
+
+    ctx.fillStyle="#a8332b";
+
+    ctx.fillRect(0,0,w,h);
+
+    for(let i=0;i<350;i++){
+
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,y,
+            .8+Math.random()*5,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle=
+            "rgba(255,220,170,.65)";
+
+        ctx.fill();
+
+    }
+
+});
+
+
+/* ---------------------------------
+   BOARD
+--------------------------------- */
+
+const boardGeometry =
+    new THREE.BoxGeometry(
+        8.8,
+        .55,
+        5.2,
+        8,
+        2,
+        8
     );
 
-    const arc=
-      Math.sin(Math.PI*e)*
-      (.8+index%4*.18);
 
-    piece.obj.position.y+=arc;
+const boardMaterial =
+    new THREE.MeshStandardMaterial({
 
-    const fold=
-      Math.sin(e*Math.PI*3+piece.wobble)*
-      (1-e)*.25;
+        map:woodTexture,
 
-    piece.obj.rotation.x=
-      piece.rotation*.2+
-      fold;
+        roughness:.62,
 
-    piece.obj.rotation.y=
-      piece.rotation+
-      Math.sin(time*.8+piece.wobble)*
-      (1-e)*.5;
-
-    piece.obj.rotation.z=
-      Math.cos(time*.7+piece.wobble)*
-      (1-e)*.22;
-
-  });
-
-  const cameraProgress=ease(
-    Math.min(1,scroll*1.15)
-  );
-
-  camera.position.x=
-    THREE.MathUtils.lerp(
-      0,
-      1.0,
-      cameraProgress
-    )+
-    mouse.x*.18;
-
-  camera.position.y=
-    THREE.MathUtils.lerp(
-      3.5,
-      2.8,
-      cameraProgress
-    )-
-    mouse.y*.12;
-
-  camera.position.z=
-    THREE.MathUtils.lerp(
-      7.2,
-      5.1,
-      cameraProgress
-    );
-
-  camera.lookAt(
-    THREE.MathUtils.lerp(0,0,cameraProgress),
-    .15,
-    0
-  );
-
-  key.position.x=
-    3.5+
-    Math.sin(time*.18)*.5;
-
-  warm.position.x=
-    -4+
-    Math.cos(time*.3)*.5;
-
-  renderer.render(scene,camera);
-}
-
-function resize(){
-
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio,2)
-  );
-
-  renderer.setSize(innerWidth,innerHeight);
-}
-
-window.addEventListener("resize",resize);
-
-resize();
-animate();
-
-</script>
-
-<script>
-
-document.querySelectorAll(".options").forEach(group=>{
-
-  const options=group.querySelectorAll(".option");
-
-  options.forEach(option=>{
-
-    option.addEventListener("click",()=>{
-
-      if(group.dataset.group==="cuts" ||
-         group.dataset.group==="extras"){
-
-        option.classList.toggle("active");
-
-      }else{
-
-        options.forEach(o=>o.classList.remove("active"));
-        option.classList.add("active");
-
-      }
-
-      updateSummary();
+        metalness:.02
 
     });
 
-  });
+
+const board =
+    new THREE.Mesh(
+        boardGeometry,
+        boardMaterial
+    );
+
+board.position.set(
+    .8,
+    -2.25,
+    0
+);
+
+board.rotation.y=-.08;
+
+board.castShadow=true;
+board.receiveShadow=true;
+
+scene.add(board);
+
+
+/* BOARD HANDLE */
+
+const handle =
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            .42,
+            .42,
+            .9,
+            32
+        ),
+        boardMaterial
+    );
+
+handle.rotation.z=Math.PI/2;
+
+handle.position.set(
+    5.05,
+    -2.15,
+    0
+);
+
+handle.castShadow=true;
+
+scene.add(handle);
+
+
+/* ---------------------------------
+   FOOD
+--------------------------------- */
+
+const objects=[];
+
+
+/* STEAK FUNCTION */
+
+function createSteak(
+    scale=1,
+    rotation=0
+){
+
+    const geometry =
+        new THREE.CapsuleGeometry(
+            1,
+            .75,
+            8,
+            18
+        );
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            map:steakTexture,
+
+            roughness:.43,
+
+            metalness:0,
+
+            envMapIntensity:1.15
+
+        });
+
+    const steak =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+    steak.scale.set(
+        1.35*scale,
+        .45*scale,
+        .95*scale
+    );
+
+    steak.rotation.set(
+        rotation*.3,
+        rotation,
+        -.12
+    );
+
+    steak.castShadow=true;
+    steak.receiveShadow=true;
+
+    return steak;
+}
+
+
+/* RIB EYE */
+
+const ribeye=createSteak(
+    1.05,
+    -.2
+);
+
+ribeye.position.set(
+    2.0,
+    4.8,
+    .5
+);
+
+scene.add(ribeye);
+
+objects.push({
+    mesh:ribeye,
+    target:new THREE.Vector3(
+        1.9,
+        -1.35,
+        .45
+    ),
+    rotation:new THREE.Vector3(
+        .1,
+        -.2,
+        -.1
+    ),
+    delay:0
+});
+
+
+/* STRIP */
+
+const strip=createSteak(
+    .88,
+    .25
+);
+
+strip.scale.z*=1.35;
+
+strip.position.set(
+    4.5,
+    6.5,
+    -1
+);
+
+scene.add(strip);
+
+objects.push({
+    mesh:strip,
+    target:new THREE.Vector3(
+        3.0,
+        -1.05,
+        -.2
+    ),
+    rotation:new THREE.Vector3(
+        .12,
+        .25,
+        .15
+    ),
+    delay:.16
+});
+
+
+/* THIRD STEAK */
+
+const steak3=createSteak(
+    .75,
+    -.4
+);
+
+steak3.position.set(
+    6,
+    5.4,
+    1
+);
+
+scene.add(steak3);
+
+objects.push({
+    mesh:steak3,
+    target:new THREE.Vector3(
+        .7,
+        -.9,
+        1
+    ),
+    rotation:new THREE.Vector3(
+        -.1,
+        -.4,
+        -.15
+    ),
+    delay:.31
+});
+
+
+/* SALAMI */
+
+function createSalami(){
+
+    const g=
+        new THREE.CylinderGeometry(
+            .72,
+            .72,
+            .26,
+            64
+        );
+
+    const m=
+        new THREE.MeshStandardMaterial({
+            map:salamiTexture,
+            roughness:.48
+        });
+
+    const s=
+        new THREE.Mesh(g,m);
+
+    s.rotation.x=Math.PI/2;
+
+    s.castShadow=true;
+
+    return s;
+}
+
+
+const salami=createSalami();
+
+salami.position.set(
+    5,
+    5,
+    0
+);
+
+scene.add(salami);
+
+objects.push({
+    mesh:salami,
+    target:new THREE.Vector3(
+        -1.2,
+        -.72,
+        .5
+    ),
+    rotation:new THREE.Vector3(
+        .15,
+        .2,
+        -.3
+    ),
+    delay:.43
+});
+
+
+/* PAStrami */
+
+const pastrami=createSteak(
+    .62,
+    .15
+);
+
+pastrami.scale.z*=1.5;
+
+pastrami.position.set(
+    -2,
+    6,
+    -.5
+);
+
+scene.add(pastrami);
+
+objects.push({
+    mesh:pastrami,
+    target:new THREE.Vector3(
+        -.7,
+        -.75,
+        -.4
+    ),
+    rotation:new THREE.Vector3(
+        .15,
+        .2,
+        .35
+    ),
+    delay:.55
+});
+
+
+/* PICKLES */
+
+function createPickle(){
+
+    const g=
+        new THREE.CapsuleGeometry(
+            .27,
+            .95,
+            8,
+            16
+        );
+
+    const m=
+        new THREE.MeshStandardMaterial({
+            color:"#6f8128",
+            roughness:.55
+        });
+
+    const p=
+        new THREE.Mesh(g,m);
+
+    p.scale.set(
+        .65,
+        .45,
+        .65
+    );
+
+    p.castShadow=true;
+
+    return p;
+}
+
+
+for(let i=0;i<4;i++){
+
+    const pickle=createPickle();
+
+    pickle.position.set(
+        -3+i*2,
+        4+i*.4,
+        1
+    );
+
+    scene.add(pickle);
+
+    objects.push({
+
+        mesh:pickle,
+
+        target:new THREE.Vector3(
+            -2.5+i*1.25,
+            -.63,
+            .8+(i%2)*.5
+        ),
+
+        rotation:new THREE.Vector3(
+            Math.random(),
+            Math.random(),
+            Math.random()
+        ),
+
+        delay:.68+i*.07
+
+    });
+
+}
+
+
+/* OLIVES */
+
+function createOlive(color){
+
+    const g=
+        new THREE.SphereGeometry(
+            .22,
+            24,
+            24
+        );
+
+    const m=
+        new THREE.MeshStandardMaterial({
+            color,
+            roughness:.34
+        });
+
+    const o=
+        new THREE.Mesh(g,m);
+
+    o.scale.y=.8;
+
+    o.castShadow=true;
+
+    return o;
+}
+
+
+for(let i=0;i<7;i++){
+
+    const olive=createOlive(
+        i%2
+        ? "#182315"
+        : "#242018"
+    );
+
+    olive.position.set(
+        -4+i*1.2,
+        4.5+i*.25,
+        -1
+    );
+
+    scene.add(olive);
+
+    objects.push({
+
+        mesh:olive,
+
+        target:new THREE.Vector3(
+            -3+i*.9,
+            -.57,
+            -1+(i%2)*.5
+        ),
+
+        rotation:new THREE.Vector3(
+            Math.random(),
+            Math.random(),
+            Math.random()
+        ),
+
+        delay:1.0+i*.05
+
+    });
+
+}
+
+
+/* MUSTARD BOWL */
+
+const bowl=
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            .55,
+            .42,
+            .22,
+            48
+        ),
+        new THREE.MeshStandardMaterial({
+            color:"#14100b",
+            roughness:.25
+        })
+    );
+
+bowl.position.set(
+    3.2,
+    3.5,
+    1
+);
+
+scene.add(bowl);
+
+objects.push({
+    mesh:bowl,
+    target:new THREE.Vector3(
+        3.4,
+        -.55,
+        1.5
+    ),
+    rotation:new THREE.Vector3(0,0,0),
+    delay:1.35
+});
+
+
+const mustard=
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            .4,
+            .35,
+            .08,
+            48
+        ),
+        new THREE.MeshStandardMaterial({
+            color:"#b9861f",
+            roughness:.3
+        })
+    );
+
+mustard.position.set(
+    3.2,
+    3.68,
+    1
+);
+
+scene.add(mustard);
+
+objects.push({
+    mesh:mustard,
+    target:new THREE.Vector3(
+        3.4,
+        -.42,
+        1.5
+    ),
+    rotation:new THREE.Vector3(0,0,0),
+    delay:1.43
+});
+
+
+/* ---------------------------------
+   ANIMATION
+--------------------------------- */
+
+let startTime=
+    performance.now();
+
+let scrollProgress=0;
+
+window.addEventListener(
+    "scroll",
+    ()=>{
+        const max=
+            document.documentElement.scrollHeight-
+            window.innerHeight;
+
+        scrollProgress=
+            Math.min(
+                1,
+                Math.max(
+                    0,
+                    window.scrollY /
+                    Math.max(max,1)
+                )
+            );
+    },
+    {passive:true}
+);
+
+
+function ease(t){
+
+    return t<.5
+        ? 4*t*t*t
+        : 1-Math.pow(-2*t+2,3)/2;
+
+}
+
+
+function updateFood(time){
+
+    const heroHeight=
+        window.innerHeight;
+
+    const heroProgress=
+        Math.min(
+            1,
+            Math.max(
+                0,
+                window.scrollY /
+                (heroHeight*.95)
+            )
+        );
+
+
+    objects.forEach((obj,index)=>{
+
+        const delay=obj.delay;
+
+        let p=
+            (heroProgress-delay) /
+            (.72-delay*.2);
+
+        p=
+            Math.min(
+                1,
+                Math.max(0,p)
+            );
+
+        p=ease(p);
+
+        const start=
+            obj.mesh.userData.start ||
+            obj.mesh.position.clone();
+
+        obj.mesh.userData.start=start;
+
+
+        obj.mesh.position.lerpVectors(
+            start,
+            obj.target,
+            p
+        );
+
+
+        /* ARC */
+
+        obj.mesh.position.y +=
+            Math.sin(p*Math.PI) *
+            (2.1-index*.08);
+
+
+        /* NATURAL ROTATION */
+
+        obj.mesh.rotation.x =
+            obj.rotation.x*(p)
+            +
+            Math.sin(time*.001+index)*.04*(1-p);
+
+        obj.mesh.rotation.y =
+            obj.rotation.y*(p)
+            +
+            Math.sin(time*.0013+index)*.06*(1-p);
+
+        obj.mesh.rotation.z =
+            obj.rotation.z*(p)
+            +
+            Math.cos(time*.001+index)*.04*(1-p);
+
+    });
+
+}
+
+
+/* CAMERA */
+
+let mouseX=0;
+let mouseY=0;
+
+window.addEventListener(
+    "mousemove",
+    e=>{
+
+        mouseX=
+            (e.clientX/window.innerWidth-.5);
+
+        mouseY=
+            (e.clientY/window.innerHeight-.5);
+
+    }
+);
+
+
+function updateCamera(time){
+
+    const scroll=
+        Math.min(
+            1,
+            window.scrollY/
+            window.innerHeight
+        );
+
+    camera.position.x +=
+        (
+            mouseX*.65
+            -
+            camera.position.x
+        )*.025;
+
+    camera.position.y +=
+        (
+            3.3
+            -
+            scroll*1.2
+            -
+            mouseY*.35
+            -
+            camera.position.y
+        )*.025;
+
+    camera.position.z +=
+        (
+            13
+            -
+            scroll*1.1
+            -
+            camera.position.z
+        )*.025;
+
+    camera.lookAt(
+        .8,
+        -1,
+        0
+    );
+
+}
+
+
+/* LOOP */
+
+function animate(time){
+
+    requestAnimationFrame(animate);
+
+    updateFood(time);
+
+    updateCamera(time);
+
+    warmLight.position.x=
+        Math.sin(time*.0005)*5;
+
+    warmLight.position.z=
+        Math.cos(time*.0005)*4;
+
+    composer.render();
+
+}
+
+animate();
+
+
+/* RESIZE */
+
+function resize(){
+
+    const width=
+        canvas.clientWidth;
+
+    const height=
+        canvas.clientHeight;
+
+    camera.aspect=
+        width/height;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        width,
+        height,
+        false
+    );
+
+    composer.setSize(
+        width,
+        height
+    );
+
+}
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+resize();
+
+
+/* LOADER */
+
+window.addEventListener(
+    "load",
+    ()=>{
+        setTimeout(
+            ()=>{
+                document
+                    .getElementById("loader")
+                    .classList.add("hide");
+            },
+            700
+        );
+    }
+);
+
+</script>
+
+
+<!-- GENERAL SITE JAVASCRIPT -->
+
+<script>
+
+/* ---------------------------------
+   REVEAL ANIMATIONS
+--------------------------------- */
+
+const observer =
+new IntersectionObserver(
+    entries=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add(
+                    "visible"
+                );
+
+            }
+
+        });
+
+    },
+    {
+        threshold:.12
+    }
+);
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(el=>{
+    observer.observe(el);
+});
+
+
+/* ---------------------------------
+   BUILDER OPTIONS
+--------------------------------- */
+
+document
+.querySelectorAll(".option")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            const group=
+                button.dataset.group;
+
+            if(!group){
+                return;
+            }
+
+            if(
+                group==="size" ||
+                group==="seasoning"
+            ){
+
+                document
+                .querySelectorAll(
+                    `.option[data-group="${group}"]`
+                )
+                .forEach(item=>{
+                    item.classList.remove("active");
+                });
+
+            }
+
+            button.classList.toggle(
+                "active"
+            );
+
+        }
+    );
 
 });
 
-function activeText(group){
 
-  const values=[
-    ...document.querySelectorAll(
-      `[data-group="${group}"] .option.active`
-    )
-  ].map(x=>x.textContent.trim());
+/* ---------------------------------
+   BUILDER EMAIL
+--------------------------------- */
 
-  return values.length ? values.join(", ") : "Select";
-}
+function sendBuilderRequest(){
 
-function updateSummary(){
+    const selected={};
 
-  document.getElementById("summarySize").textContent=
-    activeText("size");
+    document
+    .querySelectorAll(".option.active")
+    .forEach(button=>{
 
-  document.getElementById("summaryCuts").textContent=
-    activeText("cuts");
+        const group=
+            button.dataset.group;
 
-  document.getElementById("summarySeasoning").textContent=
-    activeText("seasonings");
+        if(!selected[group]){
+            selected[group]=[];
+        }
 
-  document.getElementById("summarySauce").textContent=
-    activeText("sauces");
+        selected[group].push(
+            button.innerText.trim()
+        );
 
-  document.getElementById("summaryExtras").textContent=
-    activeText("extras");
-}
+    });
 
-document.getElementById("contactForm").addEventListener(
-  "submit",
-  function(e){
 
-    e.preventDefault();
+    const notes=
+        document
+        .getElementById("builderNotes")
+        .value;
 
-    const form=new FormData(this);
 
-    const subject=
-      "Baruchs Boards — New Board Request";
+    let body=
+`BOARDS BY BARUCH — CUSTOM BOARD REQUEST
 
-    const body=
-`Name: ${form.get("name")}
-Phone: ${form.get("phone")}
-Email: ${form.get("email")}
-Event Date: ${form.get("date")}
+SIZE:
+${(selected.size||[]).join(", ")}
 
-Board Size: ${activeText("size")}
-Cuts: ${activeText("cuts")}
-Seasoning: ${activeText("seasonings")}
-Sauces: ${activeText("sauces")}
-Extras: ${activeText("extras")}
+CUTS:
+${(selected.cuts||[]).join(", ")}
 
-Custom Notes:
-${document.getElementById("customNotes").value}
+SEASONINGS:
+${(selected.seasoning||[]).join(", ")}
 
-Message:
-${form.get("message")}`;
+SAUCES / DIPS:
+${(selected.sauce||[]).join(", ")}
+
+PICKLES / OLIVES:
+${(selected.garnish||[]).join(", ")}
+
+CUSTOM NOTES:
+${notes || "None"}
+
+Please contact me regarding my custom board.
+`;
+
 
     window.location.href=
-      "mailto:baruch.aminov@icloud.com"+
-      "?subject="+encodeURIComponent(subject)+
-      "&body="+encodeURIComponent(body);
+        "mailto:baruch.aminov@icloud.com"
+        +
+        "?subject="
+        +
+        encodeURIComponent(
+            "Custom Board Request — Boards by Baruch"
+        )
+        +
+        "&body="
+        +
+        encodeURIComponent(body);
 
-  }
-);
+}
+
+
+/* ---------------------------------
+   CONTACT FORM
+--------------------------------- */
+
+function prepareContactEmail(){
+
+    return true;
+
+}
+
+
+/* ---------------------------------
+   SMOOTH NAV
+--------------------------------- */
+
+document
+.querySelectorAll('a[href^="#"]')
+.forEach(link=>{
+
+    link.addEventListener(
+        "click",
+        function(e){
+
+            const target=
+                document.querySelector(
+                    this.getAttribute("href")
+                );
+
+            if(target){
+
+                e.preventDefault();
+
+                target.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+            }
+
+        }
+    );
+
+});
 
 </script>
 
