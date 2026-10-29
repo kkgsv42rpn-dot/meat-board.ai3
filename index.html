@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BOARDS BY BARUCH</title>
 
 <style>
 :root{
   --black:#070707;
-  --cream:#f4eee4;
-  --gold:#c7a56a;
-  --muted:#a79e92;
-  --line:rgba(255,255,255,.12);
+  --deep:#0d0b09;
+  --gold:#c8a46a;
+  --gold2:#e5c48a;
+  --cream:#f2eadc;
+  --muted:#aaa092;
+  --line:rgba(255,255,255,.10);
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html{
   scroll-behavior:smooth;
@@ -38,765 +37,938 @@ a{
 
 button,
 input,
-textarea,
-select{
+textarea{
   font:inherit;
 }
 
-/* =====================================================
-   NAV
-===================================================== */
+button{
+  cursor:pointer;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 .nav{
   position:fixed;
   top:0;
   left:0;
-  width:100%;
-  height:78px;
-  z-index:100;
+  right:0;
+  z-index:1000;
+  height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 42px;
+  padding:0 34px;
   background:linear-gradient(
     to bottom,
-    rgba(5,5,5,.92),
-    rgba(5,5,5,0)
+    rgba(0,0,0,.88),
+    rgba(0,0,0,.15)
   );
-  pointer-events:none;
+  backdrop-filter:blur(12px);
 }
 
-.nav > *{
-  pointer-events:auto;
-}
-
-.logo{
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:4px;
-}
-
-.navLinks{
+.brand{
   display:flex;
-  gap:32px;
   align-items:center;
+  gap:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+  font-size:13px;
 }
 
-.navLinks a{
-  font-size:12px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.78);
-  transition:.25s;
+.brand-mark{
+  width:36px;
+  height:36px;
+  border:1px solid rgba(229,196,138,.7);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--gold2);
+  font-family:Georgia,serif;
+  font-size:13px;
+  letter-spacing:-.08em;
 }
 
-.navLinks a:hover{
-  color:white;
-}
-
-.navButton{
-  border:1px solid rgba(255,255,255,.28);
-  padding:12px 18px;
-  border-radius:100px;
+.nav-links{
+  display:flex;
+  gap:27px;
+  align-items:center;
   font-size:11px;
-  letter-spacing:1.7px;
+  letter-spacing:.16em;
   text-transform:uppercase;
+}
+
+.nav-links a{
+  opacity:.72;
   transition:.25s;
 }
 
-.navButton:hover{
-  background:white;
-  color:#080808;
+.nav-links a:hover{
+  opacity:1;
+  color:var(--gold2);
 }
 
-/* =====================================================
-   CONTACT RAIL
-===================================================== */
+.nav-cta{
+  border:1px solid rgba(229,196,138,.55);
+  padding:12px 17px;
+  color:var(--gold2);
+  letter-spacing:.13em;
+  font-size:10px;
+  text-transform:uppercase;
+}
 
-.contactRail{
+/* =========================================================
+   SIDE CONTACT
+========================================================= */
+
+.side-contact{
   position:fixed;
+  z-index:900;
   right:0;
   top:50%;
   transform:translateY(-50%);
-  z-index:110;
   writing-mode:vertical-rl;
-  transform-origin:center;
-  background:#111;
-  border:1px solid rgba(255,255,255,.15);
+  background:#11100e;
+  border:1px solid rgba(229,196,138,.35);
   border-right:0;
-  padding:20px 13px;
-  border-radius:10px 0 0 10px;
-  font-size:10px;
-  letter-spacing:3px;
+  padding:20px 11px;
+  letter-spacing:.22em;
+  font-size:9px;
   text-transform:uppercase;
-  color:white;
-  transition:.3s;
+  color:var(--gold2);
 }
 
-.contactRail:hover{
-  background:#c7a56a;
-  color:#080808;
-}
-
-/* =====================================================
-   HERO
-===================================================== */
+/* =========================================================
+   HERO / 3D STAGE
+========================================================= */
 
 .hero{
-  height:240vh;
+  height:250vh;
   position:relative;
 }
 
-.heroSticky{
+.hero-sticky{
   position:sticky;
   top:0;
   height:100vh;
   overflow:hidden;
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(94,53,27,.23),
-      transparent 35%
-    ),
-    #060606;
+  background:#050505;
 }
 
-#threeCanvas{
+#three-container{
   position:absolute;
   inset:0;
+}
+
+#three-container canvas{
+  display:block;
   width:100%;
   height:100%;
-  display:block;
-  z-index:1;
 }
 
-.heroVignette{
+.hero-overlay{
   position:absolute;
   inset:0;
-  z-index:2;
   pointer-events:none;
   background:
     radial-gradient(
       ellipse at center,
-      transparent 35%,
-      rgba(0,0,0,.35) 70%,
-      rgba(0,0,0,.86) 100%
+      transparent 22%,
+      rgba(0,0,0,.12) 55%,
+      rgba(0,0,0,.78) 100%
     );
 }
 
-.heroContent{
+.hero-copy{
   position:absolute;
   left:7vw;
   top:50%;
   transform:translateY(-50%);
+  max-width:540px;
   z-index:5;
-  max-width:520px;
-  pointer-events:none;
 }
 
 .eyebrow{
-  color:var(--gold);
-  letter-spacing:5px;
-  font-size:11px;
+  color:var(--gold2);
+  letter-spacing:.35em;
   text-transform:uppercase;
-  margin-bottom:20px;
+  font-size:10px;
+  margin-bottom:22px;
 }
 
-.heroTitle{
-  font-family:Georgia,serif;
-  font-size:clamp(46px,6vw,92px);
-  line-height:.94;
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(50px,7vw,105px);
+  line-height:.88;
   font-weight:400;
   margin:0;
-  letter-spacing:-3px;
+  letter-spacing:-.055em;
 }
 
-.heroTitle span{
+.hero h1 span{
   display:block;
+  color:var(--gold2);
 }
 
-.heroSubtitle{
-  margin-top:28px;
-  color:rgba(255,255,255,.65);
-  font-size:15px;
-  line-height:1.7;
-  max-width:390px;
+.hero-tagline{
+  margin-top:26px;
+  font-family:Georgia,serif;
+  font-size:19px;
+  color:#ddd2c1;
 }
 
-.heroButtons{
+.hero-buttons{
+  margin-top:34px;
   display:flex;
   gap:12px;
-  margin-top:30px;
+  flex-wrap:wrap;
   pointer-events:auto;
 }
 
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  padding:0 23px;
-  border-radius:100px;
-  border:1px solid rgba(255,255,255,.25);
-  font-size:11px;
-  letter-spacing:2px;
+  border:1px solid rgba(229,196,138,.45);
+  padding:15px 21px;
   text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:10px;
   transition:.3s;
-}
-
-.btn.primary{
-  background:#f2eadf;
-  color:#111;
-  border-color:#f2eadf;
+  background:rgba(0,0,0,.25);
+  color:#f4eadb;
 }
 
 .btn:hover{
-  transform:translateY(-2px);
+  background:var(--gold2);
+  color:#090806;
 }
 
-.scrollHint{
+.btn.gold{
+  background:var(--gold2);
+  color:#080706;
+}
+
+.hero-scroll{
   position:absolute;
-  bottom:30px;
+  bottom:26px;
   left:50%;
   transform:translateX(-50%);
   z-index:5;
+  color:#cbbda9;
   font-size:9px;
+  letter-spacing:.35em;
   text-transform:uppercase;
-  letter-spacing:4px;
-  color:rgba(255,255,255,.42);
 }
 
-/* =====================================================
+/* =========================================================
    SECTIONS
-===================================================== */
+========================================================= */
 
 .section{
   position:relative;
-  padding:130px 7vw;
-  background:#090909;
+  padding:120px 7vw;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(126,88,42,.10),
+      transparent 35%
+    ),
+    #090807;
 }
 
-.section.alt{
-  background:#0d0c0a;
+.section.dark{
+  background:#050505;
 }
 
-.sectionHeader{
-  max-width:850px;
-  margin-bottom:65px;
+.section-inner{
+  max-width:1200px;
+  margin:auto;
 }
 
-.sectionKicker{
-  color:var(--gold);
-  font-size:10px;
-  letter-spacing:4px;
+.section-kicker{
+  color:var(--gold2);
   text-transform:uppercase;
+  letter-spacing:.32em;
+  font-size:10px;
   margin-bottom:18px;
 }
 
-.sectionTitle{
+.section-title{
   font-family:Georgia,serif;
-  font-size:clamp(38px,5vw,72px);
+  font-size:clamp(42px,6vw,78px);
+  line-height:.95;
   font-weight:400;
-  line-height:1;
-  margin:0;
+  margin:0 0 30px;
+  letter-spacing:-.045em;
 }
 
-.sectionText{
-  margin-top:24px;
-  color:var(--muted);
-  max-width:680px;
+.section-text{
+  max-width:650px;
+  color:#bdb3a5;
   line-height:1.8;
   font-size:15px;
 }
 
-/* =====================================================
-   ABOUT
-===================================================== */
-
-.aboutGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:start;
-}
-
-.aboutStatement{
-  font-family:Georgia,serif;
-  font-size:32px;
-  line-height:1.2;
-}
-
-.aboutCopy{
-  color:#a79e92;
-  line-height:1.9;
-  font-size:15px;
-}
-
-.featureGrid{
-  margin-top:80px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--line);
-}
-
-.feature{
-  background:#0b0b0b;
-  padding:38px 30px;
-}
-
-.featureNumber{
-  color:var(--gold);
-  font-size:10px;
-  letter-spacing:3px;
-}
-
-.feature h3{
-  font-family:Georgia,serif;
-  font-size:25px;
-  font-weight:400;
-  margin:18px 0 12px;
-}
-
-.feature p{
-  color:#928b82;
-  line-height:1.7;
-  font-size:13px;
-}
-
-/* =====================================================
-   SERVICES
-===================================================== */
-
-.servicesGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-}
-
-.service{
-  min-height:220px;
-  border:1px solid var(--line);
-  padding:35px;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(199,165,106,.08),
-      transparent 35%
-    ),
-    #0b0b0b;
-  transition:.4s;
-}
-
-.service:hover{
-  transform:translateY(-5px);
-  border-color:rgba(199,165,106,.4);
-}
-
-.service h3{
-  font-family:Georgia,serif;
-  font-size:28px;
-  font-weight:400;
-  margin:0 0 15px;
-}
-
-.service p{
-  color:#928b82;
-  max-width:470px;
-  line-height:1.7;
-  font-size:14px;
-}
-
-/* =====================================================
+/* =========================================================
    INFO STRIP
-===================================================== */
+========================================================= */
 
-.infoStrip{
+.info-strip{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
 }
 
-.infoBox{
+.info-item{
   padding:35px 25px;
   border-right:1px solid var(--line);
 }
 
-.infoBox:last-child{
+.info-item:last-child{
   border-right:0;
 }
 
-.infoBox small{
+.info-item strong{
   display:block;
-  color:var(--gold);
-  font-size:9px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:12px;
-}
-
-.infoBox strong{
+  color:var(--gold2);
   font-family:Georgia,serif;
+  font-size:25px;
   font-weight:400;
-  font-size:21px;
+  margin-bottom:9px;
 }
 
-/* =====================================================
-   BUILDER
-===================================================== */
+.info-item span{
+  color:#8e867b;
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
 
-.builder{
+/* =========================================================
+   SERVICE CARDS
+========================================================= */
+
+.cards{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:70px;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:55px;
 }
 
-.builderPanel{
+.card{
+  min-height:260px;
   border:1px solid var(--line);
-  background:#0b0b0b;
-  padding:38px;
-}
-
-.builderGroup{
-  margin-bottom:35px;
-}
-
-.builderGroup:last-child{
-  margin-bottom:0;
-}
-
-.builderLabel{
-  display:block;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:15px;
-}
-
-.optionGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-}
-
-.option{
-  position:relative;
-}
-
-.option input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-
-.option label{
-  display:block;
-  border:1px solid rgba(255,255,255,.12);
-  padding:15px;
-  cursor:pointer;
-  color:#aaa;
-  font-size:12px;
-  transition:.25s;
-}
-
-.option input:checked + label{
-  background:#eee5d9;
-  color:#111;
-  border-color:#eee5d9;
-}
-
-textarea,
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"]{
-  width:100%;
-  background:#080808;
-  color:white;
-  border:1px solid rgba(255,255,255,.14);
-  padding:15px;
-  outline:none;
-}
-
-textarea{
-  min-height:120px;
-  resize:vertical;
-}
-
-.builderSummary{
-  position:sticky;
-  top:110px;
-  height:max-content;
-  padding:45px;
+  padding:30px;
   background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(113,64,30,.3),
-      transparent 45%
-    ),
-    #0c0a08;
-  border:1px solid rgba(199,165,106,.18);
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.008)
+    );
+  transition:.35s;
 }
 
-.summaryEyebrow{
+.card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(229,196,138,.35);
+}
+
+.card-number{
   color:var(--gold);
-  font-size:10px;
-  letter-spacing:4px;
-  text-transform:uppercase;
+  font-size:11px;
+  letter-spacing:.2em;
 }
 
-.summaryTitle{
+.card h3{
   font-family:Georgia,serif;
-  font-size:45px;
+  font-size:29px;
   font-weight:400;
-  margin:15px 0 30px;
+  margin:55px 0 15px;
 }
 
-.summaryList{
-  list-style:none;
-  margin:0;
-  padding:0;
-}
-
-.summaryList li{
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.1);
-  padding:15px 0;
-  color:#aaa;
+.card p{
+  color:#918a80;
+  line-height:1.7;
   font-size:13px;
 }
 
-.summaryList span:last-child{
-  color:white;
-  text-align:right;
-}
+/* =========================================================
+   BOARD STUDIO
+========================================================= */
 
-.summaryNotice{
-  margin-top:30px;
-  color:#817b73;
-  font-size:12px;
-  line-height:1.7;
-}
-
-/* =====================================================
-   QUOTE
-===================================================== */
-
-.quoteSection{
-  min-height:55vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:100px 7vw;
+#board-studio{
   background:
     radial-gradient(
-      circle,
-      rgba(100,55,25,.22),
-      transparent 55%
+      circle at 50% 0%,
+      rgba(164,116,55,.12),
+      transparent 45%
     ),
     #080706;
 }
 
-.quote{
-  max-width:950px;
+.studio-shell{
+  max-width:1200px;
+  margin:auto;
+}
+
+.studio-intro{
+  max-width:760px;
+}
+
+.studio-intro p{
+  color:#999187;
+  line-height:1.8;
+}
+
+.studio-grid{
+  margin-top:55px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.studio-panel{
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.025);
+  padding:28px;
+}
+
+.studio-panel h3{
+  margin:0 0 20px;
   font-family:Georgia,serif;
-  font-size:clamp(38px,5vw,70px);
-  line-height:1.05;
+  font-weight:400;
+  font-size:28px;
+}
+
+.option-group{
+  margin-bottom:30px;
+}
+
+.option-label{
+  color:var(--gold2);
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.board-option{
+  border:1px solid rgba(255,255,255,.13);
+  background:#0d0c0b;
+  color:#aaa198;
+  padding:11px 13px;
+  font-size:10px;
+  transition:.25s;
+}
+
+.board-option:hover,
+.board-option.active{
+  color:#090807;
+  background:var(--gold2);
+  border-color:var(--gold2);
+}
+
+#board-custom{
+  width:100%;
+  min-height:120px;
+  resize:vertical;
+  background:#090807;
+  border:1px solid rgba(255,255,255,.12);
+  color:#eee5d8;
+  padding:14px;
+  outline:none;
+}
+
+#board-custom:focus{
+  border-color:rgba(229,196,138,.55);
+}
+
+.board-generate{
+  width:100%;
+  margin-top:5px;
+  border:1px solid var(--gold2);
+  background:var(--gold2);
+  color:#090807;
+  padding:17px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+}
+
+.board-generate:disabled{
+  opacity:.55;
+}
+
+.board-status{
+  margin-top:14px;
+  color:#8e877e;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   BOARD PREVIEW
+========================================================= */
+
+.preview-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:620px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(167,116,55,.11),
+      transparent 55%
+    );
+}
+
+.preview-board{
+  position:relative;
+  width:min(430px,85%);
+  aspect-ratio:1.45;
+  border-radius:35% 35% 28% 28%;
+  background:
+    linear-gradient(
+      135deg,
+      #7e522e,
+      #422714 40%,
+      #6c431f 75%,
+      #321c0d
+    );
+  box-shadow:
+    0 40px 80px rgba(0,0,0,.65),
+    inset 0 0 0 5px rgba(35,17,6,.5),
+    inset 0 0 35px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+
+.preview-board:before{
+  content:"";
+  position:absolute;
+  inset:8%;
+  border:1px solid rgba(226,173,103,.22);
+  border-radius:30%;
+}
+
+.preview-food{
+  position:absolute;
+  border-radius:50%;
+  box-shadow:0 9px 15px rgba(0,0,0,.4);
+}
+
+.preview-steak{
+  width:115px;
+  height:78px;
+  background:
+    radial-gradient(circle at 40% 40%,#d47a69 0 8%,transparent 9%),
+    radial-gradient(circle at 65% 58%,#f3c59d 0 4%,transparent 5%),
+    linear-gradient(135deg,#9d3435,#5b171c);
+  transform:rotate(-15deg);
+}
+
+.preview-salami{
+  width:70px;
+  height:24px;
+  background:
+    radial-gradient(circle,#f3ddd0 0 2px,transparent 3px),
+    #76292a;
+}
+
+.preview-pastrami{
+  width:125px;
+  height:52px;
+  border-radius:25px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #6c2520 0 8px,
+      #a04a3a 8px 14px
+    );
+}
+
+.preview-pickle{
+  width:85px;
+  height:24px;
+  border-radius:50%;
+  background:#687c2b;
+}
+
+.preview-olive{
+  width:25px;
+  height:25px;
+  background:#1e2520;
+}
+
+/* =========================================================
+   CONCEPTS
+========================================================= */
+
+.board-concepts{
+  display:none;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:35px;
+}
+
+.board-concept{
+  border:1px solid rgba(255,255,255,.10);
+  padding:18px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.board-concept:hover,
+.board-concept.active{
+  border-color:var(--gold2);
+  transform:translateY(-5px);
+}
+
+.mini-board{
+  position:relative;
+  aspect-ratio:1.5;
+  border-radius:28%;
+  background:linear-gradient(135deg,#71461f,#321b0d);
+  overflow:hidden;
+  box-shadow:inset 0 0 25px rgba(0,0,0,.45);
+}
+
+.mini-food{
+  position:absolute;
+  border-radius:50%;
+  box-shadow:0 5px 10px rgba(0,0,0,.4);
+}
+
+.mini-food.a{
+  width:30%;
+  height:22%;
+  background:#8f3032;
+  transform:rotate(-15deg);
+}
+
+.mini-food.b{
+  width:25%;
+  height:10%;
+  background:#b24b3c;
+  transform:rotate(25deg);
+}
+
+.mini-food.c{
+  width:17%;
+  height:17%;
+  background:#263021;
+}
+
+.concept-title{
+  margin-top:15px;
+  font-family:Georgia,serif;
+  font-size:21px;
+}
+
+.concept-description{
+  margin-top:6px;
+  color:#80796f;
+  font-size:11px;
+}
+
+.board-final{
+  display:none;
+  margin-top:30px;
+  border:1px solid rgba(229,196,138,.25);
+  padding:25px;
+  background:rgba(198,164,106,.04);
+}
+
+.board-final h4{
+  margin:0 0 15px;
+  color:var(--gold2);
+  font-family:Georgia,serif;
+  font-size:23px;
   font-weight:400;
 }
 
-.quote em{
-  color:var(--gold);
+.board-final-text{
+  white-space:pre-wrap;
+  color:#aaa198;
+  line-height:1.7;
+  font-size:13px;
 }
 
-/* =====================================================
-   CONTACT
-===================================================== */
+.board-final-actions{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
 
-.contactGrid{
+.board-button{
+  border:1px solid rgba(255,255,255,.14);
+  background:#11100e;
+  color:#ddd2c1;
+  padding:13px 17px;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-size:9px;
+}
+
+.board-button.primary{
+  background:var(--gold2);
+  color:#080706;
+  border-color:var(--gold2);
+}
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.quote{
+  text-align:center;
+  padding:150px 7vw;
+  background:#050505;
+}
+
+.quote p{
+  max-width:900px;
+  margin:auto;
+  font-family:Georgia,serif;
+  font-size:clamp(30px,5vw,62px);
+  line-height:1.08;
+  color:#e9dfd1;
+}
+
+.quote span{
+  display:block;
+  margin-top:25px;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.3em;
+  font-size:9px;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-grid{
   display:grid;
   grid-template-columns:.8fr 1.2fr;
-  gap:80px;
+  gap:60px;
+  margin-top:55px;
 }
 
-.contactDetails{
-  display:flex;
-  flex-direction:column;
-  gap:30px;
+.contact-details{
+  border-top:1px solid var(--line);
 }
 
-.contactItem small{
-  color:var(--gold);
+.contact-detail{
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.contact-detail small{
   display:block;
+  color:var(--gold);
   font-size:9px;
-  letter-spacing:3px;
+  letter-spacing:.2em;
   text-transform:uppercase;
   margin-bottom:8px;
 }
 
-.contactItem strong{
-  font-size:18px;
-  font-weight:400;
+.contact-detail div{
+  color:#d8cdbd;
 }
 
-.contactForm{
+.contact-form{
   display:grid;
-  gap:13px;
+  gap:12px;
 }
 
-.formRow{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  border:1px solid rgba(255,255,255,.12);
+  background:#0d0c0b;
+  color:#eee5d8;
+  padding:15px;
+  outline:none;
 }
 
-.contactForm button{
-  border:0;
-  cursor:pointer;
-  margin-top:8px;
+.contact-form textarea{
+  min-height:170px;
+  resize:vertical;
 }
 
-/* =====================================================
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:rgba(229,196,138,.55);
+}
+
+.contact-form button{
+  border:1px solid var(--gold2);
+  background:var(--gold2);
+  color:#090807;
+  padding:16px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:10px;
+}
+
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 footer{
-  padding:55px 7vw 30px;
+  padding:60px 7vw 35px;
+  background:#030303;
   border-top:1px solid var(--line);
-  background:#060606;
 }
 
-.footerTop{
-  display:flex;
-  justify-content:space-between;
+.footer-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
   gap:40px;
-  align-items:flex-start;
 }
 
-.footerBrand{
-  font-size:14px;
-  letter-spacing:4px;
-  font-weight:700;
+.footer-brand{
+  font-family:Georgia,serif;
+  font-size:28px;
 }
 
-.footerText{
-  color:#777;
-  font-size:12px;
+.footer-copy{
+  color:#716b63;
+  max-width:390px;
   line-height:1.7;
-  max-width:330px;
+  font-size:12px;
+  margin-top:15px;
 }
 
-.footerBottom{
-  margin-top:60px;
+.footer-title{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:9px;
+  margin-bottom:15px;
+}
+
+.footer-links{
+  display:grid;
+  gap:9px;
+  color:#8b847b;
+  font-size:11px;
+}
+
+.footer-bottom{
+  max-width:1200px;
+  margin:45px auto 0;
   padding-top:20px;
   border-top:1px solid var(--line);
-  color:#555;
-  font-size:10px;
-  letter-spacing:1px;
+  color:#55504a;
+  font-size:9px;
+  letter-spacing:.12em;
 }
 
-/* =====================================================
-   LOADING
-===================================================== */
-
-#threeStatus{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  z-index:20;
-  color:white;
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  pointer-events:none;
-  transition:.5s;
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:850px){
 
   .nav{
-    padding:0 20px;
+    padding:0 17px;
   }
 
-  .navLinks{
+  .nav-links{
     display:none;
   }
 
-  .heroContent{
+  .nav-cta{
+    display:none;
+  }
+
+  .hero-copy{
     left:25px;
     right:25px;
-    top:auto;
-    bottom:100px;
-    transform:none;
+    top:65%;
   }
 
-  .heroTitle{
-    font-size:48px;
+  .hero h1{
+    font-size:54px;
   }
 
-  .heroSubtitle{
-    font-size:13px;
+  .hero-tagline{
+    font-size:16px;
   }
 
-  .aboutGrid,
-  .builder,
-  .contactGrid{
-    grid-template-columns:1fr;
-  }
-
-  .featureGrid,
-  .infoStrip{
+  .info-strip{
     grid-template-columns:1fr 1fr;
   }
 
-  .servicesGrid{
+  .info-item:nth-child(2){
+    border-right:0;
+  }
+
+  .cards{
     grid-template-columns:1fr;
   }
 
-  .builderSummary{
-    position:relative;
-    top:auto;
-  }
-
-  .footerTop{
-    flex-direction:column;
-  }
-
-  .formRow{
+  .studio-grid{
     grid-template-columns:1fr;
   }
 
+  .board-concepts{
+    grid-template-columns:1fr;
+  }
+
+  .preview-wrap{
+    min-height:430px;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .side-contact{
+    display:none;
+  }
 }
 
 @media(max-width:500px){
 
-  .featureGrid,
-  .infoStrip{
-    grid-template-columns:1fr;
+  .hero{
+    height:220vh;
   }
 
-  .heroTitle{
-    font-size:42px;
+  .hero h1{
+    font-size:45px;
   }
 
   .section{
-    padding:90px 22px;
+    padding:85px 22px;
   }
 
-  .builderPanel,
-  .builderSummary{
-    padding:25px;
+  .info-item{
+    padding:25px 15px;
+  }
+
+  .info-item strong{
+    font-size:20px;
+  }
+
+  .studio-panel{
+    padding:20px;
   }
 
 }
@@ -805,76 +977,69 @@ footer{
 
 <body>
 
-<!-- =====================================================
+<!-- =======================================================
      NAV
-===================================================== -->
+======================================================= -->
 
 <nav class="nav">
 
-  <a href="#top" class="logo">
-    BOARDS BY BARUCH
+  <a href="#top" class="brand">
+    <span class="brand-mark">BB</span>
+    <span>BOARDS BY BARUCH</span>
   </a>
 
-  <div class="navLinks">
+  <div class="nav-links">
     <a href="#about">About</a>
     <a href="#boards">Boards</a>
-    <a href="#builder">Build Yours</a>
+    <a href="#board-studio">Build Yours</a>
     <a href="#contact">Contact</a>
-
-    <a href="#builder" class="navButton">
-      Create Your Own Board
-    </a>
   </div>
+
+  <a href="#board-studio" class="nav-cta">
+    Create Your Board
+  </a>
 
 </nav>
 
-
-<a href="#contact" class="contactRail">
+<a href="#contact" class="side-contact">
   Contact Us Now
 </a>
 
 
-<!-- =====================================================
+<!-- =======================================================
      HERO / 3D
-===================================================== -->
+======================================================= -->
 
 <section class="hero" id="top">
 
-  <div class="heroSticky">
+  <div class="hero-sticky">
 
-    <canvas id="threeCanvas"></canvas>
+    <div id="three-container"></div>
 
-    <div id="threeStatus">
-      Loading
-    </div>
+    <div class="hero-overlay"></div>
 
-    <div class="heroVignette"></div>
-
-    <div class="heroContent">
+    <div class="hero-copy">
 
       <div class="eyebrow">
         Premium Kosher Meat
       </div>
 
-      <h1 class="heroTitle">
-        <span>Exceptional</span>
-        <span>Kosher.</span>
-        <span>Unforgettable Boards.</span>
+      <h1>
+        BOARDS
+        <span>BY BARUCH</span>
       </h1>
 
-      <p class="heroSubtitle">
-        Premium kosher meat, crafted your way.
-        From intimate moments to unforgettable
-        celebrations across New York and New Jersey.
-      </p>
+      <div class="hero-tagline">
+        Exceptional Kosher. Unforgettable Boards.
+      </div>
 
-      <div class="heroButtons">
+      <div class="hero-buttons">
 
-        <a href="#contact" class="btn primary">
+        <a href="#contact" class="btn gold">
           Contact Us Now
         </a>
 
-        <a href="#builder" class="btn">
+        <a href="#board-studio" class="btn">
           Create Your Own Board
         </a>
 
@@ -882,8 +1047,8 @@ footer{
 
     </div>
 
-    <div class="scrollHint">
-      Scroll to build your board
+    <div class="hero-scroll">
+      Scroll to build
     </div>
 
   </div>
@@ -891,116 +1056,65 @@ footer{
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      ABOUT
-===================================================== -->
+======================================================= -->
 
 <section class="section" id="about">
 
-  <div class="sectionHeader">
+  <div class="section-inner">
 
-    <div class="sectionKicker">
-      About
+    <div class="section-kicker">
+      The Board
     </div>
 
-    <h2 class="sectionTitle">
-      Your Board.<br>
-      Your Cuts. Your Way.
+    <h2 class="section-title">
+      Premium meat.<br>
+      Crafted your way.
     </h2>
 
-    <p class="sectionText">
-      BOARDS BY BARUCH creates premium kosher meat
-      boards, charcuterie, individual trays, gift boxes,
-      event platters and full-scale catering designed
-      around the people and occasion.
+    <p class="section-text">
+      BOARDS BY BARUCH creates premium kosher meat boards,
+      charcuterie boards, trays and custom catering experiences
+      designed around your event, your guests and your vision.
+      Every board is carefully assembled to look exceptional
+      before the first bite.
     </p>
 
   </div>
 
-
-  <div class="aboutGrid">
-
-    <div class="aboutStatement">
-      Beautiful food should feel like part of
-      the occasion — not just something placed
-      on the table.
-    </div>
-
-    <div class="aboutCopy">
-
-      Every board is assembled around your vision.
-      Choose your size, cuts, seasonings, sauces,
-      pickles, olives and custom details.
-
-      <br><br>
-
-      Whether you're hosting at home, celebrating
-      a birthday, planning an engagement or wedding,
-      preparing for Shabbat or Yom Tov, sending a gift,
-      or catering a major event, every board is built
-      to make an impression.
-
-      <br><br>
-
-      Serving New York and New Jersey.
-
-    </div>
-
-  </div>
+</section>
 
 
-  <div class="featureGrid">
+<!-- =======================================================
+     INFO STRIP
+======================================================= -->
 
-    <div class="feature">
+<section class="section dark">
 
-      <div class="featureNumber">
-        01
+  <div class="section-inner">
+
+    <div class="info-strip">
+
+      <div class="info-item">
+        <strong>NY + NJ</strong>
+        <span>Service Area</span>
       </div>
 
-      <h3>
-        Premium Cuts
-      </h3>
-
-      <p>
-        Carefully selected kosher meats prepared
-        and arranged for a luxurious presentation.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="featureNumber">
-        02
+      <div class="info-item">
+        <strong>VHQ</strong>
+        <span>Kosher Certified</span>
       </div>
 
-      <h3>
-        Crafted Your Way
-      </h3>
-
-      <p>
-        Choose your cuts, flavors, extras and
-        custom details to create your own board.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="featureNumber">
-        03
+      <div class="info-item">
+        <strong>24–48 HR</strong>
+        <span>Ordering Notice</span>
       </div>
 
-      <h3>
-        Made For Moments
-      </h3>
-
-      <p>
-        From intimate dinners to large events,
-        every board is designed around the occasion.
-      </p>
+      <div class="info-item">
+        <strong>Custom</strong>
+        <span>Your Board, Your Way</span>
+      </div>
 
     </div>
 
@@ -1009,112 +1123,78 @@ footer{
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      SERVICES
-===================================================== -->
+======================================================= -->
 
-<section class="section alt" id="boards">
+<section class="section" id="boards">
 
-  <div class="sectionHeader">
+  <div class="section-inner">
 
-    <div class="sectionKicker">
+    <div class="section-kicker">
       What We Create
     </div>
 
-    <h2 class="sectionTitle">
-      Built For Any Occasion.
+    <h2 class="section-title">
+      Built for the<br>
+      occasion.
     </h2>
 
-    <p class="sectionText">
-      Choose the experience that fits your event,
-      then make it completely your own.
-    </p>
+    <div class="cards">
 
-  </div>
+      <div class="card">
+        <div class="card-number">01</div>
+        <h3>Meat Boards</h3>
+        <p>
+          Premium cuts arranged into a dramatic,
+          abundant centerpiece for your table.
+        </p>
+      </div>
 
+      <div class="card">
+        <div class="card-number">02</div>
+        <h3>Events</h3>
+        <p>
+          Birthdays, weddings, engagements,
+          Shabbat, Yom Tov and corporate events.
+        </p>
+      </div>
 
-  <div class="servicesGrid">
+      <div class="card">
+        <div class="card-number">03</div>
+        <h3>Gifting</h3>
+        <p>
+          Individual trays and luxury gift boxes
+          designed to make an unforgettable impression.
+        </p>
+      </div>
 
-    <div class="service">
+      <div class="card">
+        <div class="card-number">04</div>
+        <h3>Catering</h3>
+        <p>
+          Larger custom orders and event platters
+          built around your guest count.
+        </p>
+      </div>
 
-      <h3>
-        Meat Boards
-      </h3>
+      <div class="card">
+        <div class="card-number">05</div>
+        <h3>Pickup</h3>
+        <p>
+          Carefully prepared boards available
+          for pickup in our NY and NJ service area.
+        </p>
+      </div>
 
-      <p>
-        Premium cuts arranged into a dramatic
-        centerpiece for your table.
-      </p>
-
-    </div>
-
-
-    <div class="service">
-
-      <h3>
-        Charcuterie Boards
-      </h3>
-
-      <p>
-        A refined selection of kosher meats,
-        accompaniments and carefully balanced flavors.
-      </p>
-
-    </div>
-
-
-    <div class="service">
-
-      <h3>
-        Event Platters
-      </h3>
-
-      <p>
-        Designed for birthdays, celebrations,
-        engagement parties, weddings and gatherings.
-      </p>
-
-    </div>
-
-
-    <div class="service">
-
-      <h3>
-        Catering
-      </h3>
-
-      <p>
-        Larger experiences and custom orders
-        built around your event.
-      </p>
-
-    </div>
-
-
-    <div class="service">
-
-      <h3>
-        Individual Trays
-      </h3>
-
-      <p>
-        Premium portions prepared for individual
-        dining and smaller gatherings.
-      </p>
-
-    </div>
-
-
-    <div class="service">
-
-      <h3>
-        Gift Boxes
-      </h3>
-
-      <p>
-        A memorable kosher gift built around
-        exceptional meat and presentation.
-      </p>
+      <div class="card">
+        <div class="card-number">06</div>
+        <h3>Delivery</h3>
+        <p>
+          Delivery options available throughout
+          our NY and NJ service area.
+        </p>
+      </div>
 
     </div>
 
@@ -1123,362 +1203,524 @@ footer{
 </section>
 
 
-<!-- =====================================================
-     INFO
-===================================================== -->
+<!-- =======================================================
+     BOARD STUDIO
+======================================================= -->
 
-<section class="section" style="padding-top:0;padding-bottom:0;">
+<section class="section" id="board-studio">
 
-  <div class="infoStrip">
+  <div class="studio-shell">
 
-    <div class="infoBox">
+    <div class="studio-intro">
 
-      <small>
-        Service Area
-      </small>
+      <div class="section-kicker">
+        Create Your Own
+      </div>
 
-      <strong>
-        NY & NJ
-      </strong>
+      <h2 class="section-title">
+        Design your<br>
+        perfect board.
+      </h2>
 
-    </div>
-
-
-    <div class="infoBox">
-
-      <small>
-        Certification
-      </small>
-
-      <strong>
-        VHQ
-      </strong>
+      <p>
+        Choose your size, cuts, presentation style,
+        extras and overall look. Tell us exactly what
+        you have in mind and we'll turn your idea into
+        a board your guests won't forget.
+      </p>
 
     </div>
 
 
-    <div class="infoBox">
+    <div class="studio-grid">
 
-      <small>
-        Standard Notice
-      </small>
+      <!-- OPTIONS -->
 
-      <strong>
-        24 Hours
-      </strong>
+      <div class="studio-panel">
 
-    </div>
+        <h3>Board Details</h3>
 
 
-    <div class="infoBox">
+        <div class="option-group">
 
-      <small>
-        Custom / Large
-      </small>
-
-      <strong>
-        48 Hours
-      </strong>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     BUILDER
-===================================================== -->
-
-<section class="section" id="builder">
-
-  <div class="sectionHeader">
-
-    <div class="sectionKicker">
-      Create Your Own
-    </div>
-
-    <h2 class="sectionTitle">
-      Your Board.<br>
-      Exactly How You Want It.
-    </h2>
-
-    <p class="sectionText">
-      Select your size, cuts and extras.
-      Add your own notes and we'll take it from there.
-    </p>
-
-  </div>
-
-
-  <div class="builder">
-
-    <div class="builderPanel">
-
-      <!-- SIZE -->
-
-      <div class="builderGroup">
-
-        <span class="builderLabel">
-          Board Size
-        </span>
-
-        <div class="optionGrid">
-
-          <div class="option">
-            <input
-              type="radio"
-              name="size"
-              id="small"
-              value="Small — 5–8 people"
-              checked
-            >
-            <label for="small">
-              Small<br>
-              5–8
-            </label>
+          <div class="option-label">
+            Board Size
           </div>
 
-          <div class="option">
-            <input
-              type="radio"
-              name="size"
-              id="medium"
-              value="Medium — 9–15 people"
-            >
-            <label for="medium">
-              Medium<br>
-              9–15
-            </label>
-          </div>
+          <div class="options">
 
-          <div class="option">
-            <input
-              type="radio"
-              name="size"
-              id="large"
-              value="Large — 16–25 people"
-            >
-            <label for="large">
-              Large<br>
-              16–25
-            </label>
-          </div>
+            <button
+              class="board-option active"
+              data-group="size"
+              data-value="Small — 5–8 people">
+              Small · 5–8
+            </button>
 
-          <div class="option">
-            <input
-              type="radio"
-              name="size"
-              id="xl"
-              value="XL — 26+ people"
-            >
-            <label for="xl">
-              XL<br>
-              26+
-            </label>
-          </div>
+            <button
+              class="board-option"
+              data-group="size"
+              data-value="Medium — 9–15 people">
+              Medium · 9–15
+            </button>
 
-          <div class="option">
-            <input
-              type="radio"
-              name="size"
-              id="customSize"
-              value="Custom"
-            >
-            <label for="customSize">
+            <button
+              class="board-option"
+              data-group="size"
+              data-value="Large — 16–25 people">
+              Large · 16–25
+            </button>
+
+            <button
+              class="board-option"
+              data-group="size"
+              data-value="XL — 26+ people">
+              XL · 26+
+            </button>
+
+            <button
+              class="board-option"
+              data-group="size"
+              data-value="Custom">
               Custom
-            </label>
+            </button>
+
           </div>
 
         </div>
 
-      </div>
 
+        <div class="option-group">
 
-      <!-- CUTS -->
-
-      <div class="builderGroup">
-
-        <span class="builderLabel">
-          Choose Your Cuts
-        </span>
-
-        <div class="optionGrid">
-
-          <div class="option">
-            <input type="checkbox" id="nystrip" value="NY Strip">
-            <label for="nystrip">NY Strip</label>
+          <div class="option-label">
+            Meats
           </div>
 
-          <div class="option">
-            <input type="checkbox" id="oyster" value="Oyster Steak">
-            <label for="oyster">Oyster Steak</label>
-          </div>
+          <div class="options">
 
-          <div class="option">
-            <input type="checkbox" id="ribeye" value="Rib Eye">
-            <label for="ribeye">Rib Eye</label>
-          </div>
+            <button class="board-option" data-group="meat" data-value="Rib Eye">
+              Rib Eye
+            </button>
 
-          <div class="option">
-            <input type="checkbox" id="pastrami" value="Pastrami">
-            <label for="pastrami">Pastrami</label>
-          </div>
+            <button class="board-option" data-group="meat" data-value="Oyster Steak">
+              Oyster Steak
+            </button>
 
-          <div class="option">
-            <input type="checkbox" id="salami" value="Salami">
-            <label for="salami">Salami</label>
-          </div>
+            <button class="board-option" data-group="meat" data-value="NY Strip">
+              NY Strip
+            </button>
 
-          <div class="option">
-            <input type="checkbox" id="roastbeef" value="Roast Beef">
-            <label for="roastbeef">Roast Beef</label>
-          </div>
+            <button class="board-option" data-group="meat" data-value="Steak">
+              Steak
+            </button>
 
-          <div class="option">
-            <input type="checkbox" id="steak" value="Steak">
-            <label for="steak">Steak</label>
-          </div>
+            <button class="board-option" data-group="meat" data-value="Pastrami">
+              Pastrami
+            </button>
 
-          <div class="option">
-            <input type="checkbox" id="chicken" value="Chicken">
-            <label for="chicken">Chicken</label>
+            <button class="board-option" data-group="meat" data-value="Salami">
+              Salami
+            </button>
+
+            <button class="board-option" data-group="meat" data-value="Roast Beef">
+              Roast Beef
+            </button>
+
+            <button class="board-option" data-group="meat" data-value="Chicken">
+              Chicken
+            </button>
+
           </div>
 
         </div>
 
-      </div>
 
+        <div class="option-group">
 
-      <!-- EXTRAS -->
-
-      <div class="builderGroup">
-
-        <span class="builderLabel">
-          Extras
-        </span>
-
-        <div class="optionGrid">
-
-          <div class="option">
-            <input type="checkbox" id="seasoning" value="Custom Seasoning">
-            <label for="seasoning">
-              Seasoning
-            </label>
+          <div class="option-label">
+            Presentation
           </div>
 
-          <div class="option">
-            <input type="checkbox" id="sauces" value="Sauces / Dips">
-            <label for="sauces">
-              Sauces / Dips
-            </label>
+          <div class="options">
+
+            <button class="board-option" data-group="presentation" data-value="Thin Sliced">
+              Thin Sliced
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Thick Sliced">
+              Thick Sliced
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Fan">
+              Fan
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Folded">
+              Folded
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Rolled">
+              Rolled
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Shingled">
+              Shingled
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Stacked">
+              Stacked
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Cubed">
+              Cubed
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Whole">
+              Whole
+            </button>
+
+            <button class="board-option" data-group="presentation" data-value="Chef's Choice">
+              Chef's Choice
+            </button>
+
           </div>
 
-          <div class="option">
-            <input type="checkbox" id="pickles" value="Pickles">
-            <label for="pickles">
+        </div>
+
+
+        <div class="option-group">
+
+          <div class="option-label">
+            Board Style
+          </div>
+
+          <div class="options">
+
+            <button class="board-option active" data-group="style" data-value="Luxury">
+              Luxury
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Steakhouse">
+              Steakhouse
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Elegant">
+              Elegant
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Packed & Abundant">
+              Packed & Abundant
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Minimalist">
+              Minimalist
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Rustic">
+              Rustic
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Symmetrical">
+              Symmetrical
+            </button>
+
+            <button class="board-option" data-group="style" data-value="Chef's Choice">
+              Chef's Choice
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="option-group">
+
+          <div class="option-label">
+            Extras
+          </div>
+
+          <div class="options">
+
+            <button class="board-option" data-group="extra" data-value="Mustard">
+              Mustard
+            </button>
+
+            <button class="board-option" data-group="extra" data-value="Pickles">
               Pickles
-            </label>
-          </div>
+            </button>
 
-          <div class="option">
-            <input type="checkbox" id="olives" value="Olives">
-            <label for="olives">
+            <button class="board-option" data-group="extra" data-value="Olives">
               Olives
-            </label>
+            </button>
+
+            <button class="board-option" data-group="extra" data-value="Sauces / Dips">
+              Sauces / Dips
+            </button>
+
+            <button class="board-option" data-group="extra" data-value="Chef's Garnish">
+              Chef's Garnish
+            </button>
+
+            <button class="board-option" data-group="extra" data-value="None">
+              None
+            </button>
+
           </div>
 
-          <div class="option">
-            <input type="checkbox" id="requestAny" value="Request Any">
-            <label for="requestAny">
-              Request Any
-            </label>
+        </div>
+
+
+        <div class="option-group">
+
+          <div class="option-label">
+            Describe Your Vision
+          </div>
+
+          <textarea
+            id="board-custom"
+            placeholder="Tell us exactly how you want the board to look. For example: lots of thin-sliced steak fanned around the outside, pastrami folded in the center, olives and pickles between the meats, very full and luxurious..."></textarea>
+
+        </div>
+
+
+        <button
+          id="board-generate"
+          class="board-generate">
+          Generate 3 Board Designs
+        </button>
+
+        <div
+          id="board-status"
+          class="board-status">
+          Choose your options and create your board.
+        </div>
+
+      </div>
+
+
+      <!-- PREVIEW -->
+
+      <div class="studio-panel preview-wrap">
+
+        <div class="preview-board">
+
+          <div
+            class="preview-food preview-steak"
+            style="left:18%;top:25%;">
+          </div>
+
+          <div
+            class="preview-food preview-steak"
+            style="left:43%;top:35%;transform:rotate(12deg);">
+          </div>
+
+          <div
+            class="preview-food preview-pastrami"
+            style="left:39%;top:17%;transform:rotate(-8deg);">
+          </div>
+
+          <div
+            class="preview-food preview-salami"
+            style="left:12%;top:62%;transform:rotate(-20deg);">
+          </div>
+
+          <div
+            class="preview-food preview-salami"
+            style="right:12%;top:68%;transform:rotate(20deg);">
+          </div>
+
+          <div
+            class="preview-food preview-pickle"
+            style="left:22%;bottom:14%;transform:rotate(-15deg);">
+          </div>
+
+          <div
+            class="preview-food preview-pickle"
+            style="right:18%;bottom:18%;transform:rotate(12deg);">
+          </div>
+
+          <div
+            class="preview-food preview-olive"
+            style="left:40%;bottom:15%;">
+          </div>
+
+          <div
+            class="preview-food preview-olive"
+            style="left:48%;bottom:13%;">
           </div>
 
         </div>
 
       </div>
 
+    </div>
 
-      <!-- NOTES -->
 
-      <div class="builderGroup">
+    <!-- GENERATED CONCEPTS -->
 
-        <span class="builderLabel">
-          Custom Notes
-        </span>
+    <div
+      id="board-concepts"
+      class="board-concepts">
 
-        <textarea
-          id="builderNotes"
-          placeholder="Tell us exactly what you have in mind..."
-        ></textarea>
+
+      <div
+        class="board-concept active"
+        data-concept="The Centerpiece">
+
+        <div class="mini-board">
+
+          <div
+            class="mini-food a"
+            style="left:12%;top:25%;">
+          </div>
+
+          <div
+            class="mini-food a"
+            style="left:36%;top:18%;transform:rotate(15deg);">
+          </div>
+
+          <div
+            class="mini-food b"
+            style="right:12%;top:35%;">
+          </div>
+
+          <div
+            class="mini-food c"
+            style="left:42%;bottom:17%;">
+          </div>
+
+        </div>
+
+        <div class="concept-title">
+          The Centerpiece
+        </div>
+
+        <div class="concept-description">
+          A dramatic center-focused presentation
+        </div>
 
       </div>
 
 
-      <a
-        href="#contact"
-        class="btn primary"
-        style="width:100%;"
-      >
-        Send My Board Request
-      </a>
+      <div
+        class="board-concept"
+        data-concept="The Abundant Board">
+
+        <div class="mini-board">
+
+          <div
+            class="mini-food b"
+            style="left:9%;top:18%;">
+          </div>
+
+          <div
+            class="mini-food b"
+            style="left:27%;top:28%;">
+          </div>
+
+          <div
+            class="mini-food b"
+            style="left:45%;top:17%;">
+          </div>
+
+          <div
+            class="mini-food b"
+            style="right:10%;top:32%;">
+          </div>
+
+          <div
+            class="mini-food c"
+            style="left:20%;bottom:17%;">
+          </div>
+
+          <div
+            class="mini-food c"
+            style="right:23%;bottom:15%;">
+          </div>
+
+        </div>
+
+        <div class="concept-title">
+          The Abundant Board
+        </div>
+
+        <div class="concept-description">
+          Packed, generous and overflowing
+        </div>
+
+      </div>
+
+
+      <div
+        class="board-concept"
+        data-concept="The Luxury Layout">
+
+        <div class="mini-board">
+
+          <div
+            class="mini-food b"
+            style="left:13%;top:25%;">
+          </div>
+
+          <div
+            class="mini-food b"
+            style="right:12%;top:25%;">
+          </div>
+
+          <div
+            class="mini-food a"
+            style="left:34%;top:16%;">
+          </div>
+
+          <div
+            class="mini-food c"
+            style="left:47%;bottom:16%;">
+          </div>
+
+        </div>
+
+        <div class="concept-title">
+          The Luxury Layout
+        </div>
+
+        <div class="concept-description">
+          Clean, elegant and premium
+        </div>
+
+      </div>
 
     </div>
 
 
-    <!-- SUMMARY -->
+    <!-- FINAL DESIGN -->
 
-    <div class="builderSummary">
+    <div
+      id="board-final"
+      class="board-final">
 
-      <div class="summaryEyebrow">
-        Your Board
+      <h4>
+        Selected Board Design
+      </h4>
+
+      <div
+        id="board-final-text"
+        class="board-final-text">
       </div>
 
-      <div class="summaryTitle">
-        Crafted Your Way.
+      <div class="board-final-actions">
+
+        <button
+          id="board-copy"
+          class="board-button">
+          Copy Instructions
+        </button>
+
+        <button
+          id="board-send"
+          class="board-button primary">
+          Send Design
+        </button>
+
       </div>
-
-      <ul class="summaryList">
-
-        <li>
-          <span>Size</span>
-          <span id="summarySize">
-            Small — 5–8 people
-          </span>
-        </li>
-
-        <li>
-          <span>Cuts</span>
-          <span id="summaryCuts">
-            Select cuts
-          </span>
-        </li>
-
-        <li>
-          <span>Extras</span>
-          <span id="summaryExtras">
-            Select extras
-          </span>
-        </li>
-
-      </ul>
-
-      <p class="summaryNotice">
-        Small, Medium and Large boards require
-        at least 24 hours notice.
-
-        <br><br>
-
-        Anything larger or custom requires
-        at least 48 hours notice.
-
-        <br><br>
-
-        We'll confirm the details with you
-        before your order is finalized.
-      </p>
 
     </div>
 
@@ -1487,342 +1729,257 @@ footer{
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      QUOTE
-===================================================== -->
+======================================================= -->
 
-<section class="quoteSection">
+<section class="quote">
 
-  <div class="quote">
+  <p>
+    “Your Board.<br>
+    Your Cuts.<br>
+    Your Way.”
+  </p>
 
-    “Premium kosher meat,
-    <em>crafted your way.</em>”
-
-  </div>
+  <span>
+    BOARDS BY BARUCH
+  </span>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      CONTACT
-===================================================== -->
+======================================================= -->
 
-<section class="section alt" id="contact">
+<section class="section" id="contact">
 
-  <div class="sectionHeader">
+  <div class="section-inner">
 
-    <div class="sectionKicker">
+    <div class="section-kicker">
       Contact
     </div>
 
-    <h2 class="sectionTitle">
-      Let's Create Something Exceptional.
+    <h2 class="section-title">
+      Let's build<br>
+      something unforgettable.
     </h2>
 
-    <p class="sectionText">
-      Tell us about your event, what you're imagining,
-      and when you need it.
-    </p>
 
-  </div>
+    <div class="contact-grid">
 
+      <div class="contact-details">
 
-  <div class="contactGrid">
+        <div class="contact-detail">
+          <small>Phone</small>
+          <div>347-820-8835</div>
+        </div>
 
-    <div class="contactDetails">
+        <div class="contact-detail">
+          <small>Email</small>
+          <div>baruch.aminov@icloud.com</div>
+        </div>
 
-      <div class="contactItem">
+        <div class="contact-detail">
+          <small>Service Area</small>
+          <div>New York & New Jersey</div>
+        </div>
 
-        <small>
-          Phone
-        </small>
+        <div class="contact-detail">
+          <small>Kosher Certification</small>
+          <div>VHQ</div>
+        </div>
 
-        <strong>
-          347-820-8835
-        </strong>
-
-      </div>
-
-
-      <div class="contactItem">
-
-        <small>
-          Email
-        </small>
-
-        <strong>
-          baruch.aminov@icloud.com
-        </strong>
+        <div class="contact-detail">
+          <small>Ordering Notice</small>
+          <div>
+            24 hours for Small, Medium & Large.<br>
+            48 hours for anything larger or custom.
+          </div>
+        </div>
 
       </div>
 
 
-      <div class="contactItem">
+      <form
+        class="contact-form"
+        id="contact-form">
 
-        <small>
-          Service Area
-        </small>
+        <input
+          id="contact-name"
+          type="text"
+          placeholder="Name"
+          required>
 
-        <strong>
-          New York & New Jersey
-        </strong>
+        <input
+          id="contact-phone"
+          type="tel"
+          placeholder="Phone"
+          required>
 
-      </div>
+        <input
+          id="contact-email"
+          type="email"
+          placeholder="Email"
+          required>
 
+        <input
+          id="contact-date"
+          type="date"
+          placeholder="Event Date">
 
-      <div class="contactItem">
+        <textarea
+          id="contact-message"
+          placeholder="Tell us about your event, board or catering needs..."
+          required></textarea>
 
-        <small>
-          Kosher Certification
-        </small>
+        <input
+          id="contact-photo"
+          type="file"
+          accept="image/*">
 
-        <strong>
-          VHQ
-        </strong>
+        <button type="submit">
+          Contact Us Now
+        </button>
 
-      </div>
-
-
-      <div class="contactItem">
-
-        <small>
-          Ordering
-        </small>
-
-        <strong>
-          24 hours standard / 48 hours custom
-        </strong>
-
-      </div>
+      </form>
 
     </div>
-
-
-    <form
-      class="contactForm"
-      id="contactForm"
-    >
-
-      <div class="formRow">
-
-        <input
-          type="text"
-          id="name"
-          placeholder="Name"
-          required
-        >
-
-        <input
-          type="tel"
-          id="phone"
-          placeholder="Phone"
-          required
-        >
-
-      </div>
-
-
-      <div class="formRow">
-
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          required
-        >
-
-        <input
-          type="date"
-          id="eventDate"
-        >
-
-      </div>
-
-
-      <textarea
-        id="message"
-        placeholder="Tell us about your event, board or vision..."
-        required
-      ></textarea>
-
-
-      <input
-        type="file"
-        id="inspiration"
-        accept="image/*"
-      >
-
-
-      <button
-        type="submit"
-        class="btn primary"
-      >
-        Contact Us Now
-      </button>
-
-    </form>
 
   </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =======================================================
      FOOTER
-===================================================== -->
+======================================================= -->
 
 <footer>
 
-  <div class="footerTop">
+  <div class="footer-grid">
 
     <div>
 
-      <div class="footerBrand">
+      <div class="footer-brand">
         BOARDS BY BARUCH
       </div>
 
-      <p class="footerText">
+      <div class="footer-copy">
         Exceptional Kosher. Unforgettable Boards.
-        Premium kosher meat, crafted your way.
-      </p>
+        Premium kosher meat crafted your way for
+        celebrations, events, gifting and catering.
+      </div>
 
     </div>
 
 
-    <div class="footerText">
+    <div>
 
-      New York & New Jersey<br>
-      VHQ Kosher Certification<br><br>
+      <div class="footer-title">
+        Quick Links
+      </div>
 
-      347-820-8835<br>
-      baruch.aminov@icloud.com
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#boards">Boards</a>
+        <a href="#board-studio">Create Your Board</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="footer-title">
+        Contact
+      </div>
+
+      <div class="footer-links">
+        <a href="tel:3478208835">
+          347-820-8835
+        </a>
+
+        <a href="mailto:baruch.aminov@icloud.com">
+          baruch.aminov@icloud.com
+        </a>
+
+        <span>
+          NY & NJ
+        </span>
+
+        <span>
+          VHQ Kosher
+        </span>
+      </div>
 
     </div>
 
   </div>
 
 
-  <div class="footerBottom">
-
-    © 2026 BOARDS BY BARUCH · ALL RIGHTS RESERVED
-
+  <div class="footer-bottom">
+    © BOARDS BY BARUCH — ALL RIGHTS RESERVED
   </div>
 
 </footer>
 
 
-<!-- =====================================================
+<!-- =======================================================
      THREE.JS
-     
-     IMPORTANT:
-     We are using THREE.MODULE.JS.
-     
-     NOT three.min.js.
-===================================================== -->
+======================================================= -->
 
 <script type="module">
 
 import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js";
+"https://unpkg.com/three@0.166.1/build/three.module.js";
 
 
-/* =====================================================
-   BASIC SETUP
-===================================================== */
+/* =========================================================
+   BASIC THREE.JS SETUP
+========================================================= */
 
-const canvas =
-document.getElementById("threeCanvas");
+const container =
+document.getElementById("three-container");
 
-const status =
-document.getElementById("threeStatus");
-
-
-let scene;
-let camera;
-let renderer;
-
-let boardGroup;
-
-const pieces = [];
-
-let scrollProgress = 0;
-
-
-/* =====================================================
-   SAFE ERROR DISPLAY
-===================================================== */
-
-window.addEventListener(
-  "error",
-  function(event){
-
-    console.error(event.error || event.message);
-
-  }
-);
-
-
-/* =====================================================
-   SCENE
-===================================================== */
-
-scene =
+const scene =
 new THREE.Scene();
 
 scene.background =
 new THREE.Color(0x050505);
 
+scene.fog =
+new THREE.FogExp2(
+  0x050505,
+  0.035
+);
 
-/* =====================================================
-   CAMERA
-===================================================== */
 
-camera =
+const camera =
 new THREE.PerspectiveCamera(
-  38,
-  window.innerWidth /
-  window.innerHeight,
+  36,
+  window.innerWidth / window.innerHeight,
   0.1,
   100
 );
 
 camera.position.set(
   0,
-  4.2,
-  9
+  3.8,
+  6.7
 );
 
 
-/* =====================================================
-   RENDERER
-===================================================== */
-
-try{
-
-  renderer =
-  new THREE.WebGLRenderer({
-    canvas:canvas,
-    antialias:true,
-    alpha:false,
-    powerPreference:"high-performance"
-  });
-
-}catch(error){
-
-  status.innerHTML =
-  "3D RENDERER ERROR";
-
-  console.error(error);
-
-  throw error;
-}
-
+const renderer =
+new THREE.WebGLRenderer({
+  antialias:true,
+  alpha:false,
+  powerPreference:"high-performance"
+});
 
 renderer.setPixelRatio(
-  Math.min(
-    window.devicePixelRatio,
-    2
-  )
+  Math.min(window.devicePixelRatio || 1,2)
 );
 
 renderer.setSize(
@@ -1831,34 +1988,31 @@ renderer.setSize(
 );
 
 renderer.shadowMap.enabled = true;
-
 renderer.shadowMap.type =
 THREE.PCFSoftShadowMap;
-
-
-/* =====================================================
-   COLOR MANAGEMENT
-===================================================== */
-
-renderer.outputColorSpace =
-THREE.SRGBColorSpace;
 
 renderer.toneMapping =
 THREE.ACESFilmicToneMapping;
 
-renderer.toneMappingExposure =
-1.15;
+renderer.toneMappingExposure = 1.15;
+
+renderer.outputColorSpace =
+THREE.SRGBColorSpace;
+
+container.appendChild(
+  renderer.domElement
+);
 
 
-/* =====================================================
+/* =========================================================
    LIGHTING
-===================================================== */
+========================================================= */
 
 const ambient =
 new THREE.HemisphereLight(
-  0xffeee0,
-  0x120b07,
-  2.4
+  0xffe5c5,
+  0x16100b,
+  1.6
 );
 
 scene.add(ambient);
@@ -1866,14 +2020,14 @@ scene.add(ambient);
 
 const key =
 new THREE.DirectionalLight(
-  0xffe1bd,
-  4.5
+  0xffd9b0,
+  5
 );
 
 key.position.set(
-  -4,
-  8,
-  6
+  3.5,
+  7,
+  4
 );
 
 key.castShadow = true;
@@ -1881,185 +2035,136 @@ key.castShadow = true;
 key.shadow.mapSize.width = 2048;
 key.shadow.mapSize.height = 2048;
 
-key.shadow.camera.near = 0.1;
-key.shadow.camera.far = 30;
-
 scene.add(key);
 
 
-const fill =
+const warm =
 new THREE.PointLight(
-  0xff9b58,
-  25,
-  25
-);
-
-fill.position.set(
+  0xd88645,
   5,
-  4,
-  4
+  10
 );
 
-scene.add(fill);
+warm.position.set(
+  -4,
+  3,
+  -2
+);
+
+scene.add(warm);
 
 
 const rim =
 new THREE.PointLight(
-  0x9b7cff,
-  13,
-  20
+  0x8da8ff,
+  3,
+  12
 );
 
 rim.position.set(
-  -5,
-  5,
+  4,
+  3,
   -4
 );
 
 scene.add(rim);
 
 
-/* =====================================================
+/* =========================================================
    FLOOR
-===================================================== */
+========================================================= */
 
 const floor =
 new THREE.Mesh(
-  new THREE.PlaneGeometry(
-    35,
-    35
-  ),
+  new THREE.PlaneGeometry(40,40),
   new THREE.MeshStandardMaterial({
-    color:0x030303,
-    roughness:.82,
-    metalness:0
+    color:0x090807,
+    roughness:.95
   })
 );
 
 floor.rotation.x =
--Math.PI / 2;
+-Math.PI/2;
 
-floor.position.y =
--2.2;
+floor.position.y = -0.45;
 
 floor.receiveShadow = true;
 
 scene.add(floor);
 
 
-/* =====================================================
-   WOOD TEXTURE
-===================================================== */
+/* =========================================================
+   PROCEDURAL WOOD TEXTURE
+========================================================= */
 
-function makeWoodTexture(){
+function createWoodTexture(){
 
-  const c =
+  const canvas =
   document.createElement("canvas");
 
-  c.width = 1200;
-  c.height = 700;
+  canvas.width = 1024;
+  canvas.height = 1024;
 
   const ctx =
-  c.getContext("2d");
+  canvas.getContext("2d");
 
-  ctx.fillStyle =
-  "#70401f";
-
+  ctx.fillStyle="#5b351a";
   ctx.fillRect(
-    0,
-    0,
-    c.width,
-    c.height
+    0,0,1024,1024
   );
 
-
-  /* wood grain */
-
-  for(
-    let i=0;
-    i<150;
-    i++
-  ){
-
-    const y =
-    Math.random() *
-    c.height;
+  for(let i=0;i<180;i++){
 
     ctx.beginPath();
 
-    ctx.moveTo(
-      0,
-      y
-    );
+    const y =
+    Math.random()*1024;
+
+    ctx.moveTo(0,y);
 
     for(
       let x=0;
-      x<c.width;
-      x+=20
+      x<=1024;
+      x+=15
     ){
 
-      ctx.lineTo(
-        x,
-        y +
-        Math.sin(
-          x*.018 +
-          i
-        ) *
-        (3+Math.random()*7)
+      const yy =
+      y +
+      Math.sin(x*.025+i)*(
+        2+Math.random()*8
       );
 
+      ctx.lineTo(x,yy);
     }
 
     ctx.strokeStyle =
       Math.random()>.5
-      ? "rgba(35,14,5,.18)"
-      : "rgba(255,190,110,.08)";
+      ? "rgba(25,10,3,.22)"
+      : "rgba(210,140,70,.10)";
 
     ctx.lineWidth =
-      .5 +
-      Math.random()*2;
+      .5+Math.random()*3;
 
     ctx.stroke();
-
   }
 
+  for(let i=0;i<8000;i++){
 
-  /* knots */
+    ctx.fillStyle =
+      Math.random()>.5
+      ? "rgba(0,0,0,.05)"
+      : "rgba(255,220,160,.035)";
 
-  for(
-    let i=0;
-    i<18;
-    i++
-  ){
-
-    const x =
-    Math.random()*c.width;
-
-    const y =
-    Math.random()*c.height;
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-      x,
-      y,
-      20+Math.random()*45,
-      5+Math.random()*15,
-      Math.random(),
-      0,
-      Math.PI*2
+    ctx.fillRect(
+      Math.random()*1024,
+      Math.random()*1024,
+      1,
+      1
     );
-
-    ctx.strokeStyle =
-      "rgba(30,10,3,.22)";
-
-    ctx.stroke();
-
   }
-
 
   const texture =
-  new THREE.CanvasTexture(c);
+  new THREE.CanvasTexture(canvas);
 
   texture.colorSpace =
   THREE.SRGBColorSpace;
@@ -2073,39 +2178,36 @@ function makeWoodTexture(){
   return texture;
 }
 
-
 const woodTexture =
-makeWoodTexture();
+createWoodTexture();
 
 
-/* =====================================================
+/* =========================================================
    BOARD
-===================================================== */
+========================================================= */
 
-boardGroup =
+const boardGroup =
 new THREE.Group();
-
-boardGroup.position.y =
--1.45;
 
 scene.add(boardGroup);
 
 
 const boardMaterial =
-new THREE.MeshStandardMaterial({
+new THREE.MeshPhysicalMaterial({
   map:woodTexture,
-  color:0xffffff,
-  roughness:.58,
-  metalness:.02
+  color:0x9a6030,
+  roughness:.62,
+  clearcoat:.28,
+  clearcoatRoughness:.4
 });
 
 
 const board =
 new THREE.Mesh(
   new THREE.BoxGeometry(
-    7.4,
-    .45,
-    4.65,
+    4.8,
+    .34,
+    3.15,
     8,
     2,
     8
@@ -2113,574 +2215,221 @@ new THREE.Mesh(
   boardMaterial
 );
 
+board.position.y = 0;
+
 board.castShadow = true;
 board.receiveShadow = true;
 
 boardGroup.add(board);
 
 
-/* rounded-ish decorative top */
+/* =========================================================
+   BOARD HANDLE
+========================================================= */
 
-const boardTop =
+const handle =
 new THREE.Mesh(
   new THREE.BoxGeometry(
-    7.65,
-    .12,
-    4.9
-  ),
-  new THREE.MeshStandardMaterial({
-    map:woodTexture,
-    roughness:.52
-  })
-);
-
-boardTop.position.y =
-.26;
-
-boardTop.castShadow = true;
-
-boardGroup.add(boardTop);
-
-
-/* handle */
-
-const handleOuter =
-new THREE.Mesh(
-  new THREE.BoxGeometry(
-    1.05,
-    .18,
-    .48
-  ),
-  new THREE.MeshStandardMaterial({
-    color:0x3b1c0c,
-    roughness:.6
-  })
-);
-
-handleOuter.position.set(
-  0,
-  .4,
-  -2.62
-);
-
-boardGroup.add(handleOuter);
-
-
-const handleHole =
-new THREE.Mesh(
-  new THREE.CylinderGeometry(
-    .19,
-    .19,
-    .2,
-    32
-  ),
-  new THREE.MeshStandardMaterial({
-    color:0x050505
-  })
-);
-
-handleHole.rotation.x =
-Math.PI/2;
-
-handleHole.position.set(
-  0,
-  .49,
-  -2.64
-);
-
-boardGroup.add(handleHole);
-
-
-/* =====================================================
-   MEAT TEXTURE
-===================================================== */
-
-function makeMeatTexture(
-  base,
-  dark,
-  fat
-){
-
-  const c =
-  document.createElement("canvas");
-
-  c.width = 900;
-  c.height = 650;
-
-  const ctx =
-  c.getContext("2d");
-
-  ctx.fillStyle =
-  base;
-
-  ctx.fillRect(
-    0,
-    0,
-    c.width,
-    c.height
-  );
-
-
-  /* natural darker areas */
-
-  for(
-    let i=0;
-    i<90;
-    i++
-  ){
-
-    const x =
-    Math.random()*c.width;
-
-    const y =
-    Math.random()*c.height;
-
-    const r =
-    10 +
-    Math.random()*45;
-
-    const gradient =
-    ctx.createRadialGradient(
-      x,
-      y,
-      0,
-      x,
-      y,
-      r
-    );
-
-    gradient.addColorStop(
-      0,
-      dark
-    );
-
-    gradient.addColorStop(
-      1,
-      "rgba(0,0,0,0)"
-    );
-
-    ctx.fillStyle =
-    gradient;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      x,
-      y,
-      r,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-  }
-
-
-  /* fat / marbling */
-
-  for(
-    let i=0;
-    i<130;
-    i++
-  ){
-
-    const x =
-    Math.random()*c.width;
-
-    const y =
-    Math.random()*c.height;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      x,
-      y
-    );
-
-    ctx.bezierCurveTo(
-      x+20,
-      y-15,
-      x+45,
-      y+25,
-      x+80,
-      y+Math.random()*25-12
-    );
-
-    ctx.strokeStyle =
-    fat;
-
-    ctx.lineWidth =
-    .7 +
-    Math.random()*2.4;
-
-    ctx.stroke();
-
-  }
-
-
-  /* tiny texture */
-
-  for(
-    let i=0;
-    i<8000;
-    i++
-  ){
-
-    const x =
-    Math.random()*c.width;
-
-    const y =
-    Math.random()*c.height;
-
-    ctx.fillStyle =
-    Math.random()>.5
-    ? "rgba(255,255,255,.035)"
-    : "rgba(0,0,0,.035)";
-
-    ctx.fillRect(
-      x,
-      y,
-      1,
-      1
-    );
-
-  }
-
-
-  const texture =
-  new THREE.CanvasTexture(c);
-
-  texture.colorSpace =
-  THREE.SRGBColorSpace;
-
-  return texture;
-}
-
-
-const steakTexture =
-makeMeatTexture(
-  "#6f1711",
-  "rgba(35,4,2,.22)",
-  "rgba(255,212,151,.38)"
-);
-
-
-const pastramiTexture =
-makeMeatTexture(
-  "#71351f",
-  "rgba(31,9,3,.22)",
-  "rgba(238,170,103,.3)"
-);
-
-
-const salamiTexture =
-makeMeatTexture(
-  "#7e2925",
-  "rgba(40,5,4,.25)",
-  "rgba(240,183,130,.25)"
-);
-
-
-/* =====================================================
-   STEAK GEOMETRY
-===================================================== */
-
-function createSteak(){
-
-  const geometry =
-  new THREE.SphereGeometry(
-    1,
-    64,
-    32
-  );
-
-  const position =
-  geometry.attributes.position;
-
-  for(
-    let i=0;
-    i<position.count;
-    i++
-  ){
-
-    const x =
-    position.getX(i);
-
-    const y =
-    position.getY(i);
-
-    const z =
-    position.getZ(i);
-
-    const angle =
-    Math.atan2(z,x);
-
-    const variation =
-    1 +
-    Math.sin(
-      angle*5.0
-    )*.07 +
-    Math.sin(
-      angle*9.0
-    )*.035;
-
-    position.setX(
-      i,
-      x*variation
-    );
-
-    position.setZ(
-      i,
-      z*variation
-    );
-
-  }
-
-  geometry.computeVertexNormals();
-
-
-  const material =
-  new THREE.MeshStandardMaterial({
-    map:steakTexture,
-    roughness:.34,
-    metalness:0,
-    bumpMap:steakTexture,
-    bumpScale:.055
-  });
-
-
-  const steak =
-  new THREE.Mesh(
-    geometry,
-    material
-  );
-
-  steak.scale.set(
-    1.55,
-    .31,
+    .65,
+    .22,
     1.05
+  ),
+  boardMaterial
+);
+
+handle.position.set(
+  0,
+  .02,
+  -1.9
+);
+
+handle.castShadow = true;
+
+boardGroup.add(handle);
+
+
+/* =========================================================
+   FOOD MATERIALS
+========================================================= */
+
+const steakMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0x8f2529,
+  roughness:.42,
+  clearcoat:.6,
+  clearcoatRoughness:.22
+});
+
+
+const crustMaterial =
+new THREE.MeshStandardMaterial({
+  color:0x24130c,
+  roughness:.9
+});
+
+
+const pastramiMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0x713026,
+  roughness:.48,
+  clearcoat:.35
+});
+
+
+const salamiMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0x7b292a,
+  roughness:.46,
+  clearcoat:.4
+});
+
+
+const pickleMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0x6c822d,
+  roughness:.25,
+  clearcoat:1
+});
+
+
+const oliveMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0x20271d,
+  roughness:.2,
+  clearcoat:.85
+});
+
+
+const mustardMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0xdba91b,
+  roughness:.3,
+  clearcoat:.55
+});
+
+
+const bowlMaterial =
+new THREE.MeshPhysicalMaterial({
+  color:0xd4cab9,
+  roughness:.27,
+  clearcoat:.4
+});
+
+
+/* =========================================================
+   FOOD CREATION
+========================================================= */
+
+function makeSteak(){
+
+  const group =
+  new THREE.Group();
+
+  const body =
+  new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      .42,
+      .39,
+      .13,
+      48
+    ),
+    steakMaterial
   );
 
-  steak.castShadow = true;
-  steak.receiveShadow = true;
+  body.rotation.x =
+  Math.PI/2;
 
-  return steak;
-}
+  body.scale.set(
+    1.15,
+    1,
+    .85
+  );
 
+  body.castShadow = true;
 
-/* =====================================================
-   CRUST
-===================================================== */
+  group.add(body);
 
-function addCrust(steak){
 
   const crust =
   new THREE.Mesh(
     new THREE.TorusGeometry(
-      1,
-      .06,
+      .39,
+      .025,
       8,
-      64
+      48
     ),
-    new THREE.MeshStandardMaterial({
-      color:0x301009,
-      roughness:.72
-    })
-  );
-
-  crust.scale.set(
-    1.55,
-    .31,
-    1.05
+    crustMaterial
   );
 
   crust.rotation.x =
   Math.PI/2;
 
-  crust.position.y =
-  .035;
+  crust.scale.set(
+    1.15,
+    1,
+    .85
+  );
 
-  steak.add(crust);
+  crust.position.y = .002;
 
-}
-
-
-/* =====================================================
-   PEPPER
-===================================================== */
-
-function addPepper(
-  parent,
-  count=45
-){
-
-  const material =
-  new THREE.MeshStandardMaterial({
-    color:0x090705,
-    roughness:.82
-  });
+  group.add(crust);
 
 
-  for(
-    let i=0;
-    i<count;
-    i++
-  ){
+  /* fat / marbling */
 
-    const pepper =
+  for(let i=0;i<12;i++){
+
+    const fat =
     new THREE.Mesh(
-      new THREE.SphereGeometry(
-        .025 +
-        Math.random()*.035,
+      new THREE.TorusGeometry(
+        .025+Math.random()*.035,
+        .008,
         6,
-        6
+        12
       ),
-      material
+      new THREE.MeshStandardMaterial({
+        color:0xf3d5a9,
+        roughness:.4
+      })
     );
 
-    pepper.position.set(
-      (Math.random()-.5)*1.35,
-      .15 +
-      Math.random()*.04,
-      (Math.random()-.5)*.8
+    fat.rotation.x =
+    Math.PI/2;
+
+    fat.position.set(
+      (Math.random()-.5)*.45,
+      .075,
+      (Math.random()-.5)*.35
     );
 
-    parent.add(pepper);
+    fat.scale.set(
+      1.5,
+      .6,
+      1
+    );
 
+    group.add(fat);
   }
-
-}
-
-
-/* =====================================================
-   PASTRAMI
-===================================================== */
-
-function createPastrami(){
-
-  const group =
-  new THREE.Group();
-
-
-  const geometry =
-  new THREE.BoxGeometry(
-    1.65,
-    .42,
-    .72,
-    12,
-    5,
-    8
-  );
-
-
-  const position =
-  geometry.attributes.position;
-
-
-  for(
-    let i=0;
-    i<position.count;
-    i++
-  ){
-
-    const x =
-    position.getX(i);
-
-    const y =
-    position.getY(i);
-
-    const z =
-    position.getZ(i);
-
-    position.setX(
-      i,
-      x +
-      Math.sin(y*5)*.045
-    );
-
-    position.setZ(
-      i,
-      z +
-      Math.sin(x*4)*.035
-    );
-
-  }
-
-  geometry.computeVertexNormals();
-
-
-  const meat =
-  new THREE.Mesh(
-    geometry,
-    new THREE.MeshStandardMaterial({
-      map:pastramiTexture,
-      roughness:.42,
-      bumpMap:pastramiTexture,
-      bumpScale:.04
-    })
-  );
-
-  meat.castShadow = true;
-
-  group.add(meat);
-
-
-  /* fat stripe */
-
-  const fat =
-  new THREE.Mesh(
-    new THREE.BoxGeometry(
-      1.68,
-      .08,
-      .73
-    ),
-    new THREE.MeshStandardMaterial({
-      color:0xd6a86e,
-      roughness:.42
-    })
-  );
-
-  fat.position.y =
-  .16;
-
-  group.add(fat);
-
 
   return group;
 }
 
 
-/* =====================================================
-   SALAMI
-===================================================== */
-
-function createSalami(){
+function makePastrami(){
 
   const group =
   new THREE.Group();
 
-
-  const geometry =
-  new THREE.CylinderGeometry(
-    .48,
-    .52,
-    .22,
-    48
-  );
-
-
   const meat =
   new THREE.Mesh(
-    geometry,
-    new THREE.MeshStandardMaterial({
-      map:salamiTexture,
-      roughness:.38,
-      bumpMap:salamiTexture,
-      bumpScale:.04
-    })
+    new THREE.CylinderGeometry(
+      .27,
+      .27,
+      .65,
+      40
+    ),
+    pastramiMaterial
   );
-
 
   meat.rotation.z =
   Math.PI/2;
@@ -2690,74 +2439,104 @@ function createSalami(){
   group.add(meat);
 
 
-  /* small fat pieces */
+  for(let i=0;i<4;i++){
 
-  for(
-    let i=0;
-    i<18;
-    i++
-  ){
-
-    const dot =
+    const fat =
     new THREE.Mesh(
-      new THREE.SphereGeometry(
-        .025 +
-        Math.random()*.03,
+      new THREE.TorusGeometry(
+        .18,
+        .018,
         7,
-        7
+        30
       ),
       new THREE.MeshStandardMaterial({
-        color:0xe5bd8a,
+        color:0xe4c49d,
         roughness:.4
       })
     );
 
-    dot.position.set(
-      (Math.random()-.5)*.75,
-      .12,
-      (Math.random()-.5)*.75
-    );
+    fat.rotation.y =
+    Math.PI/2;
 
-    group.add(dot);
+    fat.position.x =
+    -.27+i*.18;
 
+    group.add(fat);
   }
-
 
   return group;
 }
 
 
-/* =====================================================
-   PICKLE
-===================================================== */
+function makeSalami(){
 
-function createPickle(){
+  const group =
+  new THREE.Group();
 
-  const geometry =
-  new THREE.CapsuleGeometry(
-    .16,
-    .75,
-    8,
-    20
+  const slice =
+  new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      .23,
+      .23,
+      .055,
+      40
+    ),
+    salamiMaterial
   );
 
-  const material =
-  new THREE.MeshStandardMaterial({
-    color:0x536e25,
-    roughness:.62
-  });
+  slice.rotation.x =
+  Math.PI/2;
+
+  slice.castShadow = true;
+
+  group.add(slice);
+
+
+  for(let i=0;i<10;i++){
+
+    const fat =
+    new THREE.Mesh(
+      new THREE.SphereGeometry(
+        .025+Math.random()*.018,
+        8,
+        8
+      ),
+      new THREE.MeshStandardMaterial({
+        color:0xe8d4bd,
+        roughness:.5
+      })
+    );
+
+    fat.position.set(
+      (Math.random()-.5)*.35,
+      .04,
+      (Math.random()-.5)*.35
+    );
+
+    group.add(fat);
+  }
+
+  return group;
+}
+
+
+function makePickle(){
 
   const pickle =
   new THREE.Mesh(
-    geometry,
-    material
+    new THREE.CapsuleGeometry(
+      .09,
+      .55,
+      8,
+      20
+    ),
+    pickleMaterial
   );
 
-  pickle.scale.set(
-    .8,
-    1,
-    .55
-  );
+  pickle.rotation.z =
+  Math.PI/2;
+
+  pickle.scale.y = .75;
 
   pickle.castShadow = true;
 
@@ -2765,485 +2544,283 @@ function createPickle(){
 }
 
 
-/* =====================================================
-   OLIVE
-===================================================== */
-
-function createOlive(){
+function makeOlive(){
 
   const olive =
   new THREE.Mesh(
     new THREE.SphereGeometry(
-      .21,
+      .11,
       24,
-      18
+      16
     ),
-    new THREE.MeshStandardMaterial({
-      color:0x252814,
-      roughness:.32
-    })
+    oliveMaterial
   );
 
-  olive.scale.y =
-  .82;
+  olive.scale.y=.88;
 
-  olive.castShadow = true;
+  olive.castShadow=true;
 
   return olive;
 }
 
 
-/* =====================================================
-   MUSTARD BOWL
-===================================================== */
-
-function createMustard(){
+function makeMustard(){
 
   const group =
   new THREE.Group();
 
-
   const bowl =
   new THREE.Mesh(
     new THREE.CylinderGeometry(
-      .55,
-      .45,
-      .35,
+      .30,
+      .24,
+      .18,
       40
     ),
-    new THREE.MeshStandardMaterial({
-      color:0x17130e,
-      roughness:.28,
-      metalness:.1
-    })
+    bowlMaterial
   );
 
-  bowl.castShadow = true;
+  bowl.castShadow=true;
 
   group.add(bowl);
 
 
-  const mustard =
+  const sauce =
   new THREE.Mesh(
-    new THREE.CylinderGeometry(
-      .43,
-      .43,
-      .10,
-      40
+    new THREE.SphereGeometry(
+      .22,
+      30,
+      20
     ),
-    new THREE.MeshStandardMaterial({
-      color:0xd69a16,
-      roughness:.25
-    })
+    mustardMaterial
   );
 
-  mustard.position.y =
-  .2;
+  sauce.scale.y=.25;
 
-  group.add(mustard);
+  sauce.position.y=.11;
 
+  group.add(sauce);
 
   return group;
 }
 
 
-/* =====================================================
-   PIECE SYSTEM
-===================================================== */
+/* =========================================================
+   FOOD PIECES
+========================================================= */
+
+const pieces=[];
+
 
 function addPiece(
   object,
+  target,
   start,
-  rest,
   delay,
-  spin
+  duration,
+  rotation
 ){
 
   object.position.copy(start);
+
+  object.rotation.set(
+    rotation.x,
+    rotation.y,
+    rotation.z
+  );
 
   scene.add(object);
 
   pieces.push({
     object,
     start:start.clone(),
-    rest:rest.clone(),
+    target:target.clone(),
     delay,
-    spin,
-    baseRotation:object.rotation.clone()
+    duration,
+    rotation:{
+      x:rotation.x,
+      y:rotation.y,
+      z:rotation.z
+    }
   });
-
 }
 
 
-/* =====================================================
-   STEAK 1
-===================================================== */
+/* =========================================================
+   BOARD ARRANGEMENT
+========================================================= */
 
-const steak1 =
-createSteak();
+let index=0;
 
-addCrust(steak1);
-addPepper(steak1,55);
 
-steak1.rotation.set(
-  -.2,
-  .2,
-  -.25
+function addFood(
+  object,
+  x,
+  y,
+  z,
+  scale=1
+){
+
+  object.scale.multiplyScalar(scale);
+
+  const target =
+  new THREE.Vector3(
+    x,
+    y,
+    z
+  );
+
+  const start =
+  new THREE.Vector3(
+    x+(Math.random()-.5)*1.7,
+    y+2.3+Math.random()*1.3,
+    z+(Math.random()-.5)*1.5
+  );
+
+  addPiece(
+    object,
+    target,
+    start,
+    index*.065,
+    .75+Math.random()*.35,
+    new THREE.Vector3(
+      Math.random()*1.2,
+      Math.random()*Math.PI*2,
+      Math.random()*1.2
+    )
+  );
+
+  index++;
+}
+
+
+/* =========================================================
+   MUSTARD
+========================================================= */
+
+addFood(
+  makeMustard(),
+  -1.65,
+  .30,
+  .72,
+  .82
 );
 
-addPiece(
-  steak1,
-  new THREE.Vector3(
-    -1.5,
-    4.8,
-    .3
-  ),
-  new THREE.Vector3(
-    -1.65,
-    -.95,
-    .15
-  ),
+
+/* =========================================================
+   SALAMI
+========================================================= */
+
+addFood(
+  makeSalami(),
+  -1.35,
+  .27,
+  -.55,
+  .85
+);
+
+addFood(
+  makeSalami(),
+  -1.05,
+  .29,
+  -.68,
+  .85
+);
+
+addFood(
+  makeSalami(),
+  -.76,
+  .31,
+  -.55,
+  .85
+);
+
+
+/* =========================================================
+   PASTRAMI
+========================================================= */
+
+addFood(
+  makePastrami(),
+  1.05,
+  .34,
+  .52,
+  .82
+);
+
+
+/* =========================================================
+   STEAKS
+========================================================= */
+
+addFood(
+  makeSteak(),
+  -.35,
+  .32,
+  .15,
+  1.08
+);
+
+addFood(
+  makeSteak(),
+  .30,
+  .33,
   .05,
-  .7
+  1.08
 );
 
-
-/* =====================================================
-   STEAK 2
-===================================================== */
-
-const steak2 =
-createSteak();
-
-steak2.scale.set(
-  1.2,
-  .28,
+addFood(
+  makeSteak(),
+  .12,
+  .35,
+  .65,
   .9
 );
 
-steak2.rotation.set(
-  .1,
-  -.4,
-  .2
+
+/* =========================================================
+   PICKLES
+========================================================= */
+
+addFood(
+  makePickle(),
+  .82,
+  .31,
+  1.0,
+  .75
 );
 
-addPiece(
-  steak2,
-  new THREE.Vector3(
-    1.6,
-    5.4,
-    -.2
-  ),
-  new THREE.Vector3(
-    .95,
-    -.92,
-    .1
-  ),
-  .18,
-  -.8
-);
-
-
-/* =====================================================
-   STEAK 3
-===================================================== */
-
-const steak3 =
-createSteak();
-
-steak3.scale.set(
-  .9,
-  .24,
+addFood(
+  makePickle(),
+  1.35,
+  .32,
+  .88,
   .72
 );
 
-steak3.rotation.set(
-  -.15,
-  .3,
-  .45
-);
 
-addPiece(
-  steak3,
-  new THREE.Vector3(
-    .1,
-    6.1,
-    .3
-  ),
-  new THREE.Vector3(
-    1.8,
-    -.9,
-    -.5
-  ),
-  .28,
-  .9
-);
-
-
-/* =====================================================
-   PASTRAMI
-===================================================== */
-
-const pastrami =
-createPastrami();
-
-pastrami.rotation.set(
-  .05,
-  -.25,
-  -.15
-);
-
-addPiece(
-  pastrami,
-  new THREE.Vector3(
-    -3,
-    5.8,
-    -.3
-  ),
-  new THREE.Vector3(
-    -.4,
-    -.92,
-    -.8
-  ),
-  .38,
-  -.65
-);
-
-
-/* =====================================================
-   SALAMI
-===================================================== */
-
-const salami =
-createSalami();
-
-salami.rotation.set(
-  .2,
-  .1,
-  -.25
-);
-
-addPiece(
-  salami,
-  new THREE.Vector3(
-    2.7,
-    5.2,
-    .4
-  ),
-  new THREE.Vector3(
-    2.25,
-    -.9,
-    .75
-  ),
-  .5,
-  .7
-);
-
-
-/* =====================================================
-   PICKLES
-===================================================== */
-
-for(
-  let i=0;
-  i<5;
-  i++
-){
-
-  const pickle =
-  createPickle();
-
-  pickle.rotation.z =
-  Math.random()*.8-.4;
-
-  addPiece(
-    pickle,
-    new THREE.Vector3(
-      -3 +
-      Math.random()*6,
-      4.2 +
-      Math.random()*1.8,
-      .5
-    ),
-    new THREE.Vector3(
-      -2.7 +
-      Math.random()*5.4,
-      -.92,
-      -.9 +
-      Math.random()*1.8
-    ),
-    .58 +
-    i*.07,
-    Math.random()>.5
-    ? .5
-    : -.5
-  );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    OLIVES
-===================================================== */
+========================================================= */
 
-for(
-  let i=0;
-  i<8;
-  i++
-){
+for(let i=0;i<7;i++){
 
-  const olive =
-  createOlive();
-
-  addPiece(
-    olive,
-    new THREE.Vector3(
-      -2.5 +
-      Math.random()*5,
-      4 +
-      Math.random()*2.5,
-      .2 +
-      Math.random()
-    ),
-    new THREE.Vector3(
-      -2.8 +
-      Math.random()*5.6,
-      -.95,
-      -1.2 +
-      Math.random()*2.4
-    ),
-    .72 +
-    i*.045,
-    Math.random()*.8
+  addFood(
+    makeOlive(),
+    -.85+(Math.random()*.75),
+    .34,
+    .78+(Math.random()*.38),
+    .72
   );
 
 }
 
 
-/* =====================================================
-   MUSTARD
-===================================================== */
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
 
-const mustard =
-createMustard();
-
-addPiece(
-  mustard,
-  new THREE.Vector3(
-    0,
-    5.8,
-    0
-  ),
-  new THREE.Vector3(
-    0,
-    -.9,
-    1.05
-  ),
-  .9,
-  .35
-);
-
-
-/* =====================================================
-   EASING
-===================================================== */
-
-function easeOutCubic(t){
-
-  return 1 -
-    Math.pow(
-      1-t,
-      3
-    );
-
-}
-
-
-/* =====================================================
-   UPDATE FOOD
-===================================================== */
-
-function updatePieces(){
-
-  pieces.forEach(
-    (piece,index)=>{
-
-      const local =
-      THREE.MathUtils.clamp(
-        (
-          scrollProgress -
-          piece.delay
-        ) /
-        .55,
-        0,
-        1
-      );
-
-      const eased =
-      easeOutCubic(local);
-
-
-      const p =
-      piece.start.clone().lerp(
-        piece.rest,
-        eased
-      );
-
-
-      if(local > 0 && local < 1){
-
-        const arc =
-        Math.sin(
-          local*Math.PI
-        ) *
-        (.8 +
-        index*.04);
-
-        p.y += arc;
-
-
-        piece.object.rotation.x =
-        piece.baseRotation.x +
-        Math.sin(local*Math.PI*2) *
-        piece.spin;
-
-
-        piece.object.rotation.z =
-        piece.baseRotation.z +
-        Math.cos(local*Math.PI*2) *
-        piece.spin *
-        .35;
-
-      }
-
-
-      if(local >= 1){
-
-        const settle =
-        Math.sin(
-          (local-1)*12
-        ) *
-        Math.exp(
-          -(local-1)*7
-        );
-
-        p.y +=
-        settle*.06;
-
-      }
-
-
-      piece.object.position.copy(p);
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   SCROLL
-===================================================== */
+let scrollProgress=0;
 
 function updateScroll(){
 
@@ -3254,59 +2831,20 @@ function updateScroll(){
   hero.offsetHeight -
   window.innerHeight;
 
-  const amount =
+  const current =
   Math.max(
     0,
     Math.min(
-      1,
-      window.scrollY / max
+      max,
+      window.scrollY
     )
   );
 
   scrollProgress =
-  amount;
-
-  updatePieces();
-
-
-  /* camera slowly changes during animation */
-
-  const cameraProgress =
-  Math.min(
-    amount,
-    1
-  );
-
-  camera.position.x =
-  THREE.MathUtils.lerp(
-    0,
-    .45,
-    cameraProgress
-  );
-
-  camera.position.y =
-  THREE.MathUtils.lerp(
-    4.2,
-    3.65,
-    cameraProgress
-  );
-
-  camera.position.z =
-  THREE.MathUtils.lerp(
-    9,
-    8.1,
-    cameraProgress
-  );
-
-
-  camera.lookAt(
-    0,
-    -.25,
-    0
-  );
-
+    max > 0
+    ? current/max
+    : 0;
 }
-
 
 window.addEventListener(
   "scroll",
@@ -3314,40 +2852,23 @@ window.addEventListener(
   {passive:true}
 );
 
-
-/* =====================================================
-   MOUSE PARALLAX
-===================================================== */
-
-let mouseX = 0;
-let mouseY = 0;
-
-window.addEventListener(
-  "pointermove",
-  event=>{
-
-    mouseX =
-    (
-      event.clientX /
-      window.innerWidth -
-      .5
-    );
-
-    mouseY =
-    (
-      event.clientY /
-      window.innerHeight -
-      .5
-    );
-
-  },
-  {passive:true}
-);
+updateScroll();
 
 
-/* =====================================================
+/* =========================================================
    ANIMATION
-===================================================== */
+========================================================= */
+
+const clock =
+new THREE.Clock();
+
+function ease(p){
+
+  return p < .5
+    ? 4*p*p*p
+    : 1-Math.pow(-2*p+2,3)/2;
+}
+
 
 function animate(){
 
@@ -3355,64 +2876,172 @@ function animate(){
     animate
   );
 
+  const time =
+  clock.getElapsedTime();
+
+
+  /* -------------------------------------------------------
+     BOARD CAMERA
+  ------------------------------------------------------- */
+
+  const cameraProgress =
+  Math.min(
+    1,
+    scrollProgress*1.25
+  );
 
   const targetX =
-  mouseX*.18;
+  Math.sin(
+    cameraProgress*Math.PI*.55
+  )*.75;
 
   const targetY =
-  mouseY*.12;
+  3.75 -
+  cameraProgress*.35;
 
+  const targetZ =
+  6.7 -
+  cameraProgress*.75;
 
   camera.position.x +=
-  (
-    targetX -
-    camera.position.x
-  )*.025;
-
+    (targetX-camera.position.x)*.035;
 
   camera.position.y +=
-  (
-    3.65 +
-    targetY -
-    camera.position.y
-  )*.025;
+    (targetY-camera.position.y)*.035;
 
+  camera.position.z +=
+    (targetZ-camera.position.z)*.035;
 
   camera.lookAt(
     0,
-    -.3,
+    .15,
     0
   );
 
 
-  /* tiny natural movement */
+  /* -------------------------------------------------------
+     FOOD FALLING
+  ------------------------------------------------------- */
 
-  const t =
-  performance.now()*.0005;
+  for(
+    let i=0;
+    i<pieces.length;
+    i++
+  ){
 
-  boardGroup.rotation.y =
-  Math.sin(t)*.015;
+    const piece =
+    pieces[i];
+
+    const local =
+    (scrollProgress*1.15*pieces.length)
+    - piece.delay*1.4;
+
+    let p =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        local/piece.duration
+      )
+    );
+
+    p=ease(p);
+
+
+    piece.object.position.lerpVectors(
+      piece.start,
+      piece.target,
+      p
+    );
+
+
+    /*
+      Natural falling arc
+    */
+
+    piece.object.position.y +=
+      Math.sin(
+        p*Math.PI
+      )*.42;
+
+
+    /*
+      Rotation while falling
+    */
+
+    piece.object.rotation.x =
+      piece.rotation.x*(1-p)
+      +
+      Math.sin(
+        time*1.3+i
+      )*.12*(1-p);
+
+    piece.object.rotation.y =
+      piece.rotation.y
+      +
+      (1-p)*2.4
+      +
+      Math.sin(time+i)*.08;
+
+    piece.object.rotation.z =
+      piece.rotation.z*(1-p)
+      +
+      Math.cos(
+        time*1.5+i
+      )*.12*(1-p);
+
+  }
+
+
+  /*
+    Small floating motion before landing
+  */
+
+  for(
+    let i=0;
+    i<pieces.length;
+    i++
+  ){
+
+    const piece =
+    pieces[i];
+
+    const local =
+    (scrollProgress*1.15*pieces.length)
+    - piece.delay*1.4;
+
+    if(local<0){
+
+      piece.object.position.y +=
+        Math.sin(
+          time*1.2+i
+        )*.0018;
+
+    }
+
+  }
 
 
   renderer.render(
     scene,
     camera
   );
-
 }
 
+animate();
 
-/* =====================================================
+
+/* =========================================================
    RESIZE
-===================================================== */
+========================================================= */
 
 window.addEventListener(
   "resize",
   ()=>{
 
     camera.aspect =
-    window.innerWidth /
-    window.innerHeight;
+      window.innerWidth /
+      window.innerHeight;
 
     camera.updateProjectionMatrix();
 
@@ -3421,246 +3050,592 @@ window.addEventListener(
       window.innerHeight
     );
 
-  }
-);
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-updateScroll();
-
-animate();
-
-
-status.innerHTML =
-"";
-
-setTimeout(
-  ()=>{
-    status.style.opacity =
-    "0";
-  },
-  1200
-);
-
-
-/* =====================================================
-   BUILDER
-===================================================== */
-
-const summarySize =
-document.getElementById(
-  "summarySize"
-);
-
-const summaryCuts =
-document.getElementById(
-  "summaryCuts"
-);
-
-const summaryExtras =
-document.getElementById(
-  "summaryExtras"
-);
-
-
-function updateBuilder(){
-
-  const size =
-  document.querySelector(
-    'input[name="size"]:checked'
-  );
-
-  if(size){
-
-    summarySize.textContent =
-    size.value;
-
-  }
-
-
-  const cuts =
-  Array.from(
-    document.querySelectorAll(
-      '.builderPanel input[type="checkbox"]'
-    )
-  )
-  .filter(
-    input=>
-    input.checked &&
-    [
-      "NY Strip",
-      "Oyster Steak",
-      "Rib Eye",
-      "Pastrami",
-      "Salami",
-      "Roast Beef",
-      "Steak",
-      "Chicken"
-    ].includes(input.value)
-  )
-  .map(
-    input=>input.value
-  );
-
-
-  summaryCuts.textContent =
-  cuts.length
-  ? cuts.join(", ")
-  : "Select cuts";
-
-
-  const extras =
-  Array.from(
-    document.querySelectorAll(
-      '.builderPanel input[type="checkbox"]'
-    )
-  )
-  .filter(
-    input=>
-    input.checked &&
-    ![
-      "NY Strip",
-      "Oyster Steak",
-      "Rib Eye",
-      "Pastrami",
-      "Salami",
-      "Roast Beef",
-      "Steak",
-      "Chicken"
-    ].includes(input.value)
-  )
-  .map(
-    input=>input.value
-  );
-
-
-  summaryExtras.textContent =
-  extras.length
-  ? extras.join(", ")
-  : "Select extras";
-
-}
-
-
-document.querySelectorAll(
-  ".builderPanel input"
-).forEach(
-  input=>{
-
-    input.addEventListener(
-      "change",
-      updateBuilder
+    renderer.setPixelRatio(
+      Math.min(
+        window.devicePixelRatio || 1,
+        2
+      )
     );
 
   }
 );
 
+</script>
 
-/* =====================================================
+
+<!-- =======================================================
+     BOARD STUDIO JAVASCRIPT
+======================================================= -->
+
+<script>
+
+(() => {
+
+  const state = {
+
+    boardSize:
+      "Small — 5–8 people",
+
+    meats:[],
+
+    presentation:[],
+
+    boardStyle:
+      "Luxury",
+
+    extras:[],
+
+    custom:"",
+
+    selectedConcept:
+      "The Centerpiece"
+
+  };
+
+
+  /* -------------------------------------------------------
+     OPTIONS
+  ------------------------------------------------------- */
+
+  document
+    .querySelectorAll(
+      "#board-studio .board-option"
+    )
+    .forEach(button=>{
+
+      button.addEventListener(
+        "click",
+        ()=>{
+
+          const group =
+            button.dataset.group;
+
+          const value =
+            button.dataset.value;
+
+
+          if(group==="size"){
+
+            document
+              .querySelectorAll(
+                '[data-group="size"]'
+              )
+              .forEach(item=>
+                item.classList.remove(
+                  "active"
+                )
+              );
+
+            button.classList.add(
+              "active"
+            );
+
+            state.boardSize =
+              value;
+
+          }
+
+
+          else if(group==="style"){
+
+            document
+              .querySelectorAll(
+                '[data-group="style"]'
+              )
+              .forEach(item=>
+                item.classList.remove(
+                  "active"
+                )
+              );
+
+            button.classList.add(
+              "active"
+            );
+
+            state.boardStyle =
+              value;
+
+          }
+
+
+          else if(group==="meat"){
+
+            button.classList.toggle(
+              "active"
+            );
+
+            if(
+              button.classList.contains(
+                "active"
+              )
+            ){
+
+              if(
+                !state.meats.includes(
+                  value
+                )
+              ){
+
+                state.meats.push(
+                  value
+                );
+
+              }
+
+            }else{
+
+              state.meats =
+                state.meats.filter(
+                  item=>item!==value
+                );
+
+            }
+
+          }
+
+
+          else if(
+            group==="presentation"
+          ){
+
+            button.classList.toggle(
+              "active"
+            );
+
+            if(
+              button.classList.contains(
+                "active"
+              )
+            ){
+
+              if(
+                !state.presentation.includes(
+                  value
+                )
+              ){
+
+                state.presentation.push(
+                  value
+                );
+
+              }
+
+            }else{
+
+              state.presentation =
+                state.presentation.filter(
+                  item=>item!==value
+                );
+
+            }
+
+          }
+
+
+          else if(
+            group==="extra"
+          ){
+
+            button.classList.toggle(
+              "active"
+            );
+
+            if(
+              button.classList.contains(
+                "active"
+              )
+            ){
+
+              if(
+                !state.extras.includes(
+                  value
+                )
+              ){
+
+                state.extras.push(
+                  value
+                );
+
+              }
+
+            }else{
+
+              state.extras =
+                state.extras.filter(
+                  item=>item!==value
+                );
+
+            }
+
+          }
+
+        }
+      );
+
+    });
+
+
+  /* -------------------------------------------------------
+     FINAL DESIGN
+  ------------------------------------------------------- */
+
+  function showFinal(){
+
+    document.getElementById(
+      "board-final"
+    ).style.display =
+      "block";
+
+
+    const meats =
+      state.meats.length
+      ? state.meats.join(", ")
+      : "Chef's selection";
+
+
+    const presentation =
+      state.presentation.length
+      ? state.presentation.join(", ")
+      : "Chef's choice";
+
+
+    const extras =
+      state.extras.length
+      ? state.extras.join(", ")
+      : "No extras specified";
+
+
+    const vision =
+      state.custom
+      ? state.custom
+      : "No additional instructions.";
+
+
+    document.getElementById(
+      "board-final-text"
+    ).textContent =
+
+`Board Size: ${state.boardSize}
+
+Meats: ${meats}
+
+Presentation: ${presentation}
+
+Board Style: ${state.boardStyle}
+
+Extras: ${extras}
+
+Selected Concept: ${state.selectedConcept}
+
+Vision:
+${vision}`;
+
+  }
+
+
+  /* -------------------------------------------------------
+     CONCEPT SELECTION
+  ------------------------------------------------------- */
+
+  document
+    .querySelectorAll(
+      ".board-concept"
+    )
+    .forEach(concept=>{
+
+      concept.addEventListener(
+        "click",
+        ()=>{
+
+          document
+            .querySelectorAll(
+              ".board-concept"
+            )
+            .forEach(item=>
+              item.classList.remove(
+                "active"
+              )
+            );
+
+          concept.classList.add(
+            "active"
+          );
+
+          state.selectedConcept =
+            concept.dataset.concept;
+
+          showFinal();
+
+        }
+      );
+
+    });
+
+
+  /* -------------------------------------------------------
+     GENERATE
+  ------------------------------------------------------- */
+
+  document
+    .getElementById(
+      "board-generate"
+    )
+    .addEventListener(
+      "click",
+      ()=>{
+
+        state.custom =
+          document.getElementById(
+            "board-custom"
+          ).value.trim();
+
+
+        const status =
+          document.getElementById(
+            "board-status"
+          );
+
+
+        const button =
+          document.getElementById(
+            "board-generate"
+          );
+
+
+        status.textContent =
+          "Creating Concepts...";
+
+
+        button.textContent =
+          "Creating Your Designs...";
+
+
+        button.disabled=true;
+
+
+        setTimeout(
+          ()=>{
+
+            document.getElementById(
+              "board-concepts"
+            ).style.display =
+              "grid";
+
+
+            status.textContent =
+              "3 Concepts Ready";
+
+
+            button.textContent =
+              "Generate 3 Board Designs";
+
+
+            button.disabled=false;
+
+
+            showFinal();
+
+            document
+              .getElementById(
+                "board-concepts"
+              )
+              .scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+              });
+
+          },
+          900
+        );
+
+      }
+    );
+
+
+  /* -------------------------------------------------------
+     COPY
+  ------------------------------------------------------- */
+
+  document
+    .getElementById(
+      "board-copy"
+    )
+    .addEventListener(
+      "click",
+      async()=>{
+
+        const text =
+          document.getElementById(
+            "board-final-text"
+          ).textContent;
+
+
+        try{
+
+          await navigator
+            .clipboard
+            .writeText(text);
+
+
+          const button =
+            document.getElementById(
+              "board-copy"
+            );
+
+
+          button.textContent =
+            "Copied!";
+
+
+          setTimeout(
+            ()=>{
+              button.textContent =
+                "Copy Instructions";
+            },
+            1500
+          );
+
+        }
+
+        catch(error){
+
+          alert(
+            "Please copy the instructions manually."
+          );
+
+        }
+
+      }
+    );
+
+
+  /* -------------------------------------------------------
+     SEND BOARD DESIGN
+  ------------------------------------------------------- */
+
+  document
+    .getElementById(
+      "board-send"
+    )
+    .addEventListener(
+      "click",
+      ()=>{
+
+        const text =
+          document.getElementById(
+            "board-final-text"
+          ).textContent;
+
+
+        const subject =
+          "Custom Board Design";
+
+
+        const body =
+
+`Hello Baruch,
+
+I created a custom board design.
+
+${text}
+
+Thank you!`;
+
+
+        window.location.href =
+          "mailto:baruch.aminov@icloud.com" +
+          "?subject=" +
+          encodeURIComponent(
+            subject
+          ) +
+          "&body=" +
+          encodeURIComponent(
+            body
+          );
+
+      }
+    );
+
+})();
+
+
+/* =========================================================
    CONTACT FORM
-===================================================== */
+========================================================= */
 
-document.getElementById(
-  "contactForm"
-).addEventListener(
-  "submit",
-  function(event){
+document
+  .getElementById(
+    "contact-form"
+  )
+  .addEventListener(
+    "submit",
+    function(event){
 
-    event.preventDefault();
-
-
-    const name =
-    document.getElementById(
-      "name"
-    ).value;
-
-    const phone =
-    document.getElementById(
-      "phone"
-    ).value;
-
-    const email =
-    document.getElementById(
-      "email"
-    ).value;
-
-    const date =
-    document.getElementById(
-      "eventDate"
-    ).value;
-
-    const message =
-    document.getElementById(
-      "message"
-    ).value;
+      event.preventDefault();
 
 
-    const size =
-    document.querySelector(
-      'input[name="size"]:checked'
-    )?.value ||
-    "";
+      const name =
+        document.getElementById(
+          "contact-name"
+        ).value;
 
 
-    const cuts =
-    Array.from(
-      document.querySelectorAll(
-        '.builderPanel input[type="checkbox"]:checked'
-      )
-    )
-    .map(
-      input=>input.value
-    )
-    .join(", ");
+      const phone =
+        document.getElementById(
+          "contact-phone"
+        ).value;
 
 
-    const body =
-`
-BOARDS BY BARUCH — NEW REQUEST
+      const email =
+        document.getElementById(
+          "contact-email"
+        ).value;
 
-Name:
-${name}
 
-Phone:
-${phone}
+      const date =
+        document.getElementById(
+          "contact-date"
+        ).value;
 
-Email:
-${email}
 
-Event Date:
-${date}
+      const message =
+        document.getElementById(
+          "contact-message"
+        ).value;
 
-Board Size:
-${size}
 
-Selected Options:
-${cuts}
+      const subject =
+        "BOARDS BY BARUCH Inquiry";
+
+
+      const body =
+
+`Name: ${name}
+
+Phone: ${phone}
+
+Email: ${email}
+
+Event Date: ${date || "Not provided"}
 
 Message:
-${message}
-`;
+
+${message}`;
 
 
-    const mailto =
-    "mailto:baruch.aminov@icloud.com" +
-    "?subject=" +
-    encodeURIComponent(
-      "BOARDS BY BARUCH — New Request"
-    ) +
-    "&body=" +
-    encodeURIComponent(
-      body
-    );
+      window.location.href =
+        "mailto:baruch.aminov@icloud.com" +
+        "?subject=" +
+        encodeURIComponent(
+          subject
+        ) +
+        "&body=" +
+        encodeURIComponent(
+          body
+        );
 
-
-    window.location.href =
-    mailto;
-
-  }
-);
+    }
+  );
 
 </script>
 
