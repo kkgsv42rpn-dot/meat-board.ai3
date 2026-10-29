@@ -2,5229 +2,2976 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Boards by Baruch | Exceptional Kosher. Unforgettable Boards.</title>
-
-<meta name="description" content="Boards by Baruch — premium kosher meat boards, custom boards, catering, gift boxes and event platters serving NY and NJ.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BOARDS BY BARUCH — Exceptional Kosher. Unforgettable Boards.</title>
 
 <style>
-
 :root{
-    --black:#080705;
-    --deep:#0d0a08;
-    --brown:#24160d;
-    --gold:#c7a15b;
-    --gold2:#e2bd76;
-    --cream:#f5eee1;
-    --white:#faf6ed;
-    --muted:#a49c91;
-    --line:rgba(201,163,91,.24);
+  --bg:#050507;
+  --panel:#0d0d10;
+  --cream:#f4eee5;
+  --muted:#aaa098;
+  --gold:#c8a56a;
+  --line:rgba(255,255,255,.12);
 }
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box}
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    background:var(--black);
-    color:var(--white);
-    font-family:Inter,Arial,sans-serif;
-    overflow-x:hidden;
+  margin:0;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
 }
 
 a{
-    color:inherit;
-    text-decoration:none;
+  color:inherit;
+  text-decoration:none;
 }
 
-button,
-input,
-textarea,
-select{
-    font:inherit;
+canvas{
+  display:block;
 }
 
+/* ================= NAV ================= */
 
-/* =========================================================
-   LOADER
-========================================================= */
-
-#loader{
-    position:fixed;
-    inset:0;
-    background:#070604;
-    z-index:99999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:opacity 1s ease,visibility 1s ease;
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:76px;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 42px;
+  background:linear-gradient(
+    180deg,
+    rgba(5,5,7,.94),
+    rgba(5,5,7,.2)
+  );
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-#loader.hide{
-    opacity:0;
-    visibility:hidden;
+.logo{
+  font-family:Georgia,serif;
+  font-size:14px;
+  letter-spacing:.22em;
 }
 
-.loader-inner{
-    text-align:center;
+.navlinks{
+  display:flex;
+  gap:30px;
 }
 
-.loader-mark{
-    font-family:"Cormorant Garamond",serif;
-    color:var(--gold2);
-    font-size:54px;
-    letter-spacing:9px;
+.navlinks a{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:#d6cec5;
 }
 
-.loader-line{
-    width:130px;
-    height:1px;
-    background:var(--gold);
-    margin:18px auto;
-    transform-origin:left;
-    animation:loaderLine 1.5s ease infinite;
+.navlinks a:hover{
+  color:var(--gold);
 }
 
-.loader-text{
-    font-size:9px;
-    letter-spacing:5px;
-    color:#999187;
+/* ================= SIDE BAR ================= */
+
+.side{
+  position:fixed;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:90;
+  width:190px;
+  padding:18px;
+  background:rgba(8,8,11,.78);
+  border:1px solid var(--line);
+  backdrop-filter:blur(18px);
 }
 
-@keyframes loaderLine{
-    0%,100%{
-        transform:scaleX(.2);
-    }
-
-    50%{
-        transform:scaleX(1);
-    }
+.side-title{
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  margin-bottom:12px;
 }
 
-
-/* =========================================================
-   SIDE NAV
-========================================================= */
-
-.side-nav{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:198px;
-    background:rgba(7,6,4,.94);
-    border-right:1px solid rgba(201,163,91,.18);
-    z-index:500;
-    display:flex;
-    flex-direction:column;
-    padding:38px 26px;
-    backdrop-filter:blur(18px);
+.side a{
+  display:block;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-size:9px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:#cfc6bc;
 }
 
-.brand{
-    text-align:center;
-    margin-bottom:55px;
+.side a:hover{
+  color:var(--gold);
 }
 
-.brand-mark{
-    color:var(--gold2);
-    font-family:"Cormorant Garamond",serif;
-    font-size:13px;
-    letter-spacing:5px;
-    margin-bottom:10px;
+.side-info{
+  margin-top:12px;
+  color:#817870;
+  font-size:9px;
+  line-height:1.7;
 }
 
-.brand-name{
-    font-family:"Cormorant Garamond",serif;
-    font-size:24px;
-    line-height:.82;
-    letter-spacing:3px;
-    color:var(--cream);
+/* ================= BUTTONS ================= */
+
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 22px;
+  border:1px solid rgba(200,165,106,.75);
+  background:#15110d;
+  color:white;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.25s;
 }
 
-.brand-name span{
-    color:var(--gold2);
+.button:hover{
+  background:var(--gold);
+  color:#090806;
 }
 
-.brand-divider{
-    width:36px;
-    height:1px;
-    background:var(--gold);
-    margin:20px auto 0;
+/* ================= HERO ================= */
+
+.hero-scroll{
+  position:relative;
+  height:230vh;
 }
-
-.nav-links{
-    display:flex;
-    flex-direction:column;
-    gap:27px;
-}
-
-.nav-links a{
-    color:#a49e94;
-    font-size:9px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    transition:.3s;
-    position:relative;
-}
-
-.nav-links a:before{
-    content:"";
-    position:absolute;
-    left:-26px;
-    top:50%;
-    width:0;
-    height:1px;
-    background:var(--gold);
-    transition:.3s;
-}
-
-.nav-links a:hover{
-    color:var(--gold2);
-}
-
-.nav-links a:hover:before{
-    width:15px;
-}
-
-.nav-bottom{
-    margin-top:auto;
-}
-
-.vhq{
-    border-top:1px solid rgba(201,163,91,.18);
-    padding-top:25px;
-    text-align:center;
-}
-
-.vhq-circle{
-    width:50px;
-    height:50px;
-    border:1px solid var(--gold);
-    border-radius:50%;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--gold2);
-    font-family:"Cormorant Garamond",serif;
-    font-weight:bold;
-    font-size:17px;
-}
-
-.vhq p{
-    margin-top:12px;
-    color:#817b72;
-    font-size:8px;
-    letter-spacing:2px;
-    line-height:1.6;
-}
-
-
-/* =========================================================
-   CONTACT RAIL
-========================================================= */
-
-.contact-rail{
-    position:fixed;
-    right:0;
-    top:50%;
-    transform:translateY(-50%);
-    z-index:600;
-    writing-mode:vertical-rl;
-    border:1px solid var(--gold);
-    background:rgba(8,7,5,.9);
-    color:var(--gold2);
-    padding:24px 12px;
-    letter-spacing:4px;
-    font-size:9px;
-    text-transform:uppercase;
-    transition:.3s;
-}
-
-.contact-rail:hover{
-    background:var(--gold);
-    color:#080705;
-}
-
-
-/* =========================================================
-   HERO SCROLL STAGE
-   IMPORTANT:
-   The stage is taller than the screen.
-   The hero stays sticky while the user scrolls.
-========================================================= */
 
 .hero-stage{
-    margin-left:198px;
-    height:250vh;
-    position:relative;
-    background:#080705;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:hidden;
+  background:#050507;
 }
 
-.hero-sticky{
-    position:sticky;
-    top:0;
-    height:100vh;
-    min-height:680px;
-    overflow:hidden;
+.hero-stage:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:3;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(0,0,0,0) 30%,
+      rgba(0,0,0,.72) 100%
+    );
 }
 
-#heroCanvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:1;
-}
-
-.hero-background{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    background:
-        radial-gradient(
-            circle at 70% 48%,
-            rgba(104,58,29,.34),
-            transparent 29%
-        ),
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(129,75,34,.13),
-            transparent 30%
-        ),
-        linear-gradient(
-            90deg,
-            #070604 0%,
-            #0c0907 42%,
-            #1b1009 100%
-        );
-}
-
-.hero-vignette{
-    position:absolute;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            ellipse at 65% 50%,
-            transparent 15%,
-            rgba(0,0,0,.22) 65%,
-            rgba(0,0,0,.72) 100%
-        ),
-        linear-gradient(
-            90deg,
-            rgba(5,4,3,.9) 0%,
-            rgba(5,4,3,.45) 35%,
-            transparent 72%
-        ),
-        linear-gradient(
-            0deg,
-            rgba(5,4,3,.8),
-            transparent 35%,
-            rgba(5,4,3,.22)
-        );
-}
-
-.hero-content{
-    position:absolute;
-    z-index:10;
-    left:7%;
-    top:50%;
-    transform:translateY(-50%);
-    width:520px;
-    pointer-events:none;
-}
-
-.hero-content > *{
-    pointer-events:auto;
+.hero-copy{
+  position:absolute;
+  z-index:10;
+  left:7vw;
+  bottom:13vh;
+  max-width:650px;
 }
 
 .eyebrow{
-    color:var(--gold2);
-    font-size:10px;
-    letter-spacing:6px;
-    text-transform:uppercase;
-    margin-bottom:26px;
+  color:var(--gold);
+  font-size:10px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  margin-bottom:22px;
 }
 
-.hero-title{
-    font-family:"Cormorant Garamond",serif;
-    font-size:clamp(70px,7vw,116px);
-    line-height:.77;
-    font-weight:500;
-    letter-spacing:-3px;
-    color:#f5efe4;
+.hero-copy h1{
+  margin:0 0 24px;
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(55px,8vw,118px);
+  line-height:.84;
+  letter-spacing:-.06em;
 }
 
-.hero-title span{
-    color:var(--gold2);
-}
-
-.hero-rule{
-    width:310px;
-    height:1px;
-    background:linear-gradient(
-        90deg,
-        var(--gold),
-        transparent
-    );
-    margin:35px 0 28px;
-}
-
-.hero-subtitle{
-    font-family:"Cormorant Garamond",serif;
-    font-size:21px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    color:#e7dfd1;
-    line-height:1.5;
+.hero-copy p{
+  max-width:550px;
+  color:#c7beb5;
+  font-size:16px;
+  line-height:1.7;
+  margin-bottom:28px;
 }
 
 .hero-buttons{
-    display:flex;
-    gap:14px;
-    margin-top:38px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-.btn{
-    border:1px solid var(--gold);
-    padding:17px 28px;
-    font-size:9px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:.35s;
-    display:inline-block;
+.scroll-text{
+  position:absolute;
+  z-index:10;
+  right:7vw;
+  bottom:46px;
+  font-size:9px;
+  color:#aaa099;
+  text-transform:uppercase;
+  letter-spacing:.25em;
 }
 
-.btn-primary{
-    background:linear-gradient(
-        135deg,
-        #d9b66e,
-        #b78c42
-    );
-    color:#171008;
-    border-color:#d9b66e;
+.progress-line{
+  position:absolute;
+  z-index:10;
+  left:7vw;
+  right:7vw;
+  bottom:42px;
+  height:1px;
+  background:rgba(255,255,255,.15);
 }
 
-.btn-primary:hover{
-    transform:translateY(-3px);
-    box-shadow:
-        0 14px 40px rgba(201,163,91,.25);
+.progress-line span{
+  display:block;
+  height:100%;
+  width:100%;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
 }
 
-.btn-outline{
-    background:rgba(0,0,0,.18);
-    color:var(--cream);
-}
-
-.btn-outline:hover{
-    background:rgba(201,163,91,.12);
-    transform:translateY(-3px);
-}
-
-
-/* =========================================================
-   SCROLL PROGRESS MESSAGE
-========================================================= */
-
-.scroll-status{
-    position:absolute;
-    left:50%;
-    bottom:24px;
-    transform:translateX(-50%);
-    z-index:20;
-    text-align:center;
-    pointer-events:none;
-    transition:opacity .4s;
-}
-
-.scroll-ring{
-    width:36px;
-    height:50px;
-    border:1px solid rgba(201,163,91,.7);
-    border-radius:22px;
-    margin:auto;
-    position:relative;
-}
-
-.scroll-ring:after{
-    content:"";
-    position:absolute;
-    width:5px;
-    height:5px;
-    border-right:1px solid var(--gold2);
-    border-bottom:1px solid var(--gold2);
-    transform:rotate(45deg);
-    left:14px;
-    top:12px;
-}
-
-.scroll-status-text{
-    margin-top:8px;
-    font-size:7px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:#a7a096;
-}
-
-
-/* =========================================================
-   SECTION BASICS
-========================================================= */
+/* ================= SECTIONS ================= */
 
 .section{
-    margin-left:198px;
-    position:relative;
+  min-height:100vh;
+  padding:130px 7vw;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(
+      180deg,
+      #050507,
+      #08080b
+    );
 }
 
-.dark-section{
-    background:#0b0907;
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
 }
 
-.light-section{
-    background:#eee5d5;
-    color:#20170f;
+.kicker{
+  color:var(--gold);
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
 }
 
-.section-inner{
-    width:min(1200px,88%);
-    margin:auto;
-    padding:130px 0;
+.section h2{
+  font-family:Georgia,serif;
+  font-size:clamp(45px,6vw,78px);
+  line-height:.92;
+  font-weight:400;
+  margin:16px 0 25px;
 }
 
-.section-label{
-    font-size:9px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:18px;
+.lead{
+  max-width:720px;
+  color:#bdb5ad;
+  font-size:17px;
+  line-height:1.8;
 }
 
-.section-title{
-    font-family:"Cormorant Garamond",serif;
-    font-size:65px;
-    line-height:.95;
-    font-weight:500;
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:45px;
 }
 
-.section-title span{
-    color:var(--gold);
+.card{
+  min-height:175px;
+  padding:28px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--line);
 }
 
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:90px;
-    align-items:center;
+.card h3{
+  font-family:Georgia,serif;
+  font-size:25px;
+  font-weight:400;
+  margin:0 0 12px;
 }
 
-.about-copy{
-    color:#6f675e;
-    font-size:14px;
-    line-height:2;
-    margin-top:30px;
-    max-width:550px;
+.card p{
+  color:#99918a;
+  font-size:13px;
+  line-height:1.7;
 }
 
-.about-photo{
-    height:530px;
-    position:relative;
-    overflow:hidden;
+/* ================= BOARD SIZES ================= */
 
-    background:
-        radial-gradient(
-            ellipse at 65% 45%,
-            #713d21,
-            #25140b 43%,
-            #080705 78%
-        );
+.sizes{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  margin-top:45px;
 }
 
-.about-photo:after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            135deg,
-            transparent 30%,
-            rgba(0,0,0,.6)
-        );
+.size{
+  padding:28px;
+  border-right:1px solid var(--line);
 }
 
-.about-steak{
-    position:absolute;
-    width:80%;
-    height:48%;
-    right:-7%;
-    top:27%;
-    border-radius:45% 50% 40% 45%;
-    transform:rotate(-9deg);
-
-    background:
-        radial-gradient(
-            circle at 38% 43%,
-            rgba(245,173,130,.7) 0 2%,
-            transparent 3%
-        ),
-        radial-gradient(
-            circle at 62% 34%,
-            rgba(230,134,102,.65) 0 2%,
-            transparent 3%
-        ),
-        radial-gradient(
-            circle at 54% 67%,
-            rgba(255,188,139,.55) 0 2%,
-            transparent 3%
-        ),
-        linear-gradient(
-            135deg,
-            #30110b,
-            #7e2d20 38%,
-            #c15a40 57%,
-            #541c13
-        );
-
-    box-shadow:
-        0 35px 50px rgba(0,0,0,.72),
-        inset 0 0 30px rgba(0,0,0,.45);
+.size:last-child{
+  border-right:0;
 }
 
-.about-steak:before{
-    content:"";
-    position:absolute;
-    inset:6%;
-    border-radius:inherit;
-    border:8px solid rgba(47,17,10,.5);
+.size strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:28px;
+  font-weight:400;
 }
 
-.about-steak:after{
-    content:"";
-    position:absolute;
-    inset:14%;
-    border-radius:inherit;
-    border:2px solid rgba(255,218,183,.2);
+.size span{
+  color:#8e867e;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
 }
 
-
-/* =========================================================
-   FEATURES
-========================================================= */
-
-.features{
-    margin-left:198px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    background:#0b0907;
-    border-top:1px solid rgba(201,163,91,.2);
-    border-bottom:1px solid rgba(201,163,91,.2);
-}
-
-.feature{
-    padding:30px 20px;
-    text-align:center;
-    border-right:1px solid rgba(201,163,91,.15);
-}
-
-.feature:last-child{
-    border-right:0;
-}
-
-.feature-number{
-    color:var(--gold);
-    font-family:"Cormorant Garamond",serif;
-    font-size:35px;
-}
-
-.feature-title{
-    margin-top:7px;
-    font-size:10px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-}
-
-.feature-text{
-    color:#817b72;
-    font-size:10px;
-    margin-top:8px;
-}
-
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:1px;
-    background:rgba(201,163,91,.18);
-    margin-top:65px;
-}
-
-.service{
-    background:#0b0907;
-    min-height:250px;
-    padding:40px;
-    transition:.4s;
-}
-
-.service:hover{
-    background:#15100c;
-    transform:translateY(-5px);
-}
-
-.service-icon{
-    font-size:25px;
-    color:var(--gold);
-    margin-bottom:28px;
-}
-
-.service h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:30px;
-    font-weight:500;
-}
-
-.service p{
-    color:#858078;
-    font-size:12px;
-    line-height:1.8;
-    margin-top:15px;
-}
-
-
-/* =========================================================
-   INFO STRIP
-========================================================= */
-
-.info-strip{
-    margin-left:198px;
-    background:#c4a05c;
-    color:#171009;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-}
-
-.info-box{
-    padding:28px 20px;
-    text-align:center;
-    border-right:1px solid rgba(0,0,0,.15);
-}
-
-.info-box:last-child{
-    border:0;
-}
-
-.info-box strong{
-    display:block;
-    font-family:"Cormorant Garamond",serif;
-    font-size:22px;
-}
-
-.info-box span{
-    display:block;
-    font-size:8px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-top:5px;
-}
-
-
-/* =========================================================
-   BUILDER
-========================================================= */
+/* ================= BUILDER ================= */
 
 .builder{
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(112,70,31,.18),
-            transparent 40%
-        ),
-        #0a0806;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:25px;
 }
 
-.builder-header{
-    text-align:center;
+.builder-box{
+  padding:28px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--line);
 }
 
-.builder-header .section-title{
-    font-size:70px;
+.builder-box h3{
+  font-family:Georgia,serif;
+  font-size:28px;
+  font-weight:400;
+  margin:0 0 20px;
 }
 
-.builder-header p{
-    color:#8f8880;
-    font-size:12px;
-    letter-spacing:2px;
-    margin-top:20px;
-}
-
-.builder-layout{
-    display:grid;
-    grid-template-columns:1fr 1.1fr;
-    gap:70px;
-    margin-top:75px;
-}
-
-.builder-preview{
-    position:sticky;
-    top:100px;
-    height:530px;
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            #2c190e,
-            #080705 70%
-        );
-    overflow:hidden;
-}
-
-.preview-board{
-    position:absolute;
-    width:76%;
-    height:45%;
-    left:12%;
-    bottom:17%;
-    border-radius:28px;
-    transform:
-        perspective(700px)
-        rotateX(55deg)
-        rotateZ(-3deg);
-
-    background:
-        repeating-linear-gradient(
-            0deg,
-            #4c2a17 0px,
-            #653b20 3px,
-            #3b2112 7px,
-            #704327 11px
-        );
-
-    box-shadow:
-        0 35px 45px rgba(0,0,0,.8),
-        inset 0 0 18px rgba(0,0,0,.4);
-}
-
-.preview-meat{
-    position:absolute;
-    width:150px;
-    height:70px;
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 45%,
-            #e28a68 0 3%,
-            transparent 4%
-        ),
-        radial-gradient(
-            circle at 65% 30%,
-            #c95b43 0 4%,
-            transparent 5%
-        ),
-        linear-gradient(
-            135deg,
-            #4c1810,
-            #9e3827,
-            #d76b4e
-        );
-
-    box-shadow:
-        0 15px 20px rgba(0,0,0,.5);
-    z-index:3;
-}
-
-.meat1{
-    left:20%;
-    bottom:43%;
-    transform:rotate(-8deg);
-}
-
-.meat2{
-    left:43%;
-    bottom:46%;
-    transform:rotate(9deg) scale(.8);
-}
-
-.meat3{
-    left:56%;
-    bottom:38%;
-    transform:rotate(-17deg) scale(.72);
-}
-
-.preview-pickle{
-    position:absolute;
-    width:70px;
-    height:25px;
-    border-radius:50%;
-    background:
-        linear-gradient(
-            #526d20,
-            #91a940,
-            #394d18
-        );
-    z-index:4;
-}
-
-.pickle1{
-    left:65%;
-    bottom:49%;
-    transform:rotate(20deg);
-}
-
-.pickle2{
-    left:31%;
-    bottom:35%;
-    transform:rotate(-25deg);
-}
-
-.builder-form{
-    display:flex;
-    flex-direction:column;
-    gap:40px;
-}
-
-.form-group{
-    border-top:1px solid rgba(201,163,91,.18);
-    padding-top:25px;
-}
-
-.form-group h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:28px;
-    font-weight:500;
-    margin-bottom:18px;
-}
-
-.options{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
+.option-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
 .option{
-    border:1px solid rgba(201,163,91,.3);
-    background:transparent;
-    color:#aaa39a;
-    padding:13px 16px;
-    font-size:10px;
-    letter-spacing:1px;
-    cursor:pointer;
-    transition:.25s;
+  padding:11px 13px;
+  border:1px solid rgba(255,255,255,.15);
+  color:#c8c0b7;
+  font-size:10px;
+  cursor:pointer;
 }
 
 .option:hover,
 .option.active{
-    border-color:var(--gold);
-    background:rgba(201,163,91,.12);
-    color:var(--gold2);
+  border-color:var(--gold);
+  background:rgba(200,165,106,.1);
+  color:white;
 }
 
-textarea,
+label{
+  display:block;
+  margin-top:20px;
+  color:#918981;
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
 input,
+textarea,
 select{
-    width:100%;
-    border:1px solid rgba(201,163,91,.25);
-    background:#100d0a;
-    color:#eee;
-    padding:16px;
-    outline:none;
+  width:100%;
+  margin-top:8px;
+  padding:13px;
+  color:white;
+  background:#09090c;
+  border:1px solid rgba(255,255,255,.15);
+  font:inherit;
 }
 
 textarea{
-    min-height:110px;
-    resize:vertical;
+  min-height:120px;
+  resize:vertical;
 }
 
-.file-input{
-    padding:12px;
+.summary{
+  position:sticky;
+  top:110px;
 }
 
-
-/* =========================================================
-   QUOTE
-========================================================= */
-
-.quote{
-    text-align:center;
-    background:
-        linear-gradient(
-            rgba(8,6,4,.72),
-            rgba(8,6,4,.82)
-        ),
-        radial-gradient(
-            circle at center,
-            #4b2b16,
-            #080705 70%
-        );
+.summary-line{
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  color:#aaa19a;
+  font-size:12px;
 }
 
-.quote-inner{
-    padding:150px 20px;
-    max-width:900px;
-    margin:auto;
+.summary-line strong{
+  color:white;
 }
 
-.quote-text{
-    font-family:"Cormorant Garamond",serif;
-    font-size:clamp(40px,5vw,72px);
-    line-height:1;
-}
-
-.quote-author{
-    margin-top:25px;
-    color:var(--gold);
-    font-size:9px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact{
-    background:#eee5d5;
-    color:#21170f;
-}
+/* ================= CONTACT ================= */
 
 .contact-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:90px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
 }
 
-.contact-info .section-title{
-    color:#25190f;
+.contact-info{
+  color:#aaa19a;
+  line-height:2;
+  font-size:14px;
 }
 
-.contact-info p{
-    color:#6f655b;
-    line-height:1.9;
-    margin-top:25px;
-    max-width:500px;
-}
-
-.contact-details{
-    margin-top:40px;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-.contact-detail{
-    border-bottom:1px solid rgba(80,50,25,.16);
-    padding-bottom:18px;
-}
-
-.contact-detail small{
-    display:block;
-    color:#8e7351;
-    font-size:8px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:6px;
-}
-
-.contact-detail a{
-    font-family:"Cormorant Garamond",serif;
-    font-size:24px;
+.contact-info strong{
+  color:white;
 }
 
 .contact-form{
-    background:#e6dccb;
-    padding:42px;
+  padding:28px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
 }
 
-.contact-form h3{
-    font-family:"Cormorant Garamond",serif;
-    font-size:35px;
-    margin-bottom:28px;
+/* ================= FOOTER ================= */
+
+.footer{
+  padding:70px 7vw 100px;
+  border-top:1px solid var(--line);
+  color:#817870;
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
 }
 
-.form-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.contact-form input,
-.contact-form textarea{
-    background:#f0e8da;
-    border-color:rgba(60,40,20,.2);
-    color:#21170f;
-    margin-bottom:12px;
-}
-
-.contact-form textarea{
-    min-height:130px;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder{
-    color:#887c6e;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    margin-left:198px;
-    background:#080705;
-    border-top:1px solid rgba(201,163,91,.18);
-}
-
-.footer-inner{
-    width:min(1200px,88%);
-    margin:auto;
-    padding:65px 0 30px;
-}
-
-.footer-top{
-    display:grid;
-    grid-template-columns:1.5fr 1fr 1fr 1fr;
-    gap:50px;
-}
-
-.footer-brand{
-    font-family:"Cormorant Garamond",serif;
-    font-size:34px;
-    color:var(--gold2);
-}
-
-.footer-column h4{
-    color:#eee;
-    font-size:9px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:20px;
-}
-
-.footer-column p,
-.footer-column a{
-    display:block;
-    color:#77716a;
-    font-size:11px;
-    line-height:2;
-}
-
-.footer-bottom{
-    border-top:1px solid rgba(201,163,91,.12);
-    margin-top:55px;
-    padding-top:20px;
-    display:flex;
-    justify-content:space-between;
-    color:#57524c;
-    font-size:9px;
-    letter-spacing:1px;
-}
-
-
-/* =========================================================
-   REVEALS
-========================================================= */
-
-.reveal{
-    opacity:0;
-    transform:translateY(60px);
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
-}
-
-.reveal.visible{
-    opacity:1;
-    transform:translateY(0);
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:900px){
 
-    .side-nav{
-        width:100%;
-        height:70px;
-        bottom:auto;
-        padding:0 20px;
-        flex-direction:row;
-        align-items:center;
-        border-right:0;
-        border-bottom:1px solid rgba(201,163,91,.2);
-    }
+  .nav{
+    padding:0 20px;
+  }
 
-    .brand{
-        margin:0;
-        text-align:left;
-    }
+  .navlinks{
+    display:none;
+  }
 
-    .brand-mark,
-    .brand-divider,
-    .nav-bottom{
-        display:none;
-    }
+  .side{
+    display:none;
+  }
 
-    .brand-name{
-        font-size:19px;
-    }
+  .hero-copy{
+    left:22px;
+    right:22px;
+    bottom:12vh;
+  }
 
-    .nav-links{
-        margin-left:auto;
-        flex-direction:row;
-        gap:17px;
-        overflow:hidden;
-    }
+  .hero-copy h1{
+    font-size:clamp(50px,15vw,82px);
+  }
 
-    .nav-links a{
-        font-size:7px;
-        letter-spacing:1.5px;
-        white-space:nowrap;
-    }
+  .hero-copy p{
+    font-size:14px;
+  }
 
-    .nav-links a:before{
-        display:none;
-    }
+  .section{
+    padding:100px 22px;
+  }
 
-    .hero-stage{
-        margin-left:0;
-        height:235vh;
-    }
+  .cards,
+  .builder,
+  .contact-grid,
+  .sizes{
+    grid-template-columns:1fr;
+  }
 
-    .hero-sticky{
-        padding-top:70px;
-    }
+  .size{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
 
-    .section,
-    footer{
-        margin-left:0;
-    }
+  .size:last-child{
+    border-bottom:0;
+  }
 
-    .contact-rail{
-        display:none;
-    }
+  .summary{
+    position:static;
+  }
 
-    .hero-content{
-        left:7%;
-        width:80%;
-    }
-
-    .hero-title{
-        font-size:65px;
-    }
-
-    .hero-subtitle{
-        font-size:16px;
-        letter-spacing:3px;
-    }
-
-    .hero-buttons{
-        flex-direction:column;
-        width:230px;
-    }
-
-    .section-inner{
-        padding:90px 0;
-    }
-
-    .about-grid,
-    .builder-layout,
-    .contact-grid{
-        grid-template-columns:1fr;
-        gap:45px;
-    }
-
-    .builder-preview{
-        position:relative;
-        top:auto;
-        height:400px;
-    }
-
-    .services-grid{
-        grid-template-columns:1fr;
-    }
-
-    .features,
-    .info-strip{
-        margin-left:0;
-        grid-template-columns:1fr 1fr;
-    }
-
-    .feature:nth-child(2){
-        border-right:0;
-    }
-
-    .feature{
-        border-bottom:1px solid rgba(201,163,91,.15);
-    }
-
-    .footer-top{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .footer-bottom{
-        flex-direction:column;
-        gap:10px;
-    }
+  .scroll-text{
+    display:none;
+  }
 }
-
-
-@media(max-width:600px){
-
-    .nav-links a:nth-child(n+4){
-        display:none;
-    }
-
-    .hero-stage{
-        height:220vh;
-    }
-
-    .hero-sticky{
-        min-height:680px;
-    }
-
-    .hero-title{
-        font-size:54px;
-    }
-
-    .hero-content{
-        top:48%;
-    }
-
-    .features,
-    .info-strip{
-        grid-template-columns:1fr;
-    }
-
-    .feature,
-    .info-box{
-        border-right:0;
-    }
-
-    .section-title,
-    .builder-header .section-title{
-        font-size:52px;
-    }
-
-    .form-row{
-        grid-template-columns:1fr;
-    }
-
-    .contact-form{
-        padding:25px;
-    }
-
-    .footer-top{
-        grid-template-columns:1fr;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
+<!-- ================= NAVIGATION ================= -->
 
-<!-- =========================================================
-     LOADER
-========================================================= -->
+<nav class="nav">
+  <div class="logo">BOARDS BY BARUCH</div>
 
-<div id="loader">
-
-    <div class="loader-inner">
-
-        <div class="loader-mark">
-            BB
-        </div>
-
-        <div class="loader-line"></div>
-
-        <div class="loader-text">
-            BOARDS BY BARUCH
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     SIDE NAV
-========================================================= -->
-
-<nav class="side-nav">
-
-    <a href="#home" class="brand">
-
-        <div class="brand-mark">
-            ✦
-        </div>
-
-        <div class="brand-name">
-            BOARDS<br>
-            <span>BY BARUCH</span>
-        </div>
-
-        <div class="brand-divider"></div>
-
-    </a>
-
-
-    <div class="nav-links">
-
-        <a href="#home">Home</a>
-
-        <a href="#about">About Us</a>
-
-        <a href="#boards">Our Boards</a>
-
-        <a href="#builder">Create Your Own</a>
-
-        <a href="#services">Catering</a>
-
-        <a href="#gifts">Gift Boxes</a>
-
-        <a href="#ordering">Ordering Info</a>
-
-        <a href="#contact">Contact Us</a>
-
-    </div>
-
-
-    <div class="nav-bottom">
-
-        <div class="vhq">
-
-            <div class="vhq-circle">
-                VHQ
-            </div>
-
-            <p>
-                KOSHER CERTIFIED<br>
-                UNDER VHQ SUPERVISION
-            </p>
-
-        </div>
-
-    </div>
-
+  <div class="navlinks">
+    <a href="#about">About</a>
+    <a href="#boards">Boards</a>
+    <a href="#build">Build Yours</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
+<!-- ================= SIDE BAR ================= -->
 
-<!-- =========================================================
-     CONTACT RAIL
-========================================================= -->
+<aside class="side">
+  <div class="side-title">Explore</div>
 
-<a href="#contact" class="contact-rail">
-    ☎ &nbsp; Contact Us Now
-</a>
+  <a href="#about">Our Story</a>
+  <a href="#boards">Boards & Trays</a>
+  <a href="#catering">Catering</a>
+  <a href="#build">Create Your Board</a>
+  <a href="#service">NY & NJ</a>
+  <a href="#contact">Contact Us Now</a>
 
+  <div class="side-info">
+    VHQ Certified<br>
+    Delivery + Pickup<br>
+    24h Standard<br>
+    48h Custom
+  </div>
+</aside>
 
-<!-- =========================================================
-     HERO SCROLL STAGE
-========================================================= -->
+<!-- ================= HERO / 3D SCROLL ================= -->
 
-<section class="hero-stage" id="home">
+<section class="hero-scroll" id="heroScroll">
 
-    <div class="hero-sticky">
+  <div class="hero-stage">
 
-        <div class="hero-background"></div>
+    <div class="hero-copy">
 
-        <canvas id="heroCanvas"></canvas>
+      <div class="eyebrow">
+        Premium Kosher Meat • Crafted Your Way
+      </div>
 
-        <div class="hero-vignette"></div>
+      <h1>
+        BOARDS<br>
+        BY BARUCH
+      </h1>
 
+      <p>
+        Exceptional Kosher. Unforgettable Boards.
+        Premium cuts, beautifully arranged for Shabbat,
+        Yom Tov, celebrations, corporate events,
+        gifts and unforgettable gatherings.
+      </p>
 
-        <div class="hero-content">
+      <div class="hero-buttons">
 
-            <div class="eyebrow">
-                Premium Kosher Meat · NY & NJ
-            </div>
+        <a class="button" href="#contact">
+          Contact Us Now
+        </a>
 
+        <a class="button" href="#build">
+          Create Your Own Board
+        </a>
 
-            <h1 class="hero-title">
-
-                BOARDS<br>
-
-                <span>BY BARUCH</span>
-
-            </h1>
-
-
-            <div class="hero-rule"></div>
-
-
-            <div class="hero-subtitle">
-
-                Exceptional Kosher.<br>
-                Unforgettable Boards.
-
-            </div>
-
-
-            <div class="hero-buttons">
-
-                <a
-                    href="#builder"
-                    class="btn btn-primary"
-                >
-                    Create Your Own Board
-                </a>
-
-
-                <a
-                    href="#contact"
-                    class="btn btn-outline"
-                >
-                    Contact Us Now
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="scroll-status">
-
-            <div class="scroll-ring"></div>
-
-            <div class="scroll-status-text">
-                Scroll to build
-            </div>
-
-        </div>
+      </div>
 
     </div>
+
+    <div class="scroll-text">
+      Scroll to build the board
+    </div>
+
+    <div class="progress-line">
+      <span id="progress"></span>
+    </div>
+
+  </div>
 
 </section>
 
+<!-- ================= ABOUT ================= -->
 
-<!-- =========================================================
-     ABOUT
-========================================================= -->
+<section class="section" id="about">
 
-<section
-    class="section light-section"
-    id="about"
->
+  <div class="container">
 
-    <div class="section-inner">
+    <div class="kicker">
+      The Boards by Baruch Standard
+    </div>
 
-        <div class="about-grid reveal">
+    <h2>
+      Your Board.<br>
+      Your Cuts. Your Way.
+    </h2>
 
-            <div>
+    <p class="lead">
+      Boards by Baruch brings premium kosher meat together
+      with the presentation of a luxury food experience.
+      Choose the size, cuts, seasonings, sauces, pickles,
+      olives and details that fit your event.
+    </p>
 
-                <div class="section-label">
-                    About Us
-                </div>
+    <div class="cards">
 
+      <div class="card">
+        <h3>Premium Meat</h3>
+        <p>
+          NY Strip, Oyster Steak, Rib Eye, Pastrami,
+          Salami, Roast Beef, Steak and Chicken.
+        </p>
+      </div>
 
-                <h2 class="section-title">
+      <div class="card">
+        <h3>Made Your Way</h3>
+        <p>
+          Choose your board size, cuts, seasonings,
+          sauces or dips, pickles, olives and custom notes.
+        </p>
+      </div>
 
-                    A Passion<br>
-
-                    <span>For Great Food.</span>
-
-                </h2>
-
-
-                <p class="about-copy">
-
-                    At Boards by Baruch, every board is created around
-                    premium kosher meats, beautiful presentation and
-                    the experience you want your guests to remember.
-
-                    <br><br>
-
-                    From intimate Shabbat gatherings to large events,
-                    weddings, celebrations, corporate events and gifts,
-                    every board can be crafted your way.
-
-                </p>
-
-
-                <div style="margin-top:30px">
-
-                    <a
-                        href="#builder"
-                        class="btn btn-outline"
-                        style="color:#25190f"
-                    >
-                        Create Your Own Board
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="about-photo">
-
-                <div class="about-steak"></div>
-
-            </div>
-
-        </div>
+      <div class="card">
+        <h3>For Every Occasion</h3>
+        <p>
+          Home gatherings, birthdays, weddings,
+          engagements, Shabbat & Yom Tov,
+          corporate events, gifts and large events.
+        </p>
+      </div>
 
     </div>
+
+  </div>
 
 </section>
 
+<!-- ================= BOARDS ================= -->
 
-<!-- =========================================================
-     FEATURES
-========================================================= -->
+<section class="section" id="boards">
 
-<div class="features">
+  <div class="container">
 
-    <div class="feature">
+    <div class="kicker">
+      Choose Your Format
+    </div>
 
-        <div class="feature-number">
-            01
-        </div>
+    <h2>
+      Boards.<br>
+      Trays. Gift Boxes.
+    </h2>
 
-        <div class="feature-title">
-            Premium Meats
-        </div>
+    <div class="sizes">
 
-        <div class="feature-text">
-            Carefully selected kosher cuts
-        </div>
+      <div class="size">
+        <strong>5–8</strong>
+        <span>Small</span>
+      </div>
+
+      <div class="size">
+        <strong>9–15</strong>
+        <span>Medium</span>
+      </div>
+
+      <div class="size">
+        <strong>16–25</strong>
+        <span>Large</span>
+      </div>
+
+      <div class="size">
+        <strong>26+</strong>
+        <span>XL / Custom</span>
+      </div>
 
     </div>
 
+    <div class="cards">
 
-    <div class="feature">
+      <div class="card">
+        <h3>Meat Boards</h3>
+        <p>
+          A layered centerpiece of premium cuts,
+          charcuterie, accompaniments and sauces.
+        </p>
+      </div>
 
-        <div class="feature-number">
-            02
-        </div>
+      <div class="card">
+        <h3>Individual Trays</h3>
+        <p>
+          Perfect for individual servings,
+          gifts, office gatherings and smaller celebrations.
+        </p>
+      </div>
 
-        <div class="feature-title">
-            Fully Custom
-        </div>
-
-        <div class="feature-text">
-            Your board, your cuts, your way
-        </div>
-
-    </div>
-
-
-    <div class="feature">
-
-        <div class="feature-number">
-            03
-        </div>
-
-        <div class="feature-title">
-            Every Occasion
-        </div>
-
-        <div class="feature-text">
-            Events, gifts and celebrations
-        </div>
+      <div class="card">
+        <h3>Gift Boxes</h3>
+        <p>
+          A premium kosher gift built around
+          the meats and flavors you choose.
+        </p>
+      </div>
 
     </div>
 
+  </div>
 
-    <div class="feature">
+</section>
 
-        <div class="feature-number">
-            04
-        </div>
+<!-- ================= CATERING ================= -->
 
-        <div class="feature-title">
-            NY & NJ
-        </div>
+<section class="section" id="catering">
 
-        <div class="feature-text">
-            Delivery and pickup available
-        </div>
+  <div class="container">
+
+    <div class="kicker">
+      Events & Catering
+    </div>
+
+    <h2>
+      Make the table<br>
+      the moment.
+    </h2>
+
+    <p class="lead">
+      From intimate celebrations to large events,
+      Boards by Baruch creates abundant meat-forward
+      displays that arrive ready for the occasion.
+      Delivery and pickup are available throughout NY and NJ.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Celebrations</h3>
+        <p>
+          Birthdays, weddings, engagements
+          and family gatherings.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Shabbat & Yom Tov</h3>
+        <p>
+          Elevated kosher meat presentation
+          for the table when it matters most.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Corporate & Large Events</h3>
+        <p>
+          Custom-scale trays and boards
+          for teams, clients and large gatherings.
+        </p>
+      </div>
 
     </div>
 
-</div>
+  </div>
 
+</section>
 
-<!-- =========================================================
-     SERVICES / BOARDS
-========================================================= -->
+<!-- ================= BUILDER ================= -->
 
-<section
-    class="section dark-section"
-    id="boards"
->
+<section class="section" id="build">
 
-    <div class="section-inner">
+  <div class="container">
 
-        <div class="section-label reveal">
-            What We Create
+    <div class="kicker">
+      Build Your Board
+    </div>
+
+    <h2>
+      Your Board.<br>
+      Your Way.
+    </h2>
+
+    <div class="builder">
+
+      <div class="builder-box">
+
+        <h3>Choose Your Size</h3>
+
+        <div class="option-list" id="sizesOptions">
+
+          <div class="option active" data-size="Small">
+            Small · 5–8
+          </div>
+
+          <div class="option" data-size="Medium">
+            Medium · 9–15
+          </div>
+
+          <div class="option" data-size="Large">
+            Large · 16–25
+          </div>
+
+          <div class="option" data-size="XL">
+            XL · 26+
+          </div>
+
+          <div class="option" data-size="Custom">
+            Custom
+          </div>
+
         </div>
 
+        <h3 style="margin-top:35px">
+          Choose Your Cuts
+        </h3>
 
-        <h2 class="section-title reveal">
+        <div class="option-list" id="cutsOptions">
 
-            Made For<br>
+          <div class="option" data-cut="NY Strip">
+            NY Strip
+          </div>
 
-            <span>Your Occasion.</span>
+          <div class="option" data-cut="Oyster Steak">
+            Oyster Steak
+          </div>
 
+          <div class="option" data-cut="Rib Eye">
+            Rib Eye
+          </div>
+
+          <div class="option" data-cut="Pastrami">
+            Pastrami
+          </div>
+
+          <div class="option" data-cut="Salami">
+            Salami
+          </div>
+
+          <div class="option" data-cut="Roast Beef">
+            Roast Beef
+          </div>
+
+          <div class="option" data-cut="Steak">
+            Steak
+          </div>
+
+          <div class="option" data-cut="Chicken">
+            Chicken
+          </div>
+
+        </div>
+
+        <h3 style="margin-top:35px">
+          Extras
+        </h3>
+
+        <div class="option-list" id="extrasOptions">
+
+          <div class="option" data-extra="Seasonings">
+            Seasonings
+          </div>
+
+          <div class="option" data-extra="Sauces / Dips">
+            Sauces / Dips
+          </div>
+
+          <div class="option" data-extra="Pickles">
+            Pickles
+          </div>
+
+          <div class="option" data-extra="Olives">
+            Olives
+          </div>
+
+          <div class="option" data-extra="Request Any">
+            Request Any
+          </div>
+
+        </div>
+
+        <label>
+          Custom Notes
+        </label>
+
+        <textarea
+          id="builderNotes"
+          placeholder="Tell us exactly what you have in mind..."
+        ></textarea>
+
+      </div>
+
+      <div class="builder-box summary">
+
+        <h3>Your Board</h3>
+
+        <div class="summary-line">
+          Size:
+          <strong id="summarySize">Small</strong>
+        </div>
+
+        <div class="summary-line">
+          Cuts:
+          <strong id="summaryCuts">None selected</strong>
+        </div>
+
+        <div class="summary-line">
+          Extras:
+          <strong id="summaryExtras">None selected</strong>
+        </div>
+
+        <p style="color:#918981;font-size:12px;line-height:1.7">
+          Standard orders require 24 hours notice.
+          Anything larger or custom requires 48 hours notice.
+        </p>
+
+        <a
+          href="#contact"
+          class="button"
+          style="width:100%;margin-top:20px"
+        >
+          Request This Board
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= SERVICE ================= -->
+
+<section class="section" id="service">
+
+  <div class="container">
+
+    <div class="kicker">
+      Service
+    </div>
+
+    <h2>
+      Premium Kosher.<br>
+      NY & NJ.
+    </h2>
+
+    <p class="lead">
+      Boards by Baruch offers delivery and pickup
+      throughout New York and New Jersey.
+      Kosher certification: VHQ.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>24 Hours</h3>
+        <p>
+          Small, Medium and Large boards
+          require at least 24 hours notice.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>48 Hours</h3>
+        <p>
+          XL, custom and larger event orders
+          require at least 48 hours notice.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Delivery + Pickup</h3>
+        <p>
+          Convenient delivery and pickup
+          throughout NY and NJ.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section class="section" id="contact">
+
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <div>
+
+        <div class="kicker">
+          Let's Create Something
+        </div>
+
+        <h2>
+          Contact<br>
+          Boards by Baruch.
         </h2>
 
+        <div class="contact-info">
 
-        <div class="services-grid">
+          <strong>Phone</strong><br>
+          347-820-8835
+          <br><br>
 
+          <strong>Email</strong><br>
+          baruch.aminov@icloud.com
+          <br><br>
 
-            <div class="service reveal">
+          <strong>Service Area</strong><br>
+          New York & New Jersey
+          <br><br>
 
-                <div class="service-icon">
-                    ◆
-                </div>
-
-                <h3>
-                    Meat Boards
-                </h3>
-
-                <p>
-                    Premium sliced meats, steaks and curated
-                    accompaniments presented beautifully for your table.
-                </p>
-
-            </div>
-
-
-            <div
-                class="service reveal"
-                id="services"
-            >
-
-                <div class="service-icon">
-                    ◇
-                </div>
-
-                <h3>
-                    Event Catering
-                </h3>
-
-                <p>
-                    Large custom orders for weddings, celebrations,
-                    corporate events and unforgettable gatherings.
-                </p>
-
-            </div>
-
-
-            <div
-                class="service reveal"
-                id="gifts"
-            >
-
-                <div class="service-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    Gift Boxes
-                </h3>
-
-                <p>
-                    A premium kosher gift experience designed for
-                    birthdays, holidays, clients, families and friends.
-                </p>
-
-            </div>
-
-
-            <div class="service reveal">
-
-                <div class="service-icon">
-                    ◆
-                </div>
-
-                <h3>
-                    Individual Trays
-                </h3>
-
-                <p>
-                    Beautiful individual meat trays perfect for
-                    entertaining, Shabbat and special occasions.
-                </p>
-
-            </div>
-
-
-            <div class="service reveal">
-
-                <div class="service-icon">
-                    ◇
-                </div>
-
-                <h3>
-                    Custom Platters
-                </h3>
-
-                <p>
-                    Tell us what you want and we'll build a platter
-                    around your preferences.
-                </p>
-
-            </div>
-
-
-            <div class="service reveal">
-
-                <div class="service-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    Shabbat & Yom Tov
-                </h3>
-
-                <p>
-                    Elevated meat presentation for your family's
-                    most important meals.
-                </p>
-
-            </div>
+          <strong>Kosher Certification</strong><br>
+          VHQ
 
         </div>
 
+      </div>
+
+      <form
+        class="contact-form"
+        action="mailto:baruch.aminov@icloud.com"
+        method="post"
+        enctype="text/plain"
+      >
+
+        <label>Name</label>
+        <input
+          name="Name"
+          required
+          placeholder="Your name"
+        >
+
+        <label>Phone</label>
+        <input
+          name="Phone"
+          placeholder="Your phone number"
+        >
+
+        <label>Email</label>
+        <input
+          type="email"
+          name="Email"
+          placeholder="Your email"
+        >
+
+        <label>Event Date</label>
+        <input
+          type="date"
+          name="Event Date"
+        >
+
+        <label>Message / Inspiration</label>
+
+        <textarea
+          name="Message"
+          placeholder="Tell us about your event, board, cuts or inspiration..."
+        ></textarea>
+
+        <button
+          type="submit"
+          class="button"
+          style="width:100%;margin-top:18px"
+        >
+          Contact Us Now
+        </button>
+
+      </form>
+
     </div>
+
+  </div>
 
 </section>
 
-
-<!-- =========================================================
-     ORDERING INFO
-========================================================= -->
-
-<div
-    class="info-strip"
-    id="ordering"
->
-
-    <div class="info-box">
-
-        <strong>
-            Small · Medium · Large
-        </strong>
-
-        <span>
-            24 Hour Notice
-        </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-        <strong>
-            XL & Custom
-        </strong>
-
-        <span>
-            48 Hour Notice
-        </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-        <strong>
-            NY & NJ
-        </strong>
-
-        <span>
-            Delivery & Pickup
-        </span>
-
-    </div>
-
-
-    <div class="info-box">
-
-        <strong>
-            VHQ
-        </strong>
-
-        <span>
-            Kosher Certified
-        </span>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     BUILDER
-========================================================= -->
-
-<section
-    class="section builder"
-    id="builder"
->
-
-    <div class="section-inner">
-
-        <div class="builder-header reveal">
-
-            <div class="section-label">
-                Your Board. Your Cuts. Your Way.
-            </div>
-
-
-            <h2 class="section-title">
-
-                Create Your
-                <span>Own Board.</span>
-
-            </h2>
-
-
-            <p>
-                Customize every detail and tell us exactly what you're looking for.
-            </p>
-
-        </div>
-
-
-        <div class="builder-layout">
-
-
-            <div class="builder-preview reveal">
-
-                <div class="preview-board"></div>
-
-                <div class="preview-meat meat1"></div>
-
-                <div class="preview-meat meat2"></div>
-
-                <div class="preview-meat meat3"></div>
-
-                <div class="preview-pickle pickle1"></div>
-
-                <div class="preview-pickle pickle2"></div>
-
-            </div>
-
-
-            <div class="builder-form">
-
-
-                <div class="form-group reveal">
-
-                    <h3>
-                        01 · Choose Your Size
-                    </h3>
-
-                    <div class="options">
-
-                        <button
-                            class="option"
-                            data-group="size"
-                        >
-                            Small · 5–8
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="size"
-                        >
-                            Medium · 9–15
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="size"
-                        >
-                            Large · 16–25
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="size"
-                        >
-                            XL · 26+
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="size"
-                        >
-                            Custom
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group reveal">
-
-                    <h3>
-                        02 · Choose Your Cuts
-                    </h3>
-
-                    <div class="options">
-
-                        <button class="option" data-group="cuts">
-                            NY Strip
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Oyster Steak
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Rib Eye
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Pastrami
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Salami
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Roast Beef
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Steak
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Chicken
-                        </button>
-
-                        <button class="option" data-group="cuts">
-                            Request Any
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group reveal">
-
-                    <h3>
-                        03 · Seasonings
-                    </h3>
-
-                    <div class="options">
-
-                        <button
-                            class="option"
-                            data-group="seasoning"
-                        >
-                            Classic Salt & Pepper
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="seasoning"
-                        >
-                            Garlic Herb
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="seasoning"
-                        >
-                            Steakhouse
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="seasoning"
-                        >
-                            Spicy
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="seasoning"
-                        >
-                            Custom
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group reveal">
-
-                    <h3>
-                        04 · Sauces & Dips
-                    </h3>
-
-                    <div class="options">
-
-                        <button
-                            class="option"
-                            data-group="sauce"
-                        >
-                            Request Any
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="sauce"
-                        >
-                            Garlic
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="sauce"
-                        >
-                            BBQ
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="sauce"
-                        >
-                            Spicy
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group reveal">
-
-                    <h3>
-                        05 · Pickles & Olives
-                    </h3>
-
-                    <div class="options">
-
-                        <button
-                            class="option"
-                            data-group="garnish"
-                        >
-                            Pickles
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="garnish"
-                        >
-                            Green Olives
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="garnish"
-                        >
-                            Black Olives
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="garnish"
-                        >
-                            Mixed
-                        </button>
-
-                        <button
-                            class="option"
-                            data-group="garnish"
-                        >
-                            None
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group reveal">
-
-                    <h3>
-                        06 · Custom Notes
-                    </h3>
-
-                    <textarea
-                        id="builderNotes"
-                        placeholder="Tell us exactly what you have in mind..."
-                    ></textarea>
-
-                </div>
-
-
-                <button
-                    class="btn btn-primary"
-                    style="width:100%;"
-                    onclick="sendBuilderRequest()"
-                >
-                    Create Your Own Board
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     QUOTE
-========================================================= -->
-
-<section class="section quote">
-
-    <div class="quote-inner reveal">
-
-        <div class="quote-text">
-            “Premium Kosher Meat,
-            Crafted Your Way.”
-        </div>
-
-        <div class="quote-author">
-            Boards by Baruch
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CONTACT
-========================================================= -->
-
-<section
-    class="section contact"
-    id="contact"
->
-
-    <div class="section-inner">
-
-        <div class="contact-grid">
-
-
-            <div class="contact-info reveal">
-
-                <div class="section-label">
-                    Let's Create Something
-                </div>
-
-
-                <h2 class="section-title">
-
-                    Let's Build<br>
-
-                    <span>Your Board.</span>
-
-                </h2>
-
-
-                <p>
-
-                    Whether you already know exactly what you want
-                    or want us to create something from scratch,
-                    reach out and we'll take care of the rest.
-
-                </p>
-
-
-                <div class="contact-details">
-
-
-                    <div class="contact-detail">
-
-                        <small>
-                            Phone
-                        </small>
-
-                        <a href="tel:3478208835">
-                            (347) 820-8835
-                        </a>
-
-                    </div>
-
-
-                    <div class="contact-detail">
-
-                        <small>
-                            Email
-                        </small>
-
-                        <a href="mailto:baruch.aminov@icloud.com">
-                            baruch.aminov@icloud.com
-                        </a>
-
-                    </div>
-
-
-                    <div class="contact-detail">
-
-                        <small>
-                            Service Area
-                        </small>
-
-                        <div
-                            style="
-                            font-family:'Cormorant Garamond';
-                            font-size:24px;
-                            "
-                        >
-                            New York & New Jersey
-                        </div>
-
-                    </div>
-
-
-                    <div class="contact-detail">
-
-                        <small>
-                            Ordering Notice
-                        </small>
-
-                        <div
-                            style="
-                            font-family:'Cormorant Garamond';
-                            font-size:24px;
-                            "
-                        >
-                            24 Hours · 48 Hours for Large/Custom
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-            <div class="contact-form reveal">
-
-                <h3>
-                    Start Your Order
-                </h3>
-
-
-                <form
-                    action="mailto:baruch.aminov@icloud.com"
-                    method="post"
-                    enctype="text/plain"
-                >
-
-
-                    <div class="form-row">
-
-                        <input
-                            type="text"
-                            name="Name"
-                            placeholder="Your Name"
-                            required
-                        >
-
-                        <input
-                            type="tel"
-                            name="Phone"
-                            placeholder="Phone Number"
-                            required
-                        >
-
-                    </div>
-
-
-                    <input
-                        type="email"
-                        name="Email"
-                        placeholder="Email Address"
-                        required
-                    >
-
-
-                    <input
-                        type="date"
-                        name="Event Date"
-                    >
-
-
-                    <textarea
-                        name="Message"
-                        placeholder="Tell us about your event, board, cuts, size, or anything else you have in mind..."
-                    ></textarea>
-
-
-                    <label
-                        style="
-                        display:block;
-                        font-size:9px;
-                        letter-spacing:2px;
-                        text-transform:uppercase;
-                        margin:4px 0 8px;
-                        color:#806b50;
-                        "
-                    >
-                        Inspiration Photo
-                    </label>
-
-
-                    <input
-                        class="file-input"
-                        type="file"
-                        accept="image/*"
-                        name="Inspiration Photo"
-                    >
-
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        style="
-                        width:100%;
-                        margin-top:10px;
-                        "
-                    >
-                        Contact Us Now
-                    </button>
-
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <div class="footer-inner">
-
-        <div class="footer-top">
-
-
-            <div>
-
-                <div class="footer-brand">
-                    BOARDS BY BARUCH
-                </div>
-
-                <p
-                    style="
-                    color:#77716a;
-                    font-size:11px;
-                    line-height:1.8;
-                    margin-top:15px;
-                    max-width:280px;
-                    "
-                >
-                    Exceptional Kosher.
-                    Unforgettable Boards.
-                </p>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>
-                    Explore
-                </h4>
-
-                <a href="#about">
-                    About Us
-                </a>
-
-                <a href="#boards">
-                    Our Boards
-                </a>
-
-                <a href="#builder">
-                    Create Your Own
-                </a>
-
-                <a href="#services">
-                    Catering
-                </a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>
-                    Information
-                </h4>
-
-                <a href="#ordering">
-                    Ordering Info
-                </a>
-
-                <a href="#contact">
-                    Contact Us
-                </a>
-
-                <p>
-                    NY & NJ
-                </p>
-
-                <p>
-                    VHQ Certified
-                </p>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>
-                    Contact
-                </h4>
-
-                <a href="tel:3478208835">
-                    347-820-8835
-                </a>
-
-                <a href="mailto:baruch.aminov@icloud.com">
-                    baruch.aminov@icloud.com
-                </a>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <span>
-                © 2026 Boards by Baruch
-            </span>
-
-            <span>
-                PREMIUM KOSHER MEAT BOARDS
-            </span>
-
-        </div>
-
-    </div>
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+  BOARDS BY BARUCH
+  &nbsp; • &nbsp;
+  Exceptional Kosher. Unforgettable Boards.
+  <br><br>
+
+  NY & NJ &nbsp; • &nbsp;
+  VHQ Certified &nbsp; • &nbsp;
+  Delivery + Pickup
+  <br><br>
+
+  347-820-8835
+  &nbsp; • &nbsp;
+  baruch.aminov@icloud.com
 
 </footer>
 
-
-<!-- =========================================================
-     THREE.JS IMPORTS
-========================================================= -->
+<!-- ================= THREE.JS ================= -->
 
 <script type="importmap">
 {
-    "imports":{
-        "three":"https://unpkg.com/three@0.166.1/build/three.module.js",
-        "three/addons/":"https://unpkg.com/three@0.166.1/examples/jsm/"
-    }
+  "imports":{
+    "three":"https://unpkg.com/three@0.166.1/build/three.module.js",
+    "three/addons/":"https://unpkg.com/three@0.166.1/examples/jsm/"
+  }
 }
 </script>
-
 
 <script type="module">
 
 import * as THREE from "three";
 
-import {
-    RoomEnvironment
-} from "three/addons/environments/RoomEnvironment.js";
+import {RoomEnvironment}
+from "three/addons/environments/RoomEnvironment.js";
 
-import {
-    EffectComposer
-} from "three/addons/postprocessing/EffectComposer.js";
+import {EffectComposer}
+from "three/addons/postprocessing/EffectComposer.js";
 
-import {
-    RenderPass
-} from "three/addons/postprocessing/RenderPass.js";
+import {RenderPass}
+from "three/addons/postprocessing/RenderPass.js";
 
-import {
-    OutputPass
-} from "three/addons/postprocessing/OutputPass.js";
+import {BokehPass}
+from "three/addons/postprocessing/BokehPass.js";
 
-import {
-    RoundedBoxGeometry
-} from "three/addons/geometries/RoundedBoxGeometry.js";
+import {OutputPass}
+from "three/addons/postprocessing/OutputPass.js";
 
 
-/* =========================================================
-   RENDERER
-========================================================= */
+/* ============================================================
+   RANDOM / HELPERS
+============================================================ */
 
-const canvas =
-    document.getElementById("heroCanvas");
+let seed=123456;
 
-const renderer =
-    new THREE.WebGLRenderer({
+function rand(){
 
-        canvas,
+  seed=(seed*1664525+1013904223)>>>0;
 
-        antialias:true,
+  return seed/4294967296;
+}
 
-        alpha:true,
+function rnd(a,b){
+  return a+(b-a)*rand();
+}
 
-        powerPreference:"high-performance"
+function ease(p){
 
-    });
+  p=Math.max(0,Math.min(1,p));
 
-
-renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio,
-        2
-    )
-);
-
-renderer.setSize(
-    canvas.clientWidth,
-    canvas.clientHeight,
-    false
-);
-
-renderer.shadowMap.enabled=true;
-
-renderer.shadowMap.type=
-    THREE.PCFSoftShadowMap;
-
-renderer.toneMapping=
-    THREE.ACESFilmicToneMapping;
-
-renderer.toneMappingExposure=1.15;
-
-
-/* =========================================================
-   SCENE
-========================================================= */
-
-const scene=
-    new THREE.Scene();
-
-
-scene.background=
-    new THREE.Color("#080705");
-
-
-const camera=
-    new THREE.PerspectiveCamera(
-        36,
-        canvas.clientWidth/
-        canvas.clientHeight,
-        .1,
-        100
-    );
-
-
-camera.position.set(
-    .4,
-    2.9,
-    14
-);
-
-
-/* =========================================================
-   ENVIRONMENT
-========================================================= */
-
-const pmrem=
-    new THREE.PMREMGenerator(
-        renderer
-    );
-
-
-scene.environment=
-    pmrem.fromScene(
-        new RoomEnvironment(
-            renderer
-        ),
-        .04
-    ).texture;
-
-
-/* =========================================================
-   LIGHTING
-========================================================= */
-
-const keyLight=
-    new THREE.SpotLight(
-        0xffd7a0,
-        1050
-    );
-
-keyLight.position.set(
-    4,
-    9,
-    8
-);
-
-keyLight.angle=.36;
-
-keyLight.penumbra=.82;
-
-keyLight.decay=1.6;
-
-keyLight.distance=35;
-
-keyLight.castShadow=true;
-
-keyLight.shadow.mapSize.width=2048;
-
-keyLight.shadow.mapSize.height=2048;
-
-scene.add(keyLight);
-
-
-const warmLight=
-    new THREE.PointLight(
-        0xb65d2d,
-        180,
-        18
-    );
-
-warmLight.position.set(
-    -5,
-    4,
-    4
-);
-
-scene.add(warmLight);
-
-
-const rimLight=
-    new THREE.PointLight(
-        0xffd99a,
-        420,
-        20
-    );
-
-rimLight.position.set(
-    5,
-    4,
-    -6
-);
-
-scene.add(rimLight);
-
-
-const frontLight=
-    new THREE.PointLight(
-        0xffffff,
-        100,
-        16
-    );
-
-frontLight.position.set(
-    0,
-    4,
-    9
-);
-
-scene.add(frontLight);
-
-
-/* =========================================================
-   COMPOSER
-========================================================= */
-
-const composer=
-    new EffectComposer(
-        renderer
-    );
-
-composer.addPass(
-    new RenderPass(
-        scene,
-        camera
-    )
-);
-
-composer.addPass(
-    new OutputPass()
-);
-
-
-/* =========================================================
-   CANVAS TEXTURE GENERATOR
-========================================================= */
-
-function makeTexture(
-    width,
-    height,
-    painter
-){
-
-    const c=
-        document.createElement(
-            "canvas"
-        );
-
-    c.width=width;
-    c.height=height;
-
-    const ctx=
-        c.getContext("2d");
-
-    painter(
-        ctx,
-        width,
-        height
-    );
-
-    const texture=
-        new THREE.CanvasTexture(c);
-
-    texture.colorSpace=
-        THREE.SRGBColorSpace;
-
-    texture.anisotropy=
-        renderer.capabilities.getMaxAnisotropy();
-
-    return texture;
+  return p<.5
+    ?4*p*p*p
+    :1-Math.pow(-2*p+2,3)/2;
 }
 
 
-/* =========================================================
-   REALISTIC WOOD
-========================================================= */
+/* ============================================================
+   RENDERER
+============================================================ */
 
-const woodTexture=
-makeTexture(
-    1400,
+const renderer=
+new THREE.WebGLRenderer({
+  antialias:true,
+  powerPreference:"high-performance"
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio||1,2)
+);
+
+renderer.setSize(
+  window.innerWidth,
+  window.innerHeight
+);
+
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=
+THREE.PCFSoftShadowMap;
+
+renderer.toneMapping=
+THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure=1.05;
+
+renderer.outputColorSpace=
+THREE.SRGBColorSpace;
+
+document
+  .querySelector(".hero-stage")
+  .appendChild(renderer.domElement);
+
+
+/* ============================================================
+   SCENE
+============================================================ */
+
+const scene=new THREE.Scene();
+
+scene.background=
+new THREE.Color(0x050507);
+
+scene.fog=
+new THREE.FogExp2(
+  0x07080b,
+  .028
+);
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+const camera=
+new THREE.PerspectiveCamera(
+  36,
+  window.innerWidth/window.innerHeight,
+  .1,
+  100
+);
+
+const target=
+new THREE.Vector3(
+  0,
+  .05,
+  0
+);
+
+
+/* ============================================================
+   STUDIO ENVIRONMENT
+============================================================ */
+
+const pmrem=
+new THREE.PMREMGenerator(renderer);
+
+const env=
+pmrem.fromScene(
+  new RoomEnvironment(),
+  .04
+);
+
+scene.environment=
+env.texture;
+
+scene.environmentIntensity=.42;
+
+pmrem.dispose();
+
+
+/* ============================================================
+   BACKGROUND
+============================================================ */
+
+const backdrop=
+new THREE.Mesh(
+
+  new THREE.SphereGeometry(
+    35,
+    32,
+    24
+  ),
+
+  new THREE.ShaderMaterial({
+
+    side:THREE.BackSide,
+
+    uniforms:{
+      top:{
+        value:new THREE.Color(0x20232b)
+      },
+
+      bottom:{
+        value:new THREE.Color(0x030304)
+      }
+    },
+
+    vertexShader:`
+
+      varying vec3 vPos;
+
+      void main(){
+
+        vPos=position;
+
+        gl_Position=
+          projectionMatrix*
+          modelViewMatrix*
+          vec4(position,1.0);
+
+      }
+    `,
+
+    fragmentShader:`
+
+      varying vec3 vPos;
+
+      uniform vec3 top;
+      uniform vec3 bottom;
+
+      void main(){
+
+        vec3 d=normalize(vPos);
+
+        float h=
+          smoothstep(
+            -.5,
+            1.0,
+            d.y
+          );
+
+        vec3 c=
+          mix(bottom,top,h);
+
+        gl_FragColor=
+          vec4(c,1.0);
+
+      }
+    `
+  })
+);
+
+scene.add(backdrop);
+
+
+/* ============================================================
+   FLOOR
+============================================================ */
+
+const floor=
+new THREE.Mesh(
+
+  new THREE.PlaneGeometry(
+    60,
+    60
+  ),
+
+  new THREE.MeshStandardMaterial({
+    color:0x08090b,
+    roughness:.9
+  })
+);
+
+floor.rotation.x=
+-Math.PI/2;
+
+floor.position.y=-.28;
+
+floor.receiveShadow=true;
+
+scene.add(floor);
+
+
+/* ============================================================
+   LIGHTING
+============================================================ */
+
+const key=
+new THREE.SpotLight(
+  0xffe7ca,
+  60,
+  20,
+  .62,
+  1,
+  2
+);
+
+key.position.set(
+  3,
+  6,
+  4
+);
+
+key.target.position.set(
+  0,
+  0,
+  0
+);
+
+key.castShadow=true;
+
+key.shadow.mapSize.set(
+  2048,
+  2048
+);
+
+scene.add(
+  key,
+  key.target
+);
+
+
+const warm=
+new THREE.SpotLight(
+  0xffa65f,
+  70,
+  18,
+  .8,
+  1,
+  2
+);
+
+warm.position.set(
+  -4,
+  3,
+  -4
+);
+
+warm.target.position.set(
+  0,
+  0,
+  0
+);
+
+scene.add(
+  warm,
+  warm.target
+);
+
+
+const cool=
+new THREE.SpotLight(
+  0x91b9ff,
+  55,
+  18,
+  .8,
+  1,
+  2
+);
+
+cool.position.set(
+  4,
+  3,
+  -4
+);
+
+cool.target.position.set(
+  0,
+  0,
+  0
+);
+
+scene.add(
+  cool,
+  cool.target
+);
+
+
+scene.add(
+  new THREE.HemisphereLight(
+    0x34394a,
+    0x070607,
+    .5
+  )
+);
+
+
+/* ============================================================
+   TEXTURE HELPERS
+============================================================ */
+
+function canvas(w,h){
+
+  const c=
+    document.createElement("canvas");
+
+  c.width=w;
+  c.height=h;
+
+  return {
+    c,
+    x:c.getContext("2d")
+  };
+}
+
+
+function texture(c,color=true){
+
+  const t=
+    new THREE.CanvasTexture(c);
+
+  t.colorSpace=
+    color
+    ?THREE.SRGBColorSpace
+    :THREE.NoColorSpace;
+
+  t.wrapS=
+  t.wrapT=
+    THREE.RepeatWrapping;
+
+  t.anisotropy=
+    renderer.capabilities
+      .getMaxAnisotropy();
+
+  return t;
+}
+
+
+/* ============================================================
+   REALISTIC STEAK TEXTURE
+============================================================ */
+
+function steakTexture(){
+
+  const {c,x}=canvas(
     900,
-    (ctx,w,h)=>{
+    900
+  );
 
-        const base=
-            ctx.createLinearGradient(
-                0,0,w,h
-            );
+  const g=
+    x.createRadialGradient(
+      450,400,40,
+      450,450,500
+    );
 
-        base.addColorStop(
-            0,
-            "#2d180c"
-        );
+  g.addColorStop(
+    0,
+    "#b94d4d"
+  );
 
-        base.addColorStop(
-            .35,
-            "#5a321a"
-        );
+  g.addColorStop(
+    .45,
+    "#913235"
+  );
 
-        base.addColorStop(
-            .7,
-            "#3b2110"
-        );
+  g.addColorStop(
+    1,
+    "#51191e"
+  );
 
-        base.addColorStop(
-            1,
-            "#211107"
-        );
-
-        ctx.fillStyle=base;
-
-        ctx.fillRect(
-            0,0,w,h
-        );
+  x.fillStyle=g;
+  x.fillRect(
+    0,0,900,900
+  );
 
 
-        for(let i=0;i<420;i++){
+  /* muscle grain */
 
-            const y=
-                Math.random()*h;
+  for(let i=0;i<4000;i++){
 
-            const amp=
-                2+Math.random()*16;
+    const px=rand()*900;
+    const py=rand()*900;
 
-            ctx.beginPath();
+    x.strokeStyle=
+      `rgba(
+        230,
+        ${80+rand()*50},
+        ${80+rand()*45},
+        ${.025+rand()*.08}
+      )`;
 
-            ctx.moveTo(
-                0,
-                y
-            );
+    x.lineWidth=
+      .5+rand()*2;
 
-            ctx.bezierCurveTo(
-                w*.2,
-                y+amp,
-                w*.4,
-                y-amp,
-                w*.65,
-                y+amp*.7
-            );
+    x.beginPath();
 
-            ctx.bezierCurveTo(
-                w*.78,
-                y+amp,
-                w*.9,
-                y-amp,
-                w,
-                y
-            );
+    x.moveTo(
+      px,
+      py
+    );
 
-            ctx.strokeStyle=
-                Math.random()>.35
-                ? "rgba(22,10,4,.23)"
-                : "rgba(165,103,49,.14)";
+    x.lineTo(
+      px+rnd(-8,8),
+      py+rnd(5,35)
+    );
 
-            ctx.lineWidth=
-                .3+
-                Math.random()*2.1;
-
-            ctx.stroke();
-
-        }
+    x.stroke();
+  }
 
 
-        for(let i=0;i<1700;i++){
+  /* white fat marbling */
 
-            const x=
-                Math.random()*w;
+  x.lineCap="round";
 
-            const y=
-                Math.random()*h;
+  for(let i=0;i<125;i++){
 
-            const r=
-                Math.random()*1.5;
+    let px=rand()*900;
+    let py=rand()*900;
 
-            ctx.fillStyle=
-                "rgba(255,220,160,"+
-                Math.random()*.08+
-                ")";
+    x.beginPath();
 
-            ctx.beginPath();
+    x.moveTo(
+      px,
+      py
+    );
 
-            ctx.arc(
-                x,
-                y,
-                r,
-                0,
-                Math.PI*2
-            );
+    for(let j=0;j<5;j++){
 
-            ctx.fill();
+      const nx=
+        px+rnd(-100,100);
 
-        }
+      const ny=
+        py+rnd(-80,80);
 
+      x.quadraticCurveTo(
+        (px+nx)/2,
+        (py+ny)/2,
+        nx,
+        ny
+      );
+
+      px=nx;
+      py=ny;
     }
-);
 
+    x.strokeStyle=
+      `rgba(
+        255,
+        235,
+        218,
+        ${.12+rand()*.3}
+      )`;
 
-/* =========================================================
-   STEAK TEXTURE
-========================================================= */
+    x.lineWidth=
+      2+rand()*6;
 
-const steakTexture=
-makeTexture(
-    1200,
-    900,
-    (ctx,w,h)=>{
+    x.stroke();
+  }
 
-        const base=
-            ctx.createRadialGradient(
-                w*.52,
-                h*.48,
-                20,
-                w*.5,
-                h*.5,
-                w*.7
-            );
 
-        base.addColorStop(
-            0,
-            "#b94731"
-        );
+  /* tiny dark fibers */
 
-        base.addColorStop(
-            .42,
-            "#9d3024"
-        );
+  for(let i=0;i<1000;i++){
 
-        base.addColorStop(
-            .76,
-            "#651d16"
-        );
+    x.fillStyle=
+      `rgba(
+        30,
+        8,
+        8,
+        ${.04+rand()*.2}
+      )`;
 
-        base.addColorStop(
-            1,
-            "#29100c"
-        );
+    x.fillRect(
+      rand()*900,
+      rand()*900,
+      1+rand()*2,
+      1+rand()*2
+    );
+  }
 
-        ctx.fillStyle=base;
+  return c;
+}
 
-        ctx.fillRect(
-            0,
-            0,
-            w,
-            h
-        );
 
+/* ============================================================
+   CRUST TEXTURE
+============================================================ */
 
-        /* muscle fibers */
+function crustTexture(){
 
-        for(let i=0;i<600;i++){
+  const {c,x}=canvas(
+    600,
+    600
+  );
 
-            const x=
-                Math.random()*w;
+  x.fillStyle="#26150d";
 
-            const y=
-                Math.random()*h;
+  x.fillRect(
+    0,0,600,600
+  );
 
-            const len=
-                8+Math.random()*65;
+  for(let i=0;i<5000;i++){
 
-            ctx.beginPath();
+    const r=
+      .5+rand()*3;
 
-            ctx.moveTo(
-                x,
-                y
-            );
+    x.fillStyle=
+      rand()<.55
+      ?`rgba(8,5,3,${.45+rand()*.5})`
+      :`rgba(120,70,38,${.2+rand()*.5})`;
 
-            ctx.bezierCurveTo(
-                x+len*.3,
-                y+Math.random()*10-5,
-                x+len*.7,
-                y+Math.random()*10-5,
-                x+len,
-                y
-            );
+    x.beginPath();
 
-            ctx.strokeStyle=
-                Math.random()>.55
-                ? "rgba(245,142,107,.25)"
-                : "rgba(49,9,7,.28)";
+    x.arc(
+      rand()*600,
+      rand()*600,
+      r,
+      0,
+      Math.PI*2
+    );
 
-            ctx.lineWidth=
-                .5+Math.random()*2.1;
+    x.fill();
+  }
 
-            ctx.stroke();
+  for(let i=0;i<250;i++){
 
-        }
+    x.fillStyle=
+      "rgba(245,238,220,.9)";
 
+    x.fillRect(
+      rand()*600,
+      rand()*600,
+      1.5,
+      1.5
+    );
+  }
 
-        /* fat marbling */
+  return c;
+}
 
-        for(let i=0;i<85;i++){
 
-            const x=
-                w*.12+
-                Math.random()*w*.76;
-
-            const y=
-                h*.12+
-                Math.random()*h*.76;
-
-            const r=
-                4+Math.random()*22;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                r,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fillStyle=
-                "rgba(255,204,159,"+
-                (.12+Math.random()*.3)+
-                ")";
-
-            ctx.fill();
-
-        }
-
-
-        /* fine white fat */
-
-        for(let i=0;i<65;i++){
-
-            ctx.beginPath();
-
-            const x=
-                Math.random()*w;
-
-            const y=
-                Math.random()*h;
-
-            ctx.moveTo(
-                x,
-                y
-            );
-
-            ctx.quadraticCurveTo(
-                x+30+Math.random()*50,
-                y-10+Math.random()*20,
-                x+80+Math.random()*100,
-                y+Math.random()*20
-            );
-
-            ctx.strokeStyle=
-                "rgba(255,220,175,.27)";
-
-            ctx.lineWidth=
-                2+Math.random()*5;
-
-            ctx.stroke();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SEARED CRUST TEXTURE
-========================================================= */
-
-const crustTexture=
-makeTexture(
-    1000,
-    700,
-    (ctx,w,h)=>{
-
-        ctx.fillStyle="#1b0906";
-
-        ctx.fillRect(
-            0,
-            0,
-            w,
-            h
-        );
-
-
-        for(let i=0;i<700;i++){
-
-            const x=
-                Math.random()*w;
-
-            const y=
-                Math.random()*h;
-
-            const r=
-                1+Math.random()*8;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                r,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fillStyle=
-                Math.random()>.55
-                ? "rgba(108,48,25,.7)"
-                : "rgba(9,5,3,.7)";
-
-            ctx.fill();
-
-        }
-
-
-        for(let i=0;i<80;i++){
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                Math.random()*w,
-                Math.random()*h
-            );
-
-            ctx.lineTo(
-                Math.random()*w,
-                Math.random()*h
-            );
-
-            ctx.strokeStyle=
-                "rgba(229,156,87,.25)";
-
-            ctx.lineWidth=
-                2+Math.random()*4;
-
-            ctx.stroke();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
+/* ============================================================
    SALAMI
-========================================================= */
+============================================================ */
 
-const salamiTexture=
-makeTexture(
-    900,
-    900,
-    (ctx,w,h)=>{
+function salamiTexture(){
 
-        const g=
-            ctx.createRadialGradient(
-                w*.5,
-                h*.5,
-                10,
-                w*.5,
-                h*.5,
-                w*.7
-            );
+  const {c,x}=canvas(
+    600,
+    600
+  );
 
-        g.addColorStop(
-            0,
-            "#b9463b"
-        );
+  const g=
+    x.createRadialGradient(
+      300,300,10,
+      300,300,350
+    );
 
-        g.addColorStop(
-            .55,
-            "#8e2d29"
-        );
+  g.addColorStop(
+    0,
+    "#a94a43"
+  );
 
-        g.addColorStop(
-            1,
-            "#471513"
-        );
+  g.addColorStop(
+    1,
+    "#611c1d"
+  );
 
-        ctx.fillStyle=g;
+  x.fillStyle=g;
+  x.fillRect(
+    0,0,600,600
+  );
 
-        ctx.fillRect(
-            0,0,w,h
-        );
+  for(let i=0;i<2600;i++){
 
+    x.fillStyle=
+      `rgba(
+        245,
+        224,
+        205,
+        ${.35+rand()*.55}
+      )`;
 
-        for(let i=0;i<420;i++){
+    x.beginPath();
 
-            const x=
-                Math.random()*w;
+    x.arc(
+      rand()*600,
+      rand()*600,
+      .8+rand()*3.8,
+      0,
+      Math.PI*2
+    );
 
-            const y=
-                Math.random()*h;
+    x.fill();
+  }
 
-            const r=
-                .8+Math.random()*6;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                r,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fillStyle=
-                Math.random()>.45
-                ? "rgba(255,218,164,.78)"
-                : "rgba(54,10,8,.4)";
-
-            ctx.fill();
-
-        }
-
-    }
-);
+  return c;
+}
 
 
-/* =========================================================
-   PASTRAMI TEXTURE
-========================================================= */
+/* ============================================================
+   PICKLE
+============================================================ */
 
-const pastramiTexture=
-makeTexture(
-    1100,
-    700,
-    (ctx,w,h)=>{
+function pickleTexture(){
 
-        ctx.fillStyle="#5e2016";
+  const {c,x}=canvas(
+    600,
+    600
+  );
 
-        ctx.fillRect(
-            0,0,w,h
-        );
+  x.fillStyle="#597526";
 
+  x.fillRect(
+    0,0,600,600
+  );
 
-        for(let i=0;i<500;i++){
+  for(let i=0;i<1300;i++){
 
-            const x=
-                Math.random()*w;
+    x.fillStyle=
+      rand()<.5
+      ?"rgba(170,190,90,.18)"
+      :"rgba(25,40,10,.22)";
 
-            const y=
-                Math.random()*h;
+    x.beginPath();
 
-            ctx.beginPath();
+    x.ellipse(
+      rand()*600,
+      rand()*600,
+      3+rand()*18,
+      2+rand()*12,
+      rand()*Math.PI,
+      0,
+      Math.PI*2
+    );
 
-            ctx.arc(
-                x,
-                y,
-                1+Math.random()*7,
-                0,
-                Math.PI*2
-            );
+    x.fill();
+  }
 
-            ctx.fillStyle=
-                Math.random()>.6
-                ? "rgba(220,142,94,.32)"
-                : "rgba(25,6,4,.38)";
-
-            ctx.fill();
-
-        }
+  return c;
+}
 
 
-        for(let i=0;i<130;i++){
+const steakTex=
+  texture(steakTexture());
 
-            ctx.beginPath();
+const crustTex=
+  texture(crustTexture());
 
-            const x=
-                Math.random()*w;
+const salamiTex=
+  texture(salamiTexture());
 
-            const y=
-                Math.random()*h;
-
-            ctx.moveTo(
-                x,
-                y
-            );
-
-            ctx.lineTo(
-                x+40+Math.random()*120,
-                y-20+Math.random()*40
-            );
-
-            ctx.strokeStyle=
-                "rgba(230,159,110,.18)";
-
-            ctx.lineWidth=
-                1+Math.random()*3;
-
-            ctx.stroke();
-
-        }
-
-    }
-);
+const pickleTex=
+  texture(pickleTexture());
 
 
-/* =========================================================
+/* ============================================================
    MATERIALS
-========================================================= */
+============================================================ */
+
+const boardMaterial=
+new THREE.MeshPhysicalMaterial({
+  color:0x704522,
+  roughness:.68,
+  clearcoat:.3,
+  clearcoatRoughness:.4
+});
+
 
 const steakMaterial=
 new THREE.MeshPhysicalMaterial({
-
-    map:steakTexture,
-
-    roughness:.34,
-
-    metalness:0,
-
-    clearcoat:.22,
-
-    clearcoatRoughness:.28,
-
-    envMapIntensity:1.35
-
+  map:steakTex,
+  roughness:.38,
+  clearcoat:.55,
+  clearcoatRoughness:.25,
+  sheen:.5
 });
 
 
 const crustMaterial=
-new THREE.MeshPhysicalMaterial({
-
-    map:crustTexture,
-
-    roughness:.58,
-
-    metalness:0,
-
-    clearcoat:.12,
-
-    envMapIntensity:1.05
-
+new THREE.MeshStandardMaterial({
+  map:crustTex,
+  roughness:.92
 });
 
 
 const salamiMaterial=
 new THREE.MeshPhysicalMaterial({
-
-    map:salamiTexture,
-
-    roughness:.38,
-
-    clearcoat:.2,
-
-    clearcoatRoughness:.35,
-
-    envMapIntensity:1.25
-
+  map:salamiTex,
+  roughness:.42,
+  clearcoat:.45,
+  clearcoatRoughness:.3
 });
 
 
-const pastramiMaterial=
+const pickleMaterial=
 new THREE.MeshPhysicalMaterial({
-
-    map:pastramiTexture,
-
-    roughness:.4,
-
-    clearcoat:.18,
-
-    envMapIntensity:1.2
-
+  map:pickleTex,
+  roughness:.22,
+  clearcoat:1,
+  clearcoatRoughness:.13
 });
 
 
-/* =========================================================
-   REALISTIC BOARD
-========================================================= */
+const oliveGreen=
+new THREE.MeshPhysicalMaterial({
+  color:0x718c2d,
+  roughness:.2,
+  clearcoat:1
+});
 
-const boardGroup=
-    new THREE.Group();
 
-boardGroup.position.set(
-    .9,
-    -2.1,
-    0
-);
+const oliveBlack=
+new THREE.MeshPhysicalMaterial({
+  color:0x211b20,
+  roughness:.25,
+  clearcoat:.9
+});
 
-boardGroup.rotation.y=
-    -.09;
 
-scene.add(
-    boardGroup
-);
+const mustardMaterial=
+new THREE.MeshPhysicalMaterial({
+  color:0xe0a91c,
+  roughness:.3,
+  clearcoat:.65
+});
+
+
+const ceramicMaterial=
+new THREE.MeshPhysicalMaterial({
+  color:0xd5cdc0,
+  roughness:.32,
+  clearcoat:.3
+});
+
+
+/* ============================================================
+   BOARD
+============================================================ */
+
+function roundedBoard(){
+
+  const s=
+    new THREE.Shape();
+
+  const w=3.7;
+  const d=2.45;
+  const r=.18;
+
+  const x=-w/2;
+  const y=-d/2;
+
+  s.moveTo(x+r,y);
+
+  s.lineTo(
+    x+w-r,
+    y
+  );
+
+  s.quadraticCurveTo(
+    x+w,
+    y,
+    x+w,
+    y+r
+  );
+
+  s.lineTo(
+    x+w,
+    y+d-r
+  );
+
+  s.quadraticCurveTo(
+    x+w,
+    y+d,
+    x+w-r,
+    y+d
+  );
+
+  s.lineTo(
+    x+r,
+    y+d
+  );
+
+  s.quadraticCurveTo(
+    x,
+    y+d,
+    x,
+    y+d-r
+  );
+
+  s.lineTo(
+    x,
+    y+r
+  );
+
+  s.quadraticCurveTo(
+    x,
+    y,
+    x+r,
+    y
+  );
+
+  return s;
+}
 
 
 const boardGeometry=
-    new RoundedBoxGeometry(
-        9.2,
-        .58,
-        5.25,
-        .25,
-        8
-    );
+new THREE.ExtrudeGeometry(
+  roundedBoard(),
+  {
+    depth:.24,
+    bevelEnabled:true,
+    bevelThickness:.035,
+    bevelSize:.03,
+    bevelSegments:5
+  }
+);
 
+boardGeometry.rotateX(-Math.PI/2);
 
-const boardMaterial=
-new THREE.MeshPhysicalMaterial({
+boardGeometry.computeBoundingBox();
 
-    map:woodTexture,
-
-    roughness:.42,
-
-    metalness:.02,
-
-    clearcoat:.32,
-
-    clearcoatRoughness:.3,
-
-    envMapIntensity:1.1
-
-});
-
+boardGeometry.translate(
+  0,
+  -boardGeometry.boundingBox.max.y,
+  0
+);
 
 const board=
 new THREE.Mesh(
-    boardGeometry,
-    boardMaterial
+  boardGeometry,
+  boardMaterial
 );
 
 board.castShadow=true;
-
 board.receiveShadow=true;
 
-boardGroup.add(board);
+scene.add(board);
 
 
-/* board lower shadow layer */
+/* ============================================================
+   FOOD HELPERS
+============================================================ */
 
-const boardBottom=
-new THREE.Mesh(
-    new RoundedBoxGeometry(
-        9.35,
-        .22,
-        5.38,
-        .2,
-        6
-    ),
-    new THREE.MeshStandardMaterial({
-        color:"#1b0c06",
-        roughness:.75
-    })
-);
+function shadow(obj){
 
-boardBottom.position.y=-.34;
+  obj.traverse(
+    child=>{
+      if(child.isMesh){
+        child.castShadow=true;
+        child.receiveShadow=true;
+      }
+    }
+  );
 
-boardBottom.castShadow=true;
-
-boardGroup.add(
-    boardBottom
-);
+  return obj;
+}
 
 
-/* HANDLE */
+function steak(){
 
-const handle=
-new THREE.Mesh(
+  const g=
     new THREE.CylinderGeometry(
-        .43,
-        .43,
-        .9,
+      .34,
+      .33,
+      .075,
+      64
+    );
+
+  const p=
+    g.attributes.position;
+
+  const v=
+    new THREE.Vector3();
+
+  for(let i=0;i<p.count;i++){
+
+    v.fromBufferAttribute(
+      p,
+      i
+    );
+
+    const a=
+      Math.atan2(
+        v.z,
+        v.x
+      );
+
+    const irregular=
+      1+
+      .055*Math.sin(a*3)+
+      .035*Math.sin(a*7)+
+      .018*Math.sin(a*11);
+
+    v.x*=irregular;
+    v.z*=irregular;
+
+    p.setXYZ(
+      i,
+      v.x,
+      v.y,
+      v.z
+    );
+  }
+
+  g.scale.set(
+    1.2,
+    1,
+    .95
+  );
+
+  const mesh=
+    new THREE.Mesh(
+      g,
+      [
+        crustMaterial,
+        steakMaterial,
+        steakMaterial
+      ]
+    );
+
+  mesh.position.y=.075;
+
+  return shadow(mesh);
+}
+
+
+function salami(){
+
+  const g=
+    new THREE.CylinderGeometry(
+      .17,
+      .165,
+      .045,
+      48
+    );
+
+  const mesh=
+    new THREE.Mesh(
+      g,
+      [
+        crustMaterial,
+        salamiMaterial,
+        salamiMaterial
+      ]
+    );
+
+  mesh.position.y=.04;
+
+  return shadow(mesh);
+}
+
+
+function pickle(){
+
+  const g=
+    new THREE.CapsuleGeometry(
+      .075,
+      .52,
+      10,
+      30
+    );
+
+  g.rotateZ(Math.PI/2);
+
+  const p=
+    g.attributes.position;
+
+  const v=
+    new THREE.Vector3();
+
+  for(let i=0;i<p.count;i++){
+
+    v.fromBufferAttribute(
+      p,
+      i
+    );
+
+    const n=
+      1+
+      .04*Math.sin(v.x*15)+
+      .025*Math.sin(v.z*22);
+
+    v.y*=n;
+
+    p.setXYZ(
+      i,
+      v.x,
+      v.y,
+      v.z
+    );
+  }
+
+  const mesh=
+    new THREE.Mesh(
+      g,
+      pickleMaterial
+    );
+
+  mesh.position.y=.085;
+
+  return shadow(mesh);
+}
+
+
+function olive(green){
+
+  const g=
+    new THREE.SphereGeometry(
+      .08,
+      28,
+      20
+    );
+
+  g.scale(
+    1,
+    .86,
+    1
+  );
+
+  const mesh=
+    new THREE.Mesh(
+      g,
+      green
+      ?oliveGreen
+      :oliveBlack
+    );
+
+  mesh.position.y=.085;
+
+  return shadow(mesh);
+}
+
+
+function mustard(){
+
+  const group=
+    new THREE.Group();
+
+  const bowl=
+    new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        .27,
+        .22,
+        .13,
         48
-    ),
-    boardMaterial
-);
+      ),
+      ceramicMaterial
+    );
 
-handle.rotation.z=
-    Math.PI/2;
+  bowl.position.y=.08;
 
-handle.position.set(
-    5.02,
-    .02,
-    0
-);
-
-handle.castShadow=true;
-
-boardGroup.add(handle);
+  group.add(bowl);
 
 
-/* =========================================================
-   FOOD OBJECT REGISTRY
-========================================================= */
+  const sauce=
+    new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        .205,
+        .205,
+        .018,
+        48
+      ),
+      mustardMaterial
+    );
 
-const food=[];
+  sauce.position.y=.155;
+
+  group.add(sauce);
+
+  return shadow(group);
+}
 
 
-/* =========================================================
-   REALISTIC STEAK FUNCTION
-========================================================= */
+/* ============================================================
+   ANIMATION PIECES
+============================================================ */
 
-function makeSteak(
-    scale=1,
-    crust=false
+const pieces=[];
+
+function addPiece(
+  object,
+  x,
+  z,
+  rotation,
+  delay,
+  duration
 ){
 
-    const group=
-        new THREE.Group();
+  const startAngle=
+    pieces.length*2.4;
 
+  const radius=
+    2.5+
+    (pieces.length%4)*.18;
 
-    const main=
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                1,
-                48,
-                32
-            ),
-            steakMaterial
-        );
-
-
-    main.scale.set(
-        1.45*scale,
-        .42*scale,
-        1.0*scale
+  const start=
+    new THREE.Vector3(
+      Math.sin(startAngle)*radius,
+      2.0+
+      (pieces.length%3)*.35,
+      Math.cos(startAngle)*radius
     );
 
+  object.position.copy(start);
 
-    main.castShadow=true;
+  object.rotation.set(
+    rnd(-.25,.25),
+    rnd(-.7,.7),
+    rnd(-.2,.2)
+  );
 
-    main.receiveShadow=true;
+  scene.add(object);
 
-    group.add(main);
+  pieces.push({
 
+    object,
 
-    /* dark seared outer layer */
+    start,
 
-    const edge=
-        new THREE.Mesh(
-            new THREE.TorusGeometry(
-                .84*scale,
-                .08*scale,
-                16,
-                64
-            ),
-            crustMaterial
-        );
+    end:new THREE.Vector3(
+      x,
+      object.position.y,
+      z
+    ),
 
+    endRotation:rotation,
 
-    edge.rotation.x=
-        Math.PI/2;
+    delay,
 
-    edge.scale.set(
-        1.45,
-        .72,
-        1
-    );
+    duration,
 
-    edge.position.y=
-        .025;
+    phase:rand()*Math.PI*2
 
-    edge.castShadow=true;
-
-    group.add(edge);
-
-
-    /* glossy fat center */
-
-    const fat=
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .58*scale,
-                32,
-                24
-            ),
-            new THREE.MeshPhysicalMaterial({
-
-                color:"#e9a57b",
-
-                roughness:.27,
-
-                clearcoat:.55,
-
-                clearcoatRoughness:.18
-
-            })
-        );
-
-
-    fat.scale.set(
-        1.12,
-        .17,
-        .62
-    );
-
-    fat.position.set(
-        -.15*scale,
-        .36*scale,
-        .02
-    );
-
-    group.add(fat);
-
-
-    return group;
-
+  });
 }
 
 
-/* =========================================================
-   RIBEYE
-========================================================= */
+/* ============================================================
+   BOARD COMPOSITION
+============================================================ */
 
-const ribeye=
-    makeSteak(
-        1.08
-    );
+let n=0;
 
-ribeye.position.set(
-    2.1,
-    5.7,
-    .2
+addPiece(
+  mustard(),
+  -1.15,
+  .7,
+  .4,
+  n++*.045,
+  .28
 );
 
-ribeye.rotation.set(
-    -.12,
-    -.35,
-    -.14
+
+addPiece(
+  salami(),
+  -1.3,
+  -.35,
+  .5,
+  n++*.045,
+  .25
 );
 
-scene.add(ribeye);
-
-
-food.push({
-
-    mesh:ribeye,
-
-    start:new THREE.Vector3(
-        2.1,
-        5.7,
-        .2
-    ),
-
-    target:new THREE.Vector3(
-        1.8,
-        -1.25,
-        .3
-    ),
-
-    startRotation:
-        ribeye.rotation.clone(),
-
-    targetRotation:
-        new THREE.Euler(
-            .08,
-            -.22,
-            -.16
-        ),
-
-    delay:.02,
-
-    duration:.44,
-
-    arc:2.2
-
-});
-
-
-/* =========================================================
-   NY STRIP
-========================================================= */
-
-const strip=
-    makeSteak(
-        .84
-    );
-
-strip.scale.z=
-    1.25;
-
-strip.position.set(
-    4.7,
-    7.2,
-    -1
+addPiece(
+  salami(),
+  -1.05,
+  -.52,
+  -.35,
+  n++*.045,
+  .25
 );
 
-strip.rotation.set(
-    .16,
-    .38,
-    .18
+addPiece(
+  salami(),
+  -1.22,
+  -.68,
+  1.05,
+  n++*.045,
+  .25
 );
-
-scene.add(strip);
-
-
-food.push({
-
-    mesh:strip,
-
-    start:strip.position.clone(),
-
-    target:new THREE.Vector3(
-        2.8,
-        -1.05,
-        -.35
-    ),
-
-    startRotation:
-        strip.rotation.clone(),
-
-    targetRotation:
-        new THREE.Euler(
-            .12,
-            .28,
-            .17
-        ),
-
-    delay:.13,
-
-    duration:.48,
-
-    arc:2.6
-
-});
-
-
-/* =========================================================
-   THIRD STEAK
-========================================================= */
-
-const steak3=
-    makeSteak(
-        .76
-    );
-
-steak3.scale.z=
-    1.25;
-
-steak3.position.set(
-    6.1,
-    6.2,
-    1
-);
-
-steak3.rotation.set(
-    -.1,
-    -.6,
-    .2
-);
-
-scene.add(steak3);
-
-
-food.push({
-
-    mesh:steak3,
-
-    start:steak3.position.clone(),
-
-    target:new THREE.Vector3(
-        .4,
-        -.88,
-        .95
-    ),
-
-    startRotation:
-        steak3.rotation.clone(),
-
-    targetRotation:
-        new THREE.Euler(
-            -.1,
-            -.4,
-            -.18
-        ),
-
-    delay:.25,
-
-    duration:.49,
-
-    arc:2.8
-
-});
-
-
-/* =========================================================
-   PASTRAMI
-========================================================= */
-
-const pastrami=
-new THREE.Mesh(
-    new THREE.SphereGeometry(
-        1,
-        48,
-        28
-    ),
-    pastramiMaterial
-);
-
-pastrami.scale.set(
-    1.65,
-    .19,
-    .72
-);
-
-pastrami.position.set(
-    -2.5,
-    6.6,
-    -.3
-);
-
-pastrami.rotation.set(
-    .2,
-    -.2,
-    -.35
-);
-
-pastrami.castShadow=true;
-
-scene.add(pastrami);
-
-
-food.push({
-
-    mesh:pastrami,
-
-    start:pastrami.position.clone(),
-
-    target:new THREE.Vector3(
-        -.75,
-        -.62,
-        -.45
-    ),
-
-    startRotation:
-        pastrami.rotation.clone(),
-
-    targetRotation:
-        new THREE.Euler(
-            .12,
-            .15,
-            .34
-        ),
-
-    delay:.38,
-
-    duration:.48,
-
-    arc:2.35
-
-});
-
-
-/* =========================================================
-   SALAMI
-========================================================= */
-
-function makeSalami(){
-
-    const group=
-        new THREE.Group();
-
-
-    const slice=
-        new THREE.Mesh(
-            new THREE.CylinderGeometry(
-                .72,
-                .72,
-                .17,
-                64
-            ),
-            salamiMaterial
-        );
-
-
-    slice.rotation.x=
-        Math.PI/2;
-
-    slice.castShadow=true;
-
-    group.add(slice);
-
-
-    /* pale fat spots */
-
-    for(let i=0;i<14;i++){
-
-        const spot=
-            new THREE.Mesh(
-                new THREE.SphereGeometry(
-                    .035+
-                    Math.random()*.07,
-                    12,
-                    12
-                ),
-                new THREE.MeshStandardMaterial({
-                    color:"#f4d6a7",
-                    roughness:.5
-                })
-            );
-
-        const a=
-            Math.random()*
-            Math.PI*2;
-
-        const r=
-            Math.random()*.48;
-
-        spot.position.set(
-            Math.cos(a)*r,
-            .11,
-            Math.sin(a)*r
-        );
-
-        group.add(spot);
-
-    }
-
-
-    return group;
-
-}
-
-
-const salami=
-    makeSalami();
-
-salami.position.set(
-    5.8,
-    6.1,
-    -.1
-);
-
-salami.rotation.set(
-    .3,
-    .2,
-    -.2
-);
-
-scene.add(salami);
-
-
-food.push({
-
-    mesh:salami,
-
-    start:salami.position.clone(),
-
-    target:new THREE.Vector3(
-        -1.3,
-        -.53,
-        .6
-    ),
-
-    startRotation:
-        salami.rotation.clone(),
-
-    targetRotation:
-        new THREE.Euler(
-            .1,
-            .2,
-            -.25
-        ),
-
-    delay:.51,
-
-    duration:.44,
-
-    arc:2.4
-
-});
-
-
-/* =========================================================
-   PICKLES
-========================================================= */
-
-function makePickle(){
-
-    const group=
-        new THREE.Group();
-
-
-    const body=
-        new THREE.Mesh(
-            new THREE.CapsuleGeometry(
-                .24,
-                .85,
-                10,
-                24
-            ),
-            new THREE.MeshPhysicalMaterial({
-
-                color:"#71852b",
-
-                roughness:.46,
-
-                clearcoat:.22,
-
-                clearcoatRoughness:.4
-
-            })
-        );
-
-
-    body.scale.set(
-        .65,
-        .45,
-        .65
-    );
-
-    body.castShadow=true;
-
-    group.add(body);
-
-
-    /* bumps */
-
-    for(let i=0;i<10;i++){
-
-        const bump=
-            new THREE.Mesh(
-                new THREE.SphereGeometry(
-                    .045,
-                    10,
-                    10
-                ),
-                new THREE.MeshStandardMaterial({
-                    color:"#a1ad55",
-                    roughness:.55
-                })
-            );
-
-
-        bump.position.set(
-            (Math.random()-.5)*.25,
-            (Math.random()-.5)*.25,
-            .2
-        );
-
-        group.add(bump);
-
-    }
-
-
-    return group;
-
-}
 
 
 for(let i=0;i<4;i++){
 
-    const pickle=
-        makePickle();
+  addPiece(
+    salami(),
+    -.65+i*.15,
+    -.5-i*.06,
+    i*.7,
+    n++*.04,
+    .24
+  );
 
-    pickle.position.set(
-        -4+i*2,
-        5.2+i*.5,
+}
+
+
+for(let i=0;i<3;i++){
+
+  addPiece(
+    pickle(),
+    .55+i*.34,
+    .65+i*.12,
+    -.3+i*.3,
+    n++*.05,
+    .28
+  );
+
+}
+
+
+for(let i=0;i<3;i++){
+
+  addPiece(
+    olive(true),
+    -.6+i*.14,
+    .9,
+    i,
+    n++*.035,
+    .22
+  );
+
+}
+
+
+for(let i=0;i<3;i++){
+
+  addPiece(
+    olive(false),
+    -.2+i*.14,
+    .85,
+    i,
+    n++*.035,
+    .22
+  );
+
+}
+
+
+/* HERO STEAKS */
+
+addPiece(
+  steak(),
+  -.32,
+  .12,
+  .15,
+  n++*.08,
+  .42
+);
+
+addPiece(
+  steak(),
+  .18,
+  .02,
+  -.38,
+  n++*.08,
+  .42
+);
+
+addPiece(
+  steak(),
+  .62,
+  -.2,
+  .45,
+  n++*.08,
+  .42
+);
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+const cameraPosition=
+new THREE.Vector3();
+
+function updateCamera(progress){
+
+  const p=
+    THREE.MathUtils.clamp(
+      progress,
+      0,
+      1
+    );
+
+  const angle=
+    THREE.MathUtils.lerp(
+      -.72,
+      -.38,
+      p
+    );
+
+  const radius=
+    THREE.MathUtils.lerp(
+      5.9,
+      5.15,
+      p
+    );
+
+  const polar=
+    THREE.MathUtils.lerp(
+      1.16,
+      1.08,
+      p
+    );
+
+  const s=
+    Math.sin(polar);
+
+  cameraPosition.set(
+    Math.sin(angle)*s*radius,
+    Math.cos(polar)*radius,
+    Math.cos(angle)*s*radius
+  );
+
+  cameraPosition.add(target);
+
+  camera.position.copy(
+    cameraPosition
+  );
+
+  camera.lookAt(target);
+}
+
+
+/* ============================================================
+   SCROLL PROGRESS
+============================================================ */
+
+function getProgress(){
+
+  const hero=
+    document.getElementById(
+      "heroScroll"
+    );
+
+  const rect=
+    hero.getBoundingClientRect();
+
+  const travel=
+    Math.max(
+      1,
+      hero.offsetHeight-
+      window.innerHeight
+    );
+
+  return THREE.MathUtils.clamp(
+    -rect.top/travel,
+    0,
+    1
+  );
+}
+
+
+function updateAnimation(){
+
+  const progress=
+    getProgress();
+
+  const total=
+    pieces.length;
+
+  for(let i=0;i<total;i++){
+
+    const item=
+      pieces[i];
+
+    const local=
+      (progress-
+      item.delay*.035)/
+      .92;
+
+    const p=
+      THREE.MathUtils.clamp(
+        local,
+        0,
         1
+      );
+
+    const e=ease(p);
+
+    const x=
+      THREE.MathUtils.lerp(
+        item.start.x,
+        item.end.x,
+        e
+      );
+
+    const z=
+      THREE.MathUtils.lerp(
+        item.start.z,
+        item.end.z,
+        e
+      );
+
+    const y=
+      THREE.MathUtils.lerp(
+        item.start.y,
+        item.end.y,
+        e
+      )
+      +
+      Math.sin(
+        Math.PI*e
+      )*.35;
+
+    item.object.position.set(
+      x,
+      y,
+      z
     );
 
-    pickle.rotation.set(
-        Math.random(),
-        Math.random(),
-        Math.random()
-    );
 
-    scene.add(pickle);
+    const fallingSpin=
+      (1-e)*1.4;
+
+    item.object.rotation.x=
+      Math.sin(
+        item.phase+
+        progress*8
+      )*.15+
+      fallingSpin;
+
+    item.object.rotation.y=
+      THREE.MathUtils.lerp(
+        item.object.rotation.y,
+        item.endRotation,
+        e*.08
+      );
+
+    item.object.rotation.z=
+      Math.cos(
+        item.phase+
+        progress*7
+      )*.12+
+      (1-e)*.4;
+  }
 
 
-    food.push({
+  updateCamera(progress);
 
-        mesh:pickle,
-
-        start:pickle.position.clone(),
-
-        target:new THREE.Vector3(
-            -2.6+i*1.25,
-            -.54,
-            .9+(i%2)*.5
-        ),
-
-        startRotation:
-            pickle.rotation.clone(),
-
-        targetRotation:
-            new THREE.Euler(
-                Math.random(),
-                Math.random(),
-                Math.random()
-            ),
-
-        delay:.67+i*.06,
-
-        duration:.37,
-
-        arc:1.7
-
-    });
-
+  document
+    .getElementById("progress")
+    .style.transform=
+      `scaleX(${progress})`;
 }
 
 
-/* =========================================================
-   OLIVES
-========================================================= */
+/* ============================================================
+   POST PROCESSING
+============================================================ */
 
-function makeOlive(color){
+let composer=null;
+let bokeh=null;
 
-    const olive=
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .23,
-                32,
-                24
-            ),
-            new THREE.MeshPhysicalMaterial({
+try{
 
-                color,
-
-                roughness:.25,
-
-                clearcoat:.48,
-
-                clearcoatRoughness:.2
-
-            })
-        );
-
-
-    olive.scale.y=.82;
-
-    olive.castShadow=true;
-
-    return olive;
-
-}
-
-
-for(let i=0;i<8;i++){
-
-    const olive=
-        makeOlive(
-            i%2
-            ? "#55641e"
-            : "#16130d"
-        );
-
-
-    olive.position.set(
-        -4+i*1.15,
-        5.3+i*.3,
-        -.7
+  composer=
+    new EffectComposer(
+      renderer
     );
 
-
-    scene.add(olive);
-
-
-    food.push({
-
-        mesh:olive,
-
-        start:olive.position.clone(),
-
-        target:new THREE.Vector3(
-            -3.1+i*.85,
-            -.52,
-            -1+(i%2)*.42
-        ),
-
-        startRotation:
-            new THREE.Euler(
-                Math.random(),
-                Math.random(),
-                Math.random()
-            ),
-
-        targetRotation:
-            new THREE.Euler(
-                Math.random(),
-                Math.random(),
-                Math.random()
-            ),
-
-        delay:.9+i*.04,
-
-        duration:.32,
-
-        arc:1.45
-
-    });
-
-}
-
-
-/* =========================================================
-   ROSEMARY
-========================================================= */
-
-function makeRosemary(){
-
-    const group=
-        new THREE.Group();
-
-
-    for(let i=0;i<10;i++){
-
-        const leaf=
-            new THREE.Mesh(
-                new THREE.ConeGeometry(
-                    .025,
-                    .28,
-                    7
-                ),
-                new THREE.MeshStandardMaterial({
-                    color:"#334923",
-                    roughness:.65
-                })
-            );
-
-
-        leaf.rotation.z=
-            Math.PI/2;
-
-        leaf.rotation.y=
-            Math.random()*.4;
-
-        leaf.position.set(
-            Math.sin(i*.55)*.12,
-            i*.08-.4,
-            Math.cos(i*.55)*.12
-        );
-
-        group.add(leaf);
-
-    }
-
-
-    return group;
-
-}
-
-
-const rosemary=
-    makeRosemary();
-
-rosemary.position.set(
-    5,
-    5,
-    .8
-);
-
-scene.add(rosemary);
-
-
-food.push({
-
-    mesh:rosemary,
-
-    start:rosemary.position.clone(),
-
-    target:new THREE.Vector3(
-        2.6,
-        -.3,
-        1.1
-    ),
-
-    startRotation:
-        new THREE.Euler(
-            0,
-            0,
-            -.3
-        ),
-
-    targetRotation:
-        new THREE.Euler(
-            0,
-            .2,
-            .25
-        ),
-
-    delay:1.15,
-
-    duration:.35,
-
-    arc:1.5
-
-});
-
-
-/* =========================================================
-   MUSTARD BOWL
-========================================================= */
-
-const bowl=
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            .58,
-            .44,
-            .24,
-            64
-        ),
-        new THREE.MeshPhysicalMaterial({
-
-            color:"#11100d",
-
-            roughness:.2,
-
-            clearcoat:.55,
-
-            clearcoatRoughness:.15
-
-        })
-    );
-
-
-bowl.position.set(
-    4,
-    5.5,
-    1
-);
-
-bowl.castShadow=true;
-
-scene.add(bowl);
-
-
-food.push({
-
-    mesh:bowl,
-
-    start:bowl.position.clone(),
-
-    target:new THREE.Vector3(
-        3.5,
-        -.55,
-        1.45
-    ),
-
-    startRotation:
-        new THREE.Euler(),
-
-    targetRotation:
-        new THREE.Euler(),
-
-    delay:1.24,
-
-    duration:.34,
-
-    arc:1.3
-
-});
-
-
-const mustard=
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            .42,
-            .35,
-            .09,
-            64
-        ),
-        new THREE.MeshPhysicalMaterial({
-
-            color:"#b77c19",
-
-            roughness:.3,
-
-            clearcoat:.35
-
-        })
-    );
-
-
-mustard.position.set(
-    4,
-    5.68,
-    1
-);
-
-scene.add(mustard);
-
-
-food.push({
-
-    mesh:mustard,
-
-    start:mustard.position.clone(),
-
-    target:new THREE.Vector3(
-        3.5,
-        -.38,
-        1.45
-    ),
-
-    startRotation:
-        new THREE.Euler(),
-
-    targetRotation:
-        new THREE.Euler(),
-
-    delay:1.31,
-
-    duration:.3,
-
-    arc:1.2
-
-});
-
-
-/* =========================================================
-   PEPPER PARTICLES
-========================================================= */
-
-const particleGeometry=
-    new THREE.BufferGeometry();
-
-const particleCount=260;
-
-const positions=
-    new Float32Array(
-        particleCount*3
-    );
-
-for(let i=0;i<particleCount;i++){
-
-    positions[i*3]=
-        (Math.random()-.5)*11;
-
-    positions[i*3+1]=
-        Math.random()*7-1;
-
-    positions[i*3+2]=
-        (Math.random()-.5)*6;
-
-}
-
-particleGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(
-        positions,
-        3
+  composer.addPass(
+    new RenderPass(
+      scene,
+      camera
     )
-);
+  );
 
-
-const particleMaterial=
-new THREE.PointsMaterial({
-
-    color:"#d8bd8b",
-
-    size:.025,
-
-    transparent:true,
-
-    opacity:.42,
-
-    depthWrite:false
-
-});
-
-
-const particles=
-    new THREE.Points(
-        particleGeometry,
-        particleMaterial
+  bokeh=
+    new BokehPass(
+      scene,
+      camera,
+      {
+        focus:5,
+        aperture:.0022,
+        maxblur:.0025
+      }
     );
 
-scene.add(particles);
+  composer.addPass(bokeh);
 
+  composer.addPass(
+    new OutputPass()
+  );
 
-/* =========================================================
-   SCROLL ANIMATION
-========================================================= */
+}catch(error){
 
-let smoothProgress=0;
-
-let currentProgress=0;
-
-
-function easeInOutCubic(t){
-
-    return t<.5
-
-        ? 4*t*t*t
-
-        : 1-
-          Math.pow(
-              -2*t+2,
-              3
-          )/2;
+  console.log(
+    "Post processing unavailable"
+  );
 
 }
 
 
-function clamp(
-    value,
-    min,
-    max
-){
-
-    return Math.max(
-        min,
-        Math.min(
-            max,
-            value
-        )
-    );
-
-}
-
-
-function updateScrollAnimation(){
-
-    const stage=
-        document.querySelector(
-            ".hero-stage"
-        );
-
-
-    const rect=
-        stage.getBoundingClientRect();
-
-
-    const travel=
-        stage.offsetHeight-
-        window.innerHeight;
-
-
-    const progress=
-        clamp(
-            -rect.top/
-            Math.max(
-                travel,
-                1
-            ),
-            0,
-            1
-        );
-
-
-    currentProgress=
-        progress;
-
-
-    /*
-       0–15%:
-       Food is high in the air.
-
-       15–82%:
-       Food visibly falls.
-
-       82–100%:
-       Food settles.
-    */
-
-    food.forEach(
-        (item,index)=>{
-
-            const start=
-                item.start;
-
-            const target=
-                item.target;
-
-
-            let p=
-                (
-                    progress-
-                    item.delay*.45
-                )/
-                item.duration;
-
-
-            p=
-                clamp(
-                    p,
-                    0,
-                    1
-                );
-
-
-            const eased=
-                easeInOutCubic(p);
-
-
-            item.mesh.position.lerpVectors(
-                start,
-                target,
-                eased
-            );
-
-
-            /*
-               Large cinematic arc.
-               This keeps the meat clearly
-               visible in the air while scrolling.
-            */
-
-            const arc=
-                Math.sin(
-                    Math.PI*p
-                )*
-                item.arc;
-
-
-            item.mesh.position.y+=arc;
-
-
-            /*
-               Natural tumbling while falling.
-            */
-
-            const fallSpin=
-                (1-eased)*.45;
-
-            item.mesh.rotation.x=
-                THREE.MathUtils.lerp(
-                    item.startRotation.x,
-                    item.targetRotation.x,
-                    eased
-                )
-                +
-                Math.sin(
-                    progress*20+
-                    index
-                )*
-                fallSpin;
-
-
-            item.mesh.rotation.y=
-                THREE.MathUtils.lerp(
-                    item.startRotation.y,
-                    item.targetRotation.y,
-                    eased
-                )
-                +
-                Math.cos(
-                    progress*17+
-                    index
-                )*
-                fallSpin;
-
-
-            item.mesh.rotation.z=
-                THREE.MathUtils.lerp(
-                    item.startRotation.z,
-                    item.targetRotation.z,
-                    eased
-                )
-                +
-                Math.sin(
-                    progress*15+
-                    index*2
-                )*
-                fallSpin;
-
-
-            /*
-               Small landing bounce.
-            */
-
-            if(p>.88){
-
-                const landing=
-                    (p-.88)/.12;
-
-                item.mesh.position.y+=
-                    Math.sin(
-                        landing*Math.PI*2
-                    )*
-                    .12*
-                    (1-landing);
-
-            }
-
-        }
-    );
-
-
-    /*
-       Particles fall slightly
-       behind the food.
-    */
-
-    particles.position.y=
-        -progress*1.2;
-
-
-    /*
-       Camera moves slightly closer
-       as the food lands.
-    */
-
-    const cameraProgress=
-        clamp(
-            progress,
-            0,
-            1
-        );
-
-
-    camera.position.z=
-        THREE.MathUtils.lerp(
-            14,
-            12.8,
-            cameraProgress
-        );
-
-
-    camera.position.y=
-        THREE.MathUtils.lerp(
-            2.9,
-            2.45,
-            cameraProgress
-        );
-
-
-    camera.lookAt(
-        .9,
-        -1,
-        0
-    );
-
-
-    /*
-       Hide scroll indicator after
-       animation has progressed.
-    */
-
-    const status=
-        document.querySelector(
-            ".scroll-status"
-        );
-
-    if(status){
-
-        status.style.opacity=
-            progress>.8
-            ? "0"
-            : "1";
-
-    }
-
-}
-
-
-/* =========================================================
-   MOUSE PARALLAX
-========================================================= */
+/* ============================================================
+   POINTER MOVEMENT
+============================================================ */
 
 let mouseX=0;
-
 let mouseY=0;
 
-let smoothMouseX=0;
+window.addEventListener(
+  "pointermove",
+  e=>{
 
-let smoothMouseY=0;
+    mouseX=
+      e.clientX/
+      window.innerWidth*2-1;
+
+    mouseY=
+      e.clientY/
+      window.innerHeight*2-1;
+
+  },
+  {passive:true}
+);
+
+
+/* ============================================================
+   RENDER
+============================================================ */
+
+function resize(){
+
+  const w=
+    window.innerWidth;
+
+  const h=
+    window.innerHeight;
+
+  camera.aspect=
+    w/h;
+
+  camera.updateProjectionMatrix();
+
+  const dpr=
+    Math.min(
+      window.devicePixelRatio||1,
+      2
+    );
+
+  renderer.setPixelRatio(dpr);
+
+  renderer.setSize(
+    w,
+    h
+  );
+
+  if(composer){
+
+    composer.setPixelRatio(dpr);
+
+    composer.setSize(
+      w,
+      h
+    );
+
+  }
+}
 
 
 window.addEventListener(
-    "mousemove",
-    event=>{
+  "resize",
+  resize
+);
 
-        mouseX=
-            event.clientX/
-            window.innerWidth-
-            .5;
+window.addEventListener(
+  "orientationchange",
+  ()=>{
+    setTimeout(
+      resize,
+      150
+    );
+  }
+);
 
-        mouseY=
-            event.clientY/
-            window.innerHeight-
-            .5;
-
-    }
+window.addEventListener(
+  "scroll",
+  updateAnimation,
+  {passive:true}
 );
 
 
-/* =========================================================
+/* ============================================================
    ANIMATION LOOP
-========================================================= */
+============================================================ */
 
-function animate(time){
+function animate(){
 
-    requestAnimationFrame(
-        animate
-    );
+  requestAnimationFrame(
+    animate
+  );
 
+  const progress=
+    getProgress();
 
-    updateScrollAnimation();
+  updateAnimation();
 
+  /* subtle living movement */
 
-    smoothMouseX+=
-        (
-            mouseX-
-            smoothMouseX
-        )*.025;
+  key.position.x=
+    3+
+    Math.sin(
+      performance.now()*.00025
+    )*.2;
 
+  if(bokeh){
 
-    smoothMouseY+=
-        (
-            mouseY-
-            smoothMouseY
-        )*.025;
+    bokeh.uniforms
+      .focus.value=
+      camera.position
+        .distanceTo(target);
 
+  }
 
-    /*
-       Subtle cinematic camera parallax.
-    */
-
-    camera.position.x=
-        THREE.MathUtils.lerp(
-            camera.position.x,
-            .9+
-            smoothMouseX*.65,
-            .025
-        );
-
-
-    camera.position.y+=
-        (
-            2.45-
-            smoothMouseY*.35-
-            camera.position.y
-        )*.012;
-
-
-    camera.lookAt(
-        .9,
-        -1,
-        0
-    );
-
-
-    /*
-       Warm moving restaurant-style light.
-    */
-
-    warmLight.position.x=
-        Math.sin(
-            time*.00045
-        )*4.5;
-
-
-    warmLight.position.z=
-        Math.cos(
-            time*.00045
-        )*4;
-
-
-    /*
-       Tiny movement in ambient particles.
-    */
-
-    particles.rotation.y=
-        time*.000025;
-
+  if(composer){
 
     composer.render();
 
+  }else{
+
+    renderer.render(
+      scene,
+      camera
+    );
+
+  }
 }
 
+
+resize();
+
+updateAnimation();
 
 animate();
 
 
-/* =========================================================
-   RESIZE
-========================================================= */
+/* ============================================================
+   BOARD BUILDER
+============================================================ */
 
-function resize(){
-
-    const width=
-        canvas.clientWidth;
-
-    const height=
-        canvas.clientHeight;
-
-
-    camera.aspect=
-        width/height;
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
-
-
-    composer.setSize(
-        width,
-        height
-    );
-
-}
-
-
-window.addEventListener(
-    "resize",
-    resize
-);
-
-resize();
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-window.addEventListener(
-    "load",
-    ()=>{
-
-        setTimeout(
-            ()=>{
-
-                document
-                .getElementById(
-                    "loader"
-                )
-                .classList.add(
-                    "hide"
-                );
-
-            },
-            700
-        );
-
-    }
-);
-
-</script>
-
-
-<!-- =========================================================
-     SITE JAVASCRIPT
-========================================================= -->
-
-<script>
-
-
-/* =========================================================
-   REVEAL ANIMATIONS
-========================================================= */
-
-const observer=
-new IntersectionObserver(
-    entries=>{
-
-        entries.forEach(
-            entry=>{
-
-                if(
-                    entry.isIntersecting
-                ){
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                }
-
-            }
-        );
-
-    },
-    {
-        threshold:.12
-    }
-);
+let selectedSize="Small";
+let selectedCuts=[];
+let selectedExtras=[];
 
 
 document
-.querySelectorAll(
-    ".reveal"
-)
-.forEach(
-    element=>{
+  .querySelectorAll(
+    "#sizesOptions .option"
+  )
+  .forEach(option=>{
 
-        observer.observe(
-            element
+    option.addEventListener(
+      "click",
+      ()=>{
+
+        document
+          .querySelectorAll(
+            "#sizesOptions .option"
+          )
+          .forEach(o=>
+            o.classList.remove(
+              "active"
+            )
+          );
+
+        option.classList.add(
+          "active"
         );
 
-    }
-);
+        selectedSize=
+          option.dataset.size;
 
+        document
+          .getElementById(
+            "summarySize"
+          )
+          .textContent=
+            selectedSize;
+      }
+    );
 
-/* =========================================================
-   BUILDER OPTIONS
-========================================================= */
+  });
+
 
 document
-.querySelectorAll(
-    ".option"
-)
-.forEach(
-    button=>{
+  .querySelectorAll(
+    "#cutsOptions .option"
+  )
+  .forEach(option=>{
 
-        button.addEventListener(
-            "click",
-            ()=>{
+    option.addEventListener(
+      "click",
+      ()=>{
 
-                const group=
-                    button.dataset.group;
+        const cut=
+          option.dataset.cut;
 
+        if(
+          selectedCuts.includes(cut)
+        ){
 
-                if(!group){
-                    return;
-                }
-
-
-                /*
-                   Size and seasoning
-                   allow one selection.
-                */
-
-                if(
-                    group==="size" ||
-                    group==="seasoning"
-                ){
-
-                    document
-                    .querySelectorAll(
-                        `.option[data-group="${group}"]`
-                    )
-                    .forEach(
-                        item=>{
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-                }
-
-
-                button.classList.toggle(
-                    "active"
-                );
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   CUSTOM BOARD EMAIL
-========================================================= */
-
-function sendBuilderRequest(){
-
-    const selected={};
-
-
-    document
-    .querySelectorAll(
-        ".option.active"
-    )
-    .forEach(
-        button=>{
-
-            const group=
-                button.dataset.group;
-
-
-            if(
-                !selected[group]
-            ){
-
-                selected[group]=[];
-
-            }
-
-
-            selected[group].push(
-                button.innerText.trim()
+          selectedCuts=
+            selectedCuts.filter(
+              x=>x!==cut
             );
 
+          option.classList.remove(
+            "active"
+          );
+
+        }else{
+
+          selectedCuts.push(cut);
+
+          option.classList.add(
+            "active"
+          );
+
         }
+
+        document
+          .getElementById(
+            "summaryCuts"
+          )
+          .textContent=
+            selectedCuts.length
+            ?selectedCuts.join(", ")
+            :"None selected";
+      }
     );
 
+  });
 
-    const notes=
-        document
-        .getElementById(
-            "builderNotes"
-        )
-        .value;
-
-
-    const body=
-`
-BOARDS BY BARUCH
-CUSTOM BOARD REQUEST
-
-SIZE:
-${(selected.size||[]).join(", ")}
-
-CUTS:
-${(selected.cuts||[]).join(", ")}
-
-SEASONINGS:
-${(selected.seasoning||[]).join(", ")}
-
-SAUCES / DIPS:
-${(selected.sauce||[]).join(", ")}
-
-PICKLES / OLIVES:
-${(selected.garnish||[]).join(", ")}
-
-CUSTOM NOTES:
-${notes || "None"}
-
-Please contact me regarding my custom board.
-`;
-
-
-    window.location.href=
-        "mailto:baruch.aminov@icloud.com"
-        +
-        "?subject="
-        +
-        encodeURIComponent(
-            "Custom Board Request — Boards by Baruch"
-        )
-        +
-        "&body="
-        +
-        encodeURIComponent(
-            body
-        );
-
-}
-
-
-/* =========================================================
-   SMOOTH NAVIGATION
-========================================================= */
 
 document
-.querySelectorAll(
-    'a[href^="#"]'
-)
-.forEach(
-    link=>{
+  .querySelectorAll(
+    "#extrasOptions .option"
+  )
+  .forEach(option=>{
 
-        link.addEventListener(
-            "click",
-            function(event){
+    option.addEventListener(
+      "click",
+      ()=>{
 
-                const target=
-                    document.querySelector(
-                        this.getAttribute(
-                            "href"
-                        )
-                    );
+        const extra=
+          option.dataset.extra;
 
+        if(
+          selectedExtras.includes(extra)
+        ){
 
-                if(target){
+          selectedExtras=
+            selectedExtras.filter(
+              x=>x!==extra
+            );
 
-                    event.preventDefault();
+          option.classList.remove(
+            "active"
+          );
 
+        }else{
 
-                    target.scrollIntoView({
-                        behavior:"smooth",
-                        block:"start"
-                    });
+          selectedExtras.push(extra);
 
-                }
+          option.classList.add(
+            "active"
+          );
 
-            }
-        );
+        }
 
-    }
-);
+        document
+          .getElementById(
+            "summaryExtras"
+          )
+          .textContent=
+            selectedExtras.length
+            ?selectedExtras.join(", ")
+            :"None selected";
+      }
+    );
+
+  });
 
 </script>
 
