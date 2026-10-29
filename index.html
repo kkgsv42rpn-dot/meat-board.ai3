@@ -3,18 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BOARDS BY BARUCH | Exceptional Kosher. Unforgettable Boards.</title>
+<title>BOARDS BY BARUCH</title>
 
 <style>
 :root{
-  --bg:#070707;
-  --bg2:#0e0d0c;
+  --black:#070707;
+  --black2:#0d0d0d;
   --cream:#f3eadc;
-  --muted:#b8aa99;
-  --gold:#c8a46a;
-  --line:rgba(255,255,255,.10);
-  --card:rgba(255,255,255,.045);
+  --muted:#aaa096;
+  --gold:#c5a36a;
+  --line:rgba(255,255,255,.11);
 }
 
 *{
@@ -27,9 +25,9 @@ html{
 
 body{
   margin:0;
-  background:var(--bg);
+  background:var(--black);
   color:var(--cream);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 
@@ -40,13 +38,9 @@ a{
 
 button,
 input,
-textarea,
-select{
+select,
+textarea{
   font:inherit;
-}
-
-button{
-  cursor:pointer;
 }
 
 /* =========================================================
@@ -59,185 +53,184 @@ button{
   left:0;
   right:0;
   height:78px;
-  z-index:1000;
+  z-index:100;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 42px;
   background:linear-gradient(
     to bottom,
-    rgba(5,5,5,.90),
-    rgba(5,5,5,.35),
+    rgba(5,5,5,.94),
+    rgba(5,5,5,.40),
     transparent
   );
   backdrop-filter:blur(5px);
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:13px;
+.logo{
   font-family:Georgia,serif;
-  letter-spacing:.15em;
-  font-size:14px;
+  font-size:19px;
+  letter-spacing:.18em;
+  font-weight:bold;
+  white-space:nowrap;
 }
 
-.brand-mark{
-  width:36px;
-  height:36px;
-  border:1px solid rgba(200,164,106,.65);
-  display:grid;
-  place-items:center;
-  font-family:Georgia,serif;
-  font-size:12px;
-  color:var(--gold);
-  transform:rotate(45deg);
-}
-
-.brand-mark span{
-  transform:rotate(-45deg);
-}
-
-.nav-links{
+.navlinks{
   display:flex;
-  align-items:center;
   gap:30px;
-}
-
-.nav-links a{
-  font-size:11px;
-  letter-spacing:.17em;
+  align-items:center;
+  font-size:12px;
+  letter-spacing:.18em;
   text-transform:uppercase;
-  color:rgba(243,234,220,.76);
-  transition:.25s ease;
 }
 
-.nav-links a:hover{
-  color:white;
+.navlinks a{
+  opacity:.75;
+  transition:.3s;
 }
 
-.nav-cta{
+.navlinks a:hover{
+  opacity:1;
+  color:#d8bd8b;
+}
+
+.navcta{
+  border:1px solid rgba(197,163,106,.7);
   padding:12px 18px;
-  border:1px solid rgba(200,164,106,.55);
-  color:var(--cream)!important;
+  color:#d8bd8b!important;
+  opacity:1!important;
+}
+
+@media(max-width:850px){
+  .nav{
+    padding:0 18px;
+  }
+
+  .navlinks{
+    display:none;
+  }
 }
 
 /* =========================================================
-   CONTACT SIDE RAIL
+   CONTACT RAIL
 ========================================================= */
 
-.contact-rail{
+.contactRail{
   position:fixed;
   right:0;
   top:50%;
   transform:translateY(-50%);
-  z-index:900;
+  z-index:90;
   writing-mode:vertical-rl;
-  transform-origin:center;
-  background:rgba(10,9,8,.88);
-  border:1px solid rgba(255,255,255,.10);
-  border-right:0;
-  padding:18px 13px;
+  text-orientation:mixed;
+  background:#b4935e;
+  color:#080808;
+  padding:18px 10px;
+  font-size:11px;
+  font-weight:bold;
   letter-spacing:.22em;
   text-transform:uppercase;
-  font-size:10px;
-  color:var(--cream);
-  transition:.25s ease;
-  backdrop-filter:blur(12px);
+  border-radius:8px 0 0 8px;
+  box-shadow:0 8px 35px rgba(0,0,0,.35);
 }
 
-.contact-rail:hover{
-  background:#161310;
-  color:var(--gold);
+@media(max-width:700px){
+  .contactRail{
+    display:none;
+  }
 }
 
 /* =========================================================
-   HERO / 3D EXPERIENCE
+   HERO / STICKY 3D AREA
 ========================================================= */
 
-.hero-scroll{
+.heroScroll{
+  height:250vh;
   position:relative;
-  height:245vh;
 }
 
-.hero-sticky{
+.heroSticky{
   position:sticky;
   top:0;
   height:100vh;
   overflow:hidden;
-  background:#05060a;
-}
-
-#three-stage{
-  position:absolute;
-  inset:0;
-  z-index:1;
-}
-
-#three-stage canvas{
-  width:100%;
-  height:100%;
-  display:block;
-}
-
-.hero-vignette{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:3;
   background:
     radial-gradient(
-      95% 75% at 50% 46%,
-      rgba(0,0,0,0) 35%,
-      rgba(0,0,0,.23) 68%,
-      rgba(0,0,0,.72) 100%
+      ellipse at 50% 42%,
+      #1c1712 0%,
+      #0c0a08 44%,
+      #050505 100%
     );
 }
 
-.hero-copy{
+#threeCanvas{
   position:absolute;
-  z-index:5;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  z-index:1;
+}
+
+.heroShade{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 30%,
+      rgba(0,0,0,.25) 62%,
+      rgba(0,0,0,.76) 100%
+    );
+}
+
+.heroCopy{
+  position:absolute;
   left:7vw;
   top:50%;
   transform:translateY(-50%);
-  width:min(430px,42vw);
+  z-index:5;
+  width:min(480px,42vw);
   pointer-events:none;
 }
 
-.eyebrow{
-  font-size:10px;
+.heroEyebrow{
+  color:#c7aa79;
+  font-size:11px;
   letter-spacing:.38em;
   text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
-.hero-copy h1{
-  margin:0;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(46px,6vw,94px);
-  line-height:.90;
+.heroTitle{
+  font-family:Georgia,serif;
   font-weight:400;
+  font-size:clamp(48px,6vw,92px);
+  line-height:.92;
   letter-spacing:-.045em;
+  margin:0;
 }
 
-.hero-copy h1 span{
+.heroTitle span{
   display:block;
 }
 
-.hero-copy p{
-  margin:26px 0 0;
-  color:rgba(243,234,220,.70);
-  font-size:14px;
+.heroSub{
+  margin-top:28px;
+  max-width:400px;
+  color:#c9c0b7;
   line-height:1.75;
-  max-width:370px;
+  font-size:15px;
 }
 
-.hero-buttons{
+.heroButtons{
+  pointer-events:auto;
   display:flex;
   gap:12px;
-  margin-top:28px;
-  pointer-events:auto;
+  margin-top:30px;
+  flex-wrap:wrap;
 }
 
 .btn{
@@ -246,68 +239,91 @@ button{
   justify-content:center;
   min-height:48px;
   padding:0 22px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(8,8,8,.40);
-  color:var(--cream);
-  letter-spacing:.12em;
+  border:1px solid rgba(197,163,106,.7);
   text-transform:uppercase;
+  letter-spacing:.16em;
   font-size:10px;
-  transition:.3s ease;
-  backdrop-filter:blur(10px);
-}
-
-.btn:hover{
-  border-color:rgba(200,164,106,.75);
-  transform:translateY(-2px);
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
 }
 
 .btn.gold{
-  background:var(--gold);
-  color:#0b0906;
-  border-color:var(--gold);
+  background:#b4935e;
+  color:#080808;
 }
 
-.hero-scroll-note{
+.btn.outline{
+  background:rgba(0,0,0,.2);
+  color:#d5bd94;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+.scrollHint{
   position:absolute;
-  z-index:5;
-  bottom:34px;
   left:50%;
+  bottom:26px;
   transform:translateX(-50%);
+  z-index:6;
+  text-align:center;
+  color:#a89d91;
   font-size:9px;
-  letter-spacing:.42em;
+  letter-spacing:.38em;
   text-transform:uppercase;
-  color:rgba(243,234,220,.45);
-  white-space:nowrap;
 }
 
-.hero-scroll-line{
+.scrollLine{
   width:1px;
-  height:48px;
-  background:linear-gradient(to bottom,var(--gold),transparent);
-  margin:11px auto 0;
+  height:38px;
+  background:linear-gradient(#b4935e,transparent);
+  margin:10px auto 0;
+}
+
+@media(max-width:900px){
+  .heroCopy{
+    left:6vw;
+    top:auto;
+    bottom:10vh;
+    transform:none;
+    width:82vw;
+  }
+
+  .heroSub{
+    font-size:13px;
+    max-width:340px;
+  }
+
+  .heroTitle{
+    font-size:clamp(44px,12vw,76px);
+  }
 }
 
 /* =========================================================
-   SECTIONS
+   GENERAL SECTIONS
 ========================================================= */
 
 .section{
   position:relative;
-  padding:130px 7vw;
-  background:var(--bg);
+  padding:130px 8vw;
+  background:#080808;
 }
 
-.section.dark{
-  background:#090807;
+.section.light{
+  background:#eee5d8;
+  color:#111;
 }
 
-.section-head{
-  max-width:760px;
+.sectionHead{
+  max-width:780px;
   margin-bottom:70px;
 }
 
-.section-kicker{
-  color:var(--gold);
+.kicker{
+  color:#b4935e;
   font-size:10px;
   letter-spacing:.35em;
   text-transform:uppercase;
@@ -315,81 +331,76 @@ button{
 }
 
 .section h2{
-  margin:0;
   font-family:Georgia,serif;
-  font-size:clamp(40px,5vw,76px);
+  font-size:clamp(40px,5vw,72px);
   font-weight:400;
-  line-height:.98;
   letter-spacing:-.04em;
+  line-height:1;
+  margin:0 0 25px;
 }
 
-.section-intro{
-  margin-top:25px;
-  color:var(--muted);
-  max-width:650px;
-  line-height:1.8;
-  font-size:15px;
+.section p{
+  color:#aaa19a;
+  font-size:16px;
+  line-height:1.9;
+}
+
+.light p{
+  color:#5f574f;
 }
 
 /* =========================================================
    ABOUT
 ========================================================= */
 
-.about-grid{
+.aboutGrid{
   display:grid;
   grid-template-columns:1.15fr .85fr;
-  gap:70px;
+  gap:90px;
   align-items:start;
 }
 
-.about-large{
+.aboutQuote{
+  border-left:1px solid #b4935e;
+  padding-left:30px;
   font-family:Georgia,serif;
-  font-size:clamp(28px,3vw,48px);
-  line-height:1.15;
-  color:#f1e8db;
+  font-size:27px;
+  line-height:1.35;
+  color:#e6d9c8;
 }
 
-.about-small{
-  color:var(--muted);
-  line-height:1.9;
-  font-size:14px;
-}
-
-.about-small strong{
-  color:var(--cream);
-  font-weight:500;
-}
-
-.info-strip{
+.aboutFacts{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  margin-top:80px;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--line);
 }
 
-.info-item{
-  padding:30px 25px;
-  border-right:1px solid var(--line);
+.fact{
+  background:#0c0c0c;
+  padding:30px 24px;
 }
 
-.info-item:last-child{
-  border-right:0;
-}
-
-.info-item strong{
+.fact strong{
   display:block;
-  color:var(--gold);
+  color:#d2b37c;
   font-family:Georgia,serif;
-  font-size:20px;
-  margin-bottom:8px;
+  font-size:22px;
+  margin-bottom:10px;
 }
 
-.info-item span{
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:.08em;
+.fact span{
+  color:#8e8983;
+  font-size:12px;
+  letter-spacing:.1em;
   text-transform:uppercase;
+}
+
+@media(max-width:800px){
+  .aboutGrid{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
 }
 
 /* =========================================================
@@ -399,312 +410,297 @@ button{
 .services{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  gap:1px;
+  background:var(--line);
 }
 
-.service-card{
-  min-height:270px;
-  padding:34px;
-  border:1px solid var(--line);
-  background:linear-gradient(
-    145deg,
-    rgba(255,255,255,.055),
-    rgba(255,255,255,.015)
-  );
-  position:relative;
-  overflow:hidden;
-  transition:.4s ease;
+.service{
+  background:#0b0b0b;
+  padding:45px 32px;
+  min-height:220px;
+  transition:.35s;
 }
 
-.service-card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(200,164,106,.42);
+.service:hover{
+  background:#12100d;
 }
 
-.service-number{
-  color:rgba(200,164,106,.55);
-  font-size:10px;
+.serviceNum{
+  color:#b4935e;
+  font-size:11px;
   letter-spacing:.25em;
 }
 
-.service-card h3{
+.service h3{
   font-family:Georgia,serif;
   font-size:28px;
   font-weight:400;
-  margin:65px 0 15px;
+  margin:35px 0 14px;
 }
 
-.service-card p{
-  color:var(--muted);
-  line-height:1.7;
+.service p{
   font-size:13px;
+  line-height:1.7;
+}
+
+@media(max-width:850px){
+  .services{
+    grid-template-columns:1fr;
+  }
+}
+
+/* =========================================================
+   INFO STRIP
+========================================================= */
+
+.infoStrip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.infoCell{
+  padding:30px 20px;
+  text-align:center;
+  border-right:1px solid var(--line);
+}
+
+.infoCell:last-child{
+  border-right:0;
+}
+
+.infoCell strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:20px;
+  margin-bottom:7px;
+}
+
+.infoCell span{
+  font-size:10px;
+  color:#8c8580;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+@media(max-width:700px){
+  .infoStrip{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .infoCell:nth-child(2){
+    border-right:0;
+  }
+
+  .infoCell:nth-child(-n+2){
+    border-bottom:1px solid var(--line);
+  }
 }
 
 /* =========================================================
    BUILDER
 ========================================================= */
 
+.builderWrap{
+  max-width:1100px;
+  margin:auto;
+}
+
 .builder{
   display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:55px;
-  align-items:start;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:#24211e;
+  border:1px solid #292622;
 }
 
-.builder-panel{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.025);
-  padding:34px;
+.builderPanel{
+  background:#0c0c0c;
+  padding:38px;
 }
 
-.builder-group{
-  margin-bottom:34px;
+.builderPanel h3{
+  font-family:Georgia,serif;
+  font-size:28px;
+  font-weight:400;
+  margin:0 0 25px;
 }
 
-.builder-group:last-child{
-  margin-bottom:0;
-}
-
-.builder-label{
-  display:block;
-  margin-bottom:13px;
-  font-size:10px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:var(--gold);
-}
-
-.choice-grid{
+.optionGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:35px;
 }
 
-.choice{
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.025);
-  color:rgba(243,234,220,.75);
-  padding:15px 13px;
+.option{
+  border:1px solid #292622;
+  background:#0e0e0e;
+  color:#bdb5ac;
+  padding:16px 12px;
   text-align:left;
-  transition:.2s ease;
+  cursor:pointer;
+  transition:.25s;
 }
 
-.choice:hover,
-.choice.active{
-  border-color:var(--gold);
-  color:white;
-  background:rgba(200,164,106,.08);
+.option:hover,
+.option.active{
+  border-color:#b4935e;
+  color:#ead7b7;
+  background:#15120e;
 }
 
-.builder-note{
+.option small{
+  display:block;
+  color:#77716b;
+  font-size:10px;
+  margin-top:5px;
+}
+
+textarea,
+input,
+select{
   width:100%;
-  min-height:110px;
-  resize:vertical;
-  border:1px solid rgba(255,255,255,.12);
-  background:#0d0c0b;
-  color:white;
+  border:1px solid #292622;
+  background:#090909;
+  color:#eee;
   padding:14px;
   outline:none;
 }
 
-.builder-note:focus{
-  border-color:rgba(200,164,106,.65);
+textarea{
+  min-height:120px;
+  resize:vertical;
 }
 
-.builder-summary{
-  position:sticky;
-  top:110px;
-  min-height:560px;
-  border:1px solid var(--line);
-  overflow:hidden;
-  background:
-    radial-gradient(
-      circle at 50% 25%,
-      rgba(120,72,30,.24),
-      transparent 55%
-    ),
-    #090806;
+.builderSummary{
+  background:#11100e;
+  border:1px solid #292622;
+  padding:30px;
 }
 
-.summary-inner{
-  padding:40px;
-  position:relative;
-  z-index:2;
-}
-
-.summary-mark{
-  width:70px;
-  height:70px;
-  border:1px solid rgba(200,164,106,.45);
-  transform:rotate(45deg);
-  display:grid;
-  place-items:center;
-  margin:35px auto 45px;
-}
-
-.summary-mark span{
-  transform:rotate(-45deg);
-  color:var(--gold);
-  font-family:Georgia,serif;
-  font-size:20px;
-}
-
-.summary-title{
-  text-align:center;
-  font-family:Georgia,serif;
-  font-size:40px;
-  font-weight:400;
-}
-
-.summary-sub{
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:10px;
-}
-
-.summary-list{
-  margin-top:45px;
-  border-top:1px solid var(--line);
-}
-
-.summary-row{
+.summaryLine{
   display:flex;
   justify-content:space-between;
   gap:20px;
-  padding:17px 0;
-  border-bottom:1px solid var(--line);
-  font-size:12px;
+  padding:13px 0;
+  border-bottom:1px solid #24211e;
+  color:#96908a;
+  font-size:13px;
 }
 
-.summary-row span:first-child{
-  color:var(--muted);
+.summaryLine strong{
+  color:#e5d4ba;
+  font-weight:400;
 }
 
-.summary-row span:last-child{
-  color:var(--cream);
-  text-align:right;
+.builderNote{
+  margin-top:20px;
+  color:#77716b;
+  font-size:11px;
+  line-height:1.6;
 }
 
-.builder-submit{
-  margin-top:25px;
-  width:100%;
+@media(max-width:850px){
+  .builder{
+    grid-template-columns:1fr;
+  }
 }
 
 /* =========================================================
    QUOTE
 ========================================================= */
 
-.quote-section{
-  padding:160px 7vw;
+.quoteSection{
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
   background:
-    radial-gradient(
-      circle at center,
-      rgba(106,64,28,.20),
-      transparent 52%
-    ),
-    #080706;
+    radial-gradient(circle at center,#1a140d 0,#090909 55%);
 }
 
-.quote{
+.bigQuote{
   max-width:950px;
-  margin:auto;
   font-family:Georgia,serif;
-  font-size:clamp(35px,5vw,72px);
-  line-height:1.04;
-  font-weight:400;
+  font-size:clamp(34px,5vw,68px);
+  line-height:1.1;
 }
 
-.quote span{
-  color:var(--gold);
+.bigQuote span{
+  color:#b4935e;
 }
 
 /* =========================================================
    CONTACT
 ========================================================= */
 
-.contact-grid{
+.contactGrid{
   display:grid;
-  grid-template-columns:.75fr 1.25fr;
-  gap:70px;
+  grid-template-columns:.8fr 1.2fr;
+  gap:80px;
 }
 
-.contact-details{
+.contactDetails{
   display:flex;
   flex-direction:column;
-  gap:30px;
+  gap:25px;
 }
 
-.contact-detail{
-  border-bottom:1px solid var(--line);
-  padding-bottom:25px;
-}
-
-.contact-detail small{
+.contactItem small{
   display:block;
-  color:var(--gold);
-  letter-spacing:.25em;
-  text-transform:uppercase;
+  color:#b4935e;
+  letter-spacing:.22em;
   font-size:9px;
-  margin-bottom:10px;
+  text-transform:uppercase;
+  margin-bottom:7px;
 }
 
-.contact-detail div{
-  color:var(--cream);
+.contactItem div{
   font-family:Georgia,serif;
-  font-size:21px;
+  font-size:20px;
 }
 
-.contact-detail p{
-  color:var(--muted);
-  line-height:1.7;
-  margin:8px 0 0;
-  font-size:13px;
-}
-
-.contact-form{
+.contactForm{
   display:grid;
-  gap:12px;
+  gap:14px;
 }
 
-.form-row{
+.formRow{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:14px;
 }
 
-.contact-form input,
-.contact-form textarea{
-  width:100%;
-  border:1px solid rgba(255,255,255,.12);
-  background:#0d0c0b;
-  color:white;
-  padding:16px;
-  outline:none;
-}
-
-.contact-form textarea{
-  min-height:150px;
-  resize:vertical;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus{
-  border-color:rgba(200,164,106,.65);
-}
-
-.file-input{
-  border:1px dashed rgba(255,255,255,.16);
-  padding:18px;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.form-note{
-  color:#82786c;
+.contactForm label{
   font-size:10px;
-  line-height:1.6;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#89827c;
+}
+
+.field{
+  display:grid;
+  gap:7px;
+}
+
+.fileInput{
+  padding:13px;
+  border:1px dashed #3b352e;
+  background:#0a0a0a;
+  color:#8d8780;
+}
+
+@media(max-width:800px){
+  .contactGrid{
+    grid-template-columns:1fr;
+  }
+
+  .formRow{
+    grid-template-columns:1fr;
+  }
 }
 
 /* =========================================================
@@ -712,143 +708,81 @@ button{
 ========================================================= */
 
 footer{
-  padding:55px 7vw 35px;
-  background:#050505;
+  padding:60px 8vw 40px;
   border-top:1px solid var(--line);
+  background:#050505;
 }
 
-.footer-top{
+.footerTop{
   display:flex;
   justify-content:space-between;
   gap:30px;
-  align-items:start;
+  flex-wrap:wrap;
 }
 
-.footer-brand{
+.footerLogo{
   font-family:Georgia,serif;
-  font-size:25px;
-  letter-spacing:.05em;
+  font-size:22px;
+  letter-spacing:.18em;
 }
 
-.footer-tag{
-  color:var(--muted);
-  margin-top:10px;
+.footerInfo{
+  color:#77716b;
   font-size:12px;
+  line-height:2;
 }
 
-.footer-links{
-  display:flex;
-  gap:25px;
-  color:var(--muted);
+.footerBottom{
+  border-top:1px solid var(--line);
+  margin-top:45px;
+  padding-top:20px;
+  color:#55514c;
   font-size:10px;
   letter-spacing:.12em;
   text-transform:uppercase;
 }
 
-.footer-bottom{
-  border-top:1px solid var(--line);
-  margin-top:45px;
-  padding-top:20px;
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+#threeLoading{
+  position:absolute;
+  z-index:20;
+  inset:0;
   display:flex;
-  justify-content:space-between;
-  color:#6d665d;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  color:#b4935e;
   font-size:10px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  transition:opacity .6s;
+}
+
+#threeError{
+  display:none;
+  position:absolute;
+  z-index:30;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  color:#e4d5bf;
+  text-align:center;
+  width:80%;
+  max-width:500px;
+  font-size:13px;
+  line-height:1.7;
 }
 
 /* =========================================================
-   REVEALS
+   MOBILE 3D ADJUSTMENT
 ========================================================= */
 
-.reveal{
-  opacity:0;
-  transform:translateY(35px);
-  transition:
-    opacity 1s ease,
-    transform 1s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:none;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:900px){
-
-  .nav{
-    padding:0 18px;
-  }
-
-  .nav-links{
-    display:none;
-  }
-
-  .hero-copy{
-    left:7vw;
-    top:auto;
-    bottom:85px;
-    transform:none;
-    width:80vw;
-  }
-
-  .hero-copy h1{
-    font-size:50px;
-  }
-
-  .hero-copy p{
-    font-size:12px;
-  }
-
-  .hero-buttons{
-    flex-wrap:wrap;
-  }
-
-  .contact-rail{
-    display:none;
-  }
-
-  .about-grid,
-  .builder,
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
-
-  .services{
-    grid-template-columns:1fr;
-  }
-
-  .info-strip{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .info-item:nth-child(2){
-    border-right:0;
-  }
-
-  .info-item:nth-child(1),
-  .info-item:nth-child(2){
-    border-bottom:1px solid var(--line);
-  }
-
-  .builder-summary{
-    position:relative;
-    top:auto;
-  }
-
-  .form-row{
-    grid-template-columns:1fr;
-  }
-
-  .footer-top,
-  .footer-bottom{
-    flex-direction:column;
-  }
-
-  .footer-links{
-    flex-wrap:wrap;
+@media(max-width:600px){
+  .heroScroll{
+    height:230vh;
   }
 }
 </style>
@@ -856,65 +790,73 @@ footer{
 
 <body>
 
-<!-- =======================================================
+<!-- ======================================================
      NAV
-======================================================= -->
+====================================================== -->
 
 <nav class="nav">
-  <a href="#top" class="brand">
-    <div class="brand-mark"><span>BB</span></div>
-    <span>BOARDS BY BARUCH</span>
-  </a>
+  <a href="#top" class="logo">BOARDS BY BARUCH</a>
 
-  <div class="nav-links">
+  <div class="navlinks">
     <a href="#about">About</a>
-    <a href="#services">Boards</a>
+    <a href="#boards">Boards</a>
     <a href="#builder">Build Yours</a>
     <a href="#contact">Contact</a>
-    <a href="#builder" class="nav-cta">Create Your Board</a>
+    <a href="#builder" class="navcta">Create Your Board</a>
   </div>
 </nav>
 
-<a class="contact-rail" href="#contact">Contact Us Now</a>
+<a class="contactRail" href="#contact">Contact Us Now</a>
 
 
-<!-- =======================================================
-     HERO — STICKY 3D SCROLL EXPERIENCE
-======================================================= -->
+<!-- ======================================================
+     HERO / 3D
+====================================================== -->
 
-<section id="top" class="hero-scroll">
+<section id="top" class="heroScroll">
 
-  <div class="hero-sticky">
+  <div class="heroSticky">
 
-    <div id="three-stage"></div>
+    <canvas id="threeCanvas"></canvas>
 
-    <div class="hero-vignette"></div>
+    <div id="threeLoading">Preparing Your Board</div>
 
-    <div class="hero-copy">
-      <div class="eyebrow">Premium Kosher Meat • NY & NJ</div>
+    <div id="threeError">
+      The 3D experience could not initialize in this browser.
+      Please refresh the page or use Safari/Chrome with WebGL enabled.
+    </div>
 
-      <h1>
+    <div class="heroShade"></div>
+
+    <div class="heroCopy">
+
+      <div class="heroEyebrow">
+        Premium Kosher Meat Boards
+      </div>
+
+      <h1 class="heroTitle">
         <span>Exceptional</span>
         <span>Kosher.</span>
         <span>Unforgettable</span>
         <span>Boards.</span>
       </h1>
 
-      <p>
-        Premium kosher meat, beautifully arranged and crafted your way.
-        From intimate Shabbat tables to weddings, celebrations,
-        corporate events and unforgettable gifts.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#contact" class="btn gold">Contact Us Now</a>
-        <a href="#builder" class="btn">Create Your Own Board</a>
+      <div class="heroSub">
+        Premium kosher meat, crafted your way.
+        Designed for Shabbat, Yom Tov, celebrations,
+        gifts, corporate events and unforgettable gatherings.
       </div>
+
+      <div class="heroButtons">
+        <a href="#contact" class="btn gold">Contact Us Now</a>
+        <a href="#builder" class="btn outline">Create Your Own Board</a>
+      </div>
+
     </div>
 
-    <div class="hero-scroll-note">
+    <div class="scrollHint">
       Scroll to build the board
-      <div class="hero-scroll-line"></div>
+      <div class="scrollLine"></div>
     </div>
 
   </div>
@@ -922,72 +864,53 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- ======================================================
      ABOUT
-======================================================= -->
+====================================================== -->
 
 <section id="about" class="section">
 
-  <div class="section-head reveal">
-    <div class="section-kicker">The Experience</div>
+  <div class="sectionHead">
+    <div class="kicker">The Baruch Standard</div>
 
-    <h2>Your Board.<br>Your Cuts. Your Way.</h2>
+    <h2>Made to look as good as it tastes.</h2>
 
-    <p class="section-intro">
-      BOARDS BY BARUCH creates premium kosher meat boards,
-      charcuterie boards, individual trays, gift boxes and
-      event platters designed around exactly what you want.
+    <p>
+      BOARDS BY BARUCH creates premium kosher meat boards
+      built around the cuts, flavors and presentation you want.
+      Every board is assembled to feel like an experience —
+      not just a tray of food.
     </p>
   </div>
 
-  <div class="about-grid">
+  <div class="aboutGrid">
 
-    <div class="about-large reveal">
-      Every board is designed to look as unforgettable
-      as it tastes.
+    <div class="aboutQuote">
+      “Your Board. Your Cuts. Your Way.”
     </div>
 
-    <div class="about-small reveal">
-      <p>
-        Choose your size, your cuts, your seasonings,
-        your sauces and your extras. We take your vision
-        and turn it into a premium presentation made for
-        your table, your guests and your event.
-      </p>
+    <div class="aboutFacts">
 
-      <p>
-        Serving <strong>New York and New Jersey</strong>.
-        Delivery and pickup available.
-      </p>
+      <div class="fact">
+        <strong>VHQ</strong>
+        <span>Kosher Certification</span>
+      </div>
 
-      <p>
-        All meat is prepared according to
-        <strong>VHQ kosher standards.</strong>
-      </p>
-    </div>
+      <div class="fact">
+        <strong>NY + NJ</strong>
+        <span>Service Area</span>
+      </div>
 
-  </div>
+      <div class="fact">
+        <strong>24 HR</strong>
+        <span>Standard Ordering Notice</span>
+      </div>
 
-  <div class="info-strip reveal">
+      <div class="fact">
+        <strong>48 HR</strong>
+        <span>Large / Custom Notice</span>
+      </div>
 
-    <div class="info-item">
-      <strong>24 Hours</strong>
-      <span>Small • Medium • Large</span>
-    </div>
-
-    <div class="info-item">
-      <strong>48 Hours</strong>
-      <span>XL • Custom Orders</span>
-    </div>
-
-    <div class="info-item">
-      <strong>NY + NJ</strong>
-      <span>Delivery & Pickup</span>
-    </div>
-
-    <div class="info-item">
-      <strong>VHQ</strong>
-      <span>Kosher Certified</span>
     </div>
 
   </div>
@@ -995,74 +918,75 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- ======================================================
      SERVICES
-======================================================= -->
+====================================================== -->
 
-<section id="services" class="section dark">
+<section id="boards" class="section light">
 
-  <div class="section-head reveal">
-    <div class="section-kicker">What We Create</div>
-    <h2>Made for the moment.</h2>
-    <p class="section-intro">
-      From a beautiful dinner at home to a full-scale celebration,
-      every order is built around the occasion.
+  <div class="sectionHead">
+    <div class="kicker">What We Create</div>
+    <h2>Built for every kind of gathering.</h2>
+
+    <p>
+      From intimate meals to major events, choose the format,
+      cuts and flavors that fit the occasion.
     </p>
   </div>
 
   <div class="services">
 
-    <div class="service-card reveal">
-      <div class="service-number">01</div>
+    <div class="service">
+      <div class="serviceNum">01</div>
       <h3>Meat Boards</h3>
       <p>
-        Premium cuts arranged into a dramatic,
-        centerpiece-worthy board.
+        Premium cuts arranged into a dramatic centerpiece
+        for your table.
       </p>
     </div>
 
-    <div class="service-card reveal">
-      <div class="service-number">02</div>
+    <div class="service">
+      <div class="serviceNum">02</div>
       <h3>Charcuterie</h3>
       <p>
-        Salami, pastrami, roast beef, steak,
-        pickles, olives, sauces and more.
+        Layered meats, garnishes, pickles, olives and
+        complementary flavors.
       </p>
     </div>
 
-    <div class="service-card reveal">
-      <div class="service-number">03</div>
-      <h3>Event Platters</h3>
+    <div class="service">
+      <div class="serviceNum">03</div>
+      <h3>Event Catering</h3>
       <p>
-        Large-format catering and custom platters
-        for celebrations and events.
+        Individual trays, event platters and large-format
+        catering for special occasions.
       </p>
     </div>
 
-    <div class="service-card reveal">
-      <div class="service-number">04</div>
+    <div class="service">
+      <div class="serviceNum">04</div>
       <h3>Gift Boxes</h3>
       <p>
-        A premium kosher gift designed to make
-        an immediate impression.
+        A premium kosher meat experience prepared
+        specifically for gifting.
       </p>
     </div>
 
-    <div class="service-card reveal">
-      <div class="service-number">05</div>
-      <h3>Shabbat & Yom Tov</h3>
+    <div class="service">
+      <div class="serviceNum">05</div>
+      <h3>Celebrations</h3>
       <p>
-        Beautiful meat presentations designed
-        for your Shabbat and holiday table.
+        Birthdays, weddings, engagements, Shabbat,
+        Yom Tov and everything worth celebrating.
       </p>
     </div>
 
-    <div class="service-card reveal">
-      <div class="service-number">06</div>
-      <h3>Corporate Events</h3>
+    <div class="service">
+      <div class="serviceNum">06</div>
+      <h3>Corporate</h3>
       <p>
-        High-end catering for offices,
-        meetings, celebrations and client events.
+        Elevated meat presentations for offices,
+        clients and corporate gatherings.
       </p>
     </div>
 
@@ -1071,187 +995,223 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- ======================================================
+     INFO
+====================================================== -->
+
+<section class="section" style="padding-top:0;padding-bottom:0;">
+
+  <div class="infoStrip">
+
+    <div class="infoCell">
+      <strong>NY & NJ</strong>
+      <span>Delivery & Pickup</span>
+    </div>
+
+    <div class="infoCell">
+      <strong>VHQ</strong>
+      <span>Kosher Certified</span>
+    </div>
+
+    <div class="infoCell">
+      <strong>24 Hours</strong>
+      <span>Small / Medium / Large</span>
+    </div>
+
+    <div class="infoCell">
+      <strong>48 Hours</strong>
+      <span>XL & Custom</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
      BUILDER
-======================================================= -->
+====================================================== -->
 
 <section id="builder" class="section">
 
-  <div class="section-head reveal">
-    <div class="section-kicker">Create Your Own</div>
+  <div class="builderWrap">
 
-    <h2>Build your board.</h2>
+    <div class="sectionHead">
+      <div class="kicker">Create Your Own</div>
 
-    <p class="section-intro">
-      Choose the size, cuts and extras. Add your own notes
-      and we'll turn your idea into a custom board.
-    </p>
-  </div>
+      <h2>Your Board. Your Cuts. Your Way.</h2>
 
-  <div class="builder">
+      <p>
+        Select your board size, choose the cuts you want,
+        add extras and tell us exactly how you want it built.
+      </p>
+    </div>
 
-    <div class="builder-panel reveal">
+    <div class="builder">
 
-      <!-- SIZE -->
+      <div class="builderPanel">
 
-      <div class="builder-group">
-        <label class="builder-label">Board Size</label>
+        <h3>Choose Your Size</h3>
 
-        <div class="choice-grid" data-group="size">
+        <div class="optionGrid">
 
-          <button class="choice active" data-value="Small — 5–8 people">
-            Small<br>
+          <button class="option sizeOption active" data-size="Small">
+            Small
             <small>5–8 people</small>
           </button>
 
-          <button class="choice" data-value="Medium — 9–15 people">
-            Medium<br>
+          <button class="option sizeOption" data-size="Medium">
+            Medium
             <small>9–15 people</small>
           </button>
 
-          <button class="choice" data-value="Large — 16–25 people">
-            Large<br>
+          <button class="option sizeOption" data-size="Large">
+            Large
             <small>16–25 people</small>
           </button>
 
-          <button class="choice" data-value="XL — 26+ people">
-            XL<br>
+          <button class="option sizeOption" data-size="XL">
+            XL
             <small>26+ people</small>
           </button>
 
-          <button class="choice" data-value="Custom">
-            Custom<br>
+          <button class="option sizeOption" data-size="Custom">
+            Custom
             <small>Tell us what you need</small>
           </button>
 
         </div>
-      </div>
 
+        <h3>Choose Your Cuts</h3>
 
-      <!-- CUTS -->
+        <div class="optionGrid">
 
-      <div class="builder-group">
-        <label class="builder-label">Choose Your Cuts</label>
-
-        <div class="choice-grid" data-group="cut">
-
-          <button class="choice" data-value="NY Strip">NY Strip</button>
-          <button class="choice" data-value="Oyster Steak">Oyster Steak</button>
-          <button class="choice" data-value="Rib Eye">Rib Eye</button>
-          <button class="choice" data-value="Pastrami">Pastrami</button>
-          <button class="choice" data-value="Salami">Salami</button>
-          <button class="choice" data-value="Roast Beef">Roast Beef</button>
-          <button class="choice" data-value="Steak">Steak</button>
-          <button class="choice" data-value="Chicken">Chicken</button>
-          <button class="choice" data-value="Request Any">Request Any</button>
-
-        </div>
-      </div>
-
-
-      <!-- EXTRAS -->
-
-      <div class="builder-group">
-        <label class="builder-label">Seasonings / Sauces / Extras</label>
-
-        <div class="choice-grid" data-group="extra">
-
-          <button class="choice" data-value="Sweet Seasoning">
-            Sweet Seasoning
+          <button class="option cutOption" data-cut="NY Strip">
+            NY Strip
           </button>
 
-          <button class="choice" data-value="Pepper Crust">
-            Pepper Crust
+          <button class="option cutOption" data-cut="Oyster Steak">
+            Oyster Steak
           </button>
 
-          <button class="choice" data-value="Sauce / Dip">
-            Sauce / Dip
+          <button class="option cutOption" data-cut="Rib Eye">
+            Rib Eye
           </button>
 
-          <button class="choice" data-value="Pickles">
-            Pickles
+          <button class="option cutOption" data-cut="Pastrami">
+            Pastrami
           </button>
 
-          <button class="choice" data-value="Olives">
-            Olives
+          <button class="option cutOption" data-cut="Salami">
+            Salami
           </button>
 
-          <button class="choice" data-value="Custom Extras">
-            Custom Extras
+          <button class="option cutOption" data-cut="Roast Beef">
+            Roast Beef
+          </button>
+
+          <button class="option cutOption" data-cut="Steak">
+            Steak
+          </button>
+
+          <button class="option cutOption" data-cut="Chicken">
+            Chicken
           </button>
 
         </div>
+
       </div>
 
 
-      <!-- NOTES -->
+      <div class="builderPanel">
 
-      <div class="builder-group">
+        <h3>Make It Yours</h3>
 
-        <label class="builder-label">
-          Custom Notes
-        </label>
+        <div class="field" style="margin-bottom:22px;">
+          <label>Seasonings / Flavor</label>
+          <select id="seasoning">
+            <option>Pepper Crusted</option>
+            <option>Classic Steak Seasoning</option>
+            <option>Garlic & Herb</option>
+            <option>Sweet & Savory</option>
+            <option>Custom Request</option>
+          </select>
+        </div>
 
-        <textarea
-          id="builderNotes"
-          class="builder-note"
-          placeholder="Tell us exactly what you're imagining..."
-        ></textarea>
+        <div class="field" style="margin-bottom:22px;">
+          <label>Sauces / Dips</label>
+          <select id="sauce">
+            <option>Request Any</option>
+            <option>House Sauce</option>
+            <option>Spicy Sauce</option>
+            <option>Garlic Sauce</option>
+            <option>Sweet Sauce</option>
+            <option>Custom Request</option>
+          </select>
+        </div>
+
+        <div class="field" style="margin-bottom:22px;">
+          <label>Pickles / Olives</label>
+          <select id="garnish">
+            <option>Pickles & Olives</option>
+            <option>Pickles Only</option>
+            <option>Olives Only</option>
+            <option>Extra Pickles & Olives</option>
+            <option>Custom Request</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Custom Notes</label>
+
+          <textarea
+            id="builderNotes"
+            placeholder="Tell us exactly what you want on your board..."
+          ></textarea>
+
+        </div>
 
       </div>
 
     </div>
 
 
-    <!-- SUMMARY -->
+    <div class="builderSummary" style="margin-top:1px;">
 
-    <div class="builder-summary reveal">
+      <div class="summaryLine">
+        <span>Board Size</span>
+        <strong id="summarySize">Small</strong>
+      </div>
 
-      <div class="summary-inner">
+      <div class="summaryLine">
+        <span>Cuts</span>
+        <strong id="summaryCuts">Choose your cuts</strong>
+      </div>
 
-        <div class="summary-mark">
-          <span>BB</span>
-        </div>
+      <div class="summaryLine">
+        <span>Seasoning</span>
+        <strong id="summarySeasoning">Pepper Crusted</strong>
+      </div>
 
-        <div class="summary-title">
-          Your Board
-        </div>
+      <div class="summaryLine">
+        <span>Sauce / Dip</span>
+        <strong id="summarySauce">Request Any</strong>
+      </div>
 
-        <div class="summary-sub">
-          Premium Kosher Meat, Crafted Your Way.
-        </div>
+      <div class="summaryLine">
+        <span>Pickles / Olives</span>
+        <strong id="summaryGarnish">Pickles & Olives</strong>
+      </div>
 
-        <div class="summary-list">
+      <div style="margin-top:25px;">
+        <a href="#contact" class="btn gold">
+          Send My Board Request
+        </a>
+      </div>
 
-          <div class="summary-row">
-            <span>Size</span>
-            <span id="summarySize">Small — 5–8 people</span>
-          </div>
-
-          <div class="summary-row">
-            <span>Cuts</span>
-            <span id="summaryCuts">Choose your cuts</span>
-          </div>
-
-          <div class="summary-row">
-            <span>Extras</span>
-            <span id="summaryExtras">Choose your extras</span>
-          </div>
-
-          <div class="summary-row">
-            <span>Notes</span>
-            <span id="summaryNotes">None yet</span>
-          </div>
-
-        </div>
-
-        <button
-          class="btn gold builder-submit"
-          onclick="sendBoardRequest()"
-        >
-          Request This Board
-        </button>
-
+      <div class="builderNote">
+        Small, Medium and Large boards require at least 24 hours notice.
+        Anything XL or larger/custom requires at least 48 hours notice.
       </div>
 
     </div>
@@ -1261,137 +1221,123 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- ======================================================
      QUOTE
-======================================================= -->
+====================================================== -->
 
-<section class="quote-section">
+<section class="section quoteSection">
 
-  <div class="quote reveal">
-    “Premium kosher meat,
-    <span>crafted your way.</span>”
+  <div class="bigQuote">
+    Premium Kosher Meat,
+    <span>Crafted Your Way.</span>
   </div>
 
 </section>
 
 
-<!-- =======================================================
+<!-- ======================================================
      CONTACT
-======================================================= -->
+====================================================== -->
 
-<section id="contact" class="section dark">
+<section id="contact" class="section">
 
-  <div class="section-head reveal">
-    <div class="section-kicker">Let's Create It</div>
+  <div class="sectionHead">
+    <div class="kicker">Let's Build It</div>
 
-    <h2>Tell us what you're planning.</h2>
+    <h2>Tell us what you're imagining.</h2>
 
-    <p class="section-intro">
-      Send us the details of your event or board.
-      Add inspiration photos if you have them.
+    <p>
+      Send your event details and inspiration.
+      We'll take it from there.
     </p>
   </div>
 
-  <div class="contact-grid">
+  <div class="contactGrid">
 
-    <div class="contact-details reveal">
+    <div class="contactDetails">
 
-      <div class="contact-detail">
+      <div class="contactItem">
         <small>Phone</small>
         <div>347-820-8835</div>
       </div>
 
-      <div class="contact-detail">
+      <div class="contactItem">
         <small>Email</small>
         <div>baruch.aminov@icloud.com</div>
       </div>
 
-      <div class="contact-detail">
+      <div class="contactItem">
         <small>Service Area</small>
         <div>New York & New Jersey</div>
-        <p>Delivery and pickup available.</p>
       </div>
 
-      <div class="contact-detail">
+      <div class="contactItem">
         <small>Kosher Certification</small>
         <div>VHQ</div>
-      </div>
-
-      <div class="contact-detail">
-        <small>Ordering Notice</small>
-        <p>
-          24 hours for Small, Medium and Large boards.
-          48 hours for XL and custom orders.
-        </p>
       </div>
 
     </div>
 
 
     <form
-      class="contact-form reveal"
-      id="contactForm"
+      class="contactForm"
       action="mailto:baruch.aminov@icloud.com"
       method="post"
       enctype="text/plain"
     >
 
-      <div class="form-row">
+      <div class="formRow">
 
-        <input
-          type="text"
-          name="Name"
-          placeholder="Name"
+        <div class="field">
+          <label>Name</label>
+          <input name="Name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+          <input name="Phone" type="tel" required>
+        </div>
+
+      </div>
+
+      <div class="formRow">
+
+        <div class="field">
+          <label>Email</label>
+          <input name="Email" type="email">
+        </div>
+
+        <div class="field">
+          <label>Event Date</label>
+          <input name="Event Date" type="date">
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>Message / Inspiration</label>
+
+        <textarea
+          name="Message"
+          placeholder="Tell us about your event, board size, cuts, flavors and anything else you have in mind."
           required
-        >
+        ></textarea>
+      </div>
+
+      <div class="field">
+
+        <label>Inspiration Photo</label>
 
         <input
-          type="tel"
-          name="Phone"
-          placeholder="Phone"
-          required
+          class="fileInput"
+          name="Inspiration Photo"
+          type="file"
+          accept="image/*"
         >
 
       </div>
 
-      <div class="form-row">
-
-        <input
-          type="email"
-          name="Email"
-          placeholder="Email"
-          required
-        >
-
-        <input
-          type="date"
-          name="Event Date"
-        >
-
-      </div>
-
-      <textarea
-        name="Message"
-        placeholder="Tell us about your board, event, guest count, cuts, style, etc."
-      ></textarea>
-
-      <div class="file-input">
-        <label>
-          Inspiration Photo
-          <input
-            type="file"
-            id="inspiration"
-            accept="image/*"
-          >
-        </label>
-      </div>
-
-      <div class="form-note">
-        Photos are for inspiration only. When submitted,
-        your email app will open with your request.
-      </div>
-
-      <button type="submit" class="btn gold">
+      <button class="btn gold" type="submit">
         Contact Us Now
       </button>
 
@@ -1402,142 +1348,92 @@ footer{
 </section>
 
 
-<!-- =======================================================
+<!-- ======================================================
      FOOTER
-======================================================= -->
+====================================================== -->
 
 <footer>
 
-  <div class="footer-top">
+  <div class="footerTop">
 
-    <div>
-      <div class="footer-brand">
-        BOARDS BY BARUCH
-      </div>
-
-      <div class="footer-tag">
-        Exceptional Kosher. Unforgettable Boards.
-      </div>
+    <div class="footerLogo">
+      BOARDS BY BARUCH
     </div>
 
-    <div class="footer-links">
-      <a href="#about">About</a>
-      <a href="#services">Boards</a>
-      <a href="#builder">Build Yours</a>
-      <a href="#contact">Contact</a>
+    <div class="footerInfo">
+      Exceptional Kosher. Unforgettable Boards.<br>
+      Premium Kosher Meat, Crafted Your Way.<br>
+      NY & NJ · Delivery & Pickup · VHQ
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-
-    <span>
-      © 2026 BOARDS BY BARUCH
-    </span>
-
-    <span>
-      NY • NJ • VHQ
-    </span>
-
+  <div class="footerBottom">
+    © 2026 BOARDS BY BARUCH · All Rights Reserved
   </div>
 
 </footer>
 
 
-<!-- =======================================================
-     THREE.JS
-======================================================= -->
+<!-- ======================================================
+     THREE.JS IMPORT MAP
+====================================================== -->
 
 <script type="importmap">
 {
   "imports": {
-    "three":"https://unpkg.com/three@0.166.1/build/three.module.js",
-    "three/addons/":"https://unpkg.com/three@0.166.1/examples/jsm/"
+    "three": "https://unpkg.com/three@0.166.1/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.166.1/examples/jsm/"
   }
 }
 </script>
 
 
+<!-- ======================================================
+     THREE.JS
+====================================================== -->
+
 <script type="module">
 
 import * as THREE from "three";
 
-import {
-  RoomEnvironment
-} from "three/addons/environments/RoomEnvironment.js";
+import { RoomEnvironment }
+from "three/addons/environments/RoomEnvironment.js";
 
-import {
-  EffectComposer
-} from "three/addons/postprocessing/EffectComposer.js";
+import { EffectComposer }
+from "three/addons/postprocessing/EffectComposer.js";
 
-import {
-  RenderPass
-} from "three/addons/postprocessing/RenderPass.js";
+import { RenderPass }
+from "three/addons/postprocessing/RenderPass.js";
 
-import {
-  BokehPass
-} from "three/addons/postprocessing/BokehPass.js";
-
-import {
-  OutputPass
-} from "three/addons/postprocessing/OutputPass.js";
+import { OutputPass }
+from "three/addons/postprocessing/OutputPass.js";
 
 
 /* =========================================================
-   RANDOM
+   BASIC SETUP
 ========================================================= */
 
-let seed = 0x9e3779b9;
+const canvas = document.getElementById("threeCanvas");
+const loading = document.getElementById("threeLoading");
+const errorBox = document.getElementById("threeError");
 
-function rand(){
+let renderer;
+let scene;
+let camera;
+let composer;
 
-  seed |= 0;
+try{
 
-  seed = (seed + 0x6d2b79f5) | 0;
-
-  let t = Math.imul(
-    seed ^ (seed >>> 15),
-    1 | seed
-  );
-
-  t = (
-    t +
-    Math.imul(
-      t ^ (t >>> 7),
-      61 | t
-    )
-  ) ^ t;
-
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-}
-
-const rnd = (a,b) =>
-  a + (b-a)*rand();
-
-const lerp = THREE.MathUtils.lerp;
-
-const easeInOutCubic = p =>
-  p < .5
-    ? 4*p*p*p
-    : 1-Math.pow(-2*p+2,3)/2;
-
-
-/* =========================================================
-   RENDERER
-========================================================= */
-
-const stage =
-  document.getElementById("three-stage");
-
-const renderer =
-  new THREE.WebGLRenderer({
-    antialias:true,
-    alpha:false,
-    powerPreference:"high-performance"
-  });
+renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:false,
+  powerPreference:"high-performance"
+});
 
 renderer.setPixelRatio(
-  Math.min(window.devicePixelRatio || 1,2)
+  Math.min(window.devicePixelRatio || 1, 2)
 );
 
 renderer.setSize(
@@ -1545,1340 +1441,781 @@ renderer.setSize(
   window.innerHeight
 );
 
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+
 renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-renderer.shadowMap.type =
-  THREE.PCFSoftShadowMap;
+scene = new THREE.Scene();
 
-renderer.toneMapping =
-  THREE.ACESFilmicToneMapping;
+scene.background = new THREE.Color(0x050505);
 
-renderer.toneMappingExposure = 1.12;
-
-renderer.outputColorSpace =
-  THREE.SRGBColorSpace;
-
-stage.appendChild(renderer.domElement);
-
-
-/* =========================================================
-   SCENE
-========================================================= */
-
-const scene =
-  new THREE.Scene();
-
-scene.background =
-  new THREE.Color(0x05060a);
-
-scene.fog =
-  new THREE.FogExp2(
-    0x070810,
-    .025
-  );
+scene.fog = new THREE.FogExp2(
+  0x070605,
+  0.045
+);
 
 
 /* =========================================================
    CAMERA
 ========================================================= */
 
-const camera =
-  new THREE.PerspectiveCamera(
-    34,
-    window.innerWidth/window.innerHeight,
-    .1,
-    100
-  );
+camera = new THREE.PerspectiveCamera(
+  34,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  100
+);
 
-const camTarget =
-  new THREE.Vector3(
-    0,
-    .18,
-    0
-  );
+camera.position.set(
+  0,
+  4.5,
+  7.4
+);
+
+const cameraTarget = new THREE.Vector3(
+  0,
+  0.65,
+  0
+);
+
+camera.lookAt(cameraTarget);
 
 
 /* =========================================================
    ENVIRONMENT
 ========================================================= */
 
-const pmrem =
-  new THREE.PMREMGenerator(renderer);
+const pmrem = new THREE.PMREMGenerator(renderer);
 
-const env =
-  pmrem.fromScene(
-    new RoomEnvironment(),
-    .04
-  );
+const environment =
+  new RoomEnvironment(renderer);
 
 scene.environment =
-  env.texture;
+  pmrem.fromScene(environment,0.04).texture;
 
-scene.environmentIntensity =
-  .42;
-
-pmrem.dispose();
+scene.environmentIntensity = 0.42;
 
 
 /* =========================================================
-   BACKDROP
+   LIGHTING
 ========================================================= */
 
-const backdrop =
-  new THREE.Mesh(
-    new THREE.SphereGeometry(
-      40,
-      32,
-      24
-    ),
-    new THREE.ShaderMaterial({
-
-      side:THREE.BackSide,
-
-      depthWrite:false,
-
-      uniforms:{
-        top:{
-          value:new THREE.Color(0x1c2027)
-        },
-        bottom:{
-          value:new THREE.Color(0x020304)
-        },
-        warm:{
-          value:new THREE.Color(0x4c2b15)
-        }
-      },
-
-      vertexShader:`
-
-        varying vec3 vPos;
-
-        void main(){
-
-          vPos=position;
-
-          gl_Position=
-            projectionMatrix*
-            modelViewMatrix*
-            vec4(position,1.0);
-        }
-
-      `,
-
-      fragmentShader:`
-
-        varying vec3 vPos;
-
-        uniform vec3 top;
-        uniform vec3 bottom;
-        uniform vec3 warm;
-
-        void main(){
-
-          vec3 d=
-            normalize(vPos);
-
-          float h=
-            smoothstep(
-              -.7,
-              .95,
-              d.y
-            );
-
-          vec3 c=
-            mix(
-              bottom,
-              top,
-              h
-            );
-
-          float glow=
-            pow(
-              max(
-                0.0,
-                dot(
-                  d,
-                  normalize(
-                    vec3(
-                      -.35,
-                      .2,
-                      -1.0
-                    )
-                  )
-                )
-              ),
-              5.0
-            );
-
-          c += warm*glow*.65;
-
-          gl_FragColor=
-            vec4(c,1.0);
-        }
-
-      `
-    })
+const keyLight =
+  new THREE.SpotLight(
+    0xffdfb0,
+    1050,
+    15,
+    Math.PI / 5,
+    .45,
+    1.3
   );
 
-scene.add(backdrop);
+keyLight.position.set(
+  -4,
+  7,
+  5
+);
+
+keyLight.castShadow = true;
+
+keyLight.shadow.mapSize.set(
+  2048,
+  2048
+);
+
+keyLight.shadow.bias = -0.0002;
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.PointLight(
+    0xffd7ae,
+    180,
+    10
+  );
+
+fillLight.position.set(
+  4,
+  3,
+  3
+);
+
+scene.add(fillLight);
+
+const rimLight =
+  new THREE.PointLight(
+    0x7d91b5,
+    240,
+    12
+  );
+
+rimLight.position.set(
+  -4,
+  4,
+  -5
+);
+
+scene.add(rimLight);
+
+const topLight =
+  new THREE.PointLight(
+    0xffefd2,
+    220,
+    10
+  );
+
+topLight.position.set(
+  0,
+  7,
+  -1
+);
+
+scene.add(topLight);
 
 
 /* =========================================================
    FLOOR
 ========================================================= */
 
-const floor =
-  new THREE.Mesh(
-    new THREE.PlaneGeometry(
-      60,
-      60
-    ),
-    new THREE.MeshStandardMaterial({
-      color:0x08090b,
-      roughness:.94
-    })
+const floorGeo =
+  new THREE.PlaneGeometry(
+    30,
+    30
   );
 
-floor.rotation.x =
-  -Math.PI/2;
+const floorMat =
+  new THREE.MeshStandardMaterial({
+    color:0x080706,
+    roughness:.72,
+    metalness:.04
+  });
 
-floor.position.y =
-  -.31;
+const floor =
+  new THREE.Mesh(
+    floorGeo,
+    floorMat
+  );
 
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -1.08;
 floor.receiveShadow = true;
 
 scene.add(floor);
 
 
 /* =========================================================
-   FOOD PHOTOGRAPHY LIGHTING
-========================================================= */
-
-const key =
-  new THREE.SpotLight(
-    0xffe4c7,
-    70,
-    20,
-    .58,
-    .92,
-    1.8
-  );
-
-key.position.set(
-  2.8,
-  5.6,
-  3.8
-);
-
-key.target.position.set(
-  0,
-  0,
-  0
-);
-
-key.castShadow = true;
-
-key.shadow.mapSize.set(
-  2048,
-  2048
-);
-
-key.shadow.bias =
-  -.0006;
-
-key.shadow.normalBias =
-  .018;
-
-key.shadow.radius = 4;
-
-scene.add(
-  key,
-  key.target
-);
-
-
-const fill =
-  new THREE.AreaLight(
-    0xffd9b5,
-    3.2,
-    4,
-    4
-  );
-
-fill.position.set(
-  -3,
-  3,
-  2
-);
-
-fill.lookAt(
-  0,
-  0,
-  0
-);
-
-scene.add(fill);
-
-
-const rim =
-  new THREE.SpotLight(
-    0xffa45c,
-    90,
-    18,
-    .8,
-    1,
-    2
-  );
-
-rim.position.set(
-  -4.5,
-  2.5,
-  -3.5
-);
-
-rim.target.position.set(
-  0,
-  0,
-  0
-);
-
-scene.add(
-  rim,
-  rim.target
-);
-
-
-const cool =
-  new THREE.SpotLight(
-    0x8ebdff,
-    55,
-    17,
-    .8,
-    1,
-    2
-  );
-
-cool.position.set(
-  4.5,
-  3,
-  -4
-);
-
-cool.target.position.set(
-  0,
-  0,
-  0
-);
-
-scene.add(
-  cool,
-  cool.target
-);
-
-
-scene.add(
-  new THREE.HemisphereLight(
-    0x41495b,
-    0x090706,
-    .48
-  )
-);
-
-
-/* =========================================================
    TEXTURE HELPERS
 ========================================================= */
 
-function canvas(w,h){
+function canvasTexture(
+  width,
+  height,
+  draw
+){
 
   const c =
     document.createElement("canvas");
 
-  c.width=w;
-  c.height=h;
+  c.width = width;
+  c.height = height;
 
-  return {
-    c,
-    x:c.getContext("2d")
-  };
-}
+  const ctx =
+    c.getContext("2d");
 
-const maxAniso =
-  renderer.capabilities
-    .getMaxAnisotropy();
-
-
-function texture(
-  canvas,
-  srgb=true
-){
+  draw(ctx,width,height);
 
   const t =
-    new THREE.CanvasTexture(
-      canvas
-    );
+    new THREE.CanvasTexture(c);
 
   t.colorSpace =
-    srgb
-      ? THREE.SRGBColorSpace
-      : THREE.NoColorSpace;
-
-  t.wrapS =
-    t.wrapT =
-    THREE.RepeatWrapping;
+    THREE.SRGBColorSpace;
 
   t.anisotropy =
-    Math.min(8,maxAniso);
-
-  t.needsUpdate=true;
+    renderer.capabilities.getMaxAnisotropy();
 
   return t;
 }
 
 
 /* =========================================================
-   WOOD
-========================================================= */
-
-function makeWood(){
-
-  const {c,x} =
-    canvas(1400,800);
-
-  const g =
-    x.createLinearGradient(
-      0,0,0,800
-    );
-
-  g.addColorStop(0,"#805633");
-  g.addColorStop(.25,"#704522");
-  g.addColorStop(.55,"#603a1d");
-  g.addColorStop(.8,"#4b2d16");
-  g.addColorStop(1,"#321d0d");
-
-  x.fillStyle=g;
-
-  x.fillRect(
-    0,
-    0,
-    1400,
-    800
-  );
-
-
-  for(let i=0;i<1500;i++){
-
-    const y =
-      rand()*800;
-
-    x.beginPath();
-
-    for(
-      let px=0;
-      px<=1400;
-      px+=7
-    ){
-
-      const yy =
-        y+
-        Math.sin(
-          px*.006+
-          rand()*2
-        )*
-        (2+rand()*8);
-
-      if(px===0)
-        x.moveTo(px,yy);
-      else
-        x.lineTo(px,yy);
-    }
-
-    x.strokeStyle =
-      rand()<.6
-        ? `rgba(30,14,5,${.035+rand()*.12})`
-        : `rgba(220,160,90,${.015+rand()*.06})`;
-
-    x.lineWidth =
-      .5+rand()*2.5;
-
-    x.stroke();
-  }
-
-
-  for(let i=0;i<14000;i++){
-
-    x.fillStyle =
-      rand()<.5
-        ? "rgba(0,0,0,.045)"
-        : "rgba(255,220,175,.025)";
-
-    x.fillRect(
-      rand()*1400,
-      rand()*800,
-      1,
-      1
-    );
-  }
-
-  return c;
-}
-
-
-/* =========================================================
-   REALISTIC STEAK
-========================================================= */
-
-function makeSteak(){
-
-  const {c,x} =
-    canvas(1024,1024);
-
-  const g =
-    x.createRadialGradient(
-      430,
-      390,
-      80,
-      500,
-      500,
-      650
-    );
-
-  g.addColorStop(
-    0,
-    "#d75b59"
-  );
-
-  g.addColorStop(
-    .32,
-    "#b84043"
-  );
-
-  g.addColorStop(
-    .7,
-    "#8d2e32"
-  );
-
-  g.addColorStop(
-    1,
-    "#4c151b"
-  );
-
-  x.fillStyle=g;
-  x.fillRect(0,0,1024,1024);
-
-
-  /* muscle fibers */
-
-  for(let i=0;i<6000;i++){
-
-    const px=rand()*1024;
-    const py=rand()*1024;
-
-    x.strokeStyle =
-      `rgba(
-        ${180+rand()*65|0},
-        ${50+rand()*50|0},
-        ${50+rand()*40|0},
-        ${.025+rand()*.10}
-      )`;
-
-    x.lineWidth=
-      .35+rand()*1.3;
-
-    x.beginPath();
-
-    x.moveTo(
-      px,
-      py
-    );
-
-    x.bezierCurveTo(
-      px+rnd(-45,45),
-      py+rnd(-25,25),
-      px+rnd(-55,55),
-      py+rnd(15,60),
-      px+rnd(-70,70),
-      py+rnd(30,90)
-    );
-
-    x.stroke();
-  }
-
-
-  /* white fat marbling */
-
-  x.lineCap="round";
-
-  for(let i=0;i<180;i++){
-
-    let px=
-      rnd(80,940);
-
-    let py=
-      rnd(80,940);
-
-    x.beginPath();
-
-    x.moveTo(px,py);
-
-    for(let j=0;j<7;j++){
-
-      const cx =
-        px+rnd(-90,90);
-
-      const cy =
-        py+rnd(-90,90);
-
-      px =
-        cx+rnd(-75,75);
-
-      py =
-        cy+rnd(-75,75);
-
-      x.quadraticCurveTo(
-        cx,
-        cy,
-        px,
-        py
-      );
-    }
-
-    x.strokeStyle =
-      `rgba(
-        255,
-        ${225+rand()*30|0},
-        ${205+rand()*35|0},
-        ${.18+rand()*.36}
-      )`;
-
-    x.lineWidth=
-      1.5+rand()*6;
-
-    x.stroke();
-  }
-
-
-  /* darker meat flecks */
-
-  for(let i=0;i<1400;i++){
-
-    x.fillStyle=
-      `rgba(
-        35,
-        8,
-        7,
-        ${.04+rand()*.25}
-      )`;
-
-    x.beginPath();
-
-    x.arc(
-      rand()*1024,
-      rand()*1024,
-      .5+rand()*2.8,
-      0,
-      Math.PI*2
-    );
-
-    x.fill();
-  }
-
-  return c;
-}
-
-
-/* =========================================================
-   CRUST
-========================================================= */
-
-function makeCrust(){
-
-  const {c,x} =
-    canvas(768,768);
-
-  x.fillStyle="#24130b";
-
-  x.fillRect(
-    0,
-    0,
-    768,
-    768
-  );
-
-
-  for(let i=0;i<6500;i++){
-
-    const r=
-      .5+rand()*3.2;
-
-    x.fillStyle=
-      rand()<.7
-        ? `rgba(
-            ${8+rand()*25|0},
-            ${5+rand()*18|0},
-            ${3+rand()*12|0},
-            ${.45+rand()*.55}
-          )`
-        : `rgba(
-            ${90+rand()*85|0},
-            ${55+rand()*55|0},
-            ${30+rand()*35|0},
-            ${.25+rand()*.45}
-          )`;
-
-    x.beginPath();
-
-    x.arc(
-      rand()*768,
-      rand()*768,
-      r,
-      0,
-      Math.PI*2
-    );
-
-    x.fill();
-  }
-
-
-  /* coarse pepper */
-
-  for(let i=0;i<420;i++){
-
-    x.fillStyle =
-      `rgba(
-        235,
-        230,
-        215,
-        ${.35+rand()*.55}
-      )`;
-
-    x.beginPath();
-
-    x.arc(
-      rand()*768,
-      rand()*768,
-      1+rand()*2.4,
-      0,
-      Math.PI*2
-    );
-
-    x.fill();
-  }
-
-  return c;
-}
-
-
-/* =========================================================
-   SALAMI
-========================================================= */
-
-function makeSalami(){
-
-  const {c,x} =
-    canvas(768,768);
-
-  const g =
-    x.createRadialGradient(
-      350,
-      300,
-      20,
-      384,
-      384,
-      500
-    );
-
-  g.addColorStop(
-    0,
-    "#a84a43"
-  );
-
-  g.addColorStop(
-    .6,
-    "#7d292a"
-  );
-
-  g.addColorStop(
-    1,
-    "#4d171a"
-  );
-
-  x.fillStyle=g;
-  x.fillRect(0,0,768,768);
-
-
-  for(let i=0;i<2500;i++){
-
-    const r=
-      .8+rand()*4;
-
-    x.fillStyle=
-      `rgba(
-        245,
-        224,
-        200,
-        ${.35+rand()*.55}
-      )`;
-
-    x.beginPath();
-
-    x.arc(
-      rand()*768,
-      rand()*768,
-      r,
-      0,
-      Math.PI*2
-    );
-
-    x.fill();
-  }
-
-  return c;
-}
-
-
-/* =========================================================
-   PICKLE
-========================================================= */
-
-function makePickle(){
-
-  const {c,x} =
-    canvas(512,512);
-
-  x.fillStyle="#536d24";
-
-  x.fillRect(
-    0,
-    0,
-    512,
-    512
-  );
-
-
-  for(let i=0;i<1400;i++){
-
-    const px=rand()*512;
-    const py=rand()*512;
-    const r=1+rand()*5;
-
-    const g=
-      x.createRadialGradient(
-        px-r*.4,
-        py-r*.4,
-        .2,
-        px,
-        py,
-        r
-      );
-
-    g.addColorStop(
-      0,
-      "rgba(210,225,145,.75)"
-    );
-
-    g.addColorStop(
-      1,
-      "rgba(80,110,25,0)"
-    );
-
-    x.fillStyle=g;
-
-    x.beginPath();
-
-    x.arc(
-      px,
-      py,
-      r,
-      0,
-      Math.PI*2
-    );
-
-    x.fill();
-  }
-
-  return c;
-}
-
-
-/* =========================================================
-   TEXTURES
+   WOOD TEXTURE
 ========================================================= */
 
 const woodTexture =
-  texture(makeWood());
+canvasTexture(
+  1200,
+  700,
+  (ctx,w,h)=>{
 
-const steakTexture =
-  texture(makeSteak());
+    ctx.fillStyle="#6b4225";
+    ctx.fillRect(0,0,w,h);
 
-const crustTexture =
-  texture(makeCrust());
+    for(let i=0;i<190;i++){
 
-const salamiTexture =
-  texture(makeSalami());
+      const y =
+        Math.random()*h;
 
-const pickleTexture =
-  texture(makePickle());
+      ctx.beginPath();
 
+      ctx.moveTo(0,y);
 
-/* =========================================================
-   MATERIALS
-========================================================= */
+      for(
+        let x=0;
+        x<=w;
+        x+=35
+      ){
 
-const boardMaterial =
-  new THREE.MeshPhysicalMaterial({
+        const yy =
+          y +
+          Math.sin(x*.018+i)*3 +
+          (Math.random()-.5)*3;
 
-    map:woodTexture,
+        ctx.lineTo(x,yy);
+      }
 
-    roughness:.72,
+      ctx.strokeStyle =
+        Math.random()>.5
+          ? "rgba(34,17,7,.25)"
+          : "rgba(205,142,77,.14)";
 
-    clearcoat:.38,
+      ctx.lineWidth =
+        Math.random()*2+.4;
 
-    clearcoatRoughness:.34,
+      ctx.stroke();
+    }
 
-    envMapIntensity:.9
+    for(let i=0;i<90;i++){
 
-  });
+      const x=Math.random()*w;
+      const y=Math.random()*h;
+      const r=Math.random()*10+2;
 
+      ctx.beginPath();
 
-const steakMaterial =
-  new THREE.MeshPhysicalMaterial({
+      ctx.ellipse(
+        x,y,
+        r*3,
+        r*.35,
+        Math.random(),
+        0,
+        Math.PI*2
+      );
 
-    map:steakTexture,
+      ctx.strokeStyle=
+        "rgba(30,15,7,.20)";
 
-    roughness:.37,
+      ctx.stroke();
+    }
 
-    clearcoat:.55,
-
-    clearcoatRoughness:.23,
-
-    sheen:.45,
-
-    sheenRoughness:.55,
-
-    envMapIntensity:.95
-
-  });
-
-
-const crustMaterial =
-  new THREE.MeshPhysicalMaterial({
-
-    map:crustTexture,
-
-    roughness:.88,
-
-    clearcoat:.08,
-
-    envMapIntensity:.65
-
-  });
-
-
-const salamiMaterial =
-  new THREE.MeshPhysicalMaterial({
-
-    map:salamiTexture,
-
-    roughness:.48,
-
-    clearcoat:.32,
-
-    clearcoatRoughness:.35,
-
-    envMapIntensity:.8
-
-  });
-
-
-const pickleMaterial =
-  new THREE.MeshPhysicalMaterial({
-
-    map:pickleTexture,
-
-    roughness:.24,
-
-    clearcoat:1,
-
-    clearcoatRoughness:.12,
-
-    envMapIntensity:1
-
-  });
-
-
-const oliveGreen =
-  new THREE.MeshPhysicalMaterial({
-
-    color:0x708b2f,
-
-    roughness:.20,
-
-    clearcoat:1,
-
-    clearcoatRoughness:.12,
-
-    envMapIntensity:1
-
-  });
-
-
-const oliveBlack =
-  new THREE.MeshPhysicalMaterial({
-
-    color:0x171419,
-
-    roughness:.25,
-
-    clearcoat:1,
-
-    clearcoatRoughness:.13,
-
-    envMapIntensity:1
-
-  });
-
-
-const ceramic =
-  new THREE.MeshPhysicalMaterial({
-
-    color:0xd6cbbc,
-
-    roughness:.28,
-
-    clearcoat:.4,
-
-    envMapIntensity:.9
-
-  });
-
-
-const mustard =
-  new THREE.MeshPhysicalMaterial({
-
-    color:0xd6a018,
-
-    roughness:.25,
-
-    clearcoat:.55,
-
-    clearcoatRoughness:.18,
-
-    sheen:.25,
-
-    envMapIntensity:.9
-
-  });
+  }
+);
 
 
 /* =========================================================
    BOARD
 ========================================================= */
 
-function roundedRect(
-  w,
-  d,
-  r
-){
+const boardShape =
+new THREE.Shape();
 
-  const s =
-    new THREE.Shape();
+boardShape.moveTo(-2.35,-1.48);
 
-  const x=-w/2;
-  const y=-d/2;
-
-  s.moveTo(
-    x+r,
-    y
-  );
-
-  s.lineTo(
-    x+w-r,
-    y
-  );
-
-  s.quadraticCurveTo(
-    x+w,
-    y,
-    x+w,
-    y+r
-  );
-
-  s.lineTo(
-    x+w,
-    y+d-r
-  );
-
-  s.quadraticCurveTo(
-    x+w,
-    y+d,
-    x+w-r,
-    y+d
-  );
-
-  s.lineTo(
-    x+r,
-    y+d
-  );
-
-  s.quadraticCurveTo(
-    x,
-    y+d,
-    x,
-    y+d-r
-  );
-
-  s.lineTo(
-    x,
-    y+r
-  );
-
-  s.quadraticCurveTo(
-    x,
-    y,
-    x+r,
-    y
-  );
-
-  return s;
-}
-
-
-const boardGeometry =
-  new THREE.ExtrudeGeometry(
-    roundedRect(
-      3.55,
-      2.35,
-      .18
-    ),
-    {
-      depth:.25,
-      bevelEnabled:true,
-      bevelThickness:.025,
-      bevelSize:.025,
-      bevelSegments:5,
-      curveSegments:24
-    }
-  );
-
-boardGeometry.rotateX(
-  -Math.PI/2
+boardShape.quadraticCurveTo(
+  -2.55,-1.48,
+  -2.55,-1.22
 );
 
-boardGeometry.computeBoundingBox();
+boardShape.lineTo(-2.55,1.22);
 
-boardGeometry.translate(
-  0,
-  -boardGeometry.boundingBox.max.y,
-  0
+boardShape.quadraticCurveTo(
+  -2.55,1.48,
+  -2.28,1.48
 );
 
-boardGeometry.computeVertexNormals();
+boardShape.lineTo(2.28,1.48);
 
+boardShape.quadraticCurveTo(
+  2.55,1.48,
+  2.55,1.22
+);
+
+boardShape.lineTo(2.55,-1.22);
+
+boardShape.quadraticCurveTo(
+  2.55,-1.48,
+  2.28,-1.48
+);
+
+boardShape.closePath();
+
+const boardGeo =
+new THREE.ExtrudeGeometry(
+  boardShape,
+  {
+    depth:.22,
+    bevelEnabled:true,
+    bevelSegments:5,
+    bevelSize:.11,
+    bevelThickness:.09
+  }
+);
+
+boardGeo.center();
+
+const boardMat =
+new THREE.MeshStandardMaterial({
+  map:woodTexture,
+  roughness:.48,
+  metalness:0
+});
 
 const board =
-  new THREE.Mesh(
-    boardGeometry,
-    boardMaterial
-  );
+new THREE.Mesh(
+  boardGeo,
+  boardMat
+);
 
-board.castShadow=true;
-board.receiveShadow=true;
+board.rotation.x = 0;
+board.position.y = -0.85;
+
+board.castShadow = true;
+board.receiveShadow = true;
 
 scene.add(board);
 
 
 /* =========================================================
-   HELPERS
+   BOARD EDGE
 ========================================================= */
 
-function shadowed(obj){
+const boardAccent =
+new THREE.Mesh(
+  new THREE.BoxGeometry(
+    4.65,
+    .05,
+    2.82
+  ),
+  new THREE.MeshStandardMaterial({
+    color:0x24150b,
+    roughness:.4
+  })
+);
 
-  obj.traverse(
-    o=>{
-      if(o.isMesh){
-        o.castShadow=true;
-        o.receiveShadow=true;
+boardAccent.position.set(
+  0,
+  -1.00,
+  0
+);
+
+boardAccent.castShadow=true;
+
+scene.add(boardAccent);
+
+
+/* =========================================================
+   MEAT TEXTURES
+========================================================= */
+
+function steakTexture(){
+
+  return canvasTexture(
+    900,
+    900,
+    (ctx,w,h)=>{
+
+      ctx.fillStyle="#8b2e1d";
+      ctx.fillRect(0,0,w,h);
+
+      /* dark browned surface */
+
+      for(let i=0;i<900;i++){
+
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+        const r=Math.random()*12+2;
+
+        ctx.beginPath();
+
+        ctx.arc(
+          x,
+          y,
+          r,
+          0,
+          Math.PI*2
+        );
+
+        const colors=[
+          "rgba(48,12,6,.40)",
+          "rgba(126,42,20,.34)",
+          "rgba(225,116,60,.15)",
+          "rgba(20,5,3,.26)"
+        ];
+
+        ctx.fillStyle=
+          colors[
+            Math.floor(
+              Math.random()*colors.length
+            )
+          ];
+
+        ctx.fill();
       }
+
+      /* fat marbling */
+
+      for(let i=0;i<42;i++){
+
+        ctx.beginPath();
+
+        let x=Math.random()*w;
+        let y=Math.random()*h;
+
+        ctx.moveTo(x,y);
+
+        for(let j=0;j<5;j++){
+
+          x +=
+            (Math.random()-.5)*100;
+
+          y +=
+            (Math.random()-.5)*70;
+
+          ctx.lineTo(x,y);
+        }
+
+        ctx.strokeStyle=
+          "rgba(244,196,135,.58)";
+
+        ctx.lineWidth=
+          Math.random()*5+2;
+
+        ctx.lineCap="round";
+
+        ctx.stroke();
+      }
+
+      /* darker crust */
+
+      for(let i=0;i<100;i++){
+
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+
+        ctx.beginPath();
+
+        ctx.arc(
+          x,y,
+          Math.random()*5+1,
+          0,
+          Math.PI*2
+        );
+
+        ctx.fillStyle=
+          "rgba(15,4,2,.55)";
+
+        ctx.fill();
+      }
+
     }
   );
-
-  return obj;
 }
 
 
-function restOnBoard(geo){
+function pepperTexture(){
 
-  geo.computeBoundingBox();
+  return canvasTexture(
+    800,
+    800,
+    (ctx,w,h)=>{
 
-  geo.translate(
-    0,
-    -geo.boundingBox.min.y,
-    0
+      ctx.fillStyle="#4b1b10";
+      ctx.fillRect(0,0,w,h);
+
+      for(let i=0;i<700;i++){
+
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+        const r=Math.random()*9+1;
+
+        ctx.beginPath();
+
+        ctx.arc(
+          x,
+          y,
+          r,
+          0,
+          Math.PI*2
+        );
+
+        ctx.fillStyle =
+          Math.random()>.35
+          ? "rgba(15,8,5,.85)"
+          : "rgba(220,157,89,.35)";
+
+        ctx.fill();
+      }
+
+      for(let i=0;i<35;i++){
+
+        ctx.beginPath();
+
+        let x=Math.random()*w;
+        let y=Math.random()*h;
+
+        ctx.moveTo(x,y);
+
+        for(let j=0;j<6;j++){
+
+          x +=
+            (Math.random()-.5)*110;
+
+          y +=
+            (Math.random()-.5)*60;
+
+          ctx.lineTo(x,y);
+        }
+
+        ctx.strokeStyle=
+          "rgba(241,191,127,.42)";
+
+        ctx.lineWidth=4;
+
+        ctx.stroke();
+      }
+
+    }
   );
-
-  return geo;
 }
+
+
+function pastramiTexture(){
+
+  return canvasTexture(
+    800,
+    500,
+    (ctx,w,h)=>{
+
+      ctx.fillStyle="#642217";
+      ctx.fillRect(0,0,w,h);
+
+      for(let i=0;i<800;i++){
+
+        const x=Math.random()*w;
+        const y=Math.random()*h;
+
+        ctx.fillStyle =
+          Math.random()>.4
+          ? "rgba(26,8,4,.45)"
+          : "rgba(193,89,49,.28)";
+
+        ctx.fillRect(
+          x,
+          y,
+          Math.random()*10+2,
+          Math.random()*3+1
+        );
+      }
+
+      for(let i=0;i<70;i++){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          Math.random()*w,
+          Math.random()*h
+        );
+
+        ctx.lineTo(
+          Math.random()*w,
+          Math.random()*h
+        );
+
+        ctx.strokeStyle=
+          "rgba(239,174,112,.28)";
+
+        ctx.lineWidth=2;
+
+        ctx.stroke();
+      }
+
+    }
+  );
+}
+
+
+const steakTex=steakTexture();
+const pepperTex=pepperTexture();
+const pastramiTex=pastramiTexture();
 
 
 /* =========================================================
    REALISTIC STEAK GEOMETRY
 ========================================================= */
 
-function buildSteak(){
+function buildSteak(
+  pepper=false,
+  scale=1
+){
 
-  const shape =
-    new THREE.Shape();
-
-  shape.moveTo(-.38,-.08);
-
-  shape.bezierCurveTo(
-    -.45,-.24,
-    -.18,-.35,
-    .05,-.34
-  );
-
-  shape.bezierCurveTo(
-    .30,-.35,
-    .43,-.18,
-    .40,.04
-  );
-
-  shape.bezierCurveTo(
-    .37,.27,
-    .14,.35,
-    -.08,.31
-  );
-
-  shape.bezierCurveTo(
-    -.31,.28,
-    -.48,.15,
-    -.38,-.08
-  );
-
+  const group =
+    new THREE.Group();
 
   const geo =
-    new THREE.ExtrudeGeometry(
-      shape,
-      {
-        depth:.085,
-        bevelEnabled:true,
-        bevelThickness:.025,
-        bevelSize:.025,
-        bevelSegments:5,
-        curveSegments:16
-      }
+    new THREE.CylinderGeometry(
+      .64*scale,
+      .70*scale,
+      .17*scale,
+      48,
+      8
     );
 
+  /* deform vertices */
 
-  geo.rotateX(
-    -Math.PI/2
-  );
-
-  geo.translate(
-    0,
-    .025,
-    0
-  );
-
-  geo.computeVertexNormals();
-
-
-  const steak =
-    new THREE.Mesh(
-      geo,
-      steakMaterial
-    );
-
-
-  /* crust rim */
-
-  const rimGeo =
-    new THREE.RingGeometry(
-      .27,
-      .42,
-      64
-    );
-
-  rimGeo.rotateX(
-    -Math.PI/2
-  );
-
-
-  const rim =
-    new THREE.Mesh(
-      rimGeo,
-      crustMaterial
-    );
-
-  rim.position.y=.092;
-
-  rim.scale.set(
-    1.05,
-    .72,
-    1
-  );
-
-  steak.add(rim);
-
-
-  return shadowed(steak);
-}
-
-
-/* =========================================================
-   BRISKET
-========================================================= */
-
-function buildBrisket(){
-
-  const geo =
-    new THREE.BoxGeometry(
-      .72,
-      .085,
-      .40,
-      18,
-      3,
-      14
-    );
-
-  const pos=
+  const pos =
     geo.attributes.position;
 
-
-  for(let i=0;i<pos.count;i++){
+  for(
+    let i=0;
+    i<pos.count;
+    i++
+  ){
 
     const x=pos.getX(i);
     const y=pos.getY(i);
     const z=pos.getZ(i);
 
-    const wave=
-      .045*Math.sin(
-        x*16
-      )+
-      .025*Math.sin(
-        x*31+1
-      )+
-      .018*Math.sin(
-        z*17
-      );
+    const angle =
+      Math.atan2(z,x);
+
+    const irregular =
+      1 +
+      .09*Math.sin(angle*3.0) +
+      .05*Math.sin(angle*7.0);
+
+    pos.setX(
+      i,
+      x*irregular
+    );
+
+    pos.setZ(
+      i,
+      z*irregular
+    );
 
     pos.setY(
       i,
-      y+wave
+      y +
+      Math.sin(angle*2.7)*.025
     );
   }
 
   geo.computeVertexNormals();
 
-  restOnBoard(geo);
-
-  return shadowed(
+  const meat =
     new THREE.Mesh(
       geo,
-      crustMaterial
-    )
-  );
+      new THREE.MeshStandardMaterial({
+        map:
+          pepper
+          ? pepperTex
+          : steakTex,
+        roughness:.31,
+        metalness:0,
+        envMapIntensity:.72
+      })
+    );
+
+  meat.castShadow=true;
+  meat.receiveShadow=true;
+
+  group.add(meat);
+
+  /* fat edge */
+
+  const fatGeo =
+    new THREE.TorusGeometry(
+      .67*scale,
+      .045*scale,
+      8,
+      64
+    );
+
+  const fat =
+    new THREE.Mesh(
+      fatGeo,
+      new THREE.MeshStandardMaterial({
+        color:0xd2a873,
+        roughness:.28
+      })
+    );
+
+  fat.rotation.x=Math.PI/2;
+
+  group.add(fat);
+
+  /* center eye */
+
+  const centerGeo =
+    new THREE.CircleGeometry(
+      .40*scale,
+      48
+    );
+
+  const center =
+    new THREE.Mesh(
+      centerGeo,
+      new THREE.MeshStandardMaterial({
+        map:
+          pepper
+          ? pepperTex
+          : steakTex,
+        roughness:.36
+      })
+    );
+
+  center.rotation.x=-Math.PI/2;
+  center.position.y=.09*scale;
+
+  group.add(center);
+
+  /* little marbling strips */
+
+  for(let i=0;i<9;i++){
+
+    const fatStrip =
+      new THREE.Mesh(
+        new THREE.TorusGeometry(
+          Math.random()*.18+.12,
+          .008,
+          5,
+          18
+        ),
+        new THREE.MeshStandardMaterial({
+          color:0xf1c98f,
+          roughness:.32
+        })
+      );
+
+    fatStrip.rotation.x=
+      Math.PI/2;
+
+    fatStrip.rotation.z=
+      Math.random()*Math.PI;
+
+    fatStrip.position.set(
+      (Math.random()-.5)*.5,
+      .102,
+      (Math.random()-.5)*.45
+    );
+
+    group.add(fatStrip);
+  }
+
+  return group;
 }
 
 
@@ -2888,27 +2225,42 @@ function buildBrisket(){
 
 function buildPastrami(){
 
-  const geo =
-    new THREE.CylinderGeometry(
-      .21,
-      .205,
-      .48,
-      56,
-      4
-    );
+  const group =
+    new THREE.Group();
 
-  geo.rotateZ(
-    Math.PI/2
-  );
+  for(let i=0;i<3;i++){
 
-  restOnBoard(geo);
+    const geo =
+      new THREE.BoxGeometry(
+        1.25,
+        .075,
+        .65
+      );
 
-  return shadowed(
-    new THREE.Mesh(
-      geo,
-      steakMaterial
-    )
-  );
+    const mesh =
+      new THREE.Mesh(
+        geo,
+        new THREE.MeshStandardMaterial({
+          map:pastramiTex,
+          roughness:.38
+        })
+      );
+
+    mesh.position.y=
+      i*.065;
+
+    mesh.rotation.y=
+      (Math.random()-.5)*.14;
+
+    mesh.rotation.z=
+      (Math.random()-.5)*.07;
+
+    mesh.castShadow=true;
+
+    group.add(mesh);
+  }
+
+  return group;
 }
 
 
@@ -2918,22 +2270,94 @@ function buildPastrami(){
 
 function buildSalami(){
 
-  const geo =
-    new THREE.CylinderGeometry(
-      .17,
-      .165,
-      .045,
-      48
+  const group =
+    new THREE.Group();
+
+  for(let i=0;i<6;i++){
+
+    const geo =
+      new THREE.CylinderGeometry(
+        .25,
+        .25,
+        .055,
+        48
+      );
+
+    const mat =
+      new THREE.MeshStandardMaterial({
+        color:
+          i%2
+          ? 0x9a3323
+          : 0x7b2119,
+        roughness:.42
+      });
+
+    const slice =
+      new THREE.Mesh(
+        geo,
+        mat
+      );
+
+    slice.rotation.x=
+      Math.PI/2;
+
+    slice.position.set(
+      i*.08,
+      i*.012,
+      -i*.04
     );
 
-  restOnBoard(geo);
+    slice.castShadow=true;
 
-  return shadowed(
-    new THREE.Mesh(
-      geo,
-      salamiMaterial
-    )
-  );
+    group.add(slice);
+  }
+
+  return group;
+}
+
+
+/* =========================================================
+   ROAST BEEF
+========================================================= */
+
+function buildRoast(){
+
+  const group =
+    new THREE.Group();
+
+  for(let i=0;i<4;i++){
+
+    const geo =
+      new THREE.BoxGeometry(
+        .95,
+        .08,
+        .42
+      );
+
+    const slice =
+      new THREE.Mesh(
+        geo,
+        new THREE.MeshStandardMaterial({
+          color:0x76251a,
+          roughness:.34
+        })
+      );
+
+    slice.position.set(
+      i*.07,
+      i*.035,
+      i*.035
+    );
+
+    slice.rotation.z=
+      -.08+i*.02;
+
+    slice.castShadow=true;
+
+    group.add(slice);
+  }
+
+  return group;
 }
 
 
@@ -2943,51 +2367,66 @@ function buildSalami(){
 
 function buildPickle(){
 
+  const group =
+    new THREE.Group();
+
   const geo =
     new THREE.CapsuleGeometry(
-      .075,
-      .48,
-      12,
-      32
+      .13,
+      .72,
+      8,
+      20
     );
 
-  const pos=
-    geo.attributes.position;
+  const mat =
+    new THREE.MeshStandardMaterial({
+      color:0x607b20,
+      roughness:.5
+    });
 
-  for(let i=0;i<pos.count;i++){
-
-    const x=pos.getX(i);
-    const y=pos.getY(i);
-    const z=pos.getZ(i);
-
-    const n=
-      Math.sin(
-        y*15+x*20
-      )*.035;
-
-    pos.setX(
-      i,
-      x+n
-    );
-
-    pos.setZ(
-      i,
-      z+n
-    );
-  }
-
-  geo.rotateZ(
-    Math.PI/2
-  );
-
-  restOnBoard(geo);
-
-  return shadowed(
+  const pickle =
     new THREE.Mesh(
       geo,
-      pickleMaterial
-    )
-  );
+      mat
+    );
+
+  pickle.rotation.z=
+    Math.PI/2;
+
+  pickle.rotation.y=
+    (Math.random()-.5)*.35;
+
+  pickle.castShadow=true;
+
+  group.add(pickle);
+
+  /* bumps */
+
+  for(let i=0;i<10;i++){
+
+    const bump =
+      new THREE.Mesh(
+        new THREE.SphereGeometry(
+          .018,
+          8,
+          8
+        ),
+        new THREE.MeshStandardMaterial({
+          color:0x83952d,
+          roughness:.5
+        })
+      );
+
+    bump.position.set(
+      (Math.random()-.5)*.06,
+      .10,
+      (Math.random()-.5)*.25
+    );
+
+    group.add(bump);
+  }
+
+  return group;
 }
 
 
@@ -2995,408 +2434,325 @@ function buildPickle(){
    OLIVE
 ========================================================= */
 
-function buildOlive(green){
+function buildOlive(green=true){
 
   const geo =
     new THREE.SphereGeometry(
-      .075,
-      30,
-      22
+      .105,
+      32,
+      20
     );
 
   geo.scale(
     1,
-    .82,
+    .78,
     1
   );
 
-  restOnBoard(geo);
-
-  return shadowed(
+  const mesh =
     new THREE.Mesh(
       geo,
-      green
-        ? oliveGreen
-        : oliveBlack
-    )
-  );
+      new THREE.MeshStandardMaterial({
+        color:
+          green
+          ? 0x667522
+          : 0x171312,
+        roughness:.27,
+        metalness:.02
+      })
+    );
+
+  mesh.castShadow=true;
+
+  return mesh;
 }
 
 
 /* =========================================================
-   MUSTARD
+   MUSTARD BOWL
 ========================================================= */
 
-function buildMustard(){
+const bowl =
+new THREE.Mesh(
+  new THREE.CylinderGeometry(
+    .43,
+    .35,
+    .18,
+    48
+  ),
+  new THREE.MeshStandardMaterial({
+    color:0xddd4c6,
+    roughness:.28
+  })
+);
 
-  const group =
-    new THREE.Group();
+bowl.position.set(
+  -1.48,
+  -.66,
+  .65
+);
 
+bowl.castShadow=true;
 
-  const bowlProfile=[
-    [.00,.006],
-    [.13,.006],
-    [.20,.022],
-    [.26,.075],
-    [.29,.145],
-    [.29,.17],
-    [.27,.17],
-    [.26,.145],
-    [.24,.09],
-    [.18,.05],
-    [.09,.038],
-    [.00,.036]
-  ].map(
-    p=>new THREE.Vector2(
-      p[0],
-      p[1]
-    )
-  );
+scene.add(bowl);
 
+const mustard =
+new THREE.Mesh(
+  new THREE.CylinderGeometry(
+    .32,
+    .32,
+    .035,
+    48
+  ),
+  new THREE.MeshStandardMaterial({
+    color:0xc18b1f,
+    roughness:.32
+  })
+);
 
-  const bowl =
-    new THREE.Mesh(
-      new THREE.LatheGeometry(
-        bowlProfile,
-        64
-      ),
-      ceramic
-    );
+mustard.position.set(
+  -1.48,
+  -.55,
+  .65
+);
 
-
-  group.add(bowl);
-
-
-  const mustardProfile=[
-    [.00,.07],
-    [.07,.073],
-    [.14,.085],
-    [.17,.10],
-    [.16,.125],
-    [.13,.14],
-    [.07,.153],
-    [.03,.16],
-    [.00,.163]
-  ].map(
-    p=>new THREE.Vector2(
-      p[0],
-      p[1]
-    )
-  );
-
-
-  const dollop =
-    new THREE.Mesh(
-      new THREE.LatheGeometry(
-        mustardProfile,
-        52
-      ),
-      mustard
-    );
-
-
-  dollop.rotation.y=.5;
-
-  group.add(dollop);
-
-  return shadowed(group);
-}
+scene.add(mustard);
 
 
 /* =========================================================
-   ORIGINAL-STYLE FLIGHT SYSTEM
+   PIECE ANIMATION SYSTEM
 ========================================================= */
 
 const pieces=[];
 
-let order=0;
-
-
 function addPiece(
-  obj,
+  object,
+  rest,
   options={}
 ){
 
-  const {
+  const restPos =
+    new THREE.Vector3(
+      rest.x || 0,
+      rest.y ?? -.58,
+      rest.z || 0
+    );
 
-    x=0,
-    z=0,
-    y=0,
+  const restRot =
+    new THREE.Euler(
+      rest.tiltX || 0,
+      rest.yaw || 0,
+      rest.tiltZ || 0
+    );
 
-    yaw=0,
-    tiltX=0,
-    tiltZ=0,
+  const delay =
+    options.delay ?? 0;
 
-    gap=.42,
-    lift=null,
-    arc=null,
-    dur=null
-
-  }=options;
-
-
-  const idx=order++;
-
+  const duration =
+    options.duration ?? 1.2;
 
   /*
-    IMPORTANT:
-    Food begins clearly above and around
-    the board so the user can actually see
-    it suspended before scrolling.
+    VERY IMPORTANT:
+    The starting positions are deliberately high
+    above the board so the food is clearly visible
+    before the scroll animation begins.
   */
 
-  const angle =
-    idx*2.39996+.35;
+  const startPos =
+    new THREE.Vector3(
+      restPos.x +
+        (Math.random()-.5)*1.1,
 
+      2.6 +
+        Math.random()*1.45,
 
-  const radius =
-    1.55+
-    (idx%6)*.16+
-    rand()*.22;
+      restPos.z +
+        (Math.random()-.5)*.75
+    );
 
+  const startRot =
+    new THREE.Euler(
+      (Math.random()-.5)*1.2,
+      (Math.random()-.5)*1.5,
+      (Math.random()-.5)*1.2
+    );
 
-  const height =
-    lift!==null
-      ? lift
-      : 1.65+
-        rand()*.65;
+  object.position.copy(startPos);
+  object.rotation.copy(startRot);
 
+  scene.add(object);
 
-  const item={
-
-    obj,
-
-    basePos:
-      new THREE.Vector3(
-        Math.sin(angle)*radius,
-        height,
-        Math.cos(angle)*radius
-      ),
-
-    startRotY:
-      rnd(-.35,.35),
-
-    spin:
-      rnd(-.65,.65),
-
-    phase:
-      rand()*Math.PI*2,
-
-    t0:
-      .25+idx*gap,
-
-    dur:
-      dur!==null
-        ? dur
-        : 1.55+
-          rand()*.45,
-
+  pieces.push({
+    object,
+    startPos,
+    restPos,
+    startRot,
+    restRot,
+    delay,
+    duration,
     arc:
-      arc!==null
-        ? arc
-        : .08+
-          rand()*.12,
-
-    restPos:
-      new THREE.Vector3(
-        x,
-        y,
-        z
-      ),
-
-    restRot:
-      new THREE.Euler(
-        tiltX,
-        yaw,
-        tiltZ
-      )
-  };
-
-
-  obj.position.copy(
-    item.basePos
-  );
-
-
-  obj.rotation.set(
-    rnd(-.2,.2),
-    yaw,
-    rnd(-.2,.2)
-  );
-
-
-  scene.add(obj);
-
-  pieces.push(item);
-
-  return item;
+      options.arc ?? .28,
+    phase:
+      Math.random()*Math.PI*2
+  });
 }
 
 
 /* =========================================================
-   BOARD ARRANGEMENT
+   PIECE ARRANGEMENT
 ========================================================= */
 
-addPiece(
-  buildMustard(),
-  {
-    x:-1.18,
-    z:.70,
-    yaw:.42,
-    lift:1.8,
-    arc:.10,
-    gap:.30
-  }
-);
-
+/* salami */
 
 addPiece(
   buildSalami(),
   {
-    x:-1.30,
-    z:-.38,
-    yaw:.55
-  }
-);
-
-addPiece(
-  buildSalami(),
-  {
-    x:-1.04,
-    z:-.54,
-    yaw:-.32
-  }
-);
-
-addPiece(
-  buildSalami(),
-  {
-    x:-1.20,
+    x:-1.10,
+    y:-.62,
     z:-.62,
-    y:.045,
-    yaw:1.1,
-    arc:.07
+    yaw:-.25
+  },
+  {
+    delay:.05,
+    duration:1.0
   }
 );
 
+
+/* roast beef */
+
+addPiece(
+  buildRoast(),
+  {
+    x:-.82,
+    y:-.57,
+    z:.02,
+    yaw:.25
+  },
+  {
+    delay:.15,
+    duration:1.15
+  }
+);
+
+
+/* pastrami */
 
 addPiece(
   buildPastrami(),
   {
-    x:.98,
-    z:.36,
-    yaw:-.95,
-    gap:.48
-  }
-);
-
-
-addPiece(
-  buildBrisket(),
+    x:.95,
+    y:-.58,
+    z:.38,
+    yaw:-.35
+  },
   {
-    x:.76,
-    z:-.08,
-    yaw:.26,
-    tiltX:.03
+    delay:.30,
+    duration:1.2
   }
 );
 
-addPiece(
-  buildBrisket(),
-  {
-    x:1.00,
-    z:-.70,
-    yaw:-.75,
-    tiltX:-.03
-  }
-);
 
+/* pickles */
 
 addPiece(
   buildPickle(),
   {
-    x:.58,
-    z:.66,
-    yaw:.22,
-    gap:.35
+    x:.75,
+    y:-.51,
+    z:.90,
+    yaw:.25
+  },
+  {
+    delay:.45,
+    duration:1.0
   }
 );
 
 addPiece(
   buildPickle(),
   {
-    x:.98,
-    z:.93,
-    yaw:-.16,
-    gap:.35
+    x:1.15,
+    y:-.52,
+    z:.78,
+    yaw:-.2
+  },
+  {
+    delay:.55,
+    duration:1.0
   }
 );
 
+
+/* olives */
+
+addPiece(
+  buildOlive(true),
+  {
+    x:-.40,
+    y:-.54,
+    z:.92,
+    yaw:.3
+  },
+  {
+    delay:.65,
+    duration:.8
+  }
+);
+
+addPiece(
+  buildOlive(true),
+  {
+    x:-.20,
+    y:-.54,
+    z:1.02,
+    yaw:1
+  },
+  {
+    delay:.70,
+    duration:.8
+  }
+);
 
 addPiece(
   buildOlive(true),
   {
     x:-.62,
-    z:.90,
-    yaw:.3,
-    gap:.20,
-    arc:.08
-  }
-);
-
-addPiece(
-  buildOlive(true),
-  {
-    x:-.48,
-    z:.99,
-    yaw:1.1,
-    gap:.20,
-    arc:.08
-  }
-);
-
-addPiece(
-  buildOlive(true),
-  {
-    x:-.76,
+    y:-.54,
     z:.76,
-    yaw:2,
-    gap:.20,
-    arc:.08
-  }
-);
-
-
-addPiece(
-  buildOlive(false),
+    yaw:2
+  },
   {
-    x:-.12,
-    z:.86,
-    yaw:.8,
-    gap:.20,
-    arc:.08
+    delay:.75,
+    duration:.8
   }
 );
 
 addPiece(
   buildOlive(false),
   {
-    x:.02,
-    z:.97,
-    yaw:1.7,
-    gap:.20,
-    arc:.08
+    x:.05,
+    y:-.54,
+    z:.95,
+    yaw:.8
+  },
+  {
+    delay:.82,
+    duration:.8
   }
 );
 
 addPiece(
   buildOlive(false),
   {
-    x:-.22,
-    z:.72,
-    yaw:2.6,
-    gap:.20,
-    arc:.08
+    x:.25,
+    y:-.54,
+    z:.88,
+    yaw:1.7
+  },
+  {
+    delay:.88,
+    duration:.8
   }
 );
 
@@ -3404,188 +2760,34 @@ addPiece(
 /* HERO STEAKS LAST */
 
 addPiece(
-  buildSteak(),
+  buildSteak(true,1.02),
   {
-    x:-.32,
-    z:.15,
-    yaw:.16,
-    gap:.55,
-    dur:2.1,
-    arc:.18,
-    lift:2.25
+    x:-.30,
+    y:-.52,
+    z:.12,
+    yaw:.15,
+    tiltX:.05
+  },
+  {
+    delay:1.00,
+    duration:1.55,
+    arc:.36
   }
 );
 
 addPiece(
-  buildSteak(),
+  buildSteak(false,.95),
   {
-    x:.15,
-    z:.01,
+    x:.28,
+    y:-.53,
+    z:.02,
     yaw:-.38,
-    gap:.55,
-    dur:2.1,
-    arc:.18,
-    lift:2.35
-  }
-);
-
-
-const animationEnd =
-  pieces.reduce(
-    (max,p)=>
-      Math.max(
-        max,
-        p.t0+p.dur
-      ),
-    0
-  );
-
-
-/* =========================================================
-   POST PROCESSING
-========================================================= */
-
-let composer=null;
-let bokeh=null;
-
-try{
-
-  composer =
-    new EffectComposer(
-      renderer
-    );
-
-  composer.setPixelRatio(
-    Math.min(
-      window.devicePixelRatio||1,
-      2
-    )
-  );
-
-  composer.setSize(
-    window.innerWidth,
-    window.innerHeight
-  );
-
-
-  composer.addPass(
-    new RenderPass(
-      scene,
-      camera
-    )
-  );
-
-
-  bokeh =
-    new BokehPass(
-      scene,
-      camera,
-      {
-        focus:6,
-        aperture:.0017,
-        maxblur:.0022
-      }
-    );
-
-
-  composer.addPass(bokeh);
-
-  composer.addPass(
-    new OutputPass()
-  );
-
-}catch(error){
-
-  console.warn(
-    "Post processing unavailable.",
-    error
-  );
-
-  composer=null;
-}
-
-
-/* =========================================================
-   CAMERA
-========================================================= */
-
-const cameraStart={
-  az:-.82,
-  pol:1.17,
-  radius:5.75
-};
-
-const cameraEnd={
-  az:-.20,
-  pol:1.08,
-  radius:5.10
-};
-
-
-const camPos =
-  new THREE.Vector3();
-
-
-function orbit(
-  az,
-  pol,
-  radius,
-  output
-){
-
-  const sinPol=
-    Math.sin(pol);
-
-  output.set(
-    Math.sin(az)*
-      sinPol*
-      radius,
-
-    Math.cos(pol)*
-      radius,
-
-    Math.cos(az)*
-      sinPol*
-      radius
-  );
-
-  output.add(
-    camTarget
-  );
-
-  return output;
-}
-
-
-/* =========================================================
-   POINTER PARALLAX
-========================================================= */
-
-const pointer={
-  x:0,
-  y:0,
-  tx:0,
-  ty:0
-};
-
-
-window.addEventListener(
-  "pointermove",
-  e=>{
-
-    pointer.tx=
-      e.clientX/
-      window.innerWidth*
-      2-1;
-
-    pointer.ty=
-      e.clientY/
-      window.innerHeight*
-      2-1;
-
+    tiltX:-.03
   },
   {
-    passive:true
+    delay:1.15,
+    duration:1.55,
+    arc:.34
   }
 );
 
@@ -3596,294 +2798,208 @@ window.addEventListener(
 
 let scrollProgress=0;
 
-
 function updateScroll(){
 
   const hero =
-    document.querySelector(
-      ".hero-scroll"
-    );
+    document.querySelector(".heroScroll");
 
   const rect =
     hero.getBoundingClientRect();
 
   const total =
-    hero.offsetHeight-
+    hero.offsetHeight -
     window.innerHeight;
 
-
-  scrollProgress =
+  const progress =
     THREE.MathUtils.clamp(
-      -rect.top/total,
+      -rect.top / total,
       0,
       1
     );
-}
 
+  scrollProgress=progress;
+}
 
 window.addEventListener(
   "scroll",
   updateScroll,
-  {
-    passive:true
-  }
+  {passive:true}
 );
 
 updateScroll();
 
 
 /* =========================================================
-   FLOAT POSE
+   ANIMATION UPDATE
 ========================================================= */
 
-const tempPose={
-  position:
-    new THREE.Vector3(),
+function easeInOutCubic(p){
 
-  rx:0,
-  ry:0,
-  rz:0
-};
-
-
-function floatingPose(
-  piece,
-  time
-){
-
-  tempPose.position.set(
-
-    piece.basePos.x+
-      Math.sin(
-        time*.72+
-        piece.phase
-      )*.08,
-
-    piece.basePos.y+
-      Math.sin(
-        time*.98+
-        piece.phase*1.7
-      )*.13,
-
-    piece.basePos.z+
-      Math.cos(
-        time*.58+
-        piece.phase*.8
-      )*.08
-  );
-
-
-  tempPose.rx=
-    Math.sin(
-      time*.80+
-      piece.phase
-    )*.18;
-
-
-  tempPose.ry=
-    piece.startRotY+
-    time*piece.spin;
-
-
-  tempPose.rz=
-    Math.cos(
-      time*.66+
-      piece.phase
-    )*.16;
-
-  return tempPose;
+  return p < .5
+    ? 4*p*p*p
+    : 1-Math.pow(-2*p+2,3)/2;
 }
 
 
-/* =========================================================
-   PIECE UPDATE
-========================================================= */
-
-function updatePieces(
-  animationTime
-){
+function updatePieces(){
 
   /*
-    The scroll determines how far through
-    the landing sequence we are.
-
-    Before scrolling:
-    all meat is visibly suspended.
-
-    While scrolling:
-    pieces fall one by one.
-
-    At the end:
-    the full board is settled.
+    First 75% of hero scroll is the actual
+    food falling animation.
   */
 
+  const animationProgress =
+    THREE.MathUtils.clamp(
+      scrollProgress / .72,
+      0,
+      1
+    );
 
-  const sequenceTime =
-    scrollProgress*
-    (animationEnd+.45);
+  pieces.forEach(piece=>{
 
+    let local =
+      (
+        animationProgress -
+        piece.delay*.48
+      ) /
+      .56;
 
-  for(
-    let i=0;
-    i<pieces.length;
-    i++
-  ){
-
-    const piece=
-      pieces[i];
-
-    const obj=
-      piece.obj;
-
-
-    if(
-      sequenceTime<
-      piece.t0
-    ){
-
-      floatingPose(
-        piece,
-        animationTime
-      );
-
-
-      obj.position.copy(
-        tempPose.position
-      );
-
-
-      obj.rotation.set(
-        tempPose.rx,
-        tempPose.ry,
-        tempPose.rz
-      );
-
-      continue;
-    }
-
-
-    const p=
+    local =
       THREE.MathUtils.clamp(
-        (
-          sequenceTime-
-          piece.t0
-        )/
-        piece.dur,
+        local,
         0,
         1
       );
 
+    const eased =
+      easeInOutCubic(local);
 
-    const e=
-      easeInOutCubic(p);
+    const x =
+      THREE.MathUtils.lerp(
+        piece.startPos.x,
+        piece.restPos.x,
+        eased
+      );
 
+    const z =
+      THREE.MathUtils.lerp(
+        piece.startPos.z,
+        piece.restPos.z,
+        eased
+      );
 
-    floatingPose(
-      piece,
-      piece.t0
-    );
+    /*
+      Natural falling arc.
+    */
 
-
-    obj.position.lerpVectors(
-      tempPose.position,
-      piece.restPos,
-      e
-    );
-
-
-    obj.position.y +=
+    const arc =
       Math.sin(
-        Math.PI*e
-      )*
+        local*Math.PI
+      ) *
       piece.arc;
 
+    const y =
+      THREE.MathUtils.lerp(
+        piece.startPos.y,
+        piece.restPos.y,
+        eased
+      ) + arc;
 
-    const wob=
-      .085*(1-e);
-
-
-    obj.rotation.set(
-
-      lerp(
-        tempPose.rx,
-        piece.restRot.x,
-        e
-      )+
-      Math.sin(
-        sequenceTime*2.2+
-        piece.phase
-      )*
-      wob,
-
-
-      lerp(
-        tempPose.ry,
-        piece.restRot.y,
-        e
-      ),
-
-
-      lerp(
-        tempPose.rz,
-        piece.restRot.z,
-        e
-      )+
-      Math.cos(
-        sequenceTime*1.9+
-        piece.phase
-      )*
-      wob*.9
+    piece.object.position.set(
+      x,
+      y,
+      z
     );
 
+    piece.object.rotation.x =
+      THREE.MathUtils.lerp(
+        piece.startRot.x,
+        piece.restRot.x,
+        eased
+      );
 
-    if(p>=1){
+    piece.object.rotation.y =
+      THREE.MathUtils.lerp(
+        piece.startRot.y,
+        piece.restRot.y,
+        eased
+      );
 
-      const settle=
-        sequenceTime-
-        piece.t0-
-        piece.dur;
+    piece.object.rotation.z =
+      THREE.MathUtils.lerp(
+        piece.startRot.z,
+        piece.restRot.z,
+        eased
+      );
 
-      const damp=
-        Math.exp(
-          -settle*7
+    /*
+      Small realistic landing bounce.
+    */
+
+    if(local>=1){
+
+      const settle =
+        THREE.MathUtils.clamp(
+          (animationProgress-.72)*4,
+          0,
+          1
         );
 
-
-      obj.position.y=
-        piece.restPos.y+
+      const bounce =
         Math.sin(
-          settle*18
-        )*
-        .009*
-        damp;
+          settle*Math.PI*5
+        ) *
+        .025 *
+        (1-settle);
 
+      piece.object.position.y =
+        piece.restPos.y+bounce;
 
-      obj.rotation.x=
-        piece.restRot.x+
+      piece.object.rotation.z =
+        piece.restRot.z +
         Math.sin(
-          settle*11
-        )*
-        .028*
-        damp;
-
-
-      obj.rotation.z=
-        piece.restRot.z+
-        Math.sin(
-          settle*13
-        )*
-        .038*
-        damp;
+          settle*Math.PI*4
+        )*.025*(1-settle);
     }
-  }
+
+  });
 }
 
 
 /* =========================================================
-   CAMERA UPDATE
+   CAMERA SCROLL MOVEMENT
 ========================================================= */
 
+const pointer={
+  x:0,
+  y:0,
+  tx:0,
+  ty:0
+};
+
+window.addEventListener(
+  "pointermove",
+  e=>{
+
+    pointer.tx =
+      (e.clientX/
+      window.innerWidth)*2-1;
+
+    pointer.ty =
+      (e.clientY/
+      window.innerHeight)*2-1;
+
+  },
+  {passive:true}
+);
+
+
 function updateCamera(){
+
+  /*
+    The camera changes subtly as the board
+    is assembled.
+  */
 
   const p=
     THREE.MathUtils.clamp(
@@ -3892,78 +3008,108 @@ function updateCamera(){
       1
     );
 
-
-  const e=
-    THREE.MathUtils.smoothstep(
-      p,
-      0,
-      1
+  const angle =
+    THREE.MathUtils.lerp(
+      -.30,
+      .20,
+      p
     );
 
-
-  let az=
-    lerp(
-      cameraStart.az,
-      cameraEnd.az,
-      e
+  const radius =
+    THREE.MathUtils.lerp(
+      7.5,
+      6.65,
+      p
     );
 
-
-  let pol=
-    lerp(
-      cameraStart.pol,
-      cameraEnd.pol,
-      e
+  const height =
+    THREE.MathUtils.lerp(
+      4.45,
+      4.05,
+      p
     );
 
+  const targetX =
+    Math.sin(angle)*radius;
 
-  let radius=
-    lerp(
-      cameraStart.radius,
-      cameraEnd.radius,
-      e
-    );
+  const targetZ =
+    Math.cos(angle)*radius;
+
+  camera.position.x +=
+    (
+      targetX +
+      pointer.x*.20 -
+      camera.position.x
+    )*.045;
+
+  camera.position.y +=
+    (
+      height -
+      pointer.y*.12 -
+      camera.position.y
+    )*.045;
+
+  camera.position.z +=
+    (
+      targetZ -
+      camera.position.z
+    )*.045;
+
+  camera.lookAt(
+    cameraTarget
+  );
+}
 
 
-  /*
-    Subtle mouse movement.
-  */
+/* =========================================================
+   POST PROCESSING
+========================================================= */
 
-  az +=
-    pointer.x*
-    .055;
+try{
 
-  pol +=
-    pointer.y*
-    .035;
+  composer =
+    new EffectComposer(renderer);
 
-
-  camera.position.copy(
-    orbit(
-      az,
-      pol,
-      radius,
-      camPos
+  composer.setPixelRatio(
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
     )
   );
 
-
-  camera.lookAt(
-    camTarget
+  composer.setSize(
+    window.innerWidth,
+    window.innerHeight
   );
 
+  const renderPass =
+    new RenderPass(
+      scene,
+      camera
+    );
 
-  if(
-    bokeh &&
-    bokeh.uniforms &&
-    bokeh.uniforms.focus
-  ){
+  composer.addPass(
+    renderPass
+  );
 
-    bokeh.uniforms.focus.value=
-      camera.position.distanceTo(
-        camTarget
-      );
-  }
+  /*
+    Keep the final pass simple and reliable.
+    This avoids the BokehPass being the reason
+    the scene disappears on a browser.
+  */
+
+  composer.addPass(
+    new OutputPass()
+  );
+
+}catch(err){
+
+  console.warn(
+    "Composer unavailable:",
+    err
+  );
+
+  composer=null;
 }
 
 
@@ -3979,34 +3125,27 @@ function resize(){
   const h=
     window.innerHeight;
 
-  const dpr=
-    Math.min(
-      window.devicePixelRatio||1,
-      2
-    );
-
-
   camera.aspect=
     w/h;
 
   camera.updateProjectionMatrix();
 
+  const dpr=
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
+    );
 
-  renderer.setPixelRatio(
-    dpr
-  );
+  renderer.setPixelRatio(dpr);
 
   renderer.setSize(
     w,
     h
   );
 
-
   if(composer){
 
-    composer.setPixelRatio(
-      dpr
-    );
+    composer.setPixelRatio(dpr);
 
     composer.setSize(
       w,
@@ -4015,7 +3154,6 @@ function resize(){
   }
 }
 
-
 window.addEventListener(
   "resize",
   resize
@@ -4023,14 +3161,11 @@ window.addEventListener(
 
 
 /* =========================================================
-   ANIMATION LOOP
+   MAIN LOOP
 ========================================================= */
 
 const clock=
   new THREE.Clock();
-
-let elapsed=0;
-
 
 function animate(){
 
@@ -4038,323 +3173,214 @@ function animate(){
     animate
   );
 
-
-  const dt=
-    Math.min(
-      clock.getDelta(),
-      .05
-    );
-
-  elapsed += dt;
-
-
-  pointer.x=
-    THREE.MathUtils.lerp(
-      pointer.x,
-      pointer.tx,
-      .045
-    );
-
-  pointer.y=
-    THREE.MathUtils.lerp(
-      pointer.y,
-      pointer.ty,
-      .045
-    );
-
-
-  updateScroll();
-
-  updatePieces(
-    elapsed
-  );
+  updatePieces();
 
   updateCamera();
 
-
-  if(composer)
+  if(composer){
     composer.render();
-
-  else
+  }else{
     renderer.render(
       scene,
       camera
     );
+  }
 }
 
 
+/* =========================================================
+   START
+========================================================= */
+
 resize();
 
+updateScroll();
+
+updatePieces();
+
 updateCamera();
+
+loading.style.opacity="0";
+
+setTimeout(()=>{
+  loading.style.display="none";
+},700);
 
 animate();
 
 
-/* =========================================================
-   BUILDER
-========================================================= */
+}catch(err){
 
-const builderState={
-  size:"Small — 5–8 people",
-  cuts:[],
-  extras:[],
-  notes:""
-};
-
-
-document
-  .querySelectorAll(
-    ".choice"
-  )
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        const group=
-          button.closest(
-            "[data-group]"
-          );
-
-        const type=
-          group.dataset.group;
-
-        const value=
-          button.dataset.value;
-
-
-        if(type==="size"){
-
-          group
-            .querySelectorAll(
-              ".choice"
-            )
-            .forEach(
-              b=>
-                b.classList.remove(
-                  "active"
-                )
-            );
-
-          button.classList.add(
-            "active"
-          );
-
-          builderState.size=
-            value;
-
-        }
-
-
-        if(type==="cut"){
-
-          button.classList.toggle(
-            "active"
-          );
-
-          if(
-            builderState.cuts
-              .includes(value)
-          ){
-
-            builderState.cuts=
-              builderState.cuts
-                .filter(
-                  x=>x!==value
-                );
-
-          }else{
-
-            builderState.cuts.push(
-              value
-            );
-          }
-        }
-
-
-        if(type==="extra"){
-
-          button.classList.toggle(
-            "active"
-          );
-
-          if(
-            builderState.extras
-              .includes(value)
-          ){
-
-            builderState.extras=
-              builderState.extras
-                .filter(
-                  x=>x!==value
-                );
-
-          }else{
-
-            builderState.extras.push(
-              value
-            );
-          }
-        }
-
-
-        updateSummary();
-      }
-    );
-  });
-
-
-document
-  .getElementById(
-    "builderNotes"
-  )
-  .addEventListener(
-    "input",
-    e=>{
-
-      builderState.notes=
-        e.target.value;
-
-      updateSummary();
-    }
+  console.error(
+    "THREE.JS ERROR:",
+    err
   );
 
+  loading.style.display="none";
 
-function updateSummary(){
+  errorBox.style.display="block";
 
-  document.getElementById(
-    "summarySize"
-  ).textContent=
-    builderState.size;
-
-
-  document.getElementById(
-    "summaryCuts"
-  ).textContent=
-    builderState.cuts.length
-      ? builderState.cuts.join(", ")
-      : "Choose your cuts";
-
-
-  document.getElementById(
-    "summaryExtras"
-  ).textContent=
-    builderState.extras.length
-      ? builderState.extras.join(", ")
-      : "Choose your extras";
-
-
-  document.getElementById(
-    "summaryNotes"
-  ).textContent=
-    builderState.notes.trim()
-      ? builderState.notes
-      : "None yet";
 }
 
-
-function sendBoardRequest(){
-
-  const subject=
-    encodeURIComponent(
-      "BOARDS BY BARUCH — Custom Board Request"
-    );
+</script>
 
 
-  const body=
-    encodeURIComponent(
+<!-- ======================================================
+     BUILDER JAVASCRIPT
+====================================================== -->
 
-`Hello Baruch,
+<script>
 
-I would like to request a custom board.
+const sizeOptions =
+document.querySelectorAll(
+  ".sizeOption"
+);
 
-BOARD SIZE:
-${builderState.size}
+const cutOptions =
+document.querySelectorAll(
+  ".cutOption"
+);
 
-CUTS:
-${builderState.cuts.length
-  ? builderState.cuts.join(", ")
-  : "Not selected"}
+let selectedSize="Small";
+let selectedCuts=[];
 
-SEASONINGS / SAUCES / EXTRAS:
-${builderState.extras.length
-  ? builderState.extras.join(", ")
-  : "Not selected"}
+const summarySize =
+document.getElementById(
+  "summarySize"
+);
 
-CUSTOM NOTES:
-${builderState.notes || "None"}
+const summaryCuts =
+document.getElementById(
+  "summaryCuts"
+);
 
-Thank you!`
-    );
+const seasoning =
+document.getElementById(
+  "seasoning"
+);
+
+const sauce =
+document.getElementById(
+  "sauce"
+);
+
+const garnish =
+document.getElementById(
+  "garnish"
+);
+
+const summarySeasoning =
+document.getElementById(
+  "summarySeasoning"
+);
+
+const summarySauce =
+document.getElementById(
+  "summarySauce"
+);
+
+const summaryGarnish =
+document.getElementById(
+  "summaryGarnish"
+);
 
 
-  window.location.href=
-    `mailto:baruch.aminov@icloud.com?subject=${subject}&body=${body}`;
-}
+/* SIZE */
 
+sizeOptions.forEach(button=>{
 
-/* =========================================================
-   SCROLL REVEALS
-========================================================= */
+  button.addEventListener(
+    "click",
+    ()=>{
 
-const observer=
-  new IntersectionObserver(
-    entries=>{
-
-      entries.forEach(
-        entry=>{
-
-          if(
-            entry.isIntersecting
-          ){
-
-            entry.target
-              .classList
-              .add(
-                "visible"
-              );
-          }
-        }
+      sizeOptions.forEach(
+        b=>b.classList.remove("active")
       );
 
-    },
-    {
-      threshold:.12
-    }
-  );
+      button.classList.add("active");
 
+      selectedSize=
+        button.dataset.size;
 
-document
-  .querySelectorAll(
-    ".reveal"
-  )
-  .forEach(
-    el=>
-      observer.observe(el)
-  );
-
-
-/* =========================================================
-   CONTACT FORM
-========================================================= */
-
-document
-  .getElementById(
-    "contactForm"
-  )
-  .addEventListener(
-    "submit",
-    function(){
-
-      /*
-        mailto is intentionally used so the
-        customer can send directly through
-        their email application.
-      */
+      summarySize.textContent=
+        selectedSize;
 
     }
   );
+
+});
+
+
+/* CUTS */
+
+cutOptions.forEach(button=>{
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      const cut=
+        button.dataset.cut;
+
+      if(
+        selectedCuts.includes(cut)
+      ){
+
+        selectedCuts=
+          selectedCuts.filter(
+            x=>x!==cut
+          );
+
+        button.classList.remove(
+          "active"
+        );
+
+      }else{
+
+        selectedCuts.push(cut);
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+      summaryCuts.textContent=
+        selectedCuts.length
+          ? selectedCuts.join(", ")
+          : "Choose your cuts";
+
+    }
+  );
+
+});
+
+
+/* DROPDOWNS */
+
+seasoning.addEventListener(
+  "change",
+  ()=>{
+    summarySeasoning.textContent=
+      seasoning.value;
+  }
+);
+
+sauce.addEventListener(
+  "change",
+  ()=>{
+    summarySauce.textContent=
+      sauce.value;
+  }
+);
+
+garnish.addEventListener(
+  "change",
+  ()=>{
+    summaryGarnish.textContent=
+      garnish.value;
+  }
+);
 
 </script>
 
